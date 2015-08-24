@@ -1,6 +1,4 @@
-/* 
- * AutoUtil.java
- * Copyright (C) 2015 Thunderbots-5604
+/* Copyright (C) 2015 Zach Ohara
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,18 +14,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.sdk.utility;
+package io.github.thunderbots.sdk.drive;
 
-public class AutoUtil {
+import io.github.thunderbots.sdk.Robot;
+import io.github.thunderbots.sdk.hardware.TMotor;
 
-	/**
-	 * Lets the user select an autonomous delay with whatever interface we 
-	 * will have.
-	 * @return the delay selected by the user
-	 */
-	public static int setAutoDelay() {
-		throw new UnsupportedOperationException();
-		// TODO: Implement from FTC's API
+/**
+ * 
+ *
+ * @author Zach Ohara
+ */
+public class DriveMotorSet {
+	
+	private TMotor[] motors;
+	
+	public DriveMotorSet(String[] names) {
+		this.motors = new TMotor[names.length];
+		for (int i = 0; i < names.length; i++) {
+			motors[i] = Robot.getMotor(names[i]);
+		}
+	}
+	
+	public void setMotorPowers(double[] powers) {
+		if (motors.length != powers.length) {
+			throw new IllegalArgumentException();
+		}
+		for (int i = 0; i < powers.length; i++) {
+			this.motors[i].setPower(powers[i]);
+		}
 	}
 
 }

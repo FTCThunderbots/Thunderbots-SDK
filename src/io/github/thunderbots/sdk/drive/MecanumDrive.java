@@ -1,66 +1,61 @@
-/* 
- * MecanumDrive.java
- * Copyright (C) 2015 Thunderbots-5604
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package io.github.thunderbots.sdk.drive;
 
-import io.github.thunderbots.sdk.movement.Motor;
-import io.github.thunderbots.sdk.utility.MathUtil;
+import io.github.thunderbots.sdk.hardware.TMotor;
 
+/**
+ * 
+ *
+ * @author Zach Ohara
+ */
 public class MecanumDrive extends DriveSystem {
 
-	private Motor frontLeftMotor;
-	private Motor frontRightMotor;
-	private Motor backLeftMotor;
-	private Motor backRightMotor;
-
-	// TODO: Add PID functionality
-	// TODO: Add encoder functionality
+	public MecanumDrive(DriveMotorSet wheels) {
+		super(wheels);
+	}
 
 	public static final double MOVE_POWER_SCALE = 1.0; // used for speed limits
 	public static final double DRIVE_POWER_WEIGHT = 1.0;
 	public static final double STRAFE_POWER_WEIGHT = 1.0;
 	public static final double ROTATE_POWER_WEIGHT = 1.0;
 
-	public static final int[] INPUT_RANGE = {0, 100};
-	public static final int[] DRIVE_POWER_RANGE = {10, 100};
-	public static final int[] STRAFE_POWER_RANGE = {10, 100};
-	public static final int[] ROTATE_POWER_RANGE = {10, 100};
+	// This code is on standby. We don't know if we need it yet.
+//	public static final double[] INPUT_RANGE = {0, 1};
+//	public static final double[] DRIVE_POWER_RANGE = {0, 1};
+//	public static final double[] STRAFE_POWER_RANGE = {0, 1};
+//	public static final double[] ROTATE_POWER_RANGE = {0, 1};
 
 	/**
-	 * Constructs a new mecanum drive system with all default settings
+	 * {@inheritDoc}
 	 */
-	public MecanumDrive() {
-		super();
-		this.frontLeftMotor = new Motor();
-		this.frontRightMotor = new Motor();
-		this.backLeftMotor = new Motor();
-		this.backRightMotor = new Motor();
+	@Override
+	public boolean setMovement(double forward, double clockwise) {
+		return this.setMovement(forward, 0, clockwise);
+	}
+	
+	public boolean strafe(int power) {
+		return this.setMovement(0, power, 0);
 	}
 
-	@Override
-	public boolean setMovement(int forwardPower, int rightPower, int clockwisePower) {
-		double forward = forwardPower;
-		double right = rightPower;
-		double clockwise = clockwisePower;
+	public boolean traverse(boolean right, int power) {
+		int directionMultiplier = right ? 1 : -1;
+		return this.setMovement(power, Math.abs(power) * directionMultiplier, 0);
+	}
+	
+	public boolean strafeSeconds(int power, float seconds) {
+		return this.strafe(power) && this.waitAndStop(seconds);
+	}
 
-		forward = MathUtil.scaleToRange(forward, INPUT_RANGE, DRIVE_POWER_RANGE);
-		right = MathUtil.scaleToRange(right, INPUT_RANGE, STRAFE_POWER_RANGE);
-		clockwise = MathUtil.scaleToRange(clockwise, INPUT_RANGE, ROTATE_POWER_RANGE);
+	public boolean traverseSeconds(boolean right, int power, float seconds) {
+		return this.traverse(right, power)
+				&& this.waitAndStop(seconds);
+	}
+	
+	public boolean setMovement(double forward, double right, double clockwise) {
+
+		// This code is on standby
+//		forward = MathUtil.scaleToRange(forward, INPUT_RANGE, DRIVE_POWER_RANGE);
+//		right = MathUtil.scaleToRange(right, INPUT_RANGE, STRAFE_POWER_RANGE);
+//		clockwise = MathUtil.scaleToRange(clockwise, INPUT_RANGE, ROTATE_POWER_RANGE);
 
 		forward *= MOVE_POWER_SCALE * DRIVE_POWER_WEIGHT;
 		right *= MOVE_POWER_SCALE * STRAFE_POWER_WEIGHT;
@@ -75,18 +70,16 @@ public class MecanumDrive extends DriveSystem {
 				Math.max(Math.abs(frontLeft), Math.abs(frontRight)),
 				Math.max(Math.abs(backLeft), Math.abs(backRight)));
 
-		if (max > Motor.MAX_POWER) {
-			double scale = max / Motor.MAX_POWER;
+		if (max > TMotor.MAX_POWER) {
+			double scale = max / TMotor.MAX_POWER;
 			frontLeft /= scale;
 			frontRight /= scale;
 			backLeft /= scale;
 			backRight /= scale;
 		}
 
-		frontLeftMotor.set((long) frontLeft);
-		frontRightMotor.set((long) frontRight);
-		backLeftMotor.set((long) backLeft);
-		backRightMotor.set((long) backRight);
+		this.getWheelSet().setMotorPowers(new double[]
+				{frontLeft, frontRight, backLeft, backRight});
 
 		return true;
 	}
