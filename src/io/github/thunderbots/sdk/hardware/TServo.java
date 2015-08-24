@@ -23,7 +23,11 @@ public class TServo {
 	}
 	
 	public void moveTo(double position) {
-		baseServo.setPosition(position);
+		this.baseServo.setPosition(position);
+	}
+	
+	public String toString() {
+		return baseServo.toString();
 	}
 
 }

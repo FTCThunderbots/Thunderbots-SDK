@@ -12,6 +12,10 @@ public class TMotor {
 	private DcMotor basemotor;
 	private TEncoder encoder;
 	
+	public static final double MAX_POWER = 1;
+	public static final double REST_POWER = 0;
+	public static final double MIN_POWER = -1;
+	
 	public TMotor(DcMotor basemotor) {
 		this.basemotor = basemotor;
 	}
@@ -30,22 +34,22 @@ public class TMotor {
 	
 	public void setReversed(boolean reversed) {
 		if (reversed) {
-			basemotor.setDirection(DcMotor.Direction.REVERSE);
+			this.basemotor.setDirection(DcMotor.Direction.REVERSE);
 		} else {
-			basemotor.setDirection(DcMotor.Direction.FORWARD);
+			this.basemotor.setDirection(DcMotor.Direction.FORWARD);
 		}
 	}
 	
 	public double getPower() {
-		return basemotor.getPower();
+		return this.basemotor.getPower();
 	}
 	
 	public void setPower(double power) {
-		basemotor.setPower(power);
+		this.basemotor.setPower(power);
 	}
 	
 	public String toString() {
-		return basemotor.toString();
+		return this.basemotor.toString();
 	}
 
 }

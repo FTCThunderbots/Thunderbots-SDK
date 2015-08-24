@@ -1,7 +1,8 @@
 package io.github.thunderbots.sdk.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.Gamepad;
+
+import io.github.thunderbots.sdk.Robot;
 
 /**
  * 
@@ -24,23 +25,8 @@ public abstract class TLinearOpMode extends LinearOpMode {
 		this.main();
 	}
 	
-	public Gamepad gamepad1() {
-		return this.gamepad1;
-	}
-	
-	public Gamepad gamepad2() {
-		return this.gamepad2;
-	}
-	
-	public Gamepad getGamepad(int gamepad) {
-		switch (gamepad) {
-			case 1:
-				return this.gamepad1;
-			case 2:
-				return this.gamepad2;
-			default:
-				return null;
-		}
+	public void initializeOpMode() {
+		Robot.initializeRobot(this.hardwareMap, this.gamepad1, this.gamepad2);
 	}
 
 }

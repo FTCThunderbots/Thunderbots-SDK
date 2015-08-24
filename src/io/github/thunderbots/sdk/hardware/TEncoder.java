@@ -37,5 +37,17 @@ public class TEncoder {
 	public double getInches() {
 		return this.getPosition() / this.ticksPerInch;
 	}
+	
+	public void setTicksPerRevolution(double ticks) {
+		this.ticksPerRevolution = ticks;
+	}
+	
+	public void setTicksPerInch(double ticks) {
+		this.ticksPerInch = ticks;
+	}
+	
+	public String toString() {
+		return "TEncoder[" + this.baseMotor + "]";
+	}
 
 }
