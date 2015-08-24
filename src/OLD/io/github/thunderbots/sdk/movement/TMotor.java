@@ -16,27 +16,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.sdk.movement;
+package OLD.io.github.thunderbots.sdk.movement;
 
-import io.github.thunderbots.sdk.movement.Encoder;
-import io.github.thunderbots.sdk.pid.PIDManager;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class Motor {
+import OLD.io.github.thunderbots.sdk.movement.Encoder;
+
+public class TMotor {
+	
+	private DcMotor motor;
 
 	private Encoder encoder;
-	private PIDManager pid;
+//	private PIDManager pid;
 	private int target; 
 	private int align;
 	private int speed;
 
 	public final static int MAX_POWER = 100;
 	public final static int MIN_POWER = 5;
-
-	public Motor() {
-		this.encoder = new Encoder();
-		this.pid = new PIDManager(); // use default PID settings
-		this.align = this.speed = 0;
+	
+	public TMotor(String id) {
+		//this.motor = 
 	}
+
+//	public Motor() {
+//		this.encoder = new Encoder();
+//		this.pid = new PIDManager(); // use default PID settings
+//		this.align = this.speed = 0;
+//	}
 
 	public void move(int power) {
 		// Depends on ftc sdk
@@ -64,8 +71,8 @@ public class Motor {
 			if (encoder == null)
 				this.move(target);	// We set motor power, not motor position (no encoders)
 			else {	// There are encoders
-				int power = bound((int)(Math.round(pid.getCorrection())));
-				this.move(power+this.align);
+//				int power = bound((int)(Math.round(pid.getCorrection())));
+//				this.move(power+this.align);
 			}
 
 			if (this.isStopped())
@@ -78,7 +85,7 @@ public class Motor {
 	}
 
 	private int bound(int power) {
-		return power > Motor.MAX_POWER ? Motor.MAX_POWER : (power < -(Motor.MAX_POWER) ? -(Motor.MAX_POWER) : power);
+		return power > TMotor.MAX_POWER ? TMotor.MAX_POWER : (power < -(TMotor.MAX_POWER) ? -(TMotor.MAX_POWER) : power);
 	}
 
 }

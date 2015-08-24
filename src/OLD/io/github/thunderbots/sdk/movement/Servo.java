@@ -1,5 +1,5 @@
 /* 
- * TeleopUtil.java
+ * Servo.java
  * Copyright (C) 2015 Thunderbots-5604
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.sdk.utility;
+package OLD.io.github.thunderbots.sdk.movement;
 
-public class TeleopUtil {
+public class Servo {
 
 }

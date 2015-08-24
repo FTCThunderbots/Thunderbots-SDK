@@ -16,16 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.sdk.structure;
+package OLD.io.github.thunderbots.sdk;
 
-import io.github.thunderbots.sdk.background.BackgroundTaskManager;
-import io.github.thunderbots.sdk.drive.DriveSystem;
-import io.github.thunderbots.sdk.drive.TankDrive;
-import io.github.thunderbots.sdk.utility.GameTimeManager;
+import OLD.io.github.thunderbots.sdk.drive.DriveSystem;
+import OLD.io.github.thunderbots.sdk.drive.TankDrive;
+import OLD.io.github.thunderbots.sdk.utility.GameTimeManager;
 
 public class Robot {
 
-	private BackgroundTaskManager taskManager;
+//	private BackgroundTaskManager taskManager;
 	private DriveSystem driveSystem;
 	private GameTimeManager gameTimer;
 	// TODO: Add sensors, if any
@@ -68,7 +67,7 @@ public class Robot {
 	 * @param driver the drive system for this robot
 	 */
 	public Robot(long untilStart, DriveSystem driver) {
-		this.taskManager = new BackgroundTaskManager();
+//		this.taskManager = new BackgroundTaskManager();
 		this.driveSystem = driver;
 		this.gameTimer = new GameTimeManager(untilStart);
 	}
