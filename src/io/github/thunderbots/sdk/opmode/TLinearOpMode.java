@@ -20,13 +20,14 @@ public abstract class TLinearOpMode extends LinearOpMode {
 	 */
 	@Override
 	public void runOpMode() throws InterruptedException {
+		this.initializeOpMode();
 		this.initializeRobot();
 		this.waitForStart();
 		this.main();
 	}
 	
 	public void initializeOpMode() {
-		Robot.initializeRobot(this.hardwareMap, this.gamepad1, this.gamepad2);
+		Robot.initializeRobot(this.hardwareMap, this.telemetry, this.gamepad1, this.gamepad2);
 	}
 
 }

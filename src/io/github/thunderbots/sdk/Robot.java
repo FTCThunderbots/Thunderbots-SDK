@@ -2,6 +2,7 @@ package io.github.thunderbots.sdk;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.robocol.Telemetry;
 
 import io.github.thunderbots.sdk.control.TGamepad;
 import io.github.thunderbots.sdk.hardware.TMotor;
@@ -15,11 +16,13 @@ import io.github.thunderbots.sdk.hardware.TServo;
 public class Robot {
 	
 	private static HardwareMap robotHardware;
+	private static Telemetry robotTelemetry;
 	private static TGamepad gamepad1;
 	private static TGamepad gamepad2;
 	
-	public static void initializeRobot(HardwareMap hardware, Gamepad pad1, Gamepad pad2) {
+	public static void initializeRobot(HardwareMap hardware, Telemetry telemetry, Gamepad pad1, Gamepad pad2) {
 		robotHardware = hardware;
+		robotTelemetry = telemetry;
 		gamepad1 = new TGamepad(pad1);
 		gamepad2 = new TGamepad(pad2);
 	}
@@ -49,6 +52,10 @@ public class Robot {
 	
 	public static TServo getServo(String name) {
 		return new TServo(robotHardware.servo.get(name));
+	}
+	
+	public static void sendTelemetryData(String tag, Object data) {
+		robotTelemetry.addData(tag, data);
 	}
 
 }
