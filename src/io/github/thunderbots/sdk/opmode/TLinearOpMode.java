@@ -20,6 +20,7 @@ public abstract class TLinearOpMode extends LinearOpMode {
 	 */
 	@Override
 	public void runOpMode() throws InterruptedException {
+		this.initializeOpMode();
 		this.initializeRobot();
 		this.waitForStart();
 		this.main();
