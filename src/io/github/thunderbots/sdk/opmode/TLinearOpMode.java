@@ -26,7 +26,7 @@ public abstract class TLinearOpMode extends LinearOpMode {
 	}
 	
 	public void initializeOpMode() {
-		Robot.initializeRobot(this.hardwareMap, this.gamepad1, this.gamepad2);
+		Robot.initializeRobot(this.hardwareMap, this.telemetry, this.gamepad1, this.gamepad2);
 	}
 
 }
