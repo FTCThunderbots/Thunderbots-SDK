@@ -23,11 +23,11 @@ public abstract class DriveSystem {
 		return this.setMovement(0, 0);
 	}
 	
-	public boolean drive(int power) {
+	public boolean drive(double power) {
 		return this.setMovement(power, 0);
 	}
 	
-	public boolean rotate(int power) {
+	public boolean rotate(double power) {
 		return this.setMovement(0, power);
 	}
 
@@ -36,11 +36,11 @@ public abstract class DriveSystem {
 		return this.setMovement(power, Math.abs(power) * directionMultiplier);
 	}
 
-	public boolean driveSeconds(int power, float seconds) {
+	public boolean driveSeconds(double power, double seconds) {
 		return this.drive(power) && this.waitAndStop(seconds);
 	}
 
-	public boolean rotateSeconds(int power, float seconds) {
+	public boolean rotateSeconds(double power, double seconds) {
 		return this.rotate(power) && this.waitAndStop(seconds);
 	}
 
@@ -48,7 +48,7 @@ public abstract class DriveSystem {
 		return this.swing(clockwise, power) && this.waitAndStop(seconds);
 	}
 
-	public boolean waitAndStop(float seconds) {
+	public boolean waitAndStop(double seconds) {
 		boolean uninterrupted = true;
 		try {
 			Thread.sleep((long) (seconds * 1000));
@@ -56,7 +56,9 @@ public abstract class DriveSystem {
 			e.printStackTrace();
 			uninterrupted = false;
 		}
-		this.halt();
+		finally {
+			this.halt();
+		}
 		return uninterrupted;
 	}
 
