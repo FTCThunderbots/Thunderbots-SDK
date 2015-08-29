@@ -13,7 +13,7 @@ public class TankDrive extends MecanumDrive {
 
 	@Override
 	public boolean setMovement(double forward, double right, double clockwise) {
-		return super.setMovement(forward, clockwise);
+		return super.setMovement(forward, 0, clockwise);
 	}
 	
 	@Override
