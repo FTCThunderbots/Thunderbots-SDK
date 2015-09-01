@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.robocol.Telemetry;
 import io.github.thunderbots.sdk.control.TGamepad;
 import io.github.thunderbots.sdk.hardware.TMotor;
 import io.github.thunderbots.sdk.hardware.TServo;
+import io.github.thunderbots.sdk.scheduler.TaskScheduler;
 
 /**
  * 
@@ -20,11 +21,21 @@ public class Robot {
 	private static TGamepad gamepad1;
 	private static TGamepad gamepad2;
 	
+	private static TaskScheduler taskScheduler;
+	
+	static {
+		taskScheduler = new TaskScheduler();
+	}
+	
 	public static void initializeRobot(HardwareMap hardware, Telemetry telemetry, Gamepad pad1, Gamepad pad2) {
 		robotHardware = hardware;
 		robotTelemetry = telemetry;
 		gamepad1 = new TGamepad(pad1);
 		gamepad2 = new TGamepad(pad2);
+	}
+	
+	public static TaskScheduler getTaskScheduler() {
+		return taskScheduler;
 	}
 	
 	public static TGamepad getGamepad1() {
