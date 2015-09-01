@@ -12,6 +12,10 @@ public class SwerveDrive extends DriveSystem {
 	public SwerveDrive(DriveMotorSet wheels) {
 		super(wheels);
 	}
+	
+	public SwerveDrive(String[] wheelnames) {
+		super(wheelnames);
+	}
 
 	/**
 	 * {@inheritDoc}
