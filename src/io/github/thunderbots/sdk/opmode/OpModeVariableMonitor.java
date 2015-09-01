@@ -21,7 +21,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
-import io.github.thunderbots.sdk.Robot;
+import io.github.thunderbots.sdk.TRobot;
 
 /**
  * 
@@ -63,7 +63,7 @@ public class OpModeVariableMonitor implements Runnable {
 		}
 		
 		if (refreshNeeded) {
-			Robot.initializeRobot(this.hardware, this.telemetry, this.gamepad1, this.gamepad2);
+			TRobot.initializeRobot(this.hardware, this.telemetry, this.gamepad1, this.gamepad2);
 		}
 	}
 	

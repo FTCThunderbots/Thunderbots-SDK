@@ -16,7 +16,7 @@
 
 package io.github.thunderbots.sdk.drive;
 
-import io.github.thunderbots.sdk.Robot;
+import io.github.thunderbots.sdk.TRobot;
 import io.github.thunderbots.sdk.hardware.TMotor;
 
 /**
@@ -31,7 +31,7 @@ public class DriveMotorSet {
 	public DriveMotorSet(String[] names) {
 		this.motors = new TMotor[names.length];
 		for (int i = 0; i < names.length; i++) {
-			motors[i] = Robot.getMotor(names[i]);
+			motors[i] = TRobot.getMotor(names[i]);
 		}
 	}
 	

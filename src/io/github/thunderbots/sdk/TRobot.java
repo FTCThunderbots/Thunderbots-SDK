@@ -14,7 +14,7 @@ import io.github.thunderbots.sdk.scheduler.TaskScheduler;
  *
  * @author Zach Ohara
  */
-public class Robot {
+public class TRobot {
 	
 	private static HardwareMap robotHardware;
 	private static Telemetry robotTelemetry;
