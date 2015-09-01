@@ -12,6 +12,10 @@ public class MecanumDrive extends DriveSystem {
 	public MecanumDrive(DriveMotorSet wheels) {
 		super(wheels);
 	}
+	
+	public MecanumDrive(String[] wheelnames) {
+		super(wheelnames);
+	}
 
 	public static final double MOVE_POWER_SCALE = 1.0; // used for speed limits
 	public static final double DRIVE_POWER_WEIGHT = 1.0;

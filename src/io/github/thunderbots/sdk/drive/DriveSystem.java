@@ -13,6 +13,10 @@ public abstract class DriveSystem {
 		this.motors = wheels;
 	}
 	
+	public DriveSystem(String[] motornames) {
+		this.motors = new DriveMotorSet(motornames);
+	}
+	
 	public abstract boolean setMovement(double forward, double clockwise);
 	
 	protected DriveMotorSet getWheelSet() {

@@ -10,6 +10,10 @@ public class TankDrive extends MecanumDrive {
 	public TankDrive(DriveMotorSet wheels) {
 		super(wheels);
 	}
+	
+	public TankDrive(String[] wheelnames) {
+		super(wheelnames);
+	}
 
 	@Override
 	public boolean setMovement(double forward, double right, double clockwise) {
