@@ -36,10 +36,8 @@ public class DriveMotorSet {
 	}
 	
 	public void setMotorPowers(double[] powers) {
-		if (motors.length != powers.length) {
-			throw new IllegalArgumentException();
-		}
-		for (int i = 0; i < powers.length; i++) {
+		int motorSet = Math.min(powers.length, this.motors.length);
+		for (int i = 0; i < motorSet; i++) {
 			this.motors[i].setPower(powers[i]);
 		}
 	}
