@@ -16,6 +16,8 @@
 
 package io.github.thunderbots.sdk.drive;
 
+import java.util.Arrays;
+
 import io.github.thunderbots.sdk.TRobot;
 import io.github.thunderbots.sdk.hardware.TMotor;
 
@@ -36,6 +38,7 @@ public class DriveMotorSet {
 	}
 	
 	public void setMotorPowers(double[] powers) {
+		TRobot.sendTelemetryData("Motors", Arrays.toString(powers));
 		int motorSet = Math.min(powers.length, this.motors.length);
 		for (int i = 0; i < motorSet; i++) {
 			this.motors[i].setPower(powers[i]);
