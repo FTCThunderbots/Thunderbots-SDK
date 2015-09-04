@@ -2,8 +2,6 @@ package io.github.thunderbots.sdk.control;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import io.github.thunderbots.sdk.utility.MathUtil;
-
 /**
  * 
  *
@@ -26,10 +24,10 @@ public class TGamepad {
 		this.baseGamepad.setJoystickDeadzone(TGamepad.JOYSTICK_THRESHOLD);
 	}
 	
-	private static double scaleJoystickInput(double raw) {
-		return MathUtil.scaleToRange(raw, new double[] {JOYSTICK_THRESHOLD, JOYSTICK_MAX},
-				new double[] {JOYSTICK_REST, JOYSTICK_MAX});
-	}
+//	private static double scaleJoystickInput(double raw) {
+//		return MathUtil.scaleToRange(raw, new double[] {JOYSTICK_THRESHOLD, JOYSTICK_MAX},
+//				new double[] {JOYSTICK_REST, JOYSTICK_MAX});
+//	}
 	
 	public boolean aButton() {
 		return baseGamepad.a;
@@ -87,20 +85,36 @@ public class TGamepad {
 		return baseGamepad.right_trigger;
 	}
 	
+//	public double leftStickX() {
+//		return scaleJoystickInput(baseGamepad.left_stick_x);
+//	}
+//	
+//	public double leftStickY() {
+//		return scaleJoystickInput(-baseGamepad.left_stick_y);
+//	}
+//	
+//	public double rightStickX() {
+//		return scaleJoystickInput(baseGamepad.right_stick_x);
+//	}
+//	
+//	public double rightStickY() {
+//		return scaleJoystickInput(-baseGamepad.right_stick_y);
+//	}
+	
 	public double leftStickX() {
-		return scaleJoystickInput(baseGamepad.left_stick_x);
+		return baseGamepad.left_stick_x;
 	}
 	
 	public double leftStickY() {
-		return scaleJoystickInput(baseGamepad.left_stick_y);
+		return -baseGamepad.left_stick_y;
 	}
 	
 	public double rightStickX() {
-		return scaleJoystickInput(baseGamepad.left_stick_x);
+		return baseGamepad.right_stick_x;
 	}
 	
 	public double rightStickY() {
-		return scaleJoystickInput(baseGamepad.left_stick_y);
+		return -baseGamepad.right_stick_y;
 	}
 	
 }
