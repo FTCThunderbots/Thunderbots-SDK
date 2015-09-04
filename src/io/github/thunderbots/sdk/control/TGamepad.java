@@ -12,8 +12,7 @@ public class TGamepad {
 	
 	private Gamepad baseGamepad;
 	
-	private static final float JOYSTICK_THRESHOLD = 0.1f;
-	
+	public static final double JOYSTICK_THRESHOLD = 0.1;
 	public static final double JOYSTICK_MAX = 1.0;
 	public static final double JOYSTICK_REST = 0.0;
 	public static final double JOYSTICK_MIN = -1.0;
@@ -22,7 +21,7 @@ public class TGamepad {
 
 	public TGamepad(Gamepad baseGamepad) {
 		this.baseGamepad = baseGamepad;
-		this.baseGamepad.setJoystickDeadzone(TGamepad.JOYSTICK_THRESHOLD);
+		this.baseGamepad.setJoystickDeadzone((float)TGamepad.JOYSTICK_THRESHOLD);
 	}
 	
 	private static double scaleJoystickInput(double raw) {
@@ -86,36 +85,20 @@ public class TGamepad {
 		return baseGamepad.right_trigger;
 	}
 	
-//	public double leftStickX() {
-//		return scaleJoystickInput(baseGamepad.left_stick_x);
-//	}
-//	
-//	public double leftStickY() {
-//		return scaleJoystickInput(-baseGamepad.left_stick_y);
-//	}
-//	
-//	public double rightStickX() {
-//		return scaleJoystickInput(baseGamepad.right_stick_x);
-//	}
-//	
-//	public double rightStickY() {
-//		return scaleJoystickInput(-baseGamepad.right_stick_y);
-//	}
-	
 	public double leftStickX() {
-		return baseGamepad.left_stick_x;
+		return scaleJoystickInput(baseGamepad.left_stick_x);
 	}
 	
 	public double leftStickY() {
-		return -baseGamepad.left_stick_y;
+		return scaleJoystickInput(-baseGamepad.left_stick_y);
 	}
 	
 	public double rightStickX() {
-		return baseGamepad.right_stick_x;
+		return scaleJoystickInput(baseGamepad.right_stick_x);
 	}
 	
 	public double rightStickY() {
-		return -baseGamepad.right_stick_y;
+		return scaleJoystickInput(-baseGamepad.right_stick_y);
 	}
 	
 }
