@@ -20,7 +20,7 @@ public class TaskScheduler {
 		this.taskThread.start();
 	}
 	
-	public void scheduleTask(Runnable task) {
+	public void registerTask(Runnable task) {
 		this.tasks.add(task);
 	}
 	

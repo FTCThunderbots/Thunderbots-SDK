@@ -2,8 +2,6 @@ package io.github.thunderbots.sdk.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import io.github.thunderbots.sdk.TRobot;
-
 /**
  * 
  *
@@ -20,14 +18,10 @@ public abstract class TLinearOpMode extends LinearOpMode {
 	 */
 	@Override
 	public void runOpMode() throws InterruptedException {
-		this.initializeOpMode();
+		new OpModeVariableMonitor(this).run();
 		this.initializeRobot();
 		this.waitForStart();
 		this.main();
-	}
-	
-	public void initializeOpMode() {
-		TRobot.initializeRobot(this.hardwareMap, this.telemetry, this.gamepad1, this.gamepad2);
 	}
 
 }

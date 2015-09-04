@@ -39,7 +39,7 @@ public class OpModeVariableMonitor implements Runnable {
 	
 	public OpModeVariableMonitor(OpMode monitor) {
 		this.monitor = monitor;
-		// TODO: add to task scheduler
+		TRobot.getTaskScheduler().registerTask(this);
 	}
 	
 	@Override
@@ -68,6 +68,9 @@ public class OpModeVariableMonitor implements Runnable {
 	}
 	
 	private static boolean isSameObject(Object a, Object b) {
+		if (a == null || b == null) {
+			return false;
+		}
 		synchronized (a) {
 			synchronized (b) {
 				return a == b;
