@@ -1,6 +1,7 @@
 package io.github.thunderbots.sdk.control;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
+import io.github.thunderbots.sdk.utility.MathUtil;
 
 /**
  * 
@@ -24,10 +25,10 @@ public class TGamepad {
 		this.baseGamepad.setJoystickDeadzone(TGamepad.JOYSTICK_THRESHOLD);
 	}
 	
-//	private static double scaleJoystickInput(double raw) {
-//		return MathUtil.scaleToRange(raw, new double[] {JOYSTICK_THRESHOLD, JOYSTICK_MAX},
-//				new double[] {JOYSTICK_REST, JOYSTICK_MAX});
-//	}
+	private static double scaleJoystickInput(double raw) {
+		return MathUtil.scaleToRange(raw, new double[] {JOYSTICK_THRESHOLD, JOYSTICK_MAX},
+				new double[] {JOYSTICK_REST, JOYSTICK_MAX});
+	}
 	
 	public boolean aButton() {
 		return baseGamepad.a;
