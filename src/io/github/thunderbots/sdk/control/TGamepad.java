@@ -89,7 +89,7 @@ public class TGamepad {
 	}
 
 	public double leftStickY() {
-		return scaleJoystickInput(-baseGamepad.left_stick_y);
+		return TGamepad.scaleJoystickInput(-this.baseGamepad.left_stick_y);
 	}
 
 	public double rightStickX() {
@@ -97,7 +97,7 @@ public class TGamepad {
 	}
 
 	public double rightStickY() {
-		return scaleJoystickInput(-baseGamepad.right_stick_y);
+		return TGamepad.scaleJoystickInput(-this.baseGamepad.right_stick_y);
 	}
 
 }

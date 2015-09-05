@@ -43,19 +43,19 @@ public class OpModeVariableMonitor implements Runnable {
 	@Override
 	public void run() {
 		boolean refreshNeeded = false;
-		if (!isSameObject(this.gamepad1, this.monitor.gamepad1)) {
+		if (!OpModeVariableMonitor.isSameObject(this.gamepad1, this.monitor.gamepad1)) {
 			this.gamepad1 = this.monitor.gamepad1;
 			refreshNeeded = true;
 		}
-		if (!isSameObject(this.gamepad2, this.monitor.gamepad2)) {
+		if (!OpModeVariableMonitor.isSameObject(this.gamepad2, this.monitor.gamepad2)) {
 			this.gamepad2 = this.monitor.gamepad2;
 			refreshNeeded = true;
 		}
-		if (!isSameObject(this.hardware, this.monitor.hardwareMap)) {
+		if (!OpModeVariableMonitor.isSameObject(this.hardware, this.monitor.hardwareMap)) {
 			this.hardware = this.monitor.hardwareMap;
 			refreshNeeded = true;
 		}
-		if (!isSameObject(this.telemetry, this.monitor.telemetry)) {
+		if (!OpModeVariableMonitor.isSameObject(this.telemetry, this.monitor.telemetry)) {
 			this.telemetry = this.monitor.telemetry;
 			refreshNeeded = true;
 		}
