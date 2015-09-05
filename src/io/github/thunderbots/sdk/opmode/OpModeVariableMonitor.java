@@ -24,24 +24,22 @@ import com.qualcomm.robotcore.robocol.Telemetry;
 import io.github.thunderbots.sdk.TRobot;
 
 /**
- * 
- *
  * @author Zach Ohara
  */
 public class OpModeVariableMonitor implements Runnable {
-	
+
 	private OpMode monitor;
-	
+
 	private Gamepad gamepad1;
 	private Gamepad gamepad2;
 	private HardwareMap hardware;
 	private Telemetry telemetry;
-	
+
 	public OpModeVariableMonitor(OpMode monitor) {
 		this.monitor = monitor;
 		TRobot.getTaskScheduler().registerTask(this);
 	}
-	
+
 	@Override
 	public void run() {
 		boolean refreshNeeded = false;
@@ -61,12 +59,12 @@ public class OpModeVariableMonitor implements Runnable {
 			this.telemetry = this.monitor.telemetry;
 			refreshNeeded = true;
 		}
-		
+
 		if (refreshNeeded) {
 			TRobot.initializeRobot(this.hardware, this.telemetry, this.gamepad1, this.gamepad2);
 		}
 	}
-	
+
 	private static boolean isSameObject(Object a, Object b) {
 		if (a == null || b == null) {
 			return false;

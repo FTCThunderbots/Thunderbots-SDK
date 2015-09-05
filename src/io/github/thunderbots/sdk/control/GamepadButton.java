@@ -4,7 +4,7 @@ package io.github.thunderbots.sdk.control;
  * @author Pranav Mathur
  */
 public enum GamepadButton {
-	
+
 	A,
 	B,
 	X,
@@ -19,5 +19,5 @@ public enum GamepadButton {
 	RIGHTSTICK,
 	LEFTTRIGGER,
 	RIGHTTRIGGER
-	
+
 }

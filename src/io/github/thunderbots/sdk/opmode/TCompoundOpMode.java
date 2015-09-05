@@ -1,14 +1,12 @@
 package io.github.thunderbots.sdk.opmode;
 
 /**
- * 
- *
  * @author Zach Ohara
  */
 public class TCompoundOpMode extends TLinearOpMode {
-	
+
 	private TLinearOpMode[] opmodes;
-	
+
 	public TCompoundOpMode(TLinearOpMode[] opmodes) {
 		this.opmodes = opmodes;
 	}

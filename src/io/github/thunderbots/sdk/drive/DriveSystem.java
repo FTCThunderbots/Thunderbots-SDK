@@ -1,36 +1,34 @@
 package io.github.thunderbots.sdk.drive;
 
 /**
- * 
- *
  * @author Zach Ohara
  */
 public abstract class DriveSystem {
-	
+
 	private DriveMotorSet motors;
-	
+
 	public DriveSystem(DriveMotorSet wheels) {
 		this.motors = wheels;
 	}
-	
+
 	public DriveSystem(String[] motornames) {
 		this.motors = new DriveMotorSet(motornames);
 	}
-	
+
 	public abstract boolean setMovement(double forward, double clockwise);
-	
+
 	protected DriveMotorSet getWheelSet() {
 		return this.motors;
 	}
-	
+
 	public boolean halt() {
 		return this.setMovement(0, 0);
 	}
-	
+
 	public boolean drive(double power) {
 		return this.setMovement(power, 0);
 	}
-	
+
 	public boolean rotate(double power) {
 		return this.setMovement(0, power);
 	}
@@ -59,8 +57,7 @@ public abstract class DriveSystem {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			uninterrupted = false;
-		}
-		finally {
+		} finally {
 			this.halt();
 		}
 		return uninterrupted;

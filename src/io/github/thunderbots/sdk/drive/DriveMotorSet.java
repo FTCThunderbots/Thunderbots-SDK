@@ -22,21 +22,19 @@ import io.github.thunderbots.sdk.TRobot;
 import io.github.thunderbots.sdk.hardware.TMotor;
 
 /**
- * 
- *
  * @author Zach Ohara
  */
 public class DriveMotorSet {
-	
+
 	private TMotor[] motors;
-	
+
 	public DriveMotorSet(String[] names) {
 		this.motors = new TMotor[names.length];
 		for (int i = 0; i < names.length; i++) {
-			motors[i] = TRobot.getMotor(names[i]);
+			this.motors[i] = TRobot.getMotor(names[i]);
 		}
 	}
-	
+
 	public void setMotorPowers(double[] powers) {
 		TRobot.sendTelemetryData("Motors", Arrays.toString(powers));
 		int motorSet = Math.min(powers.length, this.motors.length);

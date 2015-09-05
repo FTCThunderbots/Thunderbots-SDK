@@ -1,17 +1,16 @@
 package io.github.thunderbots.sdk.control;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
+
 import io.github.thunderbots.sdk.utility.MathUtil;
 
 /**
- * 
- *
  * @author Zach Ohara
  */
 public class TGamepad {
-	
+
 	private Gamepad baseGamepad;
-	
+
 	public static final double JOYSTICK_THRESHOLD = 0.1;
 	public static final double JOYSTICK_MAX = 1.0;
 	public static final double JOYSTICK_REST = 0.0;
@@ -21,84 +20,84 @@ public class TGamepad {
 
 	public TGamepad(Gamepad baseGamepad) {
 		this.baseGamepad = baseGamepad;
-		this.baseGamepad.setJoystickDeadzone((float)TGamepad.JOYSTICK_THRESHOLD);
+		this.baseGamepad.setJoystickDeadzone((float) TGamepad.JOYSTICK_THRESHOLD);
 	}
-	
+
 	private static double scaleJoystickInput(double raw) {
-		return MathUtil.scaleToRange(raw, new double[] {JOYSTICK_THRESHOLD, JOYSTICK_MAX},
-				new double[] {JOYSTICK_REST, JOYSTICK_MAX});
+		return MathUtil.scaleToRange(raw, new double[] {TGamepad.JOYSTICK_THRESHOLD, TGamepad.JOYSTICK_MAX},
+				new double[] {TGamepad.JOYSTICK_REST, TGamepad.JOYSTICK_MAX});
 	}
-	
+
 	public boolean aButton() {
-		return baseGamepad.a;
+		return this.baseGamepad.a;
 	}
-	
+
 	public boolean bButton() {
-		return baseGamepad.b;
+		return this.baseGamepad.b;
 	}
-	
+
 	public boolean xButton() {
-		return baseGamepad.x;
+		return this.baseGamepad.x;
 	}
-	
+
 	public boolean yButton() {
-		return baseGamepad.y;
+		return this.baseGamepad.y;
 	}
-	
+
 	public boolean upButton() {
-		return baseGamepad.dpad_up;
+		return this.baseGamepad.dpad_up;
 	}
-	
+
 	public boolean downButton() {
-		return baseGamepad.dpad_down;
+		return this.baseGamepad.dpad_down;
 	}
-	
+
 	public boolean leftButton() {
-		return baseGamepad.dpad_left;
+		return this.baseGamepad.dpad_left;
 	}
-	
+
 	public boolean rightButton() {
-		return baseGamepad.dpad_right;
+		return this.baseGamepad.dpad_right;
 	}
-	
+
 	public boolean leftBumper() {
-		return baseGamepad.left_bumper;
+		return this.baseGamepad.left_bumper;
 	}
-	
+
 	public boolean rightBumper() {
-		return baseGamepad.right_bumper;
+		return this.baseGamepad.right_bumper;
 	}
-	
+
 	public boolean leftStickButton() {
-		return baseGamepad.left_stick_button;
+		return this.baseGamepad.left_stick_button;
 	}
-	
+
 	public boolean rightStickButton() {
-		return baseGamepad.right_stick_button;
+		return this.baseGamepad.right_stick_button;
 	}
-	
+
 	public double leftTrigger() {
-		return baseGamepad.left_trigger;
+		return this.baseGamepad.left_trigger;
 	}
-	
+
 	public double rightTrigger() {
-		return baseGamepad.right_trigger;
+		return this.baseGamepad.right_trigger;
 	}
-	
+
 	public double leftStickX() {
-		return scaleJoystickInput(baseGamepad.left_stick_x);
+		return TGamepad.scaleJoystickInput(this.baseGamepad.left_stick_x);
 	}
-	
+
 	public double leftStickY() {
 		return scaleJoystickInput(-baseGamepad.left_stick_y);
 	}
-	
+
 	public double rightStickX() {
-		return scaleJoystickInput(baseGamepad.right_stick_x);
+		return TGamepad.scaleJoystickInput(this.baseGamepad.right_stick_x);
 	}
-	
+
 	public double rightStickY() {
 		return scaleJoystickInput(-baseGamepad.right_stick_y);
 	}
-	
+
 }
