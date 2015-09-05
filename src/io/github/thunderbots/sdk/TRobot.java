@@ -2,6 +2,7 @@ package io.github.thunderbots.sdk;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
 import io.github.thunderbots.sdk.control.TGamepad;
@@ -63,6 +64,11 @@ public class TRobot {
 	
 	public static TServo getServo(String name) {
 		return new TServo(robotHardware.servo.get(name));
+	}
+	
+	@Deprecated
+	public static TouchSensor getTouchSensor(String name) {
+		return robotHardware.touchSensor.get(name);
 	}
 	
 	public static void sendTelemetryData(String tag, Object data) {
