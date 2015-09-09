@@ -1,7 +1,7 @@
-package io.github.thunderbots.sdk.opmode;
+package io.github.thunderbots.lightning.opmode;
 
-import io.github.thunderbots.sdk.drive.DriveSystem;
-import io.github.thunderbots.sdk.drive.TankDrive;
+import io.github.thunderbots.lightning.drive.DriveSystem;
+import io.github.thunderbots.lightning.drive.TankDrive;
 
 /**
  * @author Zach Ohara

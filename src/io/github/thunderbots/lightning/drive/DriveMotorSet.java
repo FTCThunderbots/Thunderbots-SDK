@@ -14,12 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.sdk.drive;
+package io.github.thunderbots.lightning.drive;
 
 import java.util.Arrays;
 
-import io.github.thunderbots.sdk.TRobot;
-import io.github.thunderbots.sdk.hardware.TMotor;
+import io.github.thunderbots.lightning.TRobot;
+import io.github.thunderbots.lightning.hardware.TMotor;
 
 /**
  * @author Zach Ohara

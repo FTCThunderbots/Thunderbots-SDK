@@ -14,14 +14,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.sdk.opmode;
+package io.github.thunderbots.lightning.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
-import io.github.thunderbots.sdk.TRobot;
+import io.github.thunderbots.lightning.TRobot;
 
 /**
  * @author Zach Ohara

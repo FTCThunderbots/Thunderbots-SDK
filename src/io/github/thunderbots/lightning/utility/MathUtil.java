@@ -1,4 +1,4 @@
-package io.github.thunderbots.sdk.utility;
+package io.github.thunderbots.lightning.utility;
 
 public class MathUtil {
 

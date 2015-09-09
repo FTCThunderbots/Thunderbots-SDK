@@ -1,8 +1,8 @@
-package io.github.thunderbots.sdk.control;
+package io.github.thunderbots.lightning.control;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import io.github.thunderbots.sdk.utility.MathUtil;
+import io.github.thunderbots.lightning.utility.MathUtil;
 
 /**
  * @author Zach Ohara

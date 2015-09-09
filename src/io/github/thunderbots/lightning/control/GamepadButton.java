@@ -1,4 +1,4 @@
-package io.github.thunderbots.sdk.control;
+package io.github.thunderbots.lightning.control;
 
 /**
  * @author Pranav Mathur

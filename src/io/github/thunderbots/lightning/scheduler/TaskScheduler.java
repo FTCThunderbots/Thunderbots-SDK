@@ -1,4 +1,4 @@
-package io.github.thunderbots.sdk.scheduler;
+package io.github.thunderbots.lightning.scheduler;
 
 import java.util.ArrayList;
 import java.util.List;

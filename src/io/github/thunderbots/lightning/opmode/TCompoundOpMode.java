@@ -1,4 +1,4 @@
-package io.github.thunderbots.sdk.opmode;
+package io.github.thunderbots.lightning.opmode;
 
 /**
  * @author Zach Ohara

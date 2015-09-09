@@ -1,14 +1,14 @@
-package io.github.thunderbots.sdk;
+package io.github.thunderbots.lightning;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
-import io.github.thunderbots.sdk.control.TGamepad;
-import io.github.thunderbots.sdk.hardware.TMotor;
-import io.github.thunderbots.sdk.hardware.TServo;
-import io.github.thunderbots.sdk.scheduler.TaskScheduler;
+import io.github.thunderbots.lightning.control.TGamepad;
+import io.github.thunderbots.lightning.hardware.TMotor;
+import io.github.thunderbots.lightning.hardware.TServo;
+import io.github.thunderbots.lightning.scheduler.TaskScheduler;
 
 /**
  * @author Zach Ohara

@@ -1,6 +1,6 @@
-package io.github.thunderbots.sdk.drive;
+package io.github.thunderbots.lightning.drive;
 
-import io.github.thunderbots.sdk.hardware.TMotor;
+import io.github.thunderbots.lightning.hardware.TMotor;
 
 /**
  * @author Zach Ohara

@@ -1,4 +1,4 @@
-package io.github.thunderbots.sdk.hardware;
+package io.github.thunderbots.lightning.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
