@@ -18,7 +18,7 @@ package io.github.thunderbots.lightning.drive;
 
 import java.util.Arrays;
 
-import io.github.thunderbots.lightning.TRobot;
+import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.hardware.TMotor;
 
 /**
@@ -31,12 +31,12 @@ public class DriveMotorSet {
 	public DriveMotorSet(String[] names) {
 		this.motors = new TMotor[names.length];
 		for (int i = 0; i < names.length; i++) {
-			this.motors[i] = TRobot.getMotor(names[i]);
+			this.motors[i] = Lightning.getMotor(names[i]);
 		}
 	}
 
 	public void setMotorPowers(double[] powers) {
-		TRobot.sendTelemetryData("Motors", Arrays.toString(powers));
+		Lightning.sendTelemetryData("Motors", Arrays.toString(powers));
 		int motorSet = Math.min(powers.length, this.motors.length);
 		for (int i = 0; i < motorSet; i++) {
 			this.motors[i].setPower(powers[i]);

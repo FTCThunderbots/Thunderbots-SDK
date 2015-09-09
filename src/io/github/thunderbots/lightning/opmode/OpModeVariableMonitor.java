@@ -21,7 +21,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
-import io.github.thunderbots.lightning.TRobot;
+import io.github.thunderbots.lightning.Lightning;
 
 /**
  * @author Zach Ohara
@@ -37,7 +37,7 @@ public class OpModeVariableMonitor implements Runnable {
 
 	public OpModeVariableMonitor(OpMode monitor) {
 		this.monitor = monitor;
-		TRobot.getTaskScheduler().registerTask(this);
+		Lightning.getTaskScheduler().registerTask(this);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class OpModeVariableMonitor implements Runnable {
 		}
 
 		if (refreshNeeded) {
-			TRobot.initializeRobot(this.hardware, this.telemetry, this.gamepad1, this.gamepad2);
+			Lightning.initializeRobot(this.hardware, this.telemetry, this.gamepad1, this.gamepad2);
 		}
 	}
 

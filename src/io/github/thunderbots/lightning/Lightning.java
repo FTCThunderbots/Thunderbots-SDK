@@ -13,7 +13,7 @@ import io.github.thunderbots.lightning.scheduler.TaskScheduler;
 /**
  * @author Zach Ohara
  */
-public class TRobot {
+public class Lightning {
 
 	private static HardwareMap robotHardware;
 	private static Telemetry robotTelemetry;
@@ -23,55 +23,55 @@ public class TRobot {
 	private static TaskScheduler taskScheduler;
 
 	static {
-		TRobot.taskScheduler = new TaskScheduler();
+		Lightning.taskScheduler = new TaskScheduler();
 	}
 
 	public static void initializeRobot(HardwareMap hardware, Telemetry telemetry, Gamepad pad1,
 			Gamepad pad2) {
-		TRobot.robotHardware = hardware;
-		TRobot.robotTelemetry = telemetry;
-		TRobot.gamepad1 = new TGamepad(pad1);
-		TRobot.gamepad2 = new TGamepad(pad2);
+		Lightning.robotHardware = hardware;
+		Lightning.robotTelemetry = telemetry;
+		Lightning.gamepad1 = new TGamepad(pad1);
+		Lightning.gamepad2 = new TGamepad(pad2);
 	}
 
 	public static TaskScheduler getTaskScheduler() {
-		return TRobot.taskScheduler;
+		return Lightning.taskScheduler;
 	}
 
 	public static TGamepad getGamepad1() {
-		return TRobot.gamepad1;
+		return Lightning.gamepad1;
 	}
 
 	public static TGamepad getGamepad2() {
-		return TRobot.gamepad2;
+		return Lightning.gamepad2;
 	}
 
 	public static TGamepad getGamepad(int gamepad) {
 		switch (gamepad) {
 			case 1:
-				return TRobot.getGamepad1();
+				return Lightning.getGamepad1();
 			case 2:
-				return TRobot.getGamepad2();
+				return Lightning.getGamepad2();
 			default:
 				return null;
 		}
 	}
 
 	public static TMotor getMotor(String name) {
-		return new TMotor(TRobot.robotHardware.dcMotor.get(name));
+		return new TMotor(Lightning.robotHardware.dcMotor.get(name));
 	}
 
 	public static TServo getServo(String name) {
-		return new TServo(TRobot.robotHardware.servo.get(name));
+		return new TServo(Lightning.robotHardware.servo.get(name));
 	}
 
 	@Deprecated
 	public static TouchSensor getTouchSensor(String name) {
-		return TRobot.robotHardware.touchSensor.get(name);
+		return Lightning.robotHardware.touchSensor.get(name);
 	}
 
 	public static void sendTelemetryData(String tag, Object data) {
-		TRobot.robotTelemetry.addData(tag, data);
+		Lightning.robotTelemetry.addData(tag, data);
 	}
 
 }
