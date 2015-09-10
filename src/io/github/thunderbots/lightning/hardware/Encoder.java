@@ -3,7 +3,7 @@ package io.github.thunderbots.lightning.hardware;
 /**
  * @author Zach Ohara
  */
-public class TEncoder {
+public class Encoder {
 
 	private TMotor baseMotor;
 	private int zeroPoint;
@@ -13,10 +13,10 @@ public class TEncoder {
 	private static final double DEFAULT_TICKS_PER_REVOLUTION = 0d;
 	private static final double DEFAULT_TICKS_PER_INCH = 0d;
 
-	public TEncoder(TMotor motor) {
+	public Encoder(TMotor motor) {
 		this.baseMotor = motor;
-		this.ticksPerRevolution = TEncoder.DEFAULT_TICKS_PER_REVOLUTION;
-		this.ticksPerInch = TEncoder.DEFAULT_TICKS_PER_INCH;
+		this.ticksPerRevolution = Encoder.DEFAULT_TICKS_PER_REVOLUTION;
+		this.ticksPerInch = Encoder.DEFAULT_TICKS_PER_INCH;
 		this.reset();
 	}
 

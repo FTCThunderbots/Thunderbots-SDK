@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class TMotor {
 
 	private DcMotor basemotor;
-	private TEncoder encoder;
+	private Encoder encoder;
 
 	public static final double MAX_POWER = 1;
 	public static final double REST_POWER = 0;
@@ -18,7 +18,7 @@ public class TMotor {
 		this.basemotor = basemotor;
 	}
 
-	public TEncoder getEncoder() {
+	public Encoder getEncoder() {
 		return this.encoder;
 	}
 
