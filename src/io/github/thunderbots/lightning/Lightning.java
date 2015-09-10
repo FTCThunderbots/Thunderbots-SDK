@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
 import io.github.thunderbots.lightning.control.Joystick;
-import io.github.thunderbots.lightning.hardware.TMotor;
+import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.TServo;
 import io.github.thunderbots.lightning.scheduler.TaskScheduler;
 
@@ -127,8 +127,8 @@ public class Lightning {
 	 * @param name the name of the motor.
 	 * @return the motor with the given name.
 	 */
-	public static TMotor getMotor(String name) {
-		return new TMotor(Lightning.robotHardware.dcMotor.get(name));
+	public static Motor getMotor(String name) {
+		return new Motor(Lightning.robotHardware.dcMotor.get(name));
 	}
 
 	/**

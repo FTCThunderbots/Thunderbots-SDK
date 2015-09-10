@@ -1,6 +1,6 @@
 package io.github.thunderbots.lightning.drive;
 
-import io.github.thunderbots.lightning.hardware.TMotor;
+import io.github.thunderbots.lightning.hardware.Motor;
 
 /**
  * A {@code MecanumDrive} is a {@code DriveSystem} that represents a system using mecanum wheels.
@@ -117,8 +117,8 @@ public class MecanumDrive extends DriveSystem {
 		double max = Math.max(Math.max(Math.abs(frontLeft), Math.abs(frontRight)),
 				Math.max(Math.abs(backLeft), Math.abs(backRight)));
 
-		if (max > TMotor.MAX_POWER) {
-			double scale = max / TMotor.MAX_POWER;
+		if (max > Motor.MAX_POWER) {
+			double scale = max / Motor.MAX_POWER;
 			frontLeft /= scale;
 			frontRight /= scale;
 			backLeft /= scale;

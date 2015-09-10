@@ -5,7 +5,7 @@ package io.github.thunderbots.lightning.hardware;
  */
 public class Encoder {
 
-	private TMotor baseMotor;
+	private Motor baseMotor;
 	private int zeroPoint;
 	private double ticksPerRevolution;
 	private double ticksPerInch;
@@ -13,7 +13,7 @@ public class Encoder {
 	private static final double DEFAULT_TICKS_PER_REVOLUTION = 0d;
 	private static final double DEFAULT_TICKS_PER_INCH = 0d;
 
-	public Encoder(TMotor motor) {
+	public Encoder(Motor motor) {
 		this.baseMotor = motor;
 		this.ticksPerRevolution = Encoder.DEFAULT_TICKS_PER_REVOLUTION;
 		this.ticksPerInch = Encoder.DEFAULT_TICKS_PER_INCH;

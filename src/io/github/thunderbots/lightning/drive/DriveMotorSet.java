@@ -19,7 +19,7 @@ package io.github.thunderbots.lightning.drive;
 import java.util.Arrays;
 
 import io.github.thunderbots.lightning.Lightning;
-import io.github.thunderbots.lightning.hardware.TMotor;
+import io.github.thunderbots.lightning.hardware.Motor;
 
 /**
  * A {@code DriveMotorSet} is a collection of motors used for the sole purpose of driving the
@@ -32,7 +32,7 @@ public class DriveMotorSet {
 	/**
 	 * The array of motors that this {@code DriveMotorSet} comprises.
 	 */
-	private TMotor[] motors;
+	private Motor[] motors;
 
 	/**
 	 * Constructs a new {@code DriveMotorSet} using the motors with the given names.
@@ -40,7 +40,7 @@ public class DriveMotorSet {
 	 * @param names the names of all the motors to use with this motor set.
 	 */
 	public DriveMotorSet(String[] names) {
-		this.motors = new TMotor[names.length];
+		this.motors = new Motor[names.length];
 		for (int i = 0; i < names.length; i++) {
 			this.motors[i] = Lightning.getMotor(names[i]);
 		}

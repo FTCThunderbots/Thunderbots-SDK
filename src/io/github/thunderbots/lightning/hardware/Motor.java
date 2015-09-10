@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 /**
  * @author Zach Ohara
  */
-public class TMotor {
+public class Motor {
 
 	private DcMotor basemotor;
 	private Encoder encoder;
@@ -14,7 +14,7 @@ public class TMotor {
 	public static final double REST_POWER = 0;
 	public static final double MIN_POWER = -1;
 
-	public TMotor(DcMotor basemotor) {
+	public Motor(DcMotor basemotor) {
 		this.basemotor = basemotor;
 	}
 
