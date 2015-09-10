@@ -148,4 +148,20 @@ public class Lightning {
 		Lightning.robotTelemetry.addData(tag, data);
 	}
 
+	/**
+	 * Sends given data from the robot controller to the driver station. Any object can be sent,
+	 * but the object's {@code toString()} method will be called and the string representation of
+	 * the object is what will actually be sent. The data will be displayed in the bottom portion
+	 * of the driver station's screen.
+	 * <br>
+	 * If this method is used rather than {@link #sendTelemetryData(String, Object)}, the tag for
+	 * the data will be an empty string.
+	 *
+	 * @param data the object to be sent.
+	 * @see #sendTelemetryData(String, Object)
+	 */
+	public static void sendTelemetryData(Object data) {
+		Lightning.sendTelemetryData("", data);
+	}
+
 }
