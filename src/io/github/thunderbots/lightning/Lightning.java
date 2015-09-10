@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.robocol.Telemetry;
 
 import io.github.thunderbots.lightning.control.Joystick;
 import io.github.thunderbots.lightning.hardware.Motor;
-import io.github.thunderbots.lightning.hardware.TServo;
+import io.github.thunderbots.lightning.hardware.Servo;
 import io.github.thunderbots.lightning.scheduler.TaskScheduler;
 
 /**
@@ -137,8 +137,8 @@ public class Lightning {
 	 * @param name the name of the motor.
 	 * @return the motor with the given name.
 	 */
-	public static TServo getServo(String name) {
-		return new TServo(Lightning.robotHardware.servo.get(name));
+	public static Servo getServo(String name) {
+		return new Servo(Lightning.robotHardware.servo.get(name));
 	}
 	
 	/**

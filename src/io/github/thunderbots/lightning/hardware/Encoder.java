@@ -1,6 +1,8 @@
 package io.github.thunderbots.lightning.hardware;
 
 /**
+ * An {@code Encoder} represents a physical encoder that is attached to a specific motor.
+ * 
  * @author Zach Ohara
  */
 public class Encoder {
@@ -46,7 +48,7 @@ public class Encoder {
 
 	@Override
 	public String toString() {
-		return "TEncoder[" + this.baseMotor + "]";
+		return "Encoder[" + this.baseMotor + "]";
 	}
 
 }
