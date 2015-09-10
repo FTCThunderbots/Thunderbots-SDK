@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
-import io.github.thunderbots.lightning.control.TGamepad;
+import io.github.thunderbots.lightning.control.Joystick;
 import io.github.thunderbots.lightning.hardware.TMotor;
 import io.github.thunderbots.lightning.hardware.TServo;
 import io.github.thunderbots.lightning.scheduler.TaskScheduler;
@@ -36,12 +36,12 @@ public class Lightning {
 	/**
 	 * The joysticks connected to the driver station.
 	 */
-	private static TGamepad gamepad1;
+	private static Joystick gamepad1;
 	
 	/**
 	 * The joysticks connected to the driver station.
 	 */
-	private static TGamepad gamepad2;
+	private static Joystick gamepad2;
 
 	/**
 	 * The master task scheduler that is used to execute all background tasks in the SDK
@@ -57,8 +57,8 @@ public class Lightning {
 			Gamepad pad2) {
 		Lightning.robotHardware = hardware;
 		Lightning.robotTelemetry = telemetry;
-		Lightning.gamepad1 = new TGamepad(pad1);
-		Lightning.gamepad2 = new TGamepad(pad2);
+		Lightning.gamepad1 = new Joystick(pad1);
+		Lightning.gamepad2 = new Joystick(pad2);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Lightning {
 	 * @return a reference to the primary gamepad.
 	 */
 	@Deprecated
-	public static TGamepad getGamepad1() {
+	public static Joystick getGamepad1() {
 		return Lightning.gamepad1;
 	}
 
@@ -93,11 +93,11 @@ public class Lightning {
 	 * @return a reference to the secondary gamepad.
 	 */
 	@Deprecated
-	public static TGamepad getGamepad2() {
+	public static Joystick getGamepad2() {
 		return Lightning.gamepad2;
 	}
 	
-	public static TGamepad getGamepad(int gamepad) {
+	public static Joystick getGamepad(int gamepad) {
 		switch (gamepad) {
 			case 1:
 				return Lightning.getGamepad1();

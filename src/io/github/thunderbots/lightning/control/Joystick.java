@@ -7,7 +7,7 @@ import io.github.thunderbots.lightning.utility.MathUtil;
 /**
  * @author Zach Ohara
  */
-public class TGamepad {
+public class Joystick {
 
 	private Gamepad baseGamepad;
 
@@ -18,14 +18,14 @@ public class TGamepad {
 	public static final double TRIGGER_MAX = 1.0;
 	public static final double TRIGGER_MIN = 0.0;
 
-	public TGamepad(Gamepad baseGamepad) {
+	public Joystick(Gamepad baseGamepad) {
 		this.baseGamepad = baseGamepad;
-		this.baseGamepad.setJoystickDeadzone((float) TGamepad.JOYSTICK_THRESHOLD);
+		this.baseGamepad.setJoystickDeadzone((float) Joystick.JOYSTICK_THRESHOLD);
 	}
 
 	private static double scaleJoystickInput(double raw) {
-		return MathUtil.scaleToRange(raw, new double[] {TGamepad.JOYSTICK_THRESHOLD, TGamepad.JOYSTICK_MAX},
-				new double[] {TGamepad.JOYSTICK_REST, TGamepad.JOYSTICK_MAX});
+		return MathUtil.scaleToRange(raw, new double[] {Joystick.JOYSTICK_THRESHOLD, Joystick.JOYSTICK_MAX},
+				new double[] {Joystick.JOYSTICK_REST, Joystick.JOYSTICK_MAX});
 	}
 
 	public boolean aButton() {
@@ -85,19 +85,19 @@ public class TGamepad {
 	}
 
 	public double leftStickX() {
-		return TGamepad.scaleJoystickInput(this.baseGamepad.left_stick_x);
+		return Joystick.scaleJoystickInput(this.baseGamepad.left_stick_x);
 	}
 
 	public double leftStickY() {
-		return TGamepad.scaleJoystickInput(-this.baseGamepad.left_stick_y);
+		return Joystick.scaleJoystickInput(-this.baseGamepad.left_stick_y);
 	}
 
 	public double rightStickX() {
-		return TGamepad.scaleJoystickInput(this.baseGamepad.right_stick_x);
+		return Joystick.scaleJoystickInput(this.baseGamepad.right_stick_x);
 	}
 
 	public double rightStickY() {
-		return TGamepad.scaleJoystickInput(-this.baseGamepad.right_stick_y);
+		return Joystick.scaleJoystickInput(-this.baseGamepad.right_stick_y);
 	}
 
 }
