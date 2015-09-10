@@ -108,19 +108,42 @@ public class Lightning {
 		}
 	}
 
+	/**
+	 * Gets a reference to the motor with the given name.
+	 *
+	 * @param name the name of the motor.
+	 * @return the motor with the given name.
+	 */
 	public static TMotor getMotor(String name) {
 		return new TMotor(Lightning.robotHardware.dcMotor.get(name));
 	}
 
+	/**
+	 * Gets a reference to the motor with the given name.
+	 *
+	 * @param name the name of the motor.
+	 * @return the motor with the given name.
+	 */
 	public static TServo getServo(String name) {
 		return new TServo(Lightning.robotHardware.servo.get(name));
 	}
-
+	
 	@Deprecated
 	public static TouchSensor getTouchSensor(String name) {
 		return Lightning.robotHardware.touchSensor.get(name);
 	}
 
+	/**
+	 * Sends given data from the robot controller to the driver station. Any object can be sent,
+	 * but the object's {@code toString()} method will be called and the string representation of
+	 * the object is what will actually be sent. The data will be displayed in the bottom portion
+	 * of the driver station's screen.
+	 *
+	 * @param tag a very short description of the data that is being sent. Ideally this string
+	 * should be around 1-8 characters long, but an upper limit on characters is currently not
+	 * known.
+	 * @param data the object to be sent.
+	 */
 	public static void sendTelemetryData(String tag, Object data) {
 		Lightning.robotTelemetry.addData(tag, data);
 	}
