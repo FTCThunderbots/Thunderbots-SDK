@@ -1,7 +1,11 @@
 package io.github.thunderbots.lightning;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
@@ -25,6 +29,14 @@ public class Lightning {
 	 * @see com.qualcomm.robotcore.hardware.HardwareMap
 	 */
 	private static HardwareMap robotHardware;
+	
+	/**
+	 * A list of all the {@code DeviceMapping}s exposed by the hardware map that could point
+	 * to sensors.
+	 * 
+	 * @see #robotHardware
+	 */
+	private static List<DeviceMapping<?>> sensorMaps;
 	
 	/**
 	 * The telemetry link between the robot controller and the driver station.
@@ -57,6 +69,7 @@ public class Lightning {
 			Gamepad pad2) {
 		Lightning.robotHardware = hardware;
 		Lightning.robotTelemetry = telemetry;
+		Lightning.sensorMaps = Lightning.getSensorMaps(hardware);
 		Lightning.gamepad1 = new Joystick(pad1);
 		Lightning.gamepad2 = new Joystick(pad2);
 	}
@@ -128,9 +141,23 @@ public class Lightning {
 		return new TServo(Lightning.robotHardware.servo.get(name));
 	}
 	
-	@Deprecated
-	public static TouchSensor getTouchSensor(String name) {
-		return Lightning.robotHardware.touchSensor.get(name);
+	/**
+	 * Gets a reference to any sensor on the robot with the given name. The sensor
+	 * will need to be type-cast to the expected type of sensor before it can be
+	 * used in any meaningful way.
+	 *
+	 * @param name the name of the sensor.
+	 * @return the sensor with the given name.
+	 */
+	public static Object getSensor(String name) {
+		for (DeviceMapping<?> map : Lightning.sensorMaps) {
+			try {
+				if (map.get(name) != null) {
+					return map.get(name);
+				}
+			} catch (IllegalArgumentException ignore) {}
+		}
+		return null;
 	}
 
 	/**
@@ -162,6 +189,31 @@ public class Lightning {
 	 */
 	public static void sendTelemetryData(Object data) {
 		Lightning.sendTelemetryData("", data);
+	}
+	
+	/**
+	 * Given a {@code HardwareMap}, return a list of {@code DeviceMapping}s that could lead
+	 * to sensors.
+	 * 
+	 * @param map the hardware map to search for maps in.
+	 * @return a list of the sensor maps.
+	 */
+	private static List<DeviceMapping<?>> getSensorMaps(HardwareMap map) {
+		List<DeviceMapping<?>> sensorMaps = new ArrayList<DeviceMapping<?>>();
+		sensorMaps.add(map.accelerationSensor);
+		sensorMaps.add(map.analogInput);
+		sensorMaps.add(map.analogOutput);
+		sensorMaps.add(map.compassSensor);
+		sensorMaps.add(map.digitalChannel);
+		sensorMaps.add(map.gyroSensor);
+		sensorMaps.add(map.i2cDevice);
+		sensorMaps.add(map.irSeekerSensor);
+		sensorMaps.add(map.lightSensor);
+		sensorMaps.add(map.opticalDistanceSensor);
+		sensorMaps.add(map.touchSensor);
+		sensorMaps.add(map.ultrasonicSensor);
+		sensorMaps.add(map.voltageSensor);
+		return sensorMaps;
 	}
 
 }
