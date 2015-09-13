@@ -3,15 +3,16 @@ package io.github.thunderbots.lightning.drive;
 import io.github.thunderbots.lightning.hardware.Motor;
 
 /**
- * A {@code MecanumDrive} is a {@code DriveSystem} that represents a system using mecanum wheels.
- * 
+ * A {@code MecanumDrive} is a {@code DriveSystem} that represents a system using mecanum
+ * wheels.
+ *
  * @author Zach Ohara
  */
 public class MecanumDrive extends DriveSystem {
 
 	/**
-	 * Constructs a new {@code MecanumDrive} with the given {@code DriveMotorSet} as
-	 * a base.
+	 * Constructs a new {@code MecanumDrive} with the given {@code DriveMotorSet} as a
+	 * base.
 	 *
 	 * @param wheels the {@code DriveMotorSet} of this drive system.
 	 * @see DriveSystem#DriveSystem(DriveMotorSet)
@@ -19,7 +20,7 @@ public class MecanumDrive extends DriveSystem {
 	public MecanumDrive(DriveMotorSet wheels) {
 		super(wheels);
 	}
-	
+
 	/**
 	 * Constructs a enw {@code MecanumDrive} that uses the motors with the given names.
 	 *
@@ -31,30 +32,30 @@ public class MecanumDrive extends DriveSystem {
 	}
 
 	/**
-	 * The multiplier for all motor powers. Decreasing this number can be used to impose speed
-	 * limits. Increasing this number will yield strange results, so please don't increase this
-	 * number beyond 1.
+	 * The multiplier for all motor powers. Decreasing this number can be used to impose
+	 * speed limits. Increasing this number will yield strange results, so please don't
+	 * increase this number beyond 1.
 	 */
 	public static final double MOVE_POWER_SCALE = 1.0;
-	
+
 	/**
 	 * The relative weight of the forward vector over other vectors. Increasing this number
-	 * will make the forward/backward movement more responsive, but at the expense of making
-	 * the other vectors less responsive.
+	 * will make the forward/backward movement more responsive, but at the expense of
+	 * making the other vectors less responsive.
 	 */
 	public static final double DRIVE_POWER_WEIGHT = 1.0;
-	
+
 	/**
 	 * The relative weight of the right vector over other vectors. Increasing this number
-	 * will make the left/right movement more responsive, but at the expense of making
-	 * the other vectors less responsive.
+	 * will make the left/right movement more responsive, but at the expense of making the
+	 * other vectors less responsive.
 	 */
 	public static final double STRAFE_POWER_WEIGHT = 1.0;
-	
+
 	/**
-	 * The relative weight of the clockwise vector over other vectors. Increasing this number
-	 * will make spinning responsive, but at the expense of making
-	 * the other vectors less responsive.
+	 * The relative weight of the clockwise vector over other vectors. Increasing this
+	 * number will make spinning responsive, but at the expense of making the other vectors
+	 * less responsive.
 	 */
 	public static final double ROTATE_POWER_WEIGHT = 1.0;
 
@@ -90,8 +91,8 @@ public class MecanumDrive extends DriveSystem {
 	}
 
 	/**
-	 * Sets the power of the motors on the robot so that the robot moves as described by the
-	 * three vectors.
+	 * Sets the power of the motors on the robot so that the robot moves as described by
+	 * the three vectors.
 	 *
 	 * @param forward the forward-driving vector; between -1 and 1.
 	 * @param right the right-strafing vector; between -1 and 1.

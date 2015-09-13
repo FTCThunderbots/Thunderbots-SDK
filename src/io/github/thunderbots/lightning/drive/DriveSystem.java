@@ -1,25 +1,25 @@
 package io.github.thunderbots.lightning.drive;
 
 /**
- * A {@code DriveSystem} represents the motors used for driving the robot, their arrangement, and
- * in some cases, the type of wheels attached to the motor. Every subclass of {@code DriveSystem}
- * must be able to accept two vectors, forward and clockwise, and calculate the exact power that
- * must be sent to the individual motors for the robot to move with the given two vectors.
- * 
+ * A {@code DriveSystem} represents the motors used for driving the robot, their
+ * arrangement, and in some cases, the type of wheels attached to the motor. Every subclass
+ * of {@code DriveSystem} must be able to accept two vectors, forward and clockwise, and
+ * calculate the exact power that must be sent to the individual motors for the robot to
+ * move with the given two vectors.
+ *
  * @author Zach Ohara
  */
 public abstract class DriveSystem {
 
 	/**
 	 * The motors in this drive system.
-	 * 
+	 *
 	 * @see io.github.thunderbots.lightning.drive.DriveMotorSet
 	 */
 	private DriveMotorSet motors;
 
 	/**
-	 * Constructs a new {@code DriveSystem} with the given {@code DriveMotorSet} as
-	 * a base.
+	 * Constructs a new {@code DriveSystem} with the given {@code DriveMotorSet} as a base.
 	 *
 	 * @param wheels the {@code DriveMotorSet} of this drive system.
 	 */
@@ -37,8 +37,8 @@ public abstract class DriveSystem {
 	}
 
 	/**
-	 * Sets the power of the motors on the robot so that the robot moves as described by the
-	 * two vectors.
+	 * Sets the power of the motors on the robot so that the robot moves as described by
+	 * the two vectors.
 	 *
 	 * @param forward the forward-driving vector; between -1 and 1.
 	 * @param clockwise the clockwise-spinning vector; between -1 and 1.
@@ -97,7 +97,7 @@ public abstract class DriveSystem {
 		int directionMultiplier = clockwise ? 1 : -1;
 		return this.setMovement(power, Math.abs(power) * directionMultiplier);
 	}
-	
+
 	/**
 	 * Drives the robot forward with the given power and for the given time, then stops.
 	 *
@@ -109,7 +109,7 @@ public abstract class DriveSystem {
 	public boolean driveSeconds(double power, double seconds) {
 		return this.drive(power) && this.waitAndStop(seconds);
 	}
-	
+
 	/**
 	 * Spins the robot clockwise with the given power and for the given time, then stops.
 	 *
@@ -121,9 +121,10 @@ public abstract class DriveSystem {
 	public boolean rotateSeconds(double power, double seconds) {
 		return this.rotate(power) && this.waitAndStop(seconds);
 	}
-	
+
 	/**
-	 * Swings the robot with the given spin and forward power, then stops after the given amount of time.
+	 * Swings the robot with the given spin and forward power, then stops after the given
+	 * amount of time.
 	 *
 	 * @param clockwise the clockwise power; between -1 and 1.
 	 * @param power the forward power; between -1 and 1.

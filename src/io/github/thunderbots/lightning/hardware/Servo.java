@@ -26,35 +26,38 @@ public class Servo {
 	public String toString() {
 		return this.baseServo.toString();
 	}
-	
+
 	private static class RobotcoreServo {
 
 		private com.qualcomm.robotcore.hardware.Servo baseServo;
-		
+
 		public RobotcoreServo(com.qualcomm.robotcore.hardware.Servo base) {
 			this.baseServo = base;
 		}
 
+		@Override
 		public boolean equals(Object arg0) {
-			return baseServo.equals(arg0);
+			return this.baseServo.equals(arg0);
 		}
 
 		public double getPosition() {
-			return baseServo.getPosition();
+			return this.baseServo.getPosition();
 		}
 
+		@Override
 		public int hashCode() {
-			return baseServo.hashCode();
+			return this.baseServo.hashCode();
 		}
 
 		public void setPosition(double position) {
-			baseServo.setPosition(position);
+			this.baseServo.setPosition(position);
 		}
 
+		@Override
 		public String toString() {
-			return baseServo.toString();
+			return this.baseServo.toString();
 		}
-		
+
 	}
 
 }

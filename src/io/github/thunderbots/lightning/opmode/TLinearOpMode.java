@@ -13,11 +13,11 @@ public abstract class TLinearOpMode extends LinearOpMode {
 			// This will be handled by the class loader
 		}
 	}
-	
+
 	protected abstract void initializeRobot();
 
 	protected abstract void main();
-	
+
 	@Override
 	public void runOpMode() throws InterruptedException {
 		new OpModeVariableMonitor(this).run();
@@ -25,7 +25,7 @@ public abstract class TLinearOpMode extends LinearOpMode {
 		this.waitForStart();
 		this.main();
 	}
-	
+
 	protected boolean isHidden() {
 		return false;
 	}

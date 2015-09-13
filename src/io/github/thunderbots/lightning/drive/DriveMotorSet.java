@@ -22,9 +22,9 @@ import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.hardware.Motor;
 
 /**
- * A {@code DriveMotorSet} is a collection of motors used for the sole purpose of driving the
- * robot.
- * 
+ * A {@code DriveMotorSet} is a collection of motors used for the sole purpose of driving
+ * the robot.
+ *
  * @author Zach Ohara
  */
 public class DriveMotorSet {
@@ -47,11 +47,11 @@ public class DriveMotorSet {
 	}
 
 	/**
-	 * Set the power of the motors in this motor set from the corresponding power values
-	 * in the given double array. For example, the motor at {@code motors[n]} will be
-	 * assigned the power value at {@code powers[n]}. If the lengths of {@code motors}
-	 * and {@code powers} are mismatched, then all the available pairs will be matched, and
-	 * the extra values will be discarded.
+	 * Set the power of the motors in this motor set from the corresponding power values in
+	 * the given double array. For example, the motor at {@code motors[n]} will be assigned
+	 * the power value at {@code powers[n]}. If the lengths of {@code motors} and
+	 * {@code powers} are mismatched, then all the available pairs will be matched, and the
+	 * extra values will be discarded.
 	 *
 	 * @param powers the power values to assign to the corresponding motors.
 	 */
