@@ -47,12 +47,12 @@ public class Lightning {
 	/**
 	 * The joysticks connected to the driver station.
 	 */
-	private static Joystick gamepad1;
+	private static Joystick joystick1;
 
 	/**
 	 * The joysticks connected to the driver station.
 	 */
-	private static Joystick gamepad2;
+	private static Joystick joystick2;
 
 	/**
 	 * The master task scheduler that is used to execute all background tasks in the SDK
@@ -69,8 +69,8 @@ public class Lightning {
 		Lightning.robotHardware = hardware;
 		Lightning.robotTelemetry = telemetry;
 		Lightning.sensorMaps = Lightning.getSensorMaps(hardware);
-		Lightning.gamepad1 = new Joystick(pad1);
-		Lightning.gamepad2 = new Joystick(pad2);
+		Lightning.joystick1 = new Joystick(pad1);
+		Lightning.joystick2 = new Joystick(pad2);
 	}
 
 	/**
@@ -85,32 +85,32 @@ public class Lightning {
 
 	/**
 	 * Gets a reference to the primary gamepad. This method is deprecated. Instead, please
-	 * use {@link #getGamepad(int)} with an argument of 1.
+	 * use {@link #getJoystick(int)} with an argument of 1.
 	 *
 	 * @return a reference to the primary gamepad.
 	 */
 	@Deprecated
-	public static Joystick getGamepad1() {
-		return Lightning.gamepad1;
+	public static Joystick getJoystick1() {
+		return Lightning.joystick1;
 	}
 
 	/**
 	 * Gets a reference to the secondary gamepad. This method is deprecated. Instead,
-	 * please use {@link #getGamepad(int)} with an argument of 2.
+	 * please use {@link #getJoystick(int)} with an argument of 2.
 	 *
 	 * @return a reference to the secondary gamepad.
 	 */
 	@Deprecated
-	public static Joystick getGamepad2() {
-		return Lightning.gamepad2;
+	public static Joystick getJoystick2() {
+		return Lightning.joystick2;
 	}
 
-	public static Joystick getGamepad(int gamepad) {
+	public static Joystick getJoystick(int gamepad) {
 		switch (gamepad) {
 			case 1:
-				return Lightning.getGamepad1();
+				return Lightning.getJoystick1();
 			case 2:
-				return Lightning.getGamepad2();
+				return Lightning.getJoystick2();
 			default:
 				return null;
 		}
