@@ -97,8 +97,8 @@ public class MecanumDrive extends DriveSystem {
 	}
 
 	/**
-	 * Strafes (moves sideways) with the given power and for the given amount of time,
-	 * and then stops.
+	 * Strafes (moves sideways) with the given power and for the given amount of time, and
+	 * then stops.
 	 *
 	 * @param power the right-facing power; between -1 and 1.
 	 * @param seconds the time to move for.

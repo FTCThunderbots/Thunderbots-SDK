@@ -38,9 +38,9 @@ public class TankDrive extends MecanumDrive {
 	 * for movement. The purpose of this method is only to filter out any possible
 	 * right-facing, non-zero vector argument to prevent damage to the pysical motors.
 	 * <p>
-	 * Instead of this method, use the two-argument version, which accepts only forward
-	 * and clockwise vectors. This method is declared in {@code DriveSystem} and implemented
-	 * in {@code MecanumDrive}.
+	 * Instead of this method, use the two-argument version, which accepts only forward and
+	 * clockwise vectors. This method is declared in {@code DriveSystem} and implemented in
+	 * {@code MecanumDrive}.
 	 */
 	@Override
 	@Deprecated

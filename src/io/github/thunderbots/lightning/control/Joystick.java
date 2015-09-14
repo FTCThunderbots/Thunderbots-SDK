@@ -55,7 +55,7 @@ public class Joystick {
 	/**
 	 * Constructs a new {@code Joystick} with the given {@code Gamepad} as a base.
 	 *
-	 * @param baseGamepad
+	 * @param baseGamepad the base {@code Gamepad}
 	 */
 	public Joystick(Gamepad baseGamepad) {
 		this.baseGamepad = baseGamepad;
