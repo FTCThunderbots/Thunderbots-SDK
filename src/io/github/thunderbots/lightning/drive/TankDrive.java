@@ -33,7 +33,17 @@ public class TankDrive extends MecanumDrive {
 		super(wheelnames);
 	}
 
+	/**
+	 * @deprecated A tank drive system cannot accept a right-facing vector as an argument
+	 * for movement. The purpose of this method is only to filter out any possible
+	 * right-facing, non-zero vector argument to prevent damage to the pysical motors.
+	 * <p>
+	 * Instead of this method, use the two-argument version, which accepts only forward and
+	 * clockwise vectors. This method is declared in {@code DriveSystem} and implemented in
+	 * {@code MecanumDrive}.
+	 */
 	@Override
+	@Deprecated
 	public boolean setMovement(double forward, double right, double clockwise) {
 		return super.setMovement(forward, 0, clockwise);
 	}

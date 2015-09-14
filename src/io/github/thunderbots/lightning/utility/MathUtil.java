@@ -1,5 +1,11 @@
 package io.github.thunderbots.lightning.utility;
 
+/**
+ * The {@code MathUtil} class contains static methods for common calculations and
+ * mathematical utilities.
+ *
+ * @author Zach Ohara
+ */
 public class MathUtil {
 
 	/**

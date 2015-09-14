@@ -73,19 +73,51 @@ public class MecanumDrive extends DriveSystem {
 		return this.setMovement(forward, 0, clockwise);
 	}
 
+	/**
+	 * Strafes (moves sideways) with the given power.
+	 *
+	 * @param power the right-facing power; between -1 and 1.
+	 * @return the success of the operation.
+	 */
 	public boolean strafe(int power) {
 		return this.setMovement(0, power, 0);
 	}
 
+	/**
+	 * Drives and strafes (moves sideways) with the given (equal) power.
+	 *
+	 * @param right {@code true} if the robot should strafe to the right, or {@code false}
+	 * if the robot should strafe to the left.
+	 * @param power the forward power; between -1 and 1.
+	 * @return the success of the operation.
+	 */
 	public boolean traverse(boolean right, int power) {
 		int directionMultiplier = right ? 1 : -1;
 		return this.setMovement(power, Math.abs(power) * directionMultiplier, 0);
 	}
 
+	/**
+	 * Strafes (moves sideways) with the given power and for the given amount of time, and
+	 * then stops.
+	 *
+	 * @param power the right-facing power; between -1 and 1.
+	 * @param seconds the time to move for.
+	 * @return the success of the operation.
+	 */
 	public boolean strafeSeconds(int power, float seconds) {
 		return this.strafe(power) && this.waitAndStop(seconds);
 	}
 
+	/**
+	 * Drives and strafes (moves sideways) with the given (equal) power and for the given
+	 * amount of time, and then stops.
+	 *
+	 * @param right {@code true} if the robot should strafe to the right, or {@code false}
+	 * if the robot should strafe to the left.
+	 * @param power the forward power; between -1 and 1.
+	 * @param seconds the time to move for.
+	 * @return the success of the operation.
+	 */
 	public boolean traverseSeconds(boolean right, int power, float seconds) {
 		return this.traverse(right, power) && this.waitAndStop(seconds);
 	}
@@ -97,7 +129,7 @@ public class MecanumDrive extends DriveSystem {
 	 * @param forward the forward-driving vector; between -1 and 1.
 	 * @param right the right-strafing vector; between -1 and 1.
 	 * @param clockwise the clockwise-spinning vector; between -1 and 1.
-	 * @return
+	 * @return the sucess of the operation.
 	 */
 	public boolean setMovement(double forward, double right, double clockwise) {
 
