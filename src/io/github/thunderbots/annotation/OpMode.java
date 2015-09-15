@@ -1,4 +1,4 @@
-package io.github.thunderbots.annotations;
+package io.github.thunderbots.annotation;
 
 import java.lang.annotation.Documented;
 
