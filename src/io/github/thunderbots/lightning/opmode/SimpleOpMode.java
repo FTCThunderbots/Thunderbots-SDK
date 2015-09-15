@@ -6,7 +6,7 @@ import io.github.thunderbots.lightning.drive.TankDrive;
 /**
  * @author Zach Ohara
  */
-public abstract class SimpleOpMode extends TLinearOpMode {
+public abstract class SimpleOpMode extends LightningOpMode {
 
 	private DriveSystem drive;
 

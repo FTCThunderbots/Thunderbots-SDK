@@ -5,9 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 /**
  * @author Zach Ohara
  */
-public abstract class TLinearOpMode extends LinearOpMode {
+public abstract class LightningOpMode extends LinearOpMode {
 
-	public TLinearOpMode() {
+	public LightningOpMode() {
 		if (this.isHidden()) {
 			throw new UnsupportedOperationException();
 			// This will be handled by the class loader

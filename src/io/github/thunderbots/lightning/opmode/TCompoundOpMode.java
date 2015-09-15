@@ -3,32 +3,32 @@ package io.github.thunderbots.lightning.opmode;
 /**
  * @author Zach Ohara
  */
-public class TCompoundOpMode extends TLinearOpMode {
+public class TCompoundOpMode extends LightningOpMode {
 
-	private TLinearOpMode[] opmodes;
+	private LightningOpMode[] opmodes;
 
-	public TCompoundOpMode(TLinearOpMode[] opmodes) {
+	public TCompoundOpMode(LightningOpMode[] opmodes) {
 		this.opmodes = opmodes;
 	}
 
 	@Override
 	protected void initializeRobot() {
-		for (TLinearOpMode opmode : this.opmodes) {
+		for (LightningOpMode opmode : this.opmodes) {
 			opmode.initializeRobot();
 		}
 	}
 
 	@Override
 	protected void main() {
-		for (TLinearOpMode opmode : this.opmodes) {
+		for (LightningOpMode opmode : this.opmodes) {
 			opmode.start();
 		}
 		while (this.opModeIsActive()) {
-			for (TLinearOpMode opmode : this.opmodes) {
+			for (LightningOpMode opmode : this.opmodes) {
 				opmode.loop();
 			}
 		}
-		for (TLinearOpMode opmode : this.opmodes) {
+		for (LightningOpMode opmode : this.opmodes) {
 			opmode.stop();
 		}
 	}
