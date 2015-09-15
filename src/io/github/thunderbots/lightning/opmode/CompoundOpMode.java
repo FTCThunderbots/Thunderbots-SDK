@@ -3,11 +3,11 @@ package io.github.thunderbots.lightning.opmode;
 /**
  * @author Zach Ohara
  */
-public class TCompoundOpMode extends LightningOpMode {
+public class CompoundOpMode extends LightningOpMode {
 
 	private LightningOpMode[] opmodes;
 
-	public TCompoundOpMode(LightningOpMode[] opmodes) {
+	public CompoundOpMode(LightningOpMode[] opmodes) {
 		this.opmodes = opmodes;
 	}
 
