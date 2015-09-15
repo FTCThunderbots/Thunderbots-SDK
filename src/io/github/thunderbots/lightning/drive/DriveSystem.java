@@ -42,7 +42,7 @@ public abstract class DriveSystem {
 	 *
 	 * @param forward the forward-driving vector; between -1 and 1.
 	 * @param clockwise the clockwise-spinning vector; between -1 and 1.
-	 * @return
+	 * @return the success of the operation.
 	 */
 	public abstract boolean setMovement(double forward, double clockwise);
 
