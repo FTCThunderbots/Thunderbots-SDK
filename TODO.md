@@ -13,5 +13,4 @@
 * Detect if there is an encoder attached to a motor
 * Negate motor reversals in DriveMotorSet
 * Remove `RobotcoreServo`
-* Rename TLinearOpMode to LightningOpMode or something
 * Find out how often the gamepad values are updated in the opmode. If this is infrequent, `OpModeVariableMonitor` can be fully removed.
