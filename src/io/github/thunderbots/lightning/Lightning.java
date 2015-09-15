@@ -88,35 +88,18 @@ public class Lightning {
 	}
 
 	/**
-	 * Gets a reference to the primary gamepad. This method is deprecated. Instead, please
-	 * use {@link #getJoystick(int)} with an argument of 1.
-	 *
-	 * @return a reference to the primary gamepad.
+	 * Gets a reference to the given joystick. Currently, only joysticks 1 and 2
+	 * are supported.
+	 * 
+	 * @param gamepad the joystick to return.
+	 * @return the specified joystick.
 	 */
-	@Deprecated
-	public static Joystick getJoystick1() {
-//		return Lightning.joystick1;
-		return new Joystick(opmode.gamepad1);
-	}
-
-	/**
-	 * Gets a reference to the secondary gamepad. This method is deprecated. Instead,
-	 * please use {@link #getJoystick(int)} with an argument of 2.
-	 *
-	 * @return a reference to the secondary gamepad.
-	 */
-	@Deprecated
-	public static Joystick getJoystick2() {
-//		return Lightning.joystick2;
-		return new Joystick(opmode.gamepad2);
-	}
-
 	public static Joystick getJoystick(int gamepad) {
 		switch (gamepad) {
 			case 1:
-				return Lightning.getJoystick1();
+				return new Joystick(opmode.gamepad1);
 			case 2:
-				return Lightning.getJoystick2();
+				return new Joystick(opmode.gamepad2);
 			default:
 				return null;
 		}
