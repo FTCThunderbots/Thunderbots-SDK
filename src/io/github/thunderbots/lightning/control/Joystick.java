@@ -24,7 +24,7 @@ public class Joystick {
 	 * register at all. The purpose of this value is to prevent random joystick noise and
 	 * false movements from being registered and acted upon.
 	 */
-	public static final double JOYSTICK_THRESHOLD = 0.1;
+	public static final double JOYSTICK_THRESHOLD = 0.35;
 
 	/**
 	 * The maximum value that can be expected from the thumb stick values.
