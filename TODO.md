@@ -1,7 +1,6 @@
 # To-do List for the Lightning SDK
 
 * Fix MathUtil.scaleToRange(); right now it always returns zero.
-* Implement scaleJoystickInput() in TGamepad
 * (On-hold) Add system for logging to the telemetry
 * Remove GamepadButton
 * Rename TServo to something
