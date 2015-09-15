@@ -3,6 +3,7 @@ package io.github.thunderbots.lightning;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
@@ -47,30 +48,33 @@ public class Lightning {
 	/**
 	 * The joysticks connected to the driver station.
 	 */
-	private static Joystick joystick1;
+//	private static Joystick joystick1;
 
 	/**
 	 * The joysticks connected to the driver station.
 	 */
-	private static Joystick joystick2;
+//	private static Joystick joystick2;
 
 	/**
 	 * The master task scheduler that is used to execute all background tasks in the SDK
 	 * and in client code of the SDK.
 	 */
 	private static TaskScheduler taskScheduler;
+	
+	private static OpMode opmode;
 
 	static {
 		Lightning.taskScheduler = new TaskScheduler();
 	}
 
-	public static void initializeRobot(HardwareMap hardware, Telemetry telemetry, Gamepad pad1,
+	public static void initializeRobot(OpMode m, HardwareMap hardware, Telemetry telemetry, Gamepad pad1,
 			Gamepad pad2) {
+		Lightning.opmode = m;
 		Lightning.robotHardware = hardware;
 		Lightning.robotTelemetry = telemetry;
 		Lightning.sensorMaps = Lightning.getSensorMaps(hardware);
-		Lightning.joystick1 = new Joystick(pad1);
-		Lightning.joystick2 = new Joystick(pad2);
+//		Lightning.joystick1 = new Joystick(pad1);
+//		Lightning.joystick2 = new Joystick(pad2);
 	}
 
 	/**
@@ -91,7 +95,8 @@ public class Lightning {
 	 */
 	@Deprecated
 	public static Joystick getJoystick1() {
-		return Lightning.joystick1;
+//		return Lightning.joystick1;
+		return new Joystick(opmode.gamepad1);
 	}
 
 	/**
@@ -102,7 +107,8 @@ public class Lightning {
 	 */
 	@Deprecated
 	public static Joystick getJoystick2() {
-		return Lightning.joystick2;
+//		return Lightning.joystick2;
+		return new Joystick(opmode.gamepad2);
 	}
 
 	public static Joystick getJoystick(int gamepad) {

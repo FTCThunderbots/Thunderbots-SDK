@@ -91,7 +91,7 @@ public class OpModeVariableMonitor implements Runnable {
 		}
 
 		if (refreshNeeded) {
-			Lightning.initializeRobot(this.hardware, this.telemetry, this.gamepad1, this.gamepad2);
+			Lightning.initializeRobot(monitor, this.hardware, this.telemetry, this.gamepad1, this.gamepad2);
 		}
 	}
 
