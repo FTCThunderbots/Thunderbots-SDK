@@ -10,7 +10,7 @@ public class Servo {
 	/**
 	 * The servo that this object is based on.
 	 */
-	private RobotcoreServo baseServo;
+	private com.qualcomm.robotcore.hardware.Servo baseServo;
 
 	/**
 	 * The minimum position of the servo. At the time of writing this, it is currently
@@ -30,7 +30,7 @@ public class Servo {
 	 * @param baseServo the base robotcore {@code Servo}
 	 */
 	public Servo(com.qualcomm.robotcore.hardware.Servo baseServo) {
-		this.baseServo = new RobotcoreServo(baseServo);
+		this.baseServo = baseServo;
 	}
 
 	/**
@@ -54,39 +54,6 @@ public class Servo {
 	@Override
 	public String toString() {
 		return this.baseServo.toString();
-	}
-
-	private static class RobotcoreServo {
-
-		private com.qualcomm.robotcore.hardware.Servo baseServo;
-
-		public RobotcoreServo(com.qualcomm.robotcore.hardware.Servo base) {
-			this.baseServo = base;
-		}
-
-		@Override
-		public boolean equals(Object arg0) {
-			return this.baseServo.equals(arg0);
-		}
-
-		public double getPosition() {
-			return this.baseServo.getPosition();
-		}
-
-		@Override
-		public int hashCode() {
-			return this.baseServo.hashCode();
-		}
-
-		public void setPosition(double position) {
-			this.baseServo.setPosition(position);
-		}
-
-		@Override
-		public String toString() {
-			return this.baseServo.toString();
-		}
-
 	}
 
 }
