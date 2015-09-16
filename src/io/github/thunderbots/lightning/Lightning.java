@@ -144,13 +144,20 @@ public class Lightning {
 	 * @param name the name of the sensor.
 	 * @return the sensor with the given name.
 	 */
-	public static Object getSensor(String name) {
+	@SuppressWarnings("unchecked")
+	public static <T> T getSensor(String name) {
 		for (DeviceMapping<?> map : Lightning.sensorMaps) {
 			try {
-				if (map.get(name) != null) {
-					return map.get(name);
+				Object o = map.get(name);
+				try {
+					return (T) o;
+				}
+				catch (ClassCastException ex) {
+					Lightning.sendTelemetryData("Sensor: " + name + " not found");
+					
 				}
 			} catch (IllegalArgumentException ignore) {
+				
 			}
 		}
 		return null;
