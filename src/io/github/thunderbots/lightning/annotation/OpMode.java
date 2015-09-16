@@ -30,7 +30,22 @@ import java.lang.annotation.Documented;
 @Documented
 public @interface OpMode {
 	
+	/**
+	 * Gets the 'type' of the op mode. This can be "teleop" or "autonomous", or even any
+	 * custom category defined by the client code. This is currently not used by the
+	 * backend in any way, but a use for this may be implemented later.
+	 *
+	 * @return the type of the op mode.
+	 */
 	String type();
+	
+	/**
+	 * Gets the name of the op mode. This is not necessarily just the name of the class
+	 * that defines the op mode. Ideally, the name of the op mode is the name that the
+	 * op mode should be listed as in a drop-down list of op modes.
+	 *
+	 * @return the name of the op mode.
+	 */
 	String name();
 	
 }
