@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.lightning.opmode;
+package io.github.thunderbots.lightning.robot;
 
 /**
  * {@code Robot} is an interface that should be implemented by any class representing a
