@@ -43,8 +43,8 @@ public class MecanumDrive extends DriveSystem {
 	 * @param motornames the names of the motors to use with this drive system.
 	 * @see DriveSystem#DriveSystem(String[])
 	 */
-	public MecanumDrive(String[] wheelnames) {
-		super(wheelnames);
+	public MecanumDrive(String[] motornames) {
+		super(motornames);
 	}
 
 	/**

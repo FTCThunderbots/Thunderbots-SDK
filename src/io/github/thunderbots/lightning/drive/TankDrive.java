@@ -45,8 +45,8 @@ public class TankDrive extends MecanumDrive {
 	 * @param motornames the names of the motors to use with this drive system.
 	 * @see DriveSystem#DriveSystem(String[])
 	 */
-	public TankDrive(String[] wheelnames) {
-		super(wheelnames);
+	public TankDrive(String[] motornames) {
+		super(motornames);
 	}
 
 	/**
