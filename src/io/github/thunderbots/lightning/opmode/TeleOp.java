@@ -21,7 +21,8 @@ import io.github.thunderbots.lightning.control.Joystick;
 
 /**
  * The TeleOp class is a base class that all tele-op programs should extend. It will handle
- * everything directly related to driving and moving the robot.
+ * everything directly related to driving and moving the robot, but nothing substantial
+ * beyond that.
  *
  * @author Zach Ohara
  */
