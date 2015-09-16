@@ -1,5 +1,7 @@
 package io.github.thunderbots.lightning.opmode;
 
+import io.github.thunderbots.lightning.Lightning;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
@@ -33,8 +35,8 @@ public abstract class LightningOpMode extends LinearOpMode {
 	protected abstract void main();
 
 	@Override
-	public void runOpMode() throws InterruptedException {
-		new OpModeVariableMonitor(this).run();
+	public final void runOpMode() throws InterruptedException {
+		Lightning.initialize(this);
 		this.initializeRobot();
 		this.waitForStart();
 		this.main();

@@ -3,8 +3,6 @@ package io.github.thunderbots.lightning;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
 import com.qualcomm.robotcore.robocol.Telemetry;
@@ -12,6 +10,7 @@ import com.qualcomm.robotcore.robocol.Telemetry;
 import io.github.thunderbots.lightning.control.Joystick;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
+import io.github.thunderbots.lightning.opmode.LightningOpMode;
 import io.github.thunderbots.lightning.scheduler.TaskScheduler;
 
 /**
@@ -22,6 +21,11 @@ import io.github.thunderbots.lightning.scheduler.TaskScheduler;
  * @author Zach Ohara
  */
 public class Lightning {
+
+	/**
+	 * The op mode to get joystick information from.
+	 */
+	private static LightningOpMode opmode;
 
 	/**
 	 * The {@code HardwareMap} that is used as a portal to all hardware on the robot.
@@ -46,40 +50,31 @@ public class Lightning {
 	private static Telemetry robotTelemetry;
 
 	/**
-	 * The joysticks connected to the driver station.
-	 */
-//	private static Joystick joystick1;
-
-	/**
-	 * The joysticks connected to the driver station.
-	 */
-//	private static Joystick joystick2;
-
-	/**
 	 * The master task scheduler that is used to execute all background tasks in the SDK
 	 * and in client code of the SDK.
 	 */
 	private static TaskScheduler taskScheduler;
-	
-	private static OpMode opmode;
 
 	static {
 		Lightning.taskScheduler = new TaskScheduler();
 	}
 
-	public static void initializeRobot(OpMode m, HardwareMap hardware, Telemetry telemetry, Gamepad pad1,
-			Gamepad pad2) {
-		Lightning.opmode = m;
-		Lightning.robotHardware = hardware;
-		Lightning.robotTelemetry = telemetry;
-		Lightning.sensorMaps = Lightning.getSensorMaps(hardware);
-//		Lightning.joystick1 = new Joystick(pad1);
-//		Lightning.joystick2 = new Joystick(pad2);
+	/**
+	 * Initializes the static information in {@code Lightning} from the given
+	 * {@code LightningOpMode}.
+	 * 
+	 * @param opmode the op mode to initialize this robot from.
+	 */
+	public static void initialize(LightningOpMode opmode) {
+		Lightning.opmode = opmode;
+		Lightning.robotHardware = opmode.hardwareMap;
+		Lightning.robotTelemetry = opmode.telemetry;
+		Lightning.sensorMaps = Lightning.getSensorMaps(Lightning.robotHardware);
 	}
 
 	/**
 	 * Gets a reference to the master task scheduler.
-	 *
+	 * 
 	 * @return a reference to the master task scheduler.
 	 * @see #taskScheduler
 	 */
@@ -91,7 +86,7 @@ public class Lightning {
 	 * Gets a reference to the given joystick. Currently, only joysticks 1 and 2
 	 * are supported.
 	 * 
-	 * @param gamepad the joystick to return.
+	 * @param gamepad the joystick to return; can only be 1 or 2.
 	 * @return the specified joystick.
 	 */
 	public static Joystick getJoystick(int gamepad) {
