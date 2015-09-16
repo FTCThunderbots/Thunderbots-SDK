@@ -1,4 +1,4 @@
-package io.github.thunderbots.annotation;
+package io.github.thunderbots.lightning.annotation;
 
 import java.lang.annotation.Documented;
 
