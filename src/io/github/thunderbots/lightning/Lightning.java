@@ -83,8 +83,7 @@ public class Lightning {
 	}
 
 	/**
-	 * Gets a reference to the given joystick. Currently, only joysticks 1 and 2
-	 * are supported.
+	 * Gets a reference to the given joystick. Currently, only {@code gamepad1} and {@code gamepad2} are supported.
 	 * 
 	 * @param gamepad the joystick to return; can only be 1 or 2.
 	 * @return the specified joystick.
