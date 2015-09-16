@@ -19,17 +19,17 @@ package io.github.thunderbots.lightning.annotation;
 import java.lang.annotation.Documented;
 
 /**
- * The {@code OpMode} annotation should be added to all op modes that appear in the
- * op mode list. It details information about the type of op mode, such as
- * "teleop" or "autonomous", or anything else that the client class may define. This
- * information is not currently used. It also includes the name of the op mode, and
- * this name will eventually be used to present the op mode in the list.
- * 
+ * The {@code OpMode} annotation should be added to all op modes that appear in the op mode
+ * list. It details information about the type of op mode, such as "teleop" or
+ * "autonomous", or anything else that the client class may define. This information is not
+ * currently used. It also includes the name of the op mode, and this name will eventually
+ * be used to present the op mode in the list.
+ *
  * @author Pranav Mathur
  */
 @Documented
 public @interface OpMode {
-	
+
 	/**
 	 * Gets the 'type' of the op mode. This can be "teleop" or "autonomous", or even any
 	 * custom category defined by the client code. This is currently not used by the
@@ -38,14 +38,14 @@ public @interface OpMode {
 	 * @return the type of the op mode.
 	 */
 	String type();
-	
+
 	/**
 	 * Gets the name of the op mode. This is not necessarily just the name of the class
-	 * that defines the op mode. Ideally, the name of the op mode is the name that the
-	 * op mode should be listed as in a drop-down list of op modes.
+	 * that defines the op mode. Ideally, the name of the op mode is the name that the op
+	 * mode should be listed as in a drop-down list of op modes.
 	 *
 	 * @return the name of the op mode.
 	 */
 	String name();
-	
+
 }

@@ -24,9 +24,9 @@ package io.github.thunderbots.lightning.opmode;
  * <p>
  * A {@code CompoundOpMode} is an op mode that includes the functionality of several
  * different op modes.
- * 
  * @author Zach Ohara
  */
+@Deprecated
 public class CompoundOpMode extends LightningOpMode {
 
 	/**
@@ -36,12 +36,11 @@ public class CompoundOpMode extends LightningOpMode {
 
 	/**
 	 * @deprecated {@code CompoundOpMode} as a whole is untested and unconfirmed. It will
-	 * likely work to some extent, but because of the high number of threads associated with
-	 * using multiple op modes simultaneously, it will break down when trying to run too many
-	 * simultaneous op modes.
+	 * likely work to some extent, but because of the high number of threads associated
+	 * with using multiple op modes simultaneously, it will break down when trying to run
+	 * too many simultaneous op modes.
 	 * <p>
 	 * Constructs a new compound op mode with the given list of op modes.
-	 *
 	 * @param opmodes the list of op modes to be combined.
 	 * @see #opmodes
 	 */

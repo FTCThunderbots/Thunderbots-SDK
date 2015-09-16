@@ -24,9 +24,9 @@ package io.github.thunderbots.lightning.robot;
 public interface Robot {
 
 	/**
-	 * Initializes the robot. The implementation of this method should be used in place
-	 * of a constructor. Instance variables for a robot object should initialize from
-	 * the available hardware maps in this method.
+	 * Initializes the robot. The implementation of this method should be used in place of
+	 * a constructor. Instance variables for a robot object should initialize from the
+	 * available hardware maps in this method.
 	 */
 	public void initializeRobot();
 

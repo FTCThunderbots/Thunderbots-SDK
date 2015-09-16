@@ -78,7 +78,7 @@ public class Lightning {
 	/**
 	 * Initializes the static information in {@code Lightning} from the given
 	 * {@code LightningOpMode}.
-	 * 
+	 *
 	 * @param opmode the op mode to initialize this robot from.
 	 */
 	public static void initialize(LightningOpMode opmode) {
@@ -90,7 +90,7 @@ public class Lightning {
 
 	/**
 	 * Gets a reference to the master task scheduler.
-	 * 
+	 *
 	 * @return a reference to the master task scheduler.
 	 * @see #taskScheduler
 	 */
@@ -99,17 +99,18 @@ public class Lightning {
 	}
 
 	/**
-	 * Gets a reference to the given joystick. Currently, only {@code gamepad1} and {@code gamepad2} are supported.
-	 * 
+	 * Gets a reference to the given joystick. Currently, only {@code gamepad1} and
+	 * {@code gamepad2} are supported.
+	 *
 	 * @param gamepad the joystick to return; can only be 1 or 2.
 	 * @return the specified joystick.
 	 */
 	public static Joystick getJoystick(int gamepad) {
 		switch (gamepad) {
 			case 1:
-				return new Joystick(opmode.gamepad1);
+				return new Joystick(Lightning.opmode.gamepad1);
 			case 2:
-				return new Joystick(opmode.gamepad2);
+				return new Joystick(Lightning.opmode.gamepad2);
 			default:
 				return null;
 		}

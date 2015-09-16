@@ -24,7 +24,7 @@ import io.github.thunderbots.lightning.drive.TankDrive;
  * process very easy. Many common functionalities are implemented in this class, so all
  * subclasses have easy access to that functionality. An example of this is the automatic
  * construction of a {@code DriveSystem} based on the return value of {@link #isHidden()}.
- * 
+ *
  * @author Zach Ohara
  */
 public abstract class SimpleOpMode extends LightningOpMode {
