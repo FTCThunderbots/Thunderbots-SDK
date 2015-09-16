@@ -1,8 +1,13 @@
 # To-do List for the Lightning SDK
 
-* Fix MathUtil.scaleToRange(); right now it always returns zero.
+#### Upcoming 0.1 Release
+
+* Write a README file
+* Build a simple GH pages to host the javadocs
+* Build version (compiled .jar)
+* GH Release
+
 * (On-hold) Add system for logging to the telemetry
-* Remove GamepadButton
 * Support more control methods
 * Support teleop / auto annotations in the app
 * Detect if there is an encoder attached to a motor
