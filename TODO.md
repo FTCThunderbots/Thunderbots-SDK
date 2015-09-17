@@ -2,7 +2,6 @@
 
 #### Upcoming 0.1 Release
 
-* Write a README file
 * Build a simple GH pages to host the javadocs
 * Build version (compiled .jar)
 * GH Release
