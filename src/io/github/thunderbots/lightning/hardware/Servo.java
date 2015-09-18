@@ -63,8 +63,17 @@ public class Servo {
 	 *
 	 * @param position the position to move to.
 	 */
-	public void moveTo(double position) {
+	public void moveToPosition(double position) {
 		this.baseServo.setPosition(position);
+	}
+	
+	/**
+	 * Moves the servo to its current position plus the given increment.
+	 * 
+	 * @param increment the change in servo position.
+	 */
+	public void move(double increment) {
+		this.moveToPosition(this.getPosition() + increment);
 	}
 
 	@Override
