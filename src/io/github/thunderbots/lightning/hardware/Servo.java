@@ -16,6 +16,8 @@
 
 package io.github.thunderbots.lightning.hardware;
 
+import io.github.thunderbots.lightning.utility.MathUtil;
+
 /**
  * A {@code Servo} represents any physical servo on that is connected to the robot.
  *
@@ -73,7 +75,9 @@ public class Servo {
 	 * @param increment the change in servo position.
 	 */
 	public void move(double increment) {
-		this.moveToPosition(this.getPosition() + increment);
+		double newPosition = this.getPosition() + increment;
+		newPosition = MathUtil.truncateToRange(newPosition, MIN_POSITION, MAX_POSITION);
+		this.moveToPosition(newPosition);
 	}
 
 	@Override
