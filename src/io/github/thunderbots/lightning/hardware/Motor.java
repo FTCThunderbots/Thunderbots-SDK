@@ -125,7 +125,7 @@ public class Motor {
 	 * Stops the motor. If the motor is not currently moving, this method has no effect.
 	 */
 	public void stop() {
-		this.setPower(0);
+		this.setPower(Motor.REST_POWER);
 	}
 
 	@Override
