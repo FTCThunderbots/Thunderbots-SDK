@@ -24,6 +24,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
 import io.github.thunderbots.lightning.control.Joystick;
+import io.github.thunderbots.lightning.hardware.CRServo;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
 import io.github.thunderbots.lightning.opmode.LightningOpMode;
@@ -117,13 +118,21 @@ public class Lightning {
 	}
 
 	/**
-	 * Gets a reference to the motor with the given name.
+	 * Gets a reference to the motor with the given name. If there is no motor with the given
+	 * name, but there is a servo with the given name, the servo is assumed to be a
+	 * continuous-rotation servo, and a {@link io.github.thunderbots.hardware.CRServo CRServo}
+	 * object representing that servo is returned.
 	 *
 	 * @param name the name of the motor.
 	 * @return the motor with the given name.
 	 */
 	public static Motor getMotor(String name) {
-		return new Motor(Lightning.robotHardware.dcMotor.get(name));
+		try {
+			return new Motor(Lightning.robotHardware.dcMotor.get(name));
+		} catch (Exception e) {
+			//TODO: find out which specific type of exception we should expect here.
+			return new CRServo(new Servo(Lightning.robotHardware.servo.get(name)));
+		}
 	}
 
 	/**
