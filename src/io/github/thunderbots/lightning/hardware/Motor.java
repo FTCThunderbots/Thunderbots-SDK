@@ -120,6 +120,13 @@ public class Motor {
 	public void setPower(double power) {
 		this.basemotor.setPower(power);
 	}
+	
+	/**
+	 * Stops the motor. If the motor is not currently moving, this method has no effect.
+	 */
+	public void stop() {
+		this.setPower(0);
+	}
 
 	@Override
 	public String toString() {
