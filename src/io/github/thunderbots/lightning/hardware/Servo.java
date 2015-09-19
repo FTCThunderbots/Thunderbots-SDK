@@ -29,6 +29,11 @@ public class Servo {
 	 * The servo that this object is based on.
 	 */
 	private com.qualcomm.robotcore.hardware.Servo baseServo;
+	
+	/**
+	 * The 'center' position of this servo. The default value is {@link #CENTER_POSITION}.
+	 */
+	private double centerPos;
 
 	/**
 	 * The minimum position of the servo. At the time of writing this, it is currently
@@ -41,6 +46,12 @@ public class Servo {
 	 * but this may change in the future.
 	 */
 	public static final double MAX_POSITION = com.qualcomm.robotcore.hardware.Servo.MAX_POSITION;
+	
+	/**
+	 * The default center position of the servo. It is the average value of the minimum and maximum
+	 * positions.
+	 */
+	public static final double CENTER_POSITION = (MIN_POSITION + MAX_POSITION) / 2;
 
 	/**
 	 * Constructs a new servo that uses the given robotcore {@code Servo} as a base.
@@ -49,6 +60,27 @@ public class Servo {
 	 */
 	public Servo(com.qualcomm.robotcore.hardware.Servo baseServo) {
 		this.baseServo = baseServo;
+		this.centerPos = CENTER_POSITION;
+	}
+	
+	/**
+	 * Gets the 'center' position of this servo.
+	 * 
+	 * @see #centerPos
+	 * @return the 'center' position of this servo.
+	 */
+	public double getCenterPosition() {
+		return this.centerPos;
+	}
+	
+	/**
+	 * Sets the 'center' position of this servo.
+	 * 
+	 * @see #centerPos
+	 * @param position the new 'center' position of this servo.
+	 */
+	public void setCenterPosition(double position) {
+		this.centerPos = position;
 	}
 
 	/**
@@ -78,6 +110,13 @@ public class Servo {
 		double newPosition = this.getPosition() + increment;
 		newPosition = MathUtil.truncateToRange(newPosition, MIN_POSITION, MAX_POSITION);
 		this.moveToPosition(newPosition);
+	}
+	
+	/**
+	 * Moves the servo to its center position.
+	 */
+	public void center() {
+		this.moveToPosition(this.centerPos);
 	}
 
 	@Override
