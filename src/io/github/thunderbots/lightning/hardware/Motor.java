@@ -35,6 +35,8 @@ public class Motor {
 	 * object, even if there is no encoder attached to this motor.
 	 */
 	private Encoder encoder;
+	
+	private double power;
 
 	/**
 	 * The maximum power of the motor.
@@ -109,7 +111,11 @@ public class Motor {
 	 * @return the current movement power; between -1 and 1.
 	 */
 	public double getPower() {
-		return this.basemotor.getPower();
+		try {
+			return this.basemotor.getPower();
+		} catch (Exception e) {
+			return this.power;
+		}
 	}
 
 	/**
@@ -119,6 +125,7 @@ public class Motor {
 	 */
 	public void setPower(double power) {
 		this.basemotor.setPower(power);
+		this.power = power;
 	}
 	
 	/**
