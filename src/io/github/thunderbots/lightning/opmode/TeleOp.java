@@ -47,7 +47,12 @@ public abstract class TeleOp extends SimpleOpMode {
 					drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
 			Lightning.sendTelemetryData("raw",
 					this.gamepad1.left_stick_y + ", " + this.gamepad1.right_stick_x);
+			this.mainLoop();
 		}
+	}
+	
+	protected void mainLoop() {
+		
 	}
 
 }
