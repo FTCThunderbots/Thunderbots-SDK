@@ -1,11 +1,5 @@
 # To-do List for the Lightning SDK
 
-#### Upcoming 0.1 Release
-
-* Build a simple GH pages to host the javadocs
-* Build version (compiled .jar)
-* GH Release
-
 * (On-hold) Add system for logging to the telemetry
 * Support more control methods
 * Support teleop / auto annotations in the app
