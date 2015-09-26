@@ -26,12 +26,12 @@ public class TouchSensor implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return this.baseSensor.isPressed();
 	}
 
 	@Override
 	public SensorType getType() {
-		return SensorType.ACCELERATION;
+		return SensorType.TOUCH;
 	}
 
 }

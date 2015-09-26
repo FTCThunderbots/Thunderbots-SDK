@@ -26,7 +26,7 @@ public class LightSensor implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return baseSensor.getLightDetected();
 	}
 
 	@Override

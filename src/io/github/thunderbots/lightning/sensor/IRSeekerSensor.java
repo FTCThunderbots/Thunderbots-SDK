@@ -26,7 +26,7 @@ public class IRSeekerSensor implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return this.baseSensor.getStrength();
 	}
 
 	@Override

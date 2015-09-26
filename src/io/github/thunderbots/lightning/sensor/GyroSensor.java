@@ -26,7 +26,7 @@ public class GyroSensor implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return baseSensor.getRotation();
 	}
 
 	@Override

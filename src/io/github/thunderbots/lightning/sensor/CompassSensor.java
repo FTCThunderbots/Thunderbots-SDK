@@ -26,7 +26,7 @@ public class CompassSensor implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return baseSensor.getDirection();
 	}
 
 	@Override

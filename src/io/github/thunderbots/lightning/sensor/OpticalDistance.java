@@ -26,12 +26,12 @@ public class OpticalDistance implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return baseSensor.getLightDetected();
 	}
 
 	@Override
 	public SensorType getType() {
-		return SensorType.ACCELERATION;
+		return SensorType.OPTICAL_DISTANCE;
 	}
 
 }

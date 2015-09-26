@@ -26,12 +26,12 @@ public class VoltageSensor implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return baseSensor.getVoltage();
 	}
 
 	@Override
 	public SensorType getType() {
-		return SensorType.ACCELERATION;
+		return SensorType.VOLTAGE;
 	}
 
 }

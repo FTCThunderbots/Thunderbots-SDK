@@ -26,12 +26,12 @@ public class UltrasonicSensor implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return baseSensor.getUltrasonicLevel();
 	}
 
 	@Override
 	public SensorType getType() {
-		return SensorType.ACCELERATION;
+		return SensorType.ULTRASONIC;
 	}
 
 }

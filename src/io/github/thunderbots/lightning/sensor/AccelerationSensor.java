@@ -26,7 +26,7 @@ public class AccelerationSensor implements Sensor {
 
 	@Override
 	public Object getValue() {
-		return null;
+		return baseSensor.getAcceleration();
 	}
 
 	@Override
