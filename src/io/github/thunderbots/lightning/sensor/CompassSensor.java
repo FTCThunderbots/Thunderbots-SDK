@@ -16,6 +16,8 @@
 
 package io.github.thunderbots.lightning.sensor;
 
+import com.qualcomm.robotcore.hardware.CompassSensor.CompassMode;
+
 public class CompassSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.CompassSensor baseSensor;
@@ -37,6 +39,54 @@ public class CompassSensor implements Sensor {
 	@Override
 	public SensorType getType() {
 		return SensorType.COMPASS;
+	}
+
+	/*
+	 * Delegate methods for the base sensor
+	 */
+
+	public boolean calibrationFailed() {
+		return baseSensor.calibrationFailed();
+	}
+
+	public void close() {
+		baseSensor.close();
+	}
+
+	public boolean equals(Object arg0) {
+		return baseSensor.equals(arg0);
+	}
+
+	public String getConnectionInfo() {
+		return baseSensor.getConnectionInfo();
+	}
+
+	public String getDeviceName() {
+		return baseSensor.getDeviceName();
+	}
+
+	public double getDirection() {
+		return baseSensor.getDirection();
+	}
+
+	public int getVersion() {
+		return baseSensor.getVersion();
+	}
+
+	public int hashCode() {
+		return baseSensor.hashCode();
+	}
+
+	public void setMode(CompassMode arg0) {
+		baseSensor.setMode(arg0);
+	}
+
+	public String status() {
+		return baseSensor.status();
+	}
+
+	public String toString() {
+		return baseSensor.toString();
 	}
 
 }

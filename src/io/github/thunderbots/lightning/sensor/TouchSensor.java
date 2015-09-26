@@ -39,4 +39,40 @@ public class TouchSensor implements Sensor {
 		return SensorType.TOUCH;
 	}
 
+	/*
+	 * Delegate methods for the base sensor
+	 */
+
+	public void close() {
+		baseSensor.close();
+	}
+
+	public boolean equals(Object arg0) {
+		return baseSensor.equals(arg0);
+	}
+
+	public String getConnectionInfo() {
+		return baseSensor.getConnectionInfo();
+	}
+
+	public String getDeviceName() {
+		return baseSensor.getDeviceName();
+	}
+
+	public int getVersion() {
+		return baseSensor.getVersion();
+	}
+
+	public int hashCode() {
+		return baseSensor.hashCode();
+	}
+
+	public boolean isPressed() {
+		return baseSensor.isPressed();
+	}
+
+	public String toString() {
+		return baseSensor.toString();
+	}
+
 }

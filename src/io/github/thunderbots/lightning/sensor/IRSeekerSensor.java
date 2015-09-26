@@ -16,6 +16,9 @@
 
 package io.github.thunderbots.lightning.sensor;
 
+import com.qualcomm.robotcore.hardware.IrSeekerSensor.IrSeekerIndividualSensor;
+import com.qualcomm.robotcore.hardware.IrSeekerSensor.Mode;
+
 public class IRSeekerSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.IrSeekerSensor baseSensor;
@@ -37,6 +40,62 @@ public class IRSeekerSensor implements Sensor {
 	@Override
 	public SensorType getType() {
 		return SensorType.IR_SEEKER;
+	}
+
+	/*
+	 * Delegate methods for the base sensor
+	 */
+
+	public void close() {
+		baseSensor.close();
+	}
+
+	public boolean equals(Object arg0) {
+		return baseSensor.equals(arg0);
+	}
+
+	public double getAngle() {
+		return baseSensor.getAngle();
+	}
+
+	public String getConnectionInfo() {
+		return baseSensor.getConnectionInfo();
+	}
+
+	public String getDeviceName() {
+		return baseSensor.getDeviceName();
+	}
+
+	public IrSeekerIndividualSensor[] getIndividualSensors() {
+		return baseSensor.getIndividualSensors();
+	}
+
+	public Mode getMode() {
+		return baseSensor.getMode();
+	}
+
+	public double getStrength() {
+		return baseSensor.getStrength();
+	}
+
+	public int getVersion() {
+		return baseSensor.getVersion();
+	}
+
+	public int hashCode() {
+		return baseSensor.hashCode();
+	}
+
+	public void setMode(Mode arg0) {
+		baseSensor.setMode(arg0);
+	}
+
+	public boolean signalDetected() {
+		return baseSensor.signalDetected();
+	}
+
+	public String toString() {
+		return baseSensor.toString();
 	}
 
 }

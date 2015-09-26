@@ -39,4 +39,44 @@ public class UltrasonicSensor implements Sensor {
 		return SensorType.ULTRASONIC;
 	}
 
+	/*
+	 * Delegate methods for the base sensor
+	 */
+
+	public void close() {
+		baseSensor.close();
+	}
+
+	public boolean equals(Object arg0) {
+		return baseSensor.equals(arg0);
+	}
+
+	public String getConnectionInfo() {
+		return baseSensor.getConnectionInfo();
+	}
+
+	public String getDeviceName() {
+		return baseSensor.getDeviceName();
+	}
+
+	public double getUltrasonicLevel() {
+		return baseSensor.getUltrasonicLevel();
+	}
+
+	public int getVersion() {
+		return baseSensor.getVersion();
+	}
+
+	public int hashCode() {
+		return baseSensor.hashCode();
+	}
+
+	public String status() {
+		return baseSensor.status();
+	}
+
+	public String toString() {
+		return baseSensor.toString();
+	}
+
 }

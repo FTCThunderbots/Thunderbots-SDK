@@ -39,4 +39,28 @@ public class VoltageSensor implements Sensor {
 		return SensorType.VOLTAGE;
 	}
 
+	/*
+	 * Delegate methods for the base sensor
+	 */
+
+	public void close() {
+		baseSensor.close();
+	}
+
+	public String getConnectionInfo() {
+		return baseSensor.getConnectionInfo();
+	}
+
+	public String getDeviceName() {
+		return baseSensor.getDeviceName();
+	}
+
+	public int getVersion() {
+		return baseSensor.getVersion();
+	}
+
+	public double getVoltage() {
+		return baseSensor.getVoltage();
+	}
+
 }

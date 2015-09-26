@@ -39,4 +39,52 @@ public class OpticalDistance implements Sensor {
 		return SensorType.OPTICAL_DISTANCE;
 	}
 
+	/*
+	 * Delegate methods for the base sensor
+	 */
+
+	public void close() {
+		baseSensor.close();
+	}
+
+	public void enableLed(boolean arg0) {
+		baseSensor.enableLed(arg0);
+	}
+
+	public boolean equals(Object arg0) {
+		return baseSensor.equals(arg0);
+	}
+
+	public String getConnectionInfo() {
+		return baseSensor.getConnectionInfo();
+	}
+
+	public String getDeviceName() {
+		return baseSensor.getDeviceName();
+	}
+
+	public double getLightDetected() {
+		return baseSensor.getLightDetected();
+	}
+
+	public int getLightDetectedRaw() {
+		return baseSensor.getLightDetectedRaw();
+	}
+
+	public int getVersion() {
+		return baseSensor.getVersion();
+	}
+
+	public int hashCode() {
+		return baseSensor.hashCode();
+	}
+
+	public String status() {
+		return baseSensor.status();
+	}
+
+	public String toString() {
+		return baseSensor.toString();
+	}
+
 }
