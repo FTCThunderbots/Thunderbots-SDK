@@ -28,6 +28,11 @@ public class TouchSensor implements Sensor {
 	public Object getValue() {
 		return this.baseSensor.isPressed();
 	}
+	
+	@Override
+	public String getStringValue() {
+		return this.getValue().toString();
+	}
 
 	@Override
 	public SensorType getType() {

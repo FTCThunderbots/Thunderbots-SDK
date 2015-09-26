@@ -28,6 +28,11 @@ public class LightSensor implements Sensor {
 	public Object getValue() {
 		return baseSensor.getLightDetected();
 	}
+	
+	@Override
+	public String getStringValue() {
+		return this.getValue().toString();
+	}
 
 	@Override
 	public SensorType getType() {

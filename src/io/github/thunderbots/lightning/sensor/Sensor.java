@@ -32,6 +32,19 @@ public interface Sensor {
 	public Object getValue();
 	
 	/**
+	 * Gets a string representation of the current reading of this sensor. In most cases, this should
+	 * simply be the result of {@code .toString()} on the object returned by {@link #getValue()}.
+	 * 
+	 * @return a string representation of the current reading of this sensor.
+	 * @see #getValue()
+	 */
+	/* (non-Javadoc)
+	 * If we ever are able to transition this code to use Java 8 or later, this method should be a
+	 * default method that just calls toString() on the object returned by this.getValue().
+	 */
+	public String getStringValue();
+	
+	/**
 	 * Gets the type of the sensor.
 	 * 
 	 * @return the type of the sensor.

@@ -28,6 +28,11 @@ public class UltrasonicSensor implements Sensor {
 	public Object getValue() {
 		return baseSensor.getUltrasonicLevel();
 	}
+	
+	@Override
+	public String getStringValue() {
+		return this.getValue().toString();
+	}
 
 	@Override
 	public SensorType getType() {

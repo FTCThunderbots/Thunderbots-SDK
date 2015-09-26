@@ -28,6 +28,11 @@ public class AccelerationSensor implements Sensor {
 	public Object getValue() {
 		return baseSensor.getAcceleration();
 	}
+	
+	@Override
+	public String getStringValue() {
+		return this.getValue().toString();
+	}
 
 	@Override
 	public SensorType getType() {

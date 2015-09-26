@@ -28,6 +28,11 @@ public class IRSeekerSensor implements Sensor {
 	public Object getValue() {
 		return this.baseSensor.getStrength();
 	}
+	
+	@Override
+	public String getStringValue() {
+		return this.getValue().toString();
+	}
 
 	@Override
 	public SensorType getType() {

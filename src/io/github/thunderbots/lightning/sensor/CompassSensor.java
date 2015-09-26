@@ -28,6 +28,11 @@ public class CompassSensor implements Sensor {
 	public Object getValue() {
 		return baseSensor.getDirection();
 	}
+	
+	@Override
+	public String getStringValue() {
+		return this.getValue().toString();
+	}
 
 	@Override
 	public SensorType getType() {

@@ -28,6 +28,11 @@ public class GyroSensor implements Sensor {
 	public Object getValue() {
 		return baseSensor.getRotation();
 	}
+	
+	@Override
+	public String getStringValue() {
+		return this.getValue().toString();
+	}
 
 	@Override
 	public SensorType getType() {

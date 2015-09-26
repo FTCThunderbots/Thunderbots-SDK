@@ -28,6 +28,11 @@ public class VoltageSensor implements Sensor {
 	public Object getValue() {
 		return baseSensor.getVoltage();
 	}
+	
+	@Override
+	public String getStringValue() {
+		return this.getValue().toString();
+	}
 
 	@Override
 	public SensorType getType() {
