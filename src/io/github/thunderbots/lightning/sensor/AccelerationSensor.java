@@ -16,9 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-import com.qualcomm.robotcore.hardware.AccelerationSensor.Acceleration;
-
-public class AccelerationSensor implements Sensor {
+public class AccelerationSensor extends com.qualcomm.robotcore.hardware.AccelerationSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.AccelerationSensor baseSensor;
 	
@@ -27,13 +25,13 @@ public class AccelerationSensor implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return baseSensor.getAcceleration();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override

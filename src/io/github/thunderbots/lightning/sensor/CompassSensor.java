@@ -16,9 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-import com.qualcomm.robotcore.hardware.CompassSensor.CompassMode;
-
-public class CompassSensor implements Sensor {
+public class CompassSensor extends com.qualcomm.robotcore.hardware.CompassSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.CompassSensor baseSensor;
 	
@@ -27,13 +25,13 @@ public class CompassSensor implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return baseSensor.getDirection();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override

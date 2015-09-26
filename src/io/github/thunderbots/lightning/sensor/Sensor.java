@@ -29,14 +29,14 @@ public interface Sensor {
 	 * 
 	 * @return the current reading of the sensor.
 	 */
-	public Object getValue();
+	public Object getReadValue();
 	
 	/**
 	 * Gets a string representation of the current reading of this sensor. In most cases, this should
-	 * simply be the result of {@code .toString()} on the object returned by {@link #getValue()}.
+	 * simply be the result of {@code .toString()} on the object returned by {@link #getReadValue()}.
 	 * 
 	 * @return a string representation of the current reading of this sensor.
-	 * @see #getValue()
+	 * @see #getReadValue()
 	 */
 	/* (non-Javadoc)
 	 * If we ever are able to transition this code to use Java 8 or later, this method should be a

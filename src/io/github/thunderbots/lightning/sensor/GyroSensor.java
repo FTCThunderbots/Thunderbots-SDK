@@ -16,7 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-public class GyroSensor implements Sensor {
+public class GyroSensor extends com.qualcomm.robotcore.hardware.GyroSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.GyroSensor baseSensor;
 	
@@ -25,13 +25,13 @@ public class GyroSensor implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return baseSensor.getRotation();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override

@@ -16,7 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-public class LightSensor implements Sensor {
+public class LightSensor extends com.qualcomm.robotcore.hardware.LightSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.LightSensor baseSensor;
 	
@@ -25,13 +25,13 @@ public class LightSensor implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return baseSensor.getLightDetected();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override

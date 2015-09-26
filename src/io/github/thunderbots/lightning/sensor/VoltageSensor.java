@@ -16,7 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-public class VoltageSensor implements Sensor {
+public class VoltageSensor implements com.qualcomm.robotcore.hardware.VoltageSensor, Sensor {
 	
 	private com.qualcomm.robotcore.hardware.VoltageSensor baseSensor;
 	
@@ -25,13 +25,13 @@ public class VoltageSensor implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return baseSensor.getVoltage();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override

@@ -16,7 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-public class UltrasonicSensor implements Sensor {
+public class UltrasonicSensor extends com.qualcomm.robotcore.hardware.UltrasonicSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.UltrasonicSensor baseSensor;
 	
@@ -25,13 +25,13 @@ public class UltrasonicSensor implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return baseSensor.getUltrasonicLevel();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override

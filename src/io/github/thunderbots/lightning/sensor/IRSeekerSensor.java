@@ -16,10 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-import com.qualcomm.robotcore.hardware.IrSeekerSensor.IrSeekerIndividualSensor;
-import com.qualcomm.robotcore.hardware.IrSeekerSensor.Mode;
-
-public class IRSeekerSensor implements Sensor {
+public class IRSeekerSensor extends com.qualcomm.robotcore.hardware.IrSeekerSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.IrSeekerSensor baseSensor;
 	
@@ -28,13 +25,13 @@ public class IRSeekerSensor implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return this.baseSensor.getStrength();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override

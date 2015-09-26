@@ -16,7 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-public class OpticalDistance implements Sensor {
+public class OpticalDistance extends com.qualcomm.robotcore.hardware.OpticalDistanceSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.OpticalDistanceSensor baseSensor;
 	
@@ -25,13 +25,13 @@ public class OpticalDistance implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return baseSensor.getLightDetected();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override

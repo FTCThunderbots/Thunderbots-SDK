@@ -16,7 +16,7 @@
 
 package io.github.thunderbots.lightning.sensor;
 
-public class TouchSensor implements Sensor {
+public class TouchSensor extends com.qualcomm.robotcore.hardware.TouchSensor implements Sensor {
 	
 	private com.qualcomm.robotcore.hardware.TouchSensor baseSensor;
 	
@@ -25,13 +25,13 @@ public class TouchSensor implements Sensor {
 	}
 
 	@Override
-	public Object getValue() {
+	public Object getReadValue() {
 		return this.baseSensor.isPressed();
 	}
 	
 	@Override
 	public String getStringValue() {
-		return this.getValue().toString();
+		return this.getReadValue().toString();
 	}
 
 	@Override
@@ -65,6 +65,10 @@ public class TouchSensor implements Sensor {
 
 	public int hashCode() {
 		return baseSensor.hashCode();
+	}
+	
+	public double getValue() {
+		return baseSensor.getValue();
 	}
 
 	public boolean isPressed() {
