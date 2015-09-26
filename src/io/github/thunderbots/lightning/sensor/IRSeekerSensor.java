@@ -95,4 +95,24 @@ public class IRSeekerSensor extends com.qualcomm.robotcore.hardware.IrSeekerSens
 		return baseSensor.toString();
 	}
 
+	@Override
+	public int getI2cAddress() {
+		return baseSensor.getI2cAddress();
+	}
+
+	@Override
+	public double getSignalDetectedThreshold() {
+		return baseSensor.getSignalDetectedThreshold();
+	}
+
+	@Override
+	public void setI2cAddress(int arg0) {
+		baseSensor.setI2cAddress(arg0);
+	}
+
+	@Override
+	public void setSignalDetectedThreshold(double arg0) {
+		baseSensor.setSignalDetectedThreshold(arg0);
+	}
+
 }
