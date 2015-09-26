@@ -26,6 +26,7 @@ public enum SensorType {
 	
 	// Explicit sensor types
 	ACCELERATION,
+	COLOR,
 	COMPASS,
 	GYRO,
 	IR_SEEKER,
