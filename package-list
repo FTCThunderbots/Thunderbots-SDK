@@ -6,4 +6,5 @@ io.github.thunderbots.lightning.hardware
 io.github.thunderbots.lightning.opmode
 io.github.thunderbots.lightning.robot
 io.github.thunderbots.lightning.scheduler
+io.github.thunderbots.lightning.sensor
 io.github.thunderbots.lightning.utility
