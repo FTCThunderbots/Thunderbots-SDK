@@ -38,7 +38,7 @@ public abstract class TeleOp extends SimpleOpMode {
 	protected void main() {
 		while (this.opModeIsActive()) {
 			if (!this.overrideMovement) {
-				this.setDefaultMovement();
+				this.setMovement();
 			}
 			this.mainLoop();
 		}
@@ -48,7 +48,7 @@ public abstract class TeleOp extends SimpleOpMode {
 	 * Defines the default movement for any OpMode that does not 
 	 * set {@code overrideMovement} to {@code true}
 	 */
-	protected void setDefaultMovement() {
+	protected void setMovement() {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
 		try {
 			this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
