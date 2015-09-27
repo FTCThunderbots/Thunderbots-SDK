@@ -27,55 +27,37 @@ import io.github.thunderbots.lightning.control.Joystick;
  * @author Zach Ohara
  */
 public abstract class TeleOp extends SimpleOpMode {
-	
-	/**
-	 * {@code true} if an OpMode that extends {@code TeleOp} should
-	 * not use the default movement defined in {@code setDefaultMovement()}
-	 */
-	private boolean overrideMovement;
 
 	@Override
 	protected void main() {
 		while (this.opModeIsActive()) {
-			if (!this.overrideMovement) {
-				this.setDefaultMovement();
-			}
+			this.setMovement();
 			this.mainLoop();
 		}
 	}
 	
 	/**
-	 * Defines the default movement for any OpMode that does not 
-	 * set {@code overrideMovement} to {@code true}
+	 * Sets the instantaneous movement of the robot based on readings from the joysticks. This can
+	 * be overridden by any op mode that should not use the default drive/turn controls.
 	 */
-	protected void setDefaultMovement() {
+	protected void setMovement() {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
-		try {
-			this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
-		} catch (NullPointerException e) {
-			String nulled = "";
-			if (this.getDrive() == null) {
-				nulled = "drive system";
-			} else if (drivingGamepad == null) {
-				nulled = "gamepad";
-			}
-			Lightning.sendTelemetryData(nulled + " is null!!");
-		}
-		Lightning.sendTelemetryData("joy1",
-				drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
-		Lightning.sendTelemetryData("raw",
-				this.gamepad1.left_stick_y + ", " + this.gamepad1.right_stick_x);
+		this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
+		
+		/* This is commented because we don't need the debug information right now, but it is not
+		 * removed because we may need it again in the future.
+		 */
+//		Lightning.sendTelemetryData("joy1",
+//				drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
 	}
 	
 	/**
-	 * Runs in an infinite loop during execution of any TeleOp
+	 * Executes the 'body' of any tele op. Everything controlled by a teleop that would normally be
+	 * done inside a while loop should be placed in this method. Movement is excluded from this, and
+	 * should instead be defined in {@link #setMovement()}.
 	 */
 	protected void mainLoop() {
 		
-	}
-
-	protected void setOverrideMovement(boolean overrideMovement) {
-		this.overrideMovement = overrideMovement;
 	}
 
 }
