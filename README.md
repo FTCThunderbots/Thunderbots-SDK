@@ -4,7 +4,7 @@
 
 The Lightning SDK is build to be used with FTC robots and the new Java + Android control system that was released for the 2015-2016 competition. The purpose of Lightning is to compensate for the shortcomings of the built-in FTC SDK, and to provide some additional useful functionality that speeds up and simplifies the development of robot code. It is build on top of the FTC SDK, but does not include it, so any code using Lightning will also need a copy of the Robotcore package in the FTC SDK.
 
-Along with all of the sorce code, in the root folder of this repository, you'll also find [detailed javadocs](javadoc) for all of the code, along with a compiled .jar version of the project. We are working hard to write a functioning wiki for the code, and that will be available through GitHub's Wiki system. The wiki will provide lots of code snippets and explanations on a system basis, instead of the class basis that Javadoc uses.
+Along with all of the source code, in the root folder of this repository, you'll also find [detailed javadocs](javadoc) for all of the code, along with a compiled .jar version of the project. We are working hard to write a functioning wiki for the code, and that will be available through GitHub's Wiki system. The wiki will provide lots of code snippets and explanations on a system basis, instead of the class basis that Javadoc uses.
 
 This is open sorce software, so feel free to send a pull request if you think you have a way to improve it. We will soon be providing a document with contribution outlines, and that file will be available in this repository. 
 
