@@ -27,32 +27,55 @@ import io.github.thunderbots.lightning.control.Joystick;
  * @author Zach Ohara
  */
 public abstract class TeleOp extends SimpleOpMode {
+	
+	/**
+	 * {@code true} if an OpMode that extends {@code TeleOp} should
+	 * not use the default movement defined in {@code setDefaultMovement()}
+	 */
+	private boolean overrideMovement;
 
 	@Override
 	protected void main() {
 		while (this.opModeIsActive()) {
-			Joystick drivingGamepad = Lightning.getJoystick(1);
-			try {
-				this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
-			} catch (NullPointerException e) {
-				String nulled = "";
-				if (this.getDrive() == null) {
-					nulled = "drive system";
-				} else if (drivingGamepad == null) {
-					nulled = "gamepad";
-				}
-				Lightning.sendTelemetryData(nulled + " is null!!");
+			if (!this.overrideMovement) {
+				this.setDefaultMovement();
 			}
-			Lightning.sendTelemetryData("joy1",
-					drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
-			Lightning.sendTelemetryData("raw",
-					this.gamepad1.left_stick_y + ", " + this.gamepad1.right_stick_x);
 			this.mainLoop();
 		}
 	}
 	
+	/**
+	 * Defines the default movement for any OpMode that does not 
+	 * set {@code overrideMovement} to {@code true}
+	 */
+	protected void setDefaultMovement() {
+		Joystick drivingGamepad = Lightning.getJoystick(1);
+		try {
+			this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
+		} catch (NullPointerException e) {
+			String nulled = "";
+			if (this.getDrive() == null) {
+				nulled = "drive system";
+			} else if (drivingGamepad == null) {
+				nulled = "gamepad";
+			}
+			Lightning.sendTelemetryData(nulled + " is null!!");
+		}
+		Lightning.sendTelemetryData("joy1",
+				drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
+		Lightning.sendTelemetryData("raw",
+				this.gamepad1.left_stick_y + ", " + this.gamepad1.right_stick_x);
+	}
+	
+	/**
+	 * Runs in an infinite loop during execution of any TeleOp
+	 */
 	protected void mainLoop() {
 		
+	}
+
+	protected void setOverrideMovement(boolean overrideMovement) {
+		this.overrideMovement = overrideMovement;
 	}
 
 }
