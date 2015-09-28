@@ -8,6 +8,7 @@ package io.github.thunderbots.lightning.control;
  * is either -1 or 1.
  *
  * @author Zach Ohara
+ * @author Pranav Mathur
  */
 public enum JoystickButton {
 	
