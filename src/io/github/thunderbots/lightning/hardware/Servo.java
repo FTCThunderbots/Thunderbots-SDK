@@ -16,20 +16,22 @@
 
 package io.github.thunderbots.lightning.hardware;
 
+import com.qualcomm.robotcore.hardware.ServoController;
+
 import io.github.thunderbots.lightning.utility.MathUtil;
 
 /**
  * A {@code Servo} represents any physical servo on that is connected to the robot.
  *
+ * @author Pranav Mathur
  * @author Zach Ohara
  */
-public class Servo {
-
-	/**
-	 * The servo that this object is based on.
-	 */
-	private com.qualcomm.robotcore.hardware.Servo baseServo;
+public class Servo extends com.qualcomm.robotcore.hardware.Servo {
 	
+	public Servo(ServoController controller, int portNumber) {
+		super(controller, portNumber);
+	}
+
 	/**
 	 * The 'center' position of this servo. The default value is {@link #CENTER_POSITION}.
 	 */
@@ -58,10 +60,6 @@ public class Servo {
 	 *
 	 * @param baseServo the base robotcore {@code Servo}
 	 */
-	public Servo(com.qualcomm.robotcore.hardware.Servo baseServo) {
-		this.baseServo = baseServo;
-		this.centerPos = CENTER_POSITION;
-	}
 	
 	/**
 	 * Gets the 'center' position of this servo.
@@ -84,21 +82,12 @@ public class Servo {
 	}
 
 	/**
-	 * Gets the current position of this servo.
-	 *
-	 * @return the current position of this servo.
-	 */
-	public double getPosition() {
-		return this.baseServo.getPosition();
-	}
-
-	/**
 	 * Moves the servo to the given position.
 	 *
 	 * @param position the position to move to.
 	 */
 	public void moveToPosition(double position) {
-		this.baseServo.setPosition(position);
+		super.setPosition(position);
 	}
 	
 	/**
@@ -117,11 +106,6 @@ public class Servo {
 	 */
 	public void center() {
 		this.moveToPosition(this.centerPos);
-	}
-
-	@Override
-	public String toString() {
-		return this.baseServo.toString();
 	}
 
 }

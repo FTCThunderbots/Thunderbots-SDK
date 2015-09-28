@@ -35,6 +35,7 @@ import io.github.thunderbots.lightning.scheduler.TaskScheduler;
  * the physical robot. The static methods in the class can be used for things such as
  * accessing the joysticks, and getting hardware objects.
  *
+ * @author Pranav Mathur
  * @author Zach Ohara
  */
 public class Lightning {
@@ -128,10 +129,10 @@ public class Lightning {
 	 */
 	public static Motor getMotor(String name) {
 		try {
-			return new Motor(Lightning.robotHardware.dcMotor.get(name));
+			return (Motor)Lightning.robotHardware.dcMotor.get(name);
 		} catch (Exception e) {
 			//TODO: find out which specific type of exception we should expect here.
-			return new CRServo(new Servo(Lightning.robotHardware.servo.get(name)));
+			return new CRServo((Servo)Lightning.robotHardware.servo.get(name));
 		}
 	}
 
@@ -142,7 +143,7 @@ public class Lightning {
 	 * @return the motor with the given name.
 	 */
 	public static Servo getServo(String name) {
-		return new Servo(Lightning.robotHardware.servo.get(name));
+		return (Servo)Lightning.robotHardware.servo.get(name);
 	}
 
 	/**
