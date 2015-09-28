@@ -17,18 +17,19 @@
 package io.github.thunderbots.lightning.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 
 /**
  * A {@code Motor} represents any physical DC motor that is connected to the robot.
  *
+ * @author Pranav Mathur
  * @author Zach Ohara
  */
-public class Motor {
+public class Motor extends DcMotor {
 
-	/**
-	 * The {@code DcMotor} that this object is based on.
-	 */
-	private DcMotor basemotor;
+	public Motor(DcMotorController controller, int portNumber) {
+		super(controller, portNumber);
+	}
 
 	/**
 	 * The encoder that is attached to this motor. This will always be a defined, valid
@@ -54,15 +55,6 @@ public class Motor {
 	public static final double MIN_POWER = -1;
 
 	/**
-	 * Constructs a new motor that uses the given {@code DcMotor} as a base.
-	 *
-	 * @param basemotor the base {@code Motor}
-	 */
-	public Motor(DcMotor basemotor) {
-		this.basemotor = basemotor;
-	}
-
-	/**
 	 * Gets the encoder attached to this motor. This will return an {@code Encoder} even if
 	 * there is no physical encoder attached to the physical motor.
 	 *
@@ -78,7 +70,7 @@ public class Motor {
 	 * @return the raw encoder value of this motor.
 	 */
 	public int getRawPosition() {
-		return this.basemotor.getCurrentPosition();
+		return super.getCurrentPosition();
 	}
 
 	/**
@@ -88,7 +80,7 @@ public class Motor {
 	 * {@code false} if the motor's ouput has the same polarity as its input.
 	 */
 	public boolean isReversed() {
-		return this.basemotor.getDirection() == DcMotor.Direction.REVERSE;
+		return super.getDirection() == DcMotor.Direction.REVERSE;
 	}
 
 	/**
@@ -99,9 +91,9 @@ public class Motor {
 	 */
 	public void setReversed(boolean reversed) {
 		if (reversed) {
-			this.basemotor.setDirection(DcMotor.Direction.REVERSE);
+			super.setDirection(DcMotor.Direction.REVERSE);
 		} else {
-			this.basemotor.setDirection(DcMotor.Direction.FORWARD);
+			super.setDirection(DcMotor.Direction.FORWARD);
 		}
 	}
 
@@ -112,10 +104,14 @@ public class Motor {
 	 */
 	public double getPower() {
 		try {
-			return this.basemotor.getPower();
+			return super.getPower();
 		} catch (Exception e) {
 			return this.power;
 		}
+	}
+
+	public Motor(DcMotorController controller, int portNumber, Direction direction) {
+		super(controller, portNumber, direction);
 	}
 
 	/**
@@ -124,7 +120,7 @@ public class Motor {
 	 * @param power the movement power; between -1 and 1.
 	 */
 	public void setPower(double power) {
-		this.basemotor.setPower(power);
+		super.setPower(power);
 		this.power = power;
 	}
 	
@@ -133,11 +129,6 @@ public class Motor {
 	 */
 	public void stop() {
 		this.setPower(Motor.REST_POWER);
-	}
-
-	@Override
-	public String toString() {
-		return this.basemotor.toString();
 	}
 
 }

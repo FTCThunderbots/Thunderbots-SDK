@@ -29,6 +29,7 @@ package io.github.thunderbots.lightning.hardware;
  * {@code Lightning.getServo(String)}. To use a CR servo as a motor instead, call the
  * {@code Lightning.getMotor(String)} method.
  * 
+ * @author Pranav Mathur
  * @author Zach Ohara
  */
 public class CRServo extends Motor {
@@ -59,7 +60,7 @@ public class CRServo extends Motor {
 	public static final double REVERSE = 0;
 
 	public CRServo(Servo baseservo) {
-		super(null);
+		super(null, 0);
 	}
 	
 	/**
