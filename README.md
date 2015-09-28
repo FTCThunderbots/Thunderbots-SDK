@@ -6,7 +6,7 @@ The Lightning SDK is build to be used with FTC robots and the new Java + Android
 
 Along with all of the source code, in the root folder of this repository, you'll also find [detailed javadocs](javadoc) for all of the code, along with a compiled .jar version of the project. We are working hard to write a functioning wiki for the code, and that will be available through GitHub's Wiki system. The wiki will provide lots of code snippets and explanations on a system basis, instead of the class basis that Javadoc uses.
 
-This is open sorce software, so feel free to send a pull request if you think you have a way to improve it. We will soon be providing a document with contribution outlines, and that file will be available in this repository. 
+This is open source software, so feel free to send a pull request if you think you have a way to improve it. We will soon be providing a document with contribution outlines, and that file will be available in this repository. 
 
 The quickest way to communicate with us is to file an issue under GitHub's system. The email address listed for our organization is shared by our entire robotics team, so we will eventually see emails directed to the programming team, but it will take more time. We are unable to provide full-time support for Lightning, but we will try to be as helpful as we can if you're having problems. All feedback is welcome.
 
