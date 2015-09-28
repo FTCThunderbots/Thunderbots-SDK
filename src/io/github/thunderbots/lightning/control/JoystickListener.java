@@ -6,6 +6,6 @@ package io.github.thunderbots.lightning.control;
  *
  * @author Zach Ohara
  */
-public interface ButtonListener {
+public interface JoystickListener {
 
 }
