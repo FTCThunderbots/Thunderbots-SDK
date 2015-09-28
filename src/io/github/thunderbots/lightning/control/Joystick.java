@@ -392,12 +392,12 @@ public class Joystick {
 	}
 	
 	/**
-	 * Generates an array of {@code JoystickButton}s that represent all the buttons that are
+	 * Generates a list of {@code JoystickButton}s that represent all the buttons that are
 	 * currently pressed on this joystick.
 	 *
 	 * @return the buttons currently pressed on the joystick.
 	 */
-	public JoystickButton[] toButtonArray() {
+	public List<JoystickButton> toButtonArray() {
 		List<JoystickButton> pressedButtons = new LinkedList<JoystickButton>();
 		if (this.aButton()) {
 			pressedButtons.add(JoystickButton.A);
@@ -465,7 +465,7 @@ public class Joystick {
 		if (this.rightStickPositiveY()) {
 			pressedButtons.add(JoystickButton.RIGHT_Y_POS);
 		}
-		return pressedButtons.toArray(new JoystickButton[pressedButtons.size()]);
+		return pressedButtons;
 	}
 
 }
