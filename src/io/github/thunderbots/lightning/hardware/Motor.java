@@ -60,6 +60,8 @@ public class Motor {
 	 */
 	public Motor(DcMotor basemotor) {
 		this.basemotor = basemotor;
+		this.encoder = new Encoder(this);
+		
 	}
 
 	/**
