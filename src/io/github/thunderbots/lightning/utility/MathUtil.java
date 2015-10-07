@@ -23,6 +23,10 @@ package io.github.thunderbots.lightning.utility;
  * @author Zach Ohara
  */
 public class MathUtil {
+	
+	private MathUtil() {
+		
+	}
 
 	/**
 	 * Scales a number within some range to a corresponding position relative to another
