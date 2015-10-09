@@ -62,6 +62,11 @@ public class CRServo extends Motor {
 		super(null);
 	}
 	
+	@Override
+	public String getName() {
+		return this.baseServo.getName();
+	}
+	
 	/**
 	 * @deprecated A CR servo has no way to track its position. Calling this method on a {@code CRServo}
 	 * will return null.

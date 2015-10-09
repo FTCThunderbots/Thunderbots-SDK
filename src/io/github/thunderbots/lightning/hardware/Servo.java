@@ -64,6 +64,15 @@ public class Servo {
 	}
 	
 	/**
+	 * Gets the name of the device as it is defined in the configuration file.
+	 *
+	 * @return the name of the servo.
+	 */
+	public String getName() {
+		return this.baseServo.getDeviceName();
+	}
+	
+	/**
 	 * Gets the 'center' position of this servo.
 	 * 
 	 * @see #centerPos

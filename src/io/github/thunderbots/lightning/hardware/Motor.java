@@ -61,7 +61,15 @@ public class Motor {
 	public Motor(DcMotor basemotor) {
 		this.basemotor = basemotor;
 		this.encoder = new Encoder(this);
-		
+	}
+	
+	/**
+	 * Gets the name of the device as it is defined in the configuration file.
+	 *
+	 * @return the name of the motor.
+	 */
+	public String getName() {
+		return this.basemotor.getDeviceName();
 	}
 
 	/**
