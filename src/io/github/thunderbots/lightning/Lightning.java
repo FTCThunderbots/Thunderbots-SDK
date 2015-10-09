@@ -75,6 +75,10 @@ public class Lightning {
 	static {
 		Lightning.taskScheduler = new TaskScheduler();
 	}
+	
+	private Lightning() {
+		
+	}
 
 	/**
 	 * Initializes the static information in {@code Lightning} from the given
@@ -214,6 +218,7 @@ public class Lightning {
 		sensorMaps.add(map.accelerationSensor);
 		sensorMaps.add(map.analogInput);
 		sensorMaps.add(map.analogOutput);
+		sensorMaps.add(map.colorSensor);
 		sensorMaps.add(map.compassSensor);
 		sensorMaps.add(map.digitalChannel);
 		sensorMaps.add(map.gyroSensor);
