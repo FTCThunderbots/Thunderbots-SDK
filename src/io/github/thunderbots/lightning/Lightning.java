@@ -205,6 +205,26 @@ public final class Lightning {
 	public static void sendTelemetryData(Object data) {
 		Lightning.sendTelemetryData("", data);
 	}
+	
+	/**
+	 * Sends motor data from the robot controller to the driver station
+	 * 
+	 * @param m the motor to be sent
+	 * @see #sendTelemetryData(String, Object) 
+	 */
+	public static void sendTelemetryData(Motor m) {
+		Lightning.sendTelemetryData(m.getName() + ": ", m.getPower());
+	}
+	
+	/**
+	 * Sends servo data from the robot controller to the driver station
+	 * 
+	 * @param s the servo to be sent
+	 * @see #sendTelemetryData(String, Object) 
+	 */
+	public static void sendTelemetryData(Servo s) {
+		Lightning.sendTelemetryData(s.getName() + ": ", s.getPosition());
+	}
 
 	/**
 	 * Given a {@code HardwareMap}, return a list of {@code DeviceMapping}s that could lead
