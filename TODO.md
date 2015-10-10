@@ -8,4 +8,3 @@
 * Change the op mode hiding functionality to the decorator.
 * Make SimpleOpMode more interoperable with a `Robot`.
 * Add a superclass for all sensors
-* In lightning.addTelemetryData(), if an object is a motor or servo, automatically call its getPos or getPow methods.
