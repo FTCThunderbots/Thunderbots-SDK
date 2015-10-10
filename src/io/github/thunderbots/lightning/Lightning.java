@@ -36,6 +36,7 @@ import io.github.thunderbots.lightning.scheduler.TaskScheduler;
  * accessing the joysticks, and getting hardware objects.
  *
  * @author Zach Ohara
+ * @author Pranav Mathur
  */
 public final class Lightning {
 
