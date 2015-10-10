@@ -37,7 +37,7 @@ import io.github.thunderbots.lightning.scheduler.TaskScheduler;
  *
  * @author Zach Ohara
  */
-public class Lightning {
+public final class Lightning {
 
 	/**
 	 * The op mode to get joystick information from.

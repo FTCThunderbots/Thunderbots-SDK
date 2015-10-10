@@ -1,6 +1,6 @@
 package io.github.thunderbots.lightning.utility;
 
-public class Util {
+public final class Util {
 	
 	private Util() {
 		

@@ -22,7 +22,7 @@ package io.github.thunderbots.lightning.utility;
  *
  * @author Zach Ohara
  */
-public class MathUtil {
+public final class MathUtil {
 	
 	private MathUtil() {
 		
