@@ -1,5 +1,10 @@
 package io.github.thunderbots.lightning.utility;
 
+/**
+ * The {@code Util} class contains static methods for common utilities.
+ *
+ * @author Pranav Mathur
+ */
 public final class Util {
 	
 	private Util() {
