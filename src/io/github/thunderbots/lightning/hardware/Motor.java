@@ -22,6 +22,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * A {@code Motor} represents any physical DC motor that is connected to the robot.
  *
  * @author Zach Ohara
+ * @author Pranav Mathur
  */
 public class Motor {
 
@@ -36,6 +37,9 @@ public class Motor {
 	 */
 	private Encoder encoder;
 	
+	/**
+	 * The current power of the motor. Used as backup for external requests of motor power.
+	 */
 	private double power;
 
 	/**
