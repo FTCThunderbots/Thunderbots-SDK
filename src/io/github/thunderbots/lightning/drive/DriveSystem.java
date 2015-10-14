@@ -163,7 +163,7 @@ public abstract class DriveSystem {
 	 * Waits the given amount of time, then stops the robot.
 	 *
 	 * @param seconds the time to wait before stopping the robot.
-	 * @return {@code true} if no interrupt excpetion was thrown during the wait.
+	 * @return {@code true} if no interrupt exception was thrown during the wait.
 	 */
 	public boolean waitAndStop(double seconds) {
 		boolean uninterrupted = true;
