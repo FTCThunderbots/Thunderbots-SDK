@@ -16,8 +16,10 @@
 
 package io.github.thunderbots.lightning;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
@@ -157,22 +159,35 @@ public final class Lightning {
 	 *
 	 * @param name the name of the sensor.
 	 * @return the sensor with the given name.
+	 * @throws SecurityException 
+	 * @throws NoSuchFieldException 
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getSensor(String name) {
-		for (DeviceMapping<?> map : Lightning.sensorMaps) {
+//		for (DeviceMapping<?> map : Lightning.sensorMaps) {
+//			try {
+//				Object o = map.get(name);
+//				try {
+//					return (T) o;
+//				}
+//				catch (ClassCastException ex) {
+//					Lightning.sendTelemetryData("Sensor: " + name + " not found");
+//					
+//				}
+//			} catch (IllegalArgumentException ignore) {
+//				
+//			}
+//		}
+		DeviceMapping<?> map;
+		for (DeviceMapping<?> m : Lightning.sensorMaps) {
+			Map<String, ?> a = null;
 			try {
-				Object o = map.get(name);
-				try {
-					return (T) o;
-				}
-				catch (ClassCastException ex) {
-					Lightning.sendTelemetryData("Sensor: " + name + " not found");
-					
-				}
-			} catch (IllegalArgumentException ignore) {
-				
-			}
+				Field f = m.getClass().getDeclaredField("a");
+				f.setAccessible(true);
+				a = (Map<String, ?>) f.get(m);
+			} catch (Exception ignore) {}
+			if (a.containsKey(name))
+				return (T) a.get(name);
 		}
 		return null;
 	}
