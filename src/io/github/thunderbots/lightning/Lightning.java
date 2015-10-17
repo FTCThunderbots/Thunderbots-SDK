@@ -16,10 +16,8 @@
 
 package io.github.thunderbots.lightning;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
@@ -153,46 +151,6 @@ public final class Lightning {
 	}
 
 	/**
-	 * Gets a reference to any sensor on the robot with the given name. The sensor will
-	 * need to be type-cast to the expected type of sensor before it can be used in any
-	 * meaningful way.
-	 *
-	 * @param name the name of the sensor.
-	 * @return the sensor with the given name.
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T getSensor(String name) {
-//		for (DeviceMapping<?> map : Lightning.sensorMaps) {
-//			try {
-//				Object o = map.get(name);
-//				try {
-//					return (T) o;
-//				}
-//				catch (ClassCastException ex) {
-//					Lightning.sendTelemetryData("Sensor: " + name + " not found");
-//					
-//				}
-//			} catch (IllegalArgumentException ignore) {
-//				
-//			}
-//		}
-		DeviceMapping<?> map;
-		for (DeviceMapping<?> m : Lightning.sensorMaps) {
-			Map<String, ?> a = null;
-			try {
-				Field f = m.getClass().getDeclaredField("a");
-				f.setAccessible(true);
-				a = (Map<String, ?>) f.get(m);
-			} catch (Exception ignore) {}
-			if (a.containsKey(name))
-				return (T) a.get(name);
-		}
-		return null;
-	}
-
-	/**
 	 * Sends given data from the robot controller to the driver station. Any object can be
 	 * sent, but the object's {@code toString()} method will be called and the string
 	 * representation of the object is what will actually be sent. The data will be
@@ -266,6 +224,21 @@ public final class Lightning {
 		sensorMaps.add(map.ultrasonicSensor);
 		sensorMaps.add(map.voltageSensor);
 		return sensorMaps;
+	}
+	
+	/**
+	 * Gets a reference to any sensor on the robot with the given name.
+	 *
+	 * @param name the name of the sensor.
+	 * @return the sensor with the given name.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T getSensor(String name) {
+		for (DeviceMapping<?> m : Lightning.sensorMaps) {
+			if (m.entrySet().contains(name))
+				return (T) m.get(name);
+		}
+		return null;
 	}
 
 }
