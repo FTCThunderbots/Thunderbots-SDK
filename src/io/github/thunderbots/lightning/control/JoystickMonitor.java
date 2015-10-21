@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Zach Ohara
+/* Copyright (C) 2015 Thunderbots Robotics
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,14 +16,13 @@
 
 package io.github.thunderbots.lightning.control;
 
+import io.github.thunderbots.lightning.Lightning;
+import io.github.thunderbots.lightning.control.ButtonHandler.PressType;
+
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.github.thunderbots.lightning.Lightning;
-import io.github.thunderbots.lightning.control.ButtonHandler.PressType;
 
 /**
  * 
@@ -59,6 +58,11 @@ public class JoystickMonitor {
 	public JoystickMonitor(int joystick) {
 		this.joystick = joystick;
 		this.listeners = new ArrayList<JoystickListener>();
+		Lightning.getTaskScheduler().registerTask(new MonitorUpdateRunnable());
+	}
+	
+	public void registerJoystickListener(JoystickListener listener) {
+		this.listeners.add(listener);
 	}
 	
 	public void updateJoysticks() {
@@ -104,6 +108,15 @@ public class JoystickMonitor {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private class MonitorUpdateRunnable implements Runnable {
+
+		@Override
+		public void run() {
+			JoystickMonitor.this.updateJoysticks();
+		}
+		
 	}
 
 }
