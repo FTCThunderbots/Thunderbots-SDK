@@ -24,6 +24,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
 import com.qualcomm.robotcore.robocol.Telemetry;
 
 import io.github.thunderbots.lightning.control.Joystick;
+import io.github.thunderbots.lightning.control.JoystickMonitor;
 import io.github.thunderbots.lightning.hardware.CRServo;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
@@ -71,9 +72,14 @@ public class Lightning {
 	 * and in client code of the SDK.
 	 */
 	private static TaskScheduler taskScheduler;
+	
+	private static JoystickMonitor monitor1;
+	private static JoystickMonitor monitor2;
 
 	static {
 		Lightning.taskScheduler = new TaskScheduler();
+		Lightning.monitor1 = new JoystickMonitor(1);
+		Lightning.monitor2 = new JoystickMonitor(2);
 	}
 
 	/**
@@ -112,6 +118,17 @@ public class Lightning {
 				return new Joystick(Lightning.opmode.gamepad1);
 			case 2:
 				return new Joystick(Lightning.opmode.gamepad2);
+			default:
+				return null;
+		}
+	}
+	
+	public static JoystickMonitor getJoystickMonitor(int gamepad) {
+		switch (gamepad) {
+			case 1:
+				return Lightning.monitor1;
+			case 2:
+				return Lightning.monitor2;
 			default:
 				return null;
 		}
