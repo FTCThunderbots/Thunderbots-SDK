@@ -21,11 +21,12 @@ package io.github.thunderbots.lightning.drive;
  * system, with standard parallel wheels on both sides of the robot.
  * <p>
  * The {@code TankDrive} class is a subclass of {@code MecanumDrive} for technical reasons.
- * The code that controlls a tank drive system is exactly the same as the code that
- * controlls a mecanum drive system, with the one difference being that the strafing vector
+ * The code that controls a tank drive system is exactly the same as the code that
+ * controls a mecanum drive system, with the one difference being that the strafing vector
  * must be zero if the physical robot does not use mecanum drive.
  *
  * @author Zach Ohara
+ * @author Daniel Grimshaw
  */
 public class TankDrive extends MecanumDrive {
 
@@ -40,7 +41,7 @@ public class TankDrive extends MecanumDrive {
 	}
 
 	/**
-	 * Constructs a enw {@code TankDrive} that uses the motors with the given names.
+	 * Constructs a new {@code TankDrive} that uses the motors with the given names.
 	 *
 	 * @param motornames the names of the motors to use with this drive system.
 	 * @see DriveSystem#DriveSystem(String[])
@@ -52,7 +53,7 @@ public class TankDrive extends MecanumDrive {
 	/**
 	 * @deprecated A tank drive system cannot accept a right-facing vector as an argument
 	 * for movement. The purpose of this method is only to filter out any possible
-	 * right-facing, non-zero vector argument to prevent damage to the pysical motors.
+	 * right-facing, non-zero vector argument to prevent damage to the physical motors.
 	 * <p>
 	 * Instead of this method, use the two-argument version, which accepts only forward and
 	 * clockwise vectors. This method is declared in {@code DriveSystem} and implemented in

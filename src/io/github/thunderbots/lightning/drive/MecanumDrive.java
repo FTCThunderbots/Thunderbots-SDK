@@ -23,6 +23,7 @@ import io.github.thunderbots.lightning.hardware.Motor;
  * wheels.
  *
  * @author Zach Ohara
+ * @author Daniel Grimshaw
  */
 public class MecanumDrive extends DriveSystem {
 
@@ -43,7 +44,7 @@ public class MecanumDrive extends DriveSystem {
 	}
 
 	/**
-	 * Constructs a enw {@code MecanumDrive} that uses the motors with the given names.
+	 * Constructs a new {@code MecanumDrive} that uses the motors with the given names.
 	 *
 	 * @param motornames the names of the motors to use with this drive system.
 	 * @see DriveSystem#DriveSystem(String[])
@@ -150,7 +151,7 @@ public class MecanumDrive extends DriveSystem {
 	 * @param forward the forward-driving vector; between -1 and 1.
 	 * @param right the right-strafing vector; between -1 and 1.
 	 * @param clockwise the clockwise-spinning vector; between -1 and 1.
-	 * @return the sucess of the operation.
+	 * @return the success of the operation.
 	 */
 	public boolean setMovement(double forward, double right, double clockwise) {
 

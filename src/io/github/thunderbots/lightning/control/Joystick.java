@@ -24,11 +24,12 @@ import io.github.thunderbots.lightning.utility.MathUtil;
  * connected to the driver station.
  *
  * @author Zach Ohara
+ * @author Daniel Grimshaw
  */
 public class Joystick {
 
 	/**
-	 * The {@code Gamepad} that this object should recieve information from.
+	 * The {@code Gamepad} that this object should receive information from.
 	 *
 	 * @see com.qualcomm.robotcore.hardware.Gamepad
 	 */
@@ -84,7 +85,7 @@ public class Joystick {
 	 * the minimum and the maximum, even though any value less than the threshold will be
 	 * reported as zero.
 	 *
-	 * @param raw the raw input value from the joystick, between the threshhold and maximum
+	 * @param raw the raw input value from the joystick, between the threshold and maximum
 	 * positions.
 	 * @return the corresponding value between the minimum and maximum positions.
 	 */
