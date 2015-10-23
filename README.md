@@ -10,9 +10,9 @@ This is open source software, so feel free to send a pull request if you think y
 
 The quickest way to communicate with us is to file an issue under GitHub's system. The email address listed for our organization is shared by our entire robotics team, so we will eventually see emails directed to the programming team, but it will take more time. We are unable to provide full-time support for Lightning, but we will try to be as helpful as we can if you're having problems. All feedback is welcome.
 
-An example of how to use this SDK is provided in the "2015-Code" repository in this same organization. Please note that not every feature available in Lightning is used in the example code, but the two projects have been largely developed in parallel.
+An example of how to use this SDK is provided in the "[2015-Code](https://github.com/thunderbots5604/2015-code)" repository in this same organization. Please note that not every feature available in Lightning is used in the example code, but the two projects have been largely developed in parallel.
 
-This entire repository is made available under the GNU General Public License v3.0. A full copy of this license is available as the [LICENSE](LICENSE) file in this repository, or at [gnu.org/licenses](http://www.gnu.org/licenses/).
+This entire repository is made available under the GNU General Public License v3.0 or later. A full copy of this license is available as the [LICENSE](LICENSE) file in this repository, or at [gnu.org/licenses](http://www.gnu.org/licenses/).
 
 ### Dependencies
 
