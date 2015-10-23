@@ -24,7 +24,6 @@ package io.github.thunderbots.lightning.drive;
  * move with the given two vectors.
  *
  * @author Zach Ohara
- * @author Daniel Grimshaw
  */
 public abstract class DriveSystem {
 

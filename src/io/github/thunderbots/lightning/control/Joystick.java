@@ -24,7 +24,6 @@ import io.github.thunderbots.lightning.utility.MathUtil;
  * connected to the driver station.
  *
  * @author Zach Ohara
- * @author Daniel Grimshaw
  */
 public class Joystick {
 

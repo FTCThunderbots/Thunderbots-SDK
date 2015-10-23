@@ -23,7 +23,6 @@ import io.github.thunderbots.lightning.hardware.Motor;
  * wheels.
  *
  * @author Zach Ohara
- * @author Daniel Grimshaw
  */
 public class MecanumDrive extends DriveSystem {
 

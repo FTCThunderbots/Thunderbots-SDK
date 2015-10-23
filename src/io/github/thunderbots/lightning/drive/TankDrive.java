@@ -26,7 +26,6 @@ package io.github.thunderbots.lightning.drive;
  * must be zero if the physical robot does not use mecanum drive.
  *
  * @author Zach Ohara
- * @author Daniel Grimshaw
  */
 public class TankDrive extends MecanumDrive {
 
