@@ -169,7 +169,7 @@ public class PID implements Runnable {
 	 */
 	public PID(Correctable device, double windup_guard, double Kp, double Ki, double Kd) {
 		this.device = device;
-		this.reset(windup_guard, Kp, Ki, kd);
+		this.reset(windup_guard, Kp, Ki, Kd);
 		Thread runner = new Thread(this);
 		runner.start();
 	}
@@ -249,7 +249,7 @@ public class PID implements Runnable {
 	 * @param Kd The derivative gain
 	 *
 	 */
-	private void set_constants(double integral_cap, double Kp, double Kim double Kd) {
+	private void set_constants(double integral_cap, double Kp, double Ki, double Kd) {
 		this.windup_guard = integral_cap;
 		this.proportional_gain = Kp;
 		this.integral_gain = Ki;
@@ -268,8 +268,9 @@ public class PID implements Runnable {
 				this.update_correction(this.device.get_error(), this.device.delta_t());
 				Thread.sleep(1);
 			}
+		}
 		catch (Exception e) { //TODO: Implement this
-			throw new Exception("PID has been killed");
+			
 		}
 	}
 	
@@ -298,14 +299,14 @@ public class PID implements Runnable {
 		diff = ((error - this.prev_error) / delta_t);
 		
 		//scaling
-		p_term = (this.proportional_gain * curr_error);
+		p_term = (this.proportional_gain * error);
 	    i_term = (this.integral_gain     * this.int_error);
 	    d_term = (this.derivative_gain   * diff);
 	    
 	    correction = p_term + i_term + d_term;
 	    
 	    if (correction < Motor.MIN_POWER) {
-	    	correction = Motor.MIN_POWER);
+	    	correction = Motor.MIN_POWER;
 	    } else if (correction > Motor.MAX_POWER) {
 	    	correction = Motor.MAX_POWER;
 	    }
