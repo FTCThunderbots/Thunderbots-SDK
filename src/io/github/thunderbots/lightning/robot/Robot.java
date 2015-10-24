@@ -16,6 +16,8 @@
 
 package io.github.thunderbots.lightning.robot;
 
+import io.github.thunderbots.lightning.drive.DriveSystem;
+
 /**
  * {@code Robot} is an interface that should be implemented by any class representing a
  * physical robot. In the future, this interface will be used to provide more seamless
@@ -23,13 +25,24 @@ package io.github.thunderbots.lightning.robot;
  *
  * @author Pranav Mathur
  */
-public interface Robot {
+public abstract class Robot {
+	
+	private DriveSystem drive;
 
 	/**
 	 * Initializes the robot. The implementation of this method should be used in place of
 	 * a constructor. Instance variables for a robot object should initialize from the
 	 * available hardware maps in this method.
 	 */
-	public void initializeRobot();
+	public abstract void initializeRobot();
+
+	/**
+	 * Gets a reference to the {@code DriveSystem} being used to control the robot.
+	 *
+	 * @return the drive system for this robot.
+	 */
+	public DriveSystem getDrive() {
+		return this.drive;
+	}
 
 }

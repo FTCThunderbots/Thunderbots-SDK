@@ -44,13 +44,6 @@ public abstract class TeleOp extends SimpleOpMode {
 	protected void setMovement() {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
 		this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
-
-		/*
-		 * This is commented because we don't need the debug information right now, but it
-		 * is not removed because we may need it again in the future.
-		 */
-		// Lightning.sendTelemetryData("joy1",
-		// drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
 	}
 
 	/**
