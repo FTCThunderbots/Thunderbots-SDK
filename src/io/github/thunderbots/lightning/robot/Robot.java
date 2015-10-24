@@ -19,9 +19,8 @@ package io.github.thunderbots.lightning.robot;
 import io.github.thunderbots.lightning.drive.DriveSystem;
 
 /**
- * {@code Robot} is an interface that should be implemented by any class representing a
- * physical robot. In the future, this interface will be used to provide more seamless
- * operation between op modes objects and robot objects.
+ * {@code Robot} is an abstract class that should be extended by any class representing a
+ * physical robot.
  *
  * @author Pranav Mathur
  */
