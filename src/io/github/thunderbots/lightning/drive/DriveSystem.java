@@ -33,13 +33,6 @@ public abstract class DriveSystem {
 	 * @see io.github.thunderbots.lightning.drive.DriveMotorSet
 	 */
 	private DriveMotorSet motors;
-	
-	/**
-	 * The PID controller for this system.
-	 * 
-	 * @see io.github.thunderbots.lightning.drive.Controller
-	 */
-	protected Controller controller;
 
 	/**
 	 * Constructs a new {@code DriveSystem} with the given {@code DriveMotorSet} as a base.
