@@ -16,19 +16,19 @@
 
 package io.github.thunderbots.lightning;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
-import com.qualcomm.robotcore.robocol.Telemetry;
-
 import io.github.thunderbots.lightning.control.Joystick;
 import io.github.thunderbots.lightning.hardware.CRServo;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
 import io.github.thunderbots.lightning.opmode.LightningOpMode;
 import io.github.thunderbots.lightning.scheduler.TaskScheduler;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
+import com.qualcomm.robotcore.robocol.Telemetry;
 
 /**
  * The {@code Lightning} class exposes methods for general interfacing with the hardware on
@@ -76,9 +76,9 @@ public final class Lightning {
 	static {
 		Lightning.taskScheduler = new TaskScheduler();
 	}
-	
+
 	private Lightning() {
-		
+
 	}
 
 	/**
@@ -123,10 +123,10 @@ public final class Lightning {
 	}
 
 	/**
-	 * Gets a reference to the motor with the given name. If there is no motor with the given
-	 * name, but there is a servo with the given name, the servo is assumed to be a
-	 * continuous-rotation servo, and a {@link io.github.thunderbots.hardware.CRServo CRServo}
-	 * object representing that servo is returned.
+	 * Gets a reference to the motor with the given name. If there is no motor with the
+	 * given name, but there is a servo with the given name, the servo is assumed to be a
+	 * continuous-rotation servo, and a {@link io.github.thunderbots.hardware.CRServo
+	 * CRServo} object representing that servo is returned.
 	 *
 	 * @param name the name of the motor.
 	 * @return the motor with the given name.
@@ -135,7 +135,7 @@ public final class Lightning {
 		try {
 			return new Motor(Lightning.robotHardware.dcMotor.get(name));
 		} catch (Exception e) {
-			//TODO: find out which specific type of exception we should expect here.
+			// TODO: find out which specific type of exception we should expect here.
 			return new CRServo(new Servo(Lightning.robotHardware.servo.get(name)));
 		}
 	}
@@ -179,22 +179,22 @@ public final class Lightning {
 	public static void sendTelemetryData(Object data) {
 		Lightning.sendTelemetryData("", data);
 	}
-	
+
 	/**
 	 * Sends motor data from the robot controller to the driver station
-	 * 
+	 *
 	 * @param m the motor to be sent
-	 * @see #sendTelemetryData(String, Object) 
+	 * @see #sendTelemetryData(String, Object)
 	 */
 	public static void sendTelemetryData(Motor m) {
 		Lightning.sendTelemetryData(m.getName() + ": ", m.getPower());
 	}
-	
+
 	/**
 	 * Sends servo data from the robot controller to the driver station
-	 * 
+	 *
 	 * @param s the servo to be sent
-	 * @see #sendTelemetryData(String, Object) 
+	 * @see #sendTelemetryData(String, Object)
 	 */
 	public static void sendTelemetryData(Servo s) {
 		Lightning.sendTelemetryData(s.getName() + ": ", s.getPosition());
@@ -225,7 +225,7 @@ public final class Lightning {
 		sensorMaps.add(map.voltageSensor);
 		return sensorMaps;
 	}
-	
+
 	/**
 	 * Gets a reference to any sensor on the robot with the given name.
 	 *
@@ -235,8 +235,9 @@ public final class Lightning {
 	@SuppressWarnings("unchecked")
 	public static <T> T getSensor(String name) {
 		for (DeviceMapping<?> m : Lightning.sensorMaps) {
-			if (m.entrySet().contains(name))
+			if (m.entrySet().contains(name)) {
 				return (T) m.get(name);
+			}
 		}
 		return null;
 	}

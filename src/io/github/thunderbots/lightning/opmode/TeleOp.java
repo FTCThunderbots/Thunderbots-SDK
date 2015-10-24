@@ -35,29 +35,31 @@ public abstract class TeleOp extends SimpleOpMode {
 			this.mainLoop();
 		}
 	}
-	
+
 	/**
-	 * Sets the instantaneous movement of the robot based on readings from the joysticks. This can
-	 * be overridden by any op mode that should not use the default drive/turn controls.
+	 * Sets the instantaneous movement of the robot based on readings from the joysticks.
+	 * This can be overridden by any op mode that should not use the default drive/turn
+	 * controls.
 	 */
 	protected void setMovement() {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
 		this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
-		
-		/* This is commented because we don't need the debug information right now, but it is not
-		 * removed because we may need it again in the future.
+
+		/*
+		 * This is commented because we don't need the debug information right now, but it
+		 * is not removed because we may need it again in the future.
 		 */
-//		Lightning.sendTelemetryData("joy1",
-//				drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
+		// Lightning.sendTelemetryData("joy1",
+		// drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
 	}
-	
+
 	/**
-	 * Executes the 'body' of any tele op. Everything controlled by a teleop that would normally be
-	 * done inside a while loop should be placed in this method. Movement is excluded from this, and
-	 * should instead be defined in {@link #setMovement()}.
+	 * Executes the 'body' of any tele op. Everything controlled by a teleop that would
+	 * normally be done inside a while loop should be placed in this method. Movement is
+	 * excluded from this, and should instead be defined in {@link #setMovement()}.
 	 */
 	protected void mainLoop() {
-		
+
 	}
 
 }

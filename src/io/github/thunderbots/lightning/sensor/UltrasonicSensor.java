@@ -17,18 +17,18 @@
 package io.github.thunderbots.lightning.sensor;
 
 public class UltrasonicSensor extends com.qualcomm.robotcore.hardware.UltrasonicSensor implements Sensor {
-	
+
 	private com.qualcomm.robotcore.hardware.UltrasonicSensor baseSensor;
-	
+
 	public UltrasonicSensor(com.qualcomm.robotcore.hardware.UltrasonicSensor baseSensor) {
 		this.baseSensor = baseSensor;
 	}
 
 	@Override
 	public Object getReadValue() {
-		return baseSensor.getUltrasonicLevel();
+		return this.baseSensor.getUltrasonicLevel();
 	}
-	
+
 	@Override
 	public String getStringValue() {
 		return this.getReadValue().toString();
@@ -43,40 +43,49 @@ public class UltrasonicSensor extends com.qualcomm.robotcore.hardware.Ultrasonic
 	 * Delegate methods for the base sensor
 	 */
 
+	@Override
 	public void close() {
-		baseSensor.close();
+		this.baseSensor.close();
 	}
 
+	@Override
 	public boolean equals(Object arg0) {
-		return baseSensor.equals(arg0);
+		return this.baseSensor.equals(arg0);
 	}
 
+	@Override
 	public String getConnectionInfo() {
-		return baseSensor.getConnectionInfo();
+		return this.baseSensor.getConnectionInfo();
 	}
 
+	@Override
 	public String getDeviceName() {
-		return baseSensor.getDeviceName();
+		return this.baseSensor.getDeviceName();
 	}
 
+	@Override
 	public double getUltrasonicLevel() {
-		return baseSensor.getUltrasonicLevel();
+		return this.baseSensor.getUltrasonicLevel();
 	}
 
+	@Override
 	public int getVersion() {
-		return baseSensor.getVersion();
+		return this.baseSensor.getVersion();
 	}
 
+	@Override
 	public int hashCode() {
-		return baseSensor.hashCode();
+		return this.baseSensor.hashCode();
 	}
 
+	@Override
 	public String status() {
-		return baseSensor.status();
+		return this.baseSensor.status();
 	}
 
+	@Override
 	public String toString() {
-		return baseSensor.toString();
+		return this.baseSensor.toString();
 	}
 
 }

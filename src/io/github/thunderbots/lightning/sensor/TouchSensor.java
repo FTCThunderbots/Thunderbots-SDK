@@ -17,9 +17,9 @@
 package io.github.thunderbots.lightning.sensor;
 
 public class TouchSensor extends com.qualcomm.robotcore.hardware.TouchSensor implements Sensor {
-	
+
 	private com.qualcomm.robotcore.hardware.TouchSensor baseSensor;
-	
+
 	public TouchSensor(com.qualcomm.robotcore.hardware.TouchSensor baseSensor) {
 		this.baseSensor = baseSensor;
 	}
@@ -28,7 +28,7 @@ public class TouchSensor extends com.qualcomm.robotcore.hardware.TouchSensor imp
 	public Object getReadValue() {
 		return this.baseSensor.isPressed();
 	}
-	
+
 	@Override
 	public String getStringValue() {
 		return this.getReadValue().toString();
@@ -43,40 +43,49 @@ public class TouchSensor extends com.qualcomm.robotcore.hardware.TouchSensor imp
 	 * Delegate methods for the base sensor
 	 */
 
+	@Override
 	public void close() {
-		baseSensor.close();
+		this.baseSensor.close();
 	}
 
+	@Override
 	public boolean equals(Object arg0) {
-		return baseSensor.equals(arg0);
+		return this.baseSensor.equals(arg0);
 	}
 
+	@Override
 	public String getConnectionInfo() {
-		return baseSensor.getConnectionInfo();
+		return this.baseSensor.getConnectionInfo();
 	}
 
+	@Override
 	public String getDeviceName() {
-		return baseSensor.getDeviceName();
+		return this.baseSensor.getDeviceName();
 	}
 
+	@Override
 	public int getVersion() {
-		return baseSensor.getVersion();
+		return this.baseSensor.getVersion();
 	}
 
+	@Override
 	public int hashCode() {
-		return baseSensor.hashCode();
+		return this.baseSensor.hashCode();
 	}
-	
+
+	@Override
 	public double getValue() {
-		return baseSensor.getValue();
+		return this.baseSensor.getValue();
 	}
 
+	@Override
 	public boolean isPressed() {
-		return baseSensor.isPressed();
+		return this.baseSensor.isPressed();
 	}
 
+	@Override
 	public String toString() {
-		return baseSensor.toString();
+		return this.baseSensor.toString();
 	}
 
 }

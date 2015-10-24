@@ -36,7 +36,7 @@ public class Motor {
 	 * object, even if there is no encoder attached to this motor.
 	 */
 	private Encoder encoder;
-	
+
 	/**
 	 * The current power of the motor. Used as backup for external requests of motor power.
 	 */
@@ -66,7 +66,7 @@ public class Motor {
 		this.basemotor = basemotor;
 		this.encoder = new Encoder();
 	}
-	
+
 	/**
 	 * Gets the name of the device as it is defined in the configuration file.
 	 *
@@ -141,7 +141,7 @@ public class Motor {
 		this.basemotor.setPower(power);
 		this.power = power;
 	}
-	
+
 	/**
 	 * Stops the motor. If the motor is not currently moving, this method has no effect.
 	 */
@@ -153,9 +153,10 @@ public class Motor {
 	public String toString() {
 		return this.basemotor.toString();
 	}
-	
+
 	/**
-	 * An {@code Encoder} represents a physical encoder that is attached to a specific motor.
+	 * An {@code Encoder} represents a physical encoder that is attached to a specific
+	 * motor.
 	 *
 	 * @author Zach Ohara
 	 * @author Pranav Mathur
@@ -173,19 +174,20 @@ public class Motor {
 		private double ticksPerRevolution;
 
 		/**
-		 * The number of encoder ticks that measure one inch on the circumference of the wheel.
+		 * The number of encoder ticks that measure one inch on the circumference of the
+		 * wheel.
 		 */
 		private double ticksPerInch;
 
 		/**
-		 * The default number of encoder ticks that measure exactly one full rotation of the
-		 * motor.
+		 * The default number of encoder ticks that measure exactly one full rotation of
+		 * the motor.
 		 */
 		private static final double DEFAULT_TICKS_PER_REVOLUTION = 0d;
 
 		/**
-		 * The default number of encoder ticks that measure one inch on the circumference of
-		 * the wheel.
+		 * The default number of encoder ticks that measure one inch on the circumference
+		 * of the wheel.
 		 */
 		private static final double DEFAULT_TICKS_PER_INCH = 0d;
 
@@ -207,8 +209,9 @@ public class Motor {
 		}
 
 		/**
-		 * Gets the current position of the encoder. More formally, this returns the difference
-		 * between the current position and the position when the encoder was last reset.
+		 * Gets the current position of the encoder. More formally, this returns the
+		 * difference between the current position and the position when the encoder was
+		 * last reset.
 		 *
 		 * @return the current position of the encoder.
 		 */
@@ -217,7 +220,8 @@ public class Motor {
 		}
 
 		/**
-		 * Gets the current position of the encoder with respect to the zero point, converted to revolutions of the motor.
+		 * Gets the current position of the encoder with respect to the zero point,
+		 * converted to revolutions of the motor.
 		 *
 		 * @return the current position of the encoder, in revolutions.
 		 */
@@ -239,7 +243,8 @@ public class Motor {
 		 * Sets the number of encoder ticks that measure exactly one full rotation of the
 		 * motor.
 		 *
-		 * @param ticks the encoder ticks that measure exactly one full rotation of the motor.
+		 * @param ticks the encoder ticks that measure exactly one full rotation of the
+		 * motor.
 		 * @see #ticksPerRevolution
 		 */
 		public void setTicksPerRevolution(double ticks) {
@@ -247,8 +252,8 @@ public class Motor {
 		}
 
 		/**
-		 * Sets the number of encoder ticks that measure one inch on the circumference of the
-		 * wheel.
+		 * Sets the number of encoder ticks that measure one inch on the circumference of
+		 * the wheel.
 		 *
 		 * @param ticks the encoder ticks that measure one inch on the circumference of the
 		 * wheel.

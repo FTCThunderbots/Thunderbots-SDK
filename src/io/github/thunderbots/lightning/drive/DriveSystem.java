@@ -44,7 +44,7 @@ public abstract class DriveSystem {
 	}
 
 	/**
-	 * Constructs a enw {@code DriveSystem} that uses the motors with the given names.
+	 * Constructs a new {@code DriveSystem} that uses the motors with the given names.
 	 *
 	 * @param motornames the names of the motors to use with this drive system.
 	 */

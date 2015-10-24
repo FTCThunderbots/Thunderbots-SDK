@@ -23,9 +23,9 @@ package io.github.thunderbots.lightning.utility;
  * @author Zach Ohara
  */
 public final class MathUtil {
-	
+
 	private MathUtil() {
-		
+
 	}
 
 	/**
@@ -57,17 +57,18 @@ public final class MathUtil {
 		double posOutRange = outputRange[0] + (posInRange * outputDifference);
 		return posOutRange * signum;
 	}
-	
+
 	/**
-	 * Truncates the number to be only within a given range. If the number is already within the
-	 * given range, the number is returned unchanged. If the number is less than the minimum, then
-	 * the minimum is returned, and if the number is greater than the maximum, then the maximum is
-	 * returned.
-	 * 
+	 * Truncates the number to be only within a given range. If the number is already
+	 * within the given range, the number is returned unchanged. If the number is less than
+	 * the minimum, then the minimum is returned, and if the number is greater than the
+	 * maximum, then the maximum is returned.
+	 *
 	 * @param num the number to scale.
 	 * @param min the minimum of the range.
 	 * @param max the maximum range.
-	 * @return the closest approximation of {@code num} such that {@code min <= num <= max}.
+	 * @return the closest approximation of {@code num} such that {@code min <= num <= max}
+	 * .
 	 */
 	public static double truncateToRange(double num, double min, double max) {
 		if (num < min) {
