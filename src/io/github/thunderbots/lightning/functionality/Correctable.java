@@ -30,11 +30,4 @@ public interface Correctable {
 	 * @return A scalar double representing the error in the device
 	 */
 	public double get_error();
-
-	/**
-	 * Get the change in time from the last call of getting the change in time
-	 *
-	 * @return The change in time
-	 */
-	public double delta_t();
 }

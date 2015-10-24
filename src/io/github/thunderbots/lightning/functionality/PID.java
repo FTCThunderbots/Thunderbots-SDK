@@ -49,7 +49,7 @@ public class PID implements Runnable {
 
 	/**
 	 * The guard against having too much gain from the integral correction.
-	 * This will act as the limit the ammount of of correction the PID can
+	 * This will act as the limit the amount of of correction the PID can
 	 * actually provide.
 	 */
 	private double windup_guard;
@@ -73,6 +73,11 @@ public class PID implements Runnable {
 	 * A variable to store the previous error calculated by the PID
 	 */
 	private double prev_error;
+	
+	/**
+	 * A variable to store the previous time that update was called
+	 */
+	private double last_time;
 
 	/**
 	 * The cumulative integral (past) error.
@@ -170,8 +175,8 @@ public class PID implements Runnable {
 	public PID(Correctable device, double windup_guard, double Kp, double Ki, double Kd) {
 		this.device = device;
 		this.reset(windup_guard, Kp, Ki, Kd);
-		Thread runner = new Thread(this);
-		runner.start();
+		updater = new Thread(this);
+		updater.start();
 	}
 
 	/**
@@ -265,7 +270,9 @@ public class PID implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				this.update_correction(this.device.get_error(), this.device.delta_t());
+				double delta_t = (double)System.currentTimeMillis() - this.last_time;
+				this.update_correction(this.device.get_error(), delta_t);
+				this.last_time = (double)System.currentTimeMillis();
 				Thread.sleep(1);
 			}
 		}
