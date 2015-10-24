@@ -30,7 +30,7 @@ public class MecanumDrive extends DriveSystem {
 	 * Passed to DriveMotorSet.setMotorPowers
 	 */
 	private double[] motorPowers;
-	
+
 	/**
 	 * Constructs a new {@code MecanumDrive} with the given {@code DriveMotorSet} as a
 	 * base.
@@ -168,8 +168,9 @@ public class MecanumDrive extends DriveSystem {
 		double backLeft = forward - right + clockwise;
 		double backRight = -forward - right + clockwise;
 
-		double max = Math.max(Math.max(Math.abs(frontLeft), Math.abs(frontRight)),
-				Math.max(Math.abs(backLeft), Math.abs(backRight)));
+		double max =
+				Math.max(Math.max(Math.abs(frontLeft), Math.abs(frontRight)),
+						Math.max(Math.abs(backLeft), Math.abs(backRight)));
 
 		if (max > Motor.MAX_POWER) {
 			double scale = max / Motor.MAX_POWER;
@@ -179,11 +180,11 @@ public class MecanumDrive extends DriveSystem {
 			backRight /= scale;
 		}
 
-		motorPowers[0] = frontLeft;
-		motorPowers[1] = frontRight;
-		motorPowers[2] = backLeft;
-		motorPowers[3] = backRight;
-		this.getWheelSet().setMotorPowers(motorPowers);
+		this.motorPowers[0] = frontLeft;
+		this.motorPowers[1] = frontRight;
+		this.motorPowers[2] = backLeft;
+		this.motorPowers[3] = backRight;
+		this.getWheelSet().setMotorPowers(this.motorPowers);
 
 		return true;
 	}

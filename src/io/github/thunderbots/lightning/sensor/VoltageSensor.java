@@ -17,18 +17,18 @@
 package io.github.thunderbots.lightning.sensor;
 
 public class VoltageSensor implements com.qualcomm.robotcore.hardware.VoltageSensor, Sensor {
-	
+
 	private com.qualcomm.robotcore.hardware.VoltageSensor baseSensor;
-	
+
 	public VoltageSensor(com.qualcomm.robotcore.hardware.VoltageSensor baseSensor) {
 		this.baseSensor = baseSensor;
 	}
 
 	@Override
 	public Object getReadValue() {
-		return baseSensor.getVoltage();
+		return this.baseSensor.getVoltage();
 	}
-	
+
 	@Override
 	public String getStringValue() {
 		return this.getReadValue().toString();
@@ -43,24 +43,29 @@ public class VoltageSensor implements com.qualcomm.robotcore.hardware.VoltageSen
 	 * Delegate methods for the base sensor
 	 */
 
+	@Override
 	public void close() {
-		baseSensor.close();
+		this.baseSensor.close();
 	}
 
+	@Override
 	public String getConnectionInfo() {
-		return baseSensor.getConnectionInfo();
+		return this.baseSensor.getConnectionInfo();
 	}
 
+	@Override
 	public String getDeviceName() {
-		return baseSensor.getDeviceName();
+		return this.baseSensor.getDeviceName();
 	}
 
+	@Override
 	public int getVersion() {
-		return baseSensor.getVersion();
+		return this.baseSensor.getVersion();
 	}
 
+	@Override
 	public double getVoltage() {
-		return baseSensor.getVoltage();
+		return this.baseSensor.getVoltage();
 	}
 
 }

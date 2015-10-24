@@ -16,8 +16,9 @@
 
 package io.github.thunderbots.lightning.control;
 
-import com.qualcomm.robotcore.hardware.Gamepad;
 import io.github.thunderbots.lightning.utility.MathUtil;
+
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 /**
  * A {@code Joystick} object represents one of the physical game controllers that are

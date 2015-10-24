@@ -21,9 +21,9 @@ package io.github.thunderbots.lightning.drive;
  * system, with standard parallel wheels on both sides of the robot.
  * <p>
  * The {@code TankDrive} class is a subclass of {@code MecanumDrive} for technical reasons.
- * The code that controls a tank drive system is exactly the same as the code that
- * controls a mecanum drive system, with the one difference being that the strafing vector
- * must be zero if the physical robot does not use mecanum drive.
+ * The code that controls a tank drive system is exactly the same as the code that controls
+ * a mecanum drive system, with the one difference being that the strafing vector must be
+ * zero if the physical robot does not use mecanum drive.
  *
  * @author Zach Ohara
  */

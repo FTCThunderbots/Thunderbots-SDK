@@ -22,15 +22,15 @@ package io.github.thunderbots.lightning.utility;
  * @author Pranav Mathur
  */
 public final class Util {
-	
+
 	private Util() {
-		
+
 	}
-	
+
 	public static boolean sleep(long milliseconds) {
 		try {
 			Thread.sleep(milliseconds);;
-		} catch(InterruptedException ex) {
+		} catch (InterruptedException ex) {
 			return false;
 		}
 		return true;

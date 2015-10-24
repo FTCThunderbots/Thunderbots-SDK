@@ -17,9 +17,9 @@
 package io.github.thunderbots.lightning.sensor;
 
 public class IRSeekerSensor extends com.qualcomm.robotcore.hardware.IrSeekerSensor implements Sensor {
-	
+
 	private com.qualcomm.robotcore.hardware.IrSeekerSensor baseSensor;
-	
+
 	public IRSeekerSensor(com.qualcomm.robotcore.hardware.IrSeekerSensor baseSensor) {
 		this.baseSensor = baseSensor;
 	}
@@ -28,7 +28,7 @@ public class IRSeekerSensor extends com.qualcomm.robotcore.hardware.IrSeekerSens
 	public Object getReadValue() {
 		return this.baseSensor.getStrength();
 	}
-	
+
 	@Override
 	public String getStringValue() {
 		return this.getReadValue().toString();
@@ -43,76 +43,89 @@ public class IRSeekerSensor extends com.qualcomm.robotcore.hardware.IrSeekerSens
 	 * Delegate methods for the base sensor
 	 */
 
+	@Override
 	public void close() {
-		baseSensor.close();
+		this.baseSensor.close();
 	}
 
+	@Override
 	public boolean equals(Object arg0) {
-		return baseSensor.equals(arg0);
+		return this.baseSensor.equals(arg0);
 	}
 
+	@Override
 	public double getAngle() {
-		return baseSensor.getAngle();
+		return this.baseSensor.getAngle();
 	}
 
+	@Override
 	public String getConnectionInfo() {
-		return baseSensor.getConnectionInfo();
+		return this.baseSensor.getConnectionInfo();
 	}
 
+	@Override
 	public String getDeviceName() {
-		return baseSensor.getDeviceName();
+		return this.baseSensor.getDeviceName();
 	}
 
+	@Override
 	public IrSeekerIndividualSensor[] getIndividualSensors() {
-		return baseSensor.getIndividualSensors();
+		return this.baseSensor.getIndividualSensors();
 	}
 
+	@Override
 	public Mode getMode() {
-		return baseSensor.getMode();
+		return this.baseSensor.getMode();
 	}
 
+	@Override
 	public double getStrength() {
-		return baseSensor.getStrength();
+		return this.baseSensor.getStrength();
 	}
 
+	@Override
 	public int getVersion() {
-		return baseSensor.getVersion();
+		return this.baseSensor.getVersion();
 	}
 
+	@Override
 	public int hashCode() {
-		return baseSensor.hashCode();
+		return this.baseSensor.hashCode();
 	}
 
+	@Override
 	public void setMode(Mode arg0) {
-		baseSensor.setMode(arg0);
+		this.baseSensor.setMode(arg0);
 	}
 
+	@Override
 	public boolean signalDetected() {
-		return baseSensor.signalDetected();
+		return this.baseSensor.signalDetected();
 	}
 
+	@Override
 	public String toString() {
-		return baseSensor.toString();
+		return this.baseSensor.toString();
 	}
 
 	@Override
 	public int getI2cAddress() {
-		return baseSensor.getI2cAddress();
+		return this.baseSensor.getI2cAddress();
 	}
 
 	@Override
 	public double getSignalDetectedThreshold() {
-		return baseSensor.getSignalDetectedThreshold();
+		return this.baseSensor.getSignalDetectedThreshold();
 	}
 
 	@Override
 	public void setI2cAddress(int arg0) {
-		baseSensor.setI2cAddress(arg0);
+		this.baseSensor.setI2cAddress(arg0);
 	}
 
 	@Override
 	public void setSignalDetectedThreshold(double arg0) {
-		baseSensor.setSignalDetectedThreshold(arg0);
+		this.baseSensor.setSignalDetectedThreshold(arg0);
 	}
 
 }

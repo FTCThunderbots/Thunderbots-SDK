@@ -19,9 +19,9 @@ package io.github.thunderbots.lightning.sensor;
 import java.awt.Color;
 
 public class ColorSensor extends com.qualcomm.robotcore.hardware.ColorSensor implements Sensor {
-	
+
 	private com.qualcomm.robotcore.hardware.ColorSensor baseSensor;
-	
+
 	public ColorSensor(com.qualcomm.robotcore.hardware.ColorSensor baseSensor) {
 		this.baseSensor = baseSensor;
 	}
@@ -30,7 +30,7 @@ public class ColorSensor extends com.qualcomm.robotcore.hardware.ColorSensor imp
 	public Object getReadValue() {
 		return this.color();
 	}
-	
+
 	@Override
 	public String getStringValue() {
 		return this.getReadValue().toString();
@@ -40,7 +40,7 @@ public class ColorSensor extends com.qualcomm.robotcore.hardware.ColorSensor imp
 	public SensorType getType() {
 		return SensorType.COLOR;
 	}
-	
+
 	public Color color() {
 		return new Color(this.red(), this.green(), this.blue());
 	}
@@ -49,56 +49,69 @@ public class ColorSensor extends com.qualcomm.robotcore.hardware.ColorSensor imp
 	 * Delegate methods for the base sensor
 	 */
 
+	@Override
 	public int alpha() {
-		return baseSensor.alpha();
+		return this.baseSensor.alpha();
 	}
 
+	@Override
 	public int argb() {
-		return baseSensor.argb();
+		return this.baseSensor.argb();
 	}
 
+	@Override
 	public int blue() {
-		return baseSensor.blue();
+		return this.baseSensor.blue();
 	}
 
+	@Override
 	public void close() {
-		baseSensor.close();
+		this.baseSensor.close();
 	}
 
+	@Override
 	public void enableLed(boolean arg0) {
-		baseSensor.enableLed(arg0);
+		this.baseSensor.enableLed(arg0);
 	}
 
+	@Override
 	public boolean equals(Object arg0) {
-		return baseSensor.equals(arg0);
+		return this.baseSensor.equals(arg0);
 	}
 
+	@Override
 	public String getConnectionInfo() {
-		return baseSensor.getConnectionInfo();
+		return this.baseSensor.getConnectionInfo();
 	}
 
+	@Override
 	public String getDeviceName() {
-		return baseSensor.getDeviceName();
+		return this.baseSensor.getDeviceName();
 	}
 
+	@Override
 	public int getVersion() {
-		return baseSensor.getVersion();
+		return this.baseSensor.getVersion();
 	}
 
+	@Override
 	public int green() {
-		return baseSensor.green();
+		return this.baseSensor.green();
 	}
 
+	@Override
 	public int hashCode() {
-		return baseSensor.hashCode();
+		return this.baseSensor.hashCode();
 	}
 
+	@Override
 	public int red() {
-		return baseSensor.red();
+		return this.baseSensor.red();
 	}
 
+	@Override
 	public String toString() {
-		return baseSensor.toString();
+		return this.baseSensor.toString();
 	}
 
 }

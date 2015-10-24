@@ -17,13 +17,13 @@
 package io.github.thunderbots.lightning.sensor;
 
 /**
- * {@code SensorType} enumerates the possible types of sensors or abstract I/O devices that are
- * supported by the SDK.
- * 
+ * {@code SensorType} enumerates the possible types of sensors or abstract I/O devices that
+ * are supported by the SDK.
+ *
  * @author Zach Ohara
  */
 public enum SensorType {
-	
+
 	// Explicit sensor types
 	ACCELERATION,
 	COLOR,
@@ -35,7 +35,7 @@ public enum SensorType {
 	TOUCH,
 	ULTRASONIC,
 	VOLTAGE,
-	
+
 	// Abstract I/O types
 	ANALOG_INPUT,
 	ANALOG_OUTPUT,
