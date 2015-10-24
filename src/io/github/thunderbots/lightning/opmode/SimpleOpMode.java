@@ -52,7 +52,7 @@ public abstract class SimpleOpMode extends LightningOpMode {
 	/**
 	 * The robot that this OpMode is designed for.
 	 */
-	private Robot robot;
+	protected Robot robot;
 	
 	/**
 	 * Get a reference to this OpMode's robot
