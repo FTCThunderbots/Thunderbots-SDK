@@ -93,7 +93,7 @@ public final class Lightning {
 	 *
 	 * @param opmode the op mode to initialize this robot from.
 	 */
-	public static void initialize(LightningOpMode opmode) {
+	public static void initializeLightning(LightningOpMode opmode) {
 		Lightning.opmode = opmode;
 		Lightning.robotHardware = opmode.hardwareMap;
 		Lightning.robotTelemetry = opmode.telemetry;
