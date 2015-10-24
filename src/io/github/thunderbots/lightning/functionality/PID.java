@@ -45,7 +45,7 @@ public class PID implements Runnable {
 	/**
 	 * The default derivative gain.
 	 */
-	public static final double DEFAULT_DERIVATIVE_GAIN = 1.0;
+	public static final double DEFAULT_DERIVATIVE_GAIN = 0.1;
 
 	/**
 	 * The guard against having too much gain from the integral correction.
