@@ -17,18 +17,18 @@
 package io.github.thunderbots.lightning.hardware;
 
 /**
- * A {@code CRServo} represents any physical continuous-rotation servo that is connected to the
- * robot. Normal servos are limited in their rotation, but a continuous-rotation servo can rotate
- * infinitely. Because of this, a CR servo is functionally more similar to a motor than it is to a
- * servo. This is reflected by {@code CRServo} being a subclass of
+ * A {@code CRServo} represents any physical continuous-rotation servo that is connected to
+ * the robot. Normal servos are limited in their rotation, but a continuous-rotation servo
+ * can rotate infinitely. Because of this, a CR servo is functionally more similar to a
+ * motor than it is to a servo. This is reflected by {@code CRServo} being a subclass of
  * {@link io.github.thunderbots.lightning.hardware.Motor Motor} instead of a subclass of
  * {@link io.github.thunderbots.lightning.hardware.Servo Servo}.
  * <p>
- * Because of this inheritance, a physical CR servo can be referenced in software as a motor
- * <em>OR</em> as a servo. To use it as a servo, access it through
+ * Because of this inheritance, a physical CR servo can be referenced in software as a
+ * motor <em>OR</em> as a servo. To use it as a servo, access it through
  * {@code Lightning.getServo(String)}. To use a CR servo as a motor instead, call the
  * {@code Lightning.getMotor(String)} method.
- * 
+ *
  * @author Zach Ohara
  */
 public class CRServo extends Motor {
@@ -37,12 +37,12 @@ public class CRServo extends Motor {
 	 * The servo that this object is based on.
 	 */
 	private Servo baseServo;
-	
+
 	/**
 	 * Determines if the directionality of this cr servo is reversed or not.
 	 */
 	private boolean isReversed;
-	
+
 	/**
 	 * The maximum power of the servo.
 	 */
@@ -61,10 +61,15 @@ public class CRServo extends Motor {
 	public CRServo(Servo baseservo) {
 		super(null);
 	}
-	
+
+	@Override
+	public String getName() {
+		return this.baseServo.getName();
+	}
+
 	/**
-	 * @deprecated A CR servo has no way to track its position. Calling this method on a {@code CRServo}
-	 * will return null.
+	 * @deprecated A CR servo has no way to track its position. Calling this method on a
+	 * {@code CRServo} will return null.
 	 */
 	@Override
 	@Deprecated
@@ -73,8 +78,8 @@ public class CRServo extends Motor {
 	}
 
 	/**
-	 * @deprecated A CR servo has no way to track its position. Calling this method on a {@code CRServo}
-	 * will return 0.
+	 * @deprecated A CR servo has no way to track its position. Calling this method on a
+	 * {@code CRServo} will return 0.
 	 */
 	@Override
 	@Deprecated
@@ -94,9 +99,9 @@ public class CRServo extends Motor {
 
 	@Override
 	public double getPower() {
-		if (this.baseServo.getPosition() == REVERSE) {
+		if (this.baseServo.getPosition() == CRServo.REVERSE) {
 			return Motor.MIN_POWER;
-		} else if (this.baseServo.getPosition() == FORWARD) {
+		} else if (this.baseServo.getPosition() == CRServo.FORWARD) {
 			return Motor.MAX_POWER;
 		} else { // getPosition() == REST
 			return Motor.REST_POWER;
@@ -109,11 +114,11 @@ public class CRServo extends Motor {
 			power = -power;
 		}
 		if (power < 0) {
-			this.baseServo.moveToPosition(REVERSE);
+			this.baseServo.moveToPosition(CRServo.REVERSE);
 		} else if (power > 0) {
-			this.baseServo.moveToPosition(FORWARD);
+			this.baseServo.moveToPosition(CRServo.FORWARD);
 		} else { // power == 0
-			this.baseServo.moveToPosition(REST);
+			this.baseServo.moveToPosition(CRServo.REST);
 		}
 	}
 

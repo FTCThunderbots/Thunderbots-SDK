@@ -38,7 +38,7 @@ public class MecanumDrive extends DriveSystem {
 	}
 
 	/**
-	 * Constructs a enw {@code MecanumDrive} that uses the motors with the given names.
+	 * Constructs a new {@code MecanumDrive} that uses the motors with the given names.
 	 *
 	 * @param motornames the names of the motors to use with this drive system.
 	 * @see DriveSystem#DriveSystem(String[])
@@ -145,7 +145,7 @@ public class MecanumDrive extends DriveSystem {
 	 * @param forward the forward-driving vector; between -1 and 1.
 	 * @param right the right-strafing vector; between -1 and 1.
 	 * @param clockwise the clockwise-spinning vector; between -1 and 1.
-	 * @return the sucess of the operation.
+	 * @return the success of the operation.
 	 */
 	public boolean setMovement(double forward, double right, double clockwise) {
 
@@ -163,8 +163,9 @@ public class MecanumDrive extends DriveSystem {
 		double backLeft = forward - right + clockwise;
 		double backRight = -forward - right + clockwise;
 
-		double max = Math.max(Math.max(Math.abs(frontLeft), Math.abs(frontRight)),
-				Math.max(Math.abs(backLeft), Math.abs(backRight)));
+		double max =
+				Math.max(Math.max(Math.abs(frontLeft), Math.abs(frontRight)),
+						Math.max(Math.abs(backLeft), Math.abs(backRight)));
 
 		if (max > Motor.MAX_POWER) {
 			double scale = max / Motor.MAX_POWER;
@@ -173,8 +174,13 @@ public class MecanumDrive extends DriveSystem {
 			backLeft /= scale;
 			backRight /= scale;
 		}
-
-		this.getWheelSet().setMotorPowers(new double[] {frontLeft, frontRight, backLeft, backRight});
+		
+		double[] motorPowers = new double[4];
+		motorPowers[0] = frontLeft;
+		motorPowers[1] = frontRight;
+		motorPowers[2] = backLeft;
+		motorPowers[3] = backRight;
+		this.getWheelSet().setMotorPowers(motorPowers);
 
 		return true;
 	}

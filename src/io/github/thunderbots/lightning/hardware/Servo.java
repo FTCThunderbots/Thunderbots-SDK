@@ -29,7 +29,7 @@ public class Servo {
 	 * The servo that this object is based on.
 	 */
 	private com.qualcomm.robotcore.hardware.Servo baseServo;
-	
+
 	/**
 	 * The 'center' position of this servo. The default value is {@link #CENTER_POSITION}.
 	 */
@@ -46,12 +46,12 @@ public class Servo {
 	 * but this may change in the future.
 	 */
 	public static final double MAX_POSITION = com.qualcomm.robotcore.hardware.Servo.MAX_POSITION;
-	
+
 	/**
-	 * The default center position of the servo. It is the average value of the minimum and maximum
-	 * positions.
+	 * The default center position of the servo. It is the average value of the minimum and
+	 * maximum positions.
 	 */
-	public static final double CENTER_POSITION = (MIN_POSITION + MAX_POSITION) / 2;
+	public static final double CENTER_POSITION = (Servo.MIN_POSITION + Servo.MAX_POSITION) / 2;
 
 	/**
 	 * Constructs a new servo that uses the given robotcore {@code Servo} as a base.
@@ -60,22 +60,31 @@ public class Servo {
 	 */
 	public Servo(com.qualcomm.robotcore.hardware.Servo baseServo) {
 		this.baseServo = baseServo;
-		this.centerPos = CENTER_POSITION;
+		this.centerPos = Servo.CENTER_POSITION;
 	}
-	
+
+	/**
+	 * Gets the name of the device as it is defined in the configuration file.
+	 *
+	 * @return the name of the servo.
+	 */
+	public String getName() {
+		return this.baseServo.getDeviceName();
+	}
+
 	/**
 	 * Gets the 'center' position of this servo.
-	 * 
+	 *
 	 * @see #centerPos
 	 * @return the 'center' position of this servo.
 	 */
 	public double getCenterPosition() {
 		return this.centerPos;
 	}
-	
+
 	/**
 	 * Sets the 'center' position of this servo.
-	 * 
+	 *
 	 * @see #centerPos
 	 * @param position the new 'center' position of this servo.
 	 */
@@ -100,18 +109,18 @@ public class Servo {
 	public void moveToPosition(double position) {
 		this.baseServo.setPosition(position);
 	}
-	
+
 	/**
 	 * Moves the servo to its current position plus the given increment.
-	 * 
+	 *
 	 * @param increment the change in servo position.
 	 */
 	public void move(double increment) {
 		double newPosition = this.getPosition() + increment;
-		newPosition = MathUtil.truncateToRange(newPosition, MIN_POSITION, MAX_POSITION);
+		newPosition = MathUtil.truncateToRange(newPosition, Servo.MIN_POSITION, Servo.MAX_POSITION);
 		this.moveToPosition(newPosition);
 	}
-	
+
 	/**
 	 * Moves the servo to its center position.
 	 */

@@ -16,9 +16,9 @@
 
 package io.github.thunderbots.lightning.opmode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
 import io.github.thunderbots.lightning.Lightning;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
  * The {@code LightningOpMode} is a customized version of {@code LinearOpMode} that should

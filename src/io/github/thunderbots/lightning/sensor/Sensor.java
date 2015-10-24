@@ -18,35 +18,37 @@ package io.github.thunderbots.lightning.sensor;
 
 /**
  * The {@code Sensor} interface acts as a supertype for all sensor objects.
- * 
+ *
  * @author Zach Ohara
  */
 public interface Sensor {
-	
+
 	/**
-	 * Gets the current reading of the sensor. This is an {@code Object} because the actual return
-	 * type is specific to the type of sensor.
-	 * 
+	 * Gets the current reading of the sensor. This is an {@code Object} because the actual
+	 * return type is specific to the type of sensor.
+	 *
 	 * @return the current reading of the sensor.
 	 */
 	public Object getReadValue();
-	
+
 	/**
-	 * Gets a string representation of the current reading of this sensor. In most cases, this should
-	 * simply be the result of {@code .toString()} on the object returned by {@link #getReadValue()}.
-	 * 
+	 * Gets a string representation of the current reading of this sensor. In most cases,
+	 * this should simply be the result of {@code .toString()} on the object returned by
+	 * {@link #getReadValue()}.
+	 *
 	 * @return a string representation of the current reading of this sensor.
 	 * @see #getReadValue()
 	 */
-	/* (non-Javadoc)
-	 * If we ever are able to transition this code to use Java 8 or later, this method should be a
-	 * default method that just calls toString() on the object returned by this.getValue().
+	/*
+	 * (non-Javadoc) If we ever are able to transition this code to use Java 8 or later,
+	 * this method should be a default method that just calls toString() on the object
+	 * returned by this.getValue().
 	 */
 	public String getStringValue();
-	
+
 	/**
 	 * Gets the type of the sensor.
-	 * 
+	 *
 	 * @return the type of the sensor.
 	 * @see SensorType
 	 */

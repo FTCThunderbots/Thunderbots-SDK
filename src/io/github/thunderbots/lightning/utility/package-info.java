@@ -14,32 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.lightning.sensor;
-
 /**
- * {@code SensorType} enumerates the possible types of sensors or abstract I/O devices that
- * are supported by the SDK.
- *
- * @author Zach Ohara
+ * Provides utility classes. These classes should be non-instantiable, and contain static methods
+ * grouped logically.
  */
-public enum SensorType {
-
-	// Explicit sensor types
-	ACCELERATION,
-	COLOR,
-	COMPASS,
-	GYRO,
-	IR_SEEKER,
-	LIGHT,
-	OPTICAL_DISTANCE,
-	TOUCH,
-	ULTRASONIC,
-	VOLTAGE,
-
-	// Abstract I/O types
-	ANALOG_INPUT,
-	ANALOG_OUTPUT,
-	DIGITAL_CHANNEL,
-	I2C_DEVICE,
-
-}
+package io.github.thunderbots.lightning.utility;

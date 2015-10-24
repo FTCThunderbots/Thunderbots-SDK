@@ -19,9 +19,11 @@ package io.github.thunderbots.lightning.control;
 import java.util.LinkedList;
 import java.util.List;
 
+import io.github.thunderbots.lightning.utility.MathUtil;
+
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import io.github.thunderbots.lightning.utility.MathUtil;
+
 
 /**
  * A {@code Joystick} object represents one of the physical game controllers that are
@@ -32,7 +34,7 @@ import io.github.thunderbots.lightning.utility.MathUtil;
 public class Joystick {
 
 	/**
-	 * The {@code Gamepad} that this object should recieve information from.
+	 * The {@code Gamepad} that this object should receive information from.
 	 *
 	 * @see com.qualcomm.robotcore.hardware.Gamepad
 	 */
@@ -98,7 +100,7 @@ public class Joystick {
 	 * the minimum and the maximum, even though any value less than the threshold will be
 	 * reported as zero.
 	 *
-	 * @param raw the raw input value from the joystick, between the threshhold and maximum
+	 * @param raw the raw input value from the joystick, between the threshold and maximum
 	 * positions.
 	 * @return the corresponding value between the minimum and maximum positions.
 	 */

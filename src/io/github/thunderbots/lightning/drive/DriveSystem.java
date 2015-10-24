@@ -44,7 +44,7 @@ public abstract class DriveSystem {
 	}
 
 	/**
-	 * Constructs a enw {@code DriveSystem} that uses the motors with the given names.
+	 * Constructs a new {@code DriveSystem} that uses the motors with the given names.
 	 *
 	 * @param motornames the names of the motors to use with this drive system.
 	 */
@@ -156,7 +156,7 @@ public abstract class DriveSystem {
 	 * Waits the given amount of time, then stops the robot.
 	 *
 	 * @param seconds the time to wait before stopping the robot.
-	 * @return {@code true} if no interrupt excpetion was thrown during the wait.
+	 * @return {@code true} if no interrupt exception was thrown during the wait.
 	 */
 	public boolean waitAndStop(double seconds) {
 		boolean uninterrupted = true;

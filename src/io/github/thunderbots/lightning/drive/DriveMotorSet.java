@@ -16,8 +16,6 @@
 
 package io.github.thunderbots.lightning.drive;
 
-import java.util.Arrays;
-
 import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.hardware.Motor;
 
@@ -56,7 +54,6 @@ public class DriveMotorSet {
 	 * @param powers the power values to assign to the corresponding motors.
 	 */
 	public void setMotorPowers(double[] powers) {
-		Lightning.sendTelemetryData("Motors", Arrays.toString(powers));
 		int motorSet = Math.min(powers.length, this.motors.length);
 		for (int i = 0; i < motorSet; i++) {
 			this.motors[i].setPower(powers[i]);

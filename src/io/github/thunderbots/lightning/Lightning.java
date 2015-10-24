@@ -16,13 +16,6 @@
 
 package io.github.thunderbots.lightning;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
-import com.qualcomm.robotcore.robocol.Telemetry;
-
 import io.github.thunderbots.lightning.control.Joystick;
 import io.github.thunderbots.lightning.control.JoystickMonitor;
 import io.github.thunderbots.lightning.hardware.CRServo;
@@ -31,14 +24,22 @@ import io.github.thunderbots.lightning.hardware.Servo;
 import io.github.thunderbots.lightning.opmode.LightningOpMode;
 import io.github.thunderbots.lightning.scheduler.TaskScheduler;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
+import com.qualcomm.robotcore.robocol.Telemetry;
+
 /**
  * The {@code Lightning} class exposes methods for general interfacing with the hardware on
  * the physical robot. The static methods in the class can be used for things such as
  * accessing the joysticks, and getting hardware objects.
  *
  * @author Zach Ohara
+ * @author Pranav Mathur
  */
-public class Lightning {
+public final class Lightning {
 
 	/**
 	 * The op mode to get joystick information from.
@@ -80,6 +81,10 @@ public class Lightning {
 		Lightning.taskScheduler = new TaskScheduler();
 		Lightning.monitor1 = new JoystickMonitor(1);
 		Lightning.monitor2 = new JoystickMonitor(2);
+	}
+
+	private Lightning() {
+
 	}
 
 	/**
@@ -135,10 +140,10 @@ public class Lightning {
 	}
 
 	/**
-	 * Gets a reference to the motor with the given name. If there is no motor with the given
-	 * name, but there is a servo with the given name, the servo is assumed to be a
-	 * continuous-rotation servo, and a {@link io.github.thunderbots.hardware.CRServo CRServo}
-	 * object representing that servo is returned.
+	 * Gets a reference to the motor with the given name. If there is no motor with the
+	 * given name, but there is a servo with the given name, the servo is assumed to be a
+	 * continuous-rotation servo, and a {@link io.github.thunderbots.hardware.CRServo
+	 * CRServo} object representing that servo is returned.
 	 *
 	 * @param name the name of the motor.
 	 * @return the motor with the given name.
@@ -147,7 +152,7 @@ public class Lightning {
 		try {
 			return new Motor(Lightning.robotHardware.dcMotor.get(name));
 		} catch (Exception e) {
-			//TODO: find out which specific type of exception we should expect here.
+			// TODO: find out which specific type of exception we should expect here.
 			return new CRServo(new Servo(Lightning.robotHardware.servo.get(name)));
 		}
 	}
@@ -160,33 +165,6 @@ public class Lightning {
 	 */
 	public static Servo getServo(String name) {
 		return new Servo(Lightning.robotHardware.servo.get(name));
-	}
-
-	/**
-	 * Gets a reference to any sensor on the robot with the given name. The sensor will
-	 * need to be type-cast to the expected type of sensor before it can be used in any
-	 * meaningful way.
-	 *
-	 * @param name the name of the sensor.
-	 * @return the sensor with the given name.
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T getSensor(String name) {
-		for (DeviceMapping<?> map : Lightning.sensorMaps) {
-			try {
-				Object o = map.get(name);
-				try {
-					return (T) o;
-				}
-				catch (ClassCastException ex) {
-					Lightning.sendTelemetryData("Sensor: " + name + " not found");
-					
-				}
-			} catch (IllegalArgumentException ignore) {
-				
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -220,6 +198,26 @@ public class Lightning {
 	}
 
 	/**
+	 * Sends motor data from the robot controller to the driver station
+	 *
+	 * @param m the motor to be sent
+	 * @see #sendTelemetryData(String, Object)
+	 */
+	public static void sendTelemetryData(Motor m) {
+		Lightning.sendTelemetryData(m.getName() + ": ", m.getPower());
+	}
+
+	/**
+	 * Sends servo data from the robot controller to the driver station
+	 *
+	 * @param s the servo to be sent
+	 * @see #sendTelemetryData(String, Object)
+	 */
+	public static void sendTelemetryData(Servo s) {
+		Lightning.sendTelemetryData(s.getName() + ": ", s.getPosition());
+	}
+
+	/**
 	 * Given a {@code HardwareMap}, return a list of {@code DeviceMapping}s that could lead
 	 * to sensors.
 	 *
@@ -231,6 +229,7 @@ public class Lightning {
 		sensorMaps.add(map.accelerationSensor);
 		sensorMaps.add(map.analogInput);
 		sensorMaps.add(map.analogOutput);
+		sensorMaps.add(map.colorSensor);
 		sensorMaps.add(map.compassSensor);
 		sensorMaps.add(map.digitalChannel);
 		sensorMaps.add(map.gyroSensor);
@@ -242,6 +241,22 @@ public class Lightning {
 		sensorMaps.add(map.ultrasonicSensor);
 		sensorMaps.add(map.voltageSensor);
 		return sensorMaps;
+	}
+
+	/**
+	 * Gets a reference to any sensor on the robot with the given name.
+	 *
+	 * @param name the name of the sensor.
+	 * @return the sensor with the given name.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T getSensor(String name) {
+		for (DeviceMapping<?> m : Lightning.sensorMaps) {
+			if (m.entrySet().contains(name)) {
+				return (T) m.get(name);
+			}
+		}
+		return null;
 	}
 
 }
