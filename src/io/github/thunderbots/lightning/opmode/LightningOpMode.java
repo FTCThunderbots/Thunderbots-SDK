@@ -52,7 +52,7 @@ public abstract class LightningOpMode extends LinearOpMode {
 
 	@Override
 	public final void runOpMode() throws InterruptedException {
-		Lightning.initialize(this);
+		Lightning.initializeLightning(this);
 		this.initializeRobot();
 		this.waitForStart();
 		this.main();
