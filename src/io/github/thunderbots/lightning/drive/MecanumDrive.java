@@ -27,11 +27,6 @@ import io.github.thunderbots.lightning.hardware.Motor;
 public class MecanumDrive extends DriveSystem {
 
 	/**
-	 * Passed to DriveMotorSet.setMotorPowers
-	 */
-	private double[] motorPowers;
-
-	/**
 	 * Constructs a new {@code MecanumDrive} with the given {@code DriveMotorSet} as a
 	 * base.
 	 *
@@ -179,12 +174,13 @@ public class MecanumDrive extends DriveSystem {
 			backLeft /= scale;
 			backRight /= scale;
 		}
-
-		this.motorPowers[0] = frontLeft;
-		this.motorPowers[1] = frontRight;
-		this.motorPowers[2] = backLeft;
-		this.motorPowers[3] = backRight;
-		this.getWheelSet().setMotorPowers(this.motorPowers);
+		
+		double[] motorPowers = new double[4];
+		motorPowers[0] = frontLeft;
+		motorPowers[1] = frontRight;
+		motorPowers[2] = backLeft;
+		motorPowers[3] = backRight;
+		this.getWheelSet().setMotorPowers(motorPowers);
 
 		return true;
 	}
