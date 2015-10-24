@@ -43,7 +43,7 @@ public abstract class TeleOp extends SimpleOpMode {
 	 */
 	protected void setMovement() {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
-		this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
+		this.getRobot().getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
 	}
 
 	/**
