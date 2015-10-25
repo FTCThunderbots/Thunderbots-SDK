@@ -26,6 +26,25 @@ import io.github.thunderbots.lightning.drive.DriveSystem;
  */
 public abstract class Robot {
 	
+	/**
+	 * Gets an array of Strings representing the names of the motors used for driving.
+	 * <p>
+	 * If the robot has four motors, this array should be in the format of:
+	 *
+	 * <pre>
+	 *  [front left, front right, back left, back right]
+	 * </pre>
+	 *
+	 * If the robot has only two motors, this array should be in the format of:
+	 *
+	 * <pre>
+	 *  [left, right]
+	 * </pre>
+	 *
+	 * @return the names of the driving motors.
+	 */
+	public abstract String[] getDriveMotorNames();
+	
 	private DriveSystem drive;
 
 	/**

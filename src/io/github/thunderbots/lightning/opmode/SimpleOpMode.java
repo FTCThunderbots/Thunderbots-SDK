@@ -29,25 +29,6 @@ import io.github.thunderbots.lightning.robot.Robot;
  * @author Zach Ohara
  */
 public abstract class SimpleOpMode extends LightningOpMode {
-
-	/**
-	 * Gets an array of Strings representing the names of the motors used for driving.
-	 * <p>
-	 * If the robot has four motors, this array should be in the format of:
-	 *
-	 * <pre>
-	 *  [front left, front right, back left, back right]
-	 * </pre>
-	 *
-	 * If the robot has only two motors, this array should be in the format of:
-	 *
-	 * <pre>
-	 *  [left, right]
-	 * </pre>
-	 *
-	 * @return the names of the driving motors.
-	 */
-	protected abstract String[] getDriveMotorNames();
 	
 	/**
 	 * The robot that this OpMode is designed for.
@@ -73,7 +54,7 @@ public abstract class SimpleOpMode extends LightningOpMode {
 	 * @return a constructed {@code DriveSystem} that is specific to this robot or op mode.
 	 */
 	protected DriveSystem createDriveSystem() {
-		return new TankDrive(this.getDriveMotorNames());
+		return new TankDrive(this.getRobot().getDriveMotorNames());
 	}
 
 }
