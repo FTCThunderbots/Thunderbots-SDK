@@ -399,7 +399,7 @@ public class Joystick {
 	 *
 	 * @return the buttons currently pressed on the joystick.
 	 */
-	public List<JoystickButton> toButtonArray() {
+	public List<JoystickButton> toButtonList() {
 		List<JoystickButton> pressedButtons = new LinkedList<JoystickButton>();
 		if (this.aButton()) {
 			pressedButtons.add(JoystickButton.A);
