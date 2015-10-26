@@ -1,20 +1,42 @@
 # To-do List for the Lightning SDK
 
-### Timeline for development:
-* Add a more robust telemetry logging system
-* Detect if there is an encoder attached to a motor (4 weeks)
-* Change the op mode hiding functionality to the decorator. (4 weeks)
-* Make SimpleOpMode more interoperable with a `Robot`. (2 weeks)
+### Cleanup
+* Change the op mode hiding functionality to the `OpMode` decorator
+* Better divide functionality of `SimpleOpMode` and `Robot`
 
-#### Task Scheduler
-* Test the task scheduler (`io.github.thunderbots.testing.TaskSchedulerTest.java`)
-* Implement a `remove(Runnable)` method
-* Test the remove method
+#### App Improvements
+* Support the `OpMode` annotation
+* Add categories for op modes
+* Add manual controls
+
+#### Documentation
+* Update all javadoc
+* Remove unnecessarily commented code
+* Remove unnecessary `{@inheritDoc}` tags
+* Write better package-info files
+* Update the gh-pages branch
+
+#### Encoders
+* Test encoder functionality
+* Implement an 'average' encoder value method in `DriveMotorSet` or `DriveSystem`
 
 #### Event-Based Joystick Input
-* Merge master into the joystick branch
+* ~~Merge master into the joystick branch~~
 * Write a test program
 * Run the test program
+
+#### Hardware
+* Write a test program for a Servo
+* Write a test program for a CRServo
+* Write a test program for a Motor
+* Test the CRServo code
+* __[Uncertain]__ Write and test code to detect if a servo is attached to a motor
+
+#### More Control Schemes
+* Make a branch for this
+* Add an abstract control scheme class
+* Rewrite the default controls in `TeleOp` to use the control scheme system
+* Implement other control schemes in the new system (tank, mecanum, drive/spin, video game, etc.)
 
 #### PID Control
 * Write a generic PID control system
@@ -26,13 +48,16 @@
 * Make `Lightning.getSensor()` return a wrapper
 * _Add more things here???_
 
-#### More Control Schemes
-* Make a branch for this
-* Add an abstract control scheme class
-* Rewrite the default controls in `TeleOp` to use the control scheme system
-* Implement other control schemes in the new system (tank, mecanum, drive/spin, video game, etc.)
+#### Scripting
+* Make a script that compiles all necessary code and copies it to the phone
+* Make a script that auto-updates the gh-pages branch with javadoc changes
+* Make a script that auto-corrects style errors on a fixed interval
 
-#### App Improvements
-* Support the `OpMode` annotation
-* Add categories for op modes
+#### Task Scheduler
+* Test the task scheduler (`io.github.thunderbots.testing.TaskSchedulerTest.java`)
+* Implement a `remove(Runnable)` method
+* Test the remove method
 
+#### Telemetry
+* Remove overloads of `Lightning.sendTelemetryData()` and make the `Object` implementation check if the object is an instance of the other parameters
+* __[Uncertain]__ Write a more robust telemetry system

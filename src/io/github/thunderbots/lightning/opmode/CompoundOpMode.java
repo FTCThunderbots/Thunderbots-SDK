@@ -53,9 +53,9 @@ public class CompoundOpMode extends LightningOpMode {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void initializeRobot() {
+	protected void initializeOpMode() {
 		for (LightningOpMode opmode : this.opmodes) {
-			opmode.initializeRobot();
+			opmode.initializeOpMode();
 		}
 	}
 

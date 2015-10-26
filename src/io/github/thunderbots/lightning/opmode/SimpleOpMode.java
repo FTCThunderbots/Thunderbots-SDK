@@ -70,7 +70,7 @@ public abstract class SimpleOpMode extends LightningOpMode {
 	}
 
 	@Override
-	protected void initializeRobot() {
+	protected void initializeOpMode() {
 		this.drive = this.createDriveSystem();
 	}
 
