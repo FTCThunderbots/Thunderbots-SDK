@@ -39,6 +39,11 @@ public enum JoystickButton {
 	RIGHT_X_NEG,
 	RIGHT_X_POS,
 	RIGHT_Y_NEG,
-	RIGHT_Y_POS,
+	RIGHT_Y_POS;
+	
+	@Override
+	public String toString() {
+		return this.name();
+	}
 
 }
