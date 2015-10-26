@@ -17,6 +17,7 @@
 package io.github.thunderbots.lightning.robot;
 
 import io.github.thunderbots.lightning.drive.DriveSystem;
+import io.github.thunderbots.lightning.drive.TankDrive;
 
 /**
  * {@code Robot} is an abstract class that should be extended by any class representing a
@@ -25,6 +26,10 @@ import io.github.thunderbots.lightning.drive.DriveSystem;
  * @author Pranav Mathur
  */
 public abstract class Robot {
+	
+	public Robot() {
+		this.createDriveSystem();
+	}
 	
 	/**
 	 * Gets an array of Strings representing the names of the motors used for driving.
@@ -43,7 +48,7 @@ public abstract class Robot {
 	 *
 	 * @return the names of the driving motors.
 	 */
-	public abstract String[] getDriveMotorNames();
+	protected abstract String[] getDriveMotorNames();
 	
 	private DriveSystem drive;
 
@@ -61,6 +66,16 @@ public abstract class Robot {
 	 */
 	public DriveSystem getDrive() {
 		return this.drive;
+	}
+
+	/**
+	 * Constructs a DriveSystem that the robot should use. TankDrive is assumed by default,
+	 * but this can be changed on an individual basis by overriding this method.
+	 *
+	 * @return a constructed {@code DriveSystem} that is specific to this robot or op mode.
+	 */
+	public DriveSystem createDriveSystem() {
+		return new TankDrive(this.getDriveMotorNames());
 	}
 
 }
