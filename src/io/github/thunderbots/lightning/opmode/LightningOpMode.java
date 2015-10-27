@@ -42,7 +42,7 @@ public abstract class LightningOpMode extends LinearOpMode {
 	 * Initializes the robot. This can be defined however it is seen fit by the specific
 	 * overriding op mode.
 	 */
-	protected abstract void initializeLightning();
+	protected abstract void initializeOpMode();
 
 	/**
 	 * Executes the 'main procedure' of the op mode. This method will run either until
@@ -52,8 +52,8 @@ public abstract class LightningOpMode extends LinearOpMode {
 
 	@Override
 	public final void runOpMode() throws InterruptedException {
-		Lightning.initialize(this);
-		this.initializeLightning();
+		Lightning.initializeLightning(this);
+		this.initializeOpMode();
 		this.waitForStart();
 		this.main();
 	}
