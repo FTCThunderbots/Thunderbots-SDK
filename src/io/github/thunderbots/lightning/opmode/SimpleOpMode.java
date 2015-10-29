@@ -29,9 +29,22 @@ import io.github.thunderbots.lightning.robot.Robot;
 public abstract class SimpleOpMode extends LightningOpMode {
 	
 	/**
-	 * The robot that this OpMode is designed for.
+	 * The robot that this op mode will run on
 	 */
 	private Robot robot;
+	
+	/**
+	 * Constructs the {@code Robot} for this op mode. The exact subtype of robot
+	 * that is returned by this method is specific to the individual op mode.
+	 *
+	 * @return the {@code Robot} for this op mode.
+	 */
+	protected abstract Robot createRobot();
+	
+	@Override
+	protected void initializeOpMode() {
+		this.robot = this.createRobot();
+	}
 	
 	/**
 	 * Get a reference to this OpMode's robot
@@ -39,10 +52,6 @@ public abstract class SimpleOpMode extends LightningOpMode {
 	 */
 	protected Robot getRobot() {
 		return this.robot;
-	}
-	
-	protected void setRobot(Robot robot) {
-		this.robot = robot;
 	}
 
 }
