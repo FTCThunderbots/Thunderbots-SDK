@@ -28,7 +28,7 @@ import io.github.thunderbots.lightning.drive.TankDrive;
 public abstract class Robot {
 	
 	public Robot() {
-		this.createDriveSystem();
+		this.drive = this.createDriveSystem();
 	}
 	
 	/**
