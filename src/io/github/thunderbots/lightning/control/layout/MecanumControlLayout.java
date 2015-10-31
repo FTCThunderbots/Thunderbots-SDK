@@ -16,6 +16,6 @@
 
 package io.github.thunderbots.lightning.control.layout;
 
-public class MecanumControl {
+public class MecanumControlLayout {
 
 }

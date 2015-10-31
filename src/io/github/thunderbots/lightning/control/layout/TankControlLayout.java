@@ -34,7 +34,7 @@ import io.github.thunderbots.lightning.utility.MathUtil;
  * and the clockwise power is calculated as the difference between the y-values of the two
  * thumbsticks.
  */
-public class TankControl {
+public class TankControlLayout {
 	
 	/**
 	 * Returns the motion of the robot when in Tank mode
