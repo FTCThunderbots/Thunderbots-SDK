@@ -14,15 +14,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package io.github.thunderbots.lightning.control;
+import io.github.thunderbots.lightning.control.Joystick;
+import io.github.thunderbots.lightning.drive.DriveSystem;
+import io.github.thunderbots.lightning.drive.MecanumDrive;
+import io.github.thunderbots.lightning.drive.TankDrive;
+import io.github.thunderbots.lightning.opmode.TeleOp;
+import io.github.thunderbots.lightning.opmode.LightningOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import io.github.thunderbots.lightning.opmode.SimpleOpMode;
 
 /*
- * To be documented 
- * 
- * 
- * 
- * @author Jake Ohara
+ * @author Jake Ohara and Sean Knight
  */
 
-public abstract class ControlSchemes {
+/*Overview of the code:
+Tank Control:
+If the rightstickY and leftstickY is above 0 then it's moving foward
+If rightstickY and leftstickY is below then it moves backwards
+If rightstickY > leftstickY then it moves left
+If rightstickY < leftstickY then it moves right
+Then calculate the magnitude
 
+Mecanum Control:
+Describe here
+
+Add joystick control from Teleop, or just extend Teleop
+
+ */
+
+public abstract class ControlSchemes /*extends TeleOp*/{
+    /*
+    What we're trying to accomplish with ControlSchemes:
+    We want a control system that works in ControlScheme instead of making the control scheme in TeleOp
+     */
 }
