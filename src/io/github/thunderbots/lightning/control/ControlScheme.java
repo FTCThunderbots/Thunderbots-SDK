@@ -22,4 +22,22 @@ package io.github.thunderbots.lightning.control;
  */
 public interface ControlScheme {
 	
+	/**
+	 * Gets the forward power that should be sent to the robot based on the current
+	 * state of the given joystick.
+	 *
+	 * @param joy the joystick to use for power calculations.
+	 * @return the forward drive power of the robot.
+	 */
+	public double getForwardPower(Joystick joy);
+	
+	/**
+	 * Gets the clockwise power that should be sent to the robot based on the current
+	 * state of the given joystick.
+	 *
+	 * @param joy the joystick to use for power calculations.
+	 * @return the clockwise drive power of the robot.
+	 */
+	public double getClockwisePower(Joystick joy);
+	
 }
