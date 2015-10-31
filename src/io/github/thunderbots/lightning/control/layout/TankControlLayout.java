@@ -31,6 +31,8 @@ import io.github.thunderbots.lightning.control.Joystick;
  * the drive system. The forward power is calculated as the average of the two y-values,
  * and the clockwise power is calculated as the difference between the y-values of the two
  * thumbsticks.
+ * 
+ * @author Zach Ohara
  */
 public class TankControlLayout implements ControlLayout {
 
