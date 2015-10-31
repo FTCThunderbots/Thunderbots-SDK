@@ -31,8 +31,7 @@ import io.github.thunderbots.lightning.control.Joystick;
  * the state of the joystick into the forward and clockwise powers that are accepted by
  * {@code DriveSystem}.
  * 
- * @author Jake Ohara
- * @author Sean Knight
+ * @author Zach Ohara
  */
 public interface ControlLayout {
 	
