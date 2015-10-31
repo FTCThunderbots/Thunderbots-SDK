@@ -36,13 +36,16 @@ If rightstickY < leftstickY then it moves right
 Then calculate the magnitude
 
 Mecanum Control:
-Describe here
+If rightstickY > 0 then move foward
+If rightstickY < 0 then move backwards
+If leftstickX > 0 then move right
+If leftstickX < 0 then move left
 
 Add joystick control from Teleop, or just extend Teleop
 
  */
 
-public abstract class ControlSchemes /*extends TeleOp*/{
+public abstract class ControlSchemes {
     /*
     What we're trying to accomplish with ControlSchemes:
     We want a control system that works in ControlScheme instead of making the control scheme in TeleOp
