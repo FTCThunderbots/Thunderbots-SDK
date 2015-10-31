@@ -4,32 +4,20 @@ import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.control.Joystick;
 import io.github.thunderbots.lightning.utility.MathUtil;
 
-
-
-/*
- * Tank Control:
- * If the rightstickY and leftstickY is above 0 then it's moving foward
- * If rightstickY and leftstickY is below then it moves backwards
- * If rightstickY > leftstickY then it moves left
- * If rightstickY < leftstickY then it moves right
- * Then calculate the magnitude
- */
-
-
 /**
- *
- * TankControl will input controls from the Joystick class and if the right stick and left stick 
- * are pointed foward, then the robot will move foward.
- * 
- * If both are pointed backwards, then it moves backwards.
- * 
- * If they are pointed in different directions then it will turn
- * 
- * @author Sean Knight
- * @author Jake Ohara
+ * A {@code TankControlLayout} is a {@code ControlLayout} that represents a tank-like
+ * control system. In a tank control system, the y-axis of the left thumbstick is used
+ * to control the forward/backward power of the left side of the robot, and the right
+ * thumbstick is used to control the forward/backward power of the right side of the
+ * robot.
+ * <p>
+ * Since the movement methods of {@link io.github.thunderbots.lightning.drive.DriveSystem
+ * DriveSystem} accept only a single forward vector and a single clockwise vector, some
+ * math is required to convert the relevant joystick inputs to a form that can be used by
+ * the drive system. The forward power is calculated as the average of the two y-values,
+ * and the clockwise power is calculated as the difference between the y-values of the two
+ * thumbsticks.
  */
-
-
 public class TankControl {
 	
 	/**
