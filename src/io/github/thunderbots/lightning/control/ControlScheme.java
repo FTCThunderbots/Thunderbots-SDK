@@ -17,6 +17,18 @@
 package io.github.thunderbots.lightning.control;
 
 /**
+ * The {@code ControlScheme} interface should be implemented by anything that represents
+ * a joystick control layout. The responsibility of any control scheme is to convert a
+ * joystick state into a forward power and a clockwise power, which are accepted by
+ * movement methods in {@link io.github.thunderbots.lightning.drive.DriveSystem DriveSystem}.
+ * <p>
+ * For example, possibly the most common drive system used in FTC robots is a drive-spin system.
+ * In this scheme, the y-axis of the left thumbstick controls the forward/backward power of the
+ * robot, and the x-axis of the right thumbstick control the clockwise/counter-clockwise spin
+ * of the robot. This is potentially the simplest system, because no math is required to convert
+ * the state of the joystick into the forward and clockwise powers that are accepted by
+ * {@code DriveSystem}.
+ * 
  * @author Jake Ohara
  * @author Sean Knight
  */
