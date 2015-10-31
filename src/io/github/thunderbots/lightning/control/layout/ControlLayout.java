@@ -14,7 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.lightning.control;
+package io.github.thunderbots.lightning.control.layout;
+
+import io.github.thunderbots.lightning.control.Joystick;
 
 /**
  * The {@code ControlLayout} interface should be implemented by anything that represents

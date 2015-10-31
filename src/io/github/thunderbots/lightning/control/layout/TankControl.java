@@ -1,4 +1,4 @@
-package io.github.thunderbots.lightning.control;
+package io.github.thunderbots.lightning.control.layout;
 
 import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.control.Joystick;
