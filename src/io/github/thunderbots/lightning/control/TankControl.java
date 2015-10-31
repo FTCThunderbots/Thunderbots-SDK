@@ -2,7 +2,7 @@ package io.github.thunderbots.lightning.control;
 
 import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.control.Joystick;
-
+import io.github.thunderbots.lightning.utility.MathUtil;
 
 
 
@@ -31,8 +31,31 @@ import io.github.thunderbots.lightning.control.Joystick;
 
 
 public class TankControl {
+	
+	/**
+	 * Returns the motion of the robot when in Tank mode
+	*/
+	
 	protected void tankMovement() {
+		
+		/**
+		 * Gets drivingGamepad from Joystick
+		 */
+		
 		Joystick drivingGamepad = Lightning.getJoystick(1);
-		if ()
+		
+		/**
+		 * Returns the motion and magnitude of that motion when rightStickY and leftStickY is greater than 0
+		 * 
+		 * MathUtil.average finds the average of the Y values of the sticks.
+		 * This will be used as the magnitude of 
+		 */
+		
+		if (drivingGamepad.rightStickY() > 0 && drivingGamepad.leftStickY() > 0) {
+			//forward power is average is both of them 
+			double average = MathUtil.average(drivingGamepad.rightStickY(), drivingGamepad.leftStickY());
+			return;
+			
+		}
 	}
 }

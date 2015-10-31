@@ -79,5 +79,17 @@ public final class MathUtil {
 			return num;
 		}
 	}
+	/**
+	 * 
+	 * @param num number one that will be averaged
+	 * @param num1 number two that will be averaged
+	 * @return the average number
+	 */
+	
+	public static double average(double num, double num1) {
+		double add = num + num1;
+		double average = add / 2;
+		return average; 
+	}
 
 }
