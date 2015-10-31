@@ -16,6 +16,14 @@
 
 package io.github.thunderbots.lightning.control.layout;
 
+/**
+ * A {@code MecanumControlLayout} is a {@code ControlLayout} that can control a robot with
+ * a mecanum drive system. There is no 'standard' accepted way to control a mecanum drive
+ * system, but in this implementation, the y-axis of the left thumbstick is responsible
+ * for forward/backward movement, the x-axis of the left thumbstick is responsible for
+ * left/right strafing movement, and the x-axis of the right thumbstick controls
+ * clockwise/counter-clockwise rotation of the robot.
+ */
 public class MecanumControlLayout {
 
 }
