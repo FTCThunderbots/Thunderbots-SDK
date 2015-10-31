@@ -17,8 +17,8 @@
 package io.github.thunderbots.lightning.control;
 
 /**
- * The {@code ControlScheme} interface should be implemented by anything that represents
- * a joystick control layout. The responsibility of any control scheme is to convert a
+ * The {@code ControlLayout} interface should be implemented by anything that represents
+ * a joystick control layout. The responsibility of any control layout is to convert a
  * joystick state into a forward power and a clockwise power, which are accepted by
  * movement methods in {@link io.github.thunderbots.lightning.drive.DriveSystem DriveSystem}.
  * <p>
@@ -32,7 +32,7 @@ package io.github.thunderbots.lightning.control;
  * @author Jake Ohara
  * @author Sean Knight
  */
-public interface ControlScheme {
+public interface ControlLayout {
 	
 	/**
 	 * Gets the forward power that should be sent to the robot based on the current
