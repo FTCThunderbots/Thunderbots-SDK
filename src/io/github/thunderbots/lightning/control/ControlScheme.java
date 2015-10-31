@@ -20,6 +20,6 @@ package io.github.thunderbots.lightning.control;
  * @author Jake Ohara
  * @author Sean Knight
  */
-public interface ControlSchemes {
+public interface ControlScheme {
 	
 }
