@@ -77,12 +77,6 @@ public final class Lightning {
 	private static JoystickMonitor monitor1;
 	private static JoystickMonitor monitor2;
 
-	static {
-		Lightning.taskScheduler = new TaskScheduler();
-		Lightning.monitor1 = new JoystickMonitor(1);
-		Lightning.monitor2 = new JoystickMonitor(2);
-	}
-
 	private Lightning() {
 
 	}
@@ -98,6 +92,9 @@ public final class Lightning {
 		Lightning.robotHardware = opmode.hardwareMap;
 		Lightning.robotTelemetry = opmode.telemetry;
 		Lightning.sensorMaps = Lightning.getSensorMaps(Lightning.robotHardware);
+		Lightning.taskScheduler = new TaskScheduler();
+		Lightning.monitor1 = new JoystickMonitor(1);
+		Lightning.monitor2 = new JoystickMonitor(2);
 	}
 
 	/**
