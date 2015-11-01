@@ -115,7 +115,7 @@ public final class Lightning {
 			case 2:
 				return new Joystick(Lightning.opmode.gamepad2);
 			default:
-				return null;
+				throw new IllegalArgumentException();
 		}
 	}
 
