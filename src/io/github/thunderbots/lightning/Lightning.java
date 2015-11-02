@@ -73,10 +73,6 @@ public final class Lightning {
 	 */
 	private static TaskScheduler taskScheduler;
 
-	static {
-		Lightning.taskScheduler = new TaskScheduler();
-	}
-
 	private Lightning() {
 
 	}
@@ -92,6 +88,7 @@ public final class Lightning {
 		Lightning.robotHardware = opmode.hardwareMap;
 		Lightning.robotTelemetry = opmode.telemetry;
 		Lightning.sensorMaps = Lightning.getSensorMaps(Lightning.robotHardware);
+		Lightning.taskScheduler = new TaskScheduler();
 	}
 
 	/**
@@ -118,7 +115,7 @@ public final class Lightning {
 			case 2:
 				return new Joystick(Lightning.opmode.gamepad2);
 			default:
-				return null;
+				throw new IllegalArgumentException();
 		}
 	}
 
