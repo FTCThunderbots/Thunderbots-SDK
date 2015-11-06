@@ -40,9 +40,12 @@ public abstract class LightningOpMode extends LinearOpMode {
 
 	/**
 	 * Initializes the robot. This can be defined however it is seen fit by the specific
-	 * overriding op mode.
+	 * overriding op mode. Any op mode that overrides this method should also call
+	 * {@code super.initializeOpMode()} on the first line.
 	 */
-	protected abstract void initializeOpMode();
+	protected void initializeOpMode() {
+		
+	}
 
 	/**
 	 * Executes the 'main procedure' of the op mode. This method will run either until
