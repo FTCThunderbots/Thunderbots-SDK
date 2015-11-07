@@ -14,30 +14,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.lightning.drive;
+package io.github.thunderbots.lightning.hardware;
 
 import io.github.thunderbots.lightning.Lightning;
-import io.github.thunderbots.lightning.hardware.Motor;
 
 /**
- * A {@code DriveMotorSet} is a collection of motors used for the sole purpose of driving
- * the robot.
+ * A {@code MotorSet} is a collection of motors that should move in unison. The most common
+ * use for this functionality is in a drive system, because all the motors of a drive system
+ * move together.
+ * <p>
+ * It is <b> not </b> required that all of the motors in a motor set move <em> exactly </em>
+ * in usison. In some cases, this would be catastrophic. In the case of a drive system, the
+ * robot would only be able to spin clockwise or counterclockwise. Instead, a motor set
+ * comprises motors that should be controlled together, even if they should be given
+ * different individual powers.
  *
  * @author Zach Ohara
  */
-public class DriveMotorSet {
+public class MotorSet {
 
 	/**
-	 * The array of motors that this {@code DriveMotorSet} comprises.
+	 * The array of motors that this {@code MotorSet} comprises.
 	 */
 	private Motor[] motors;
 
 	/**
-	 * Constructs a new {@code DriveMotorSet} using the motors with the given names.
+	 * Constructs a new {@code MotorSet} using the motors with the given names.
 	 *
 	 * @param names the names of all the motors to use with this motor set.
 	 */
-	public DriveMotorSet(String[] names) {
+	public MotorSet(String[] names) {
 		this.motors = new Motor[names.length];
 		for (int i = 0; i < names.length; i++) {
 			this.motors[i] = Lightning.getMotor(names[i]);
@@ -45,7 +51,7 @@ public class DriveMotorSet {
 	}
 	
 	/**
-	 * Gets the array of motors that this {@code DriveMotorSet} comprises.
+	 * Gets the array of motors that this {@code MotorSet} comprises.
 	 * 
 	 * @return an array of motors.
 	 */
@@ -58,7 +64,7 @@ public class DriveMotorSet {
 	 * the given double array. For example, the motor at {@code motors[n]} will be assigned
 	 * the power value at {@code powers[n]}. If the lengths of {@code motors} and
 	 * {@code powers} are mismatched, then all the available pairs will be matched, and the
-	 * extra values will be discarded.
+	 * extra values in either array will be discarded.
 	 *
 	 * @param powers the power values to assign to the corresponding motors.
 	 */
