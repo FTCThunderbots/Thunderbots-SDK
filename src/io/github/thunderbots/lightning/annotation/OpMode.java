@@ -21,9 +21,9 @@ import java.lang.annotation.Documented;
 /**
  * The {@code OpMode} annotation should be added to all op modes that appear in the op mode
  * list. It details information about the type of op mode, such as "teleop" or
- * "autonomous", or anything else that the client class may define. This information is not
- * currently used. It also includes the name of the op mode, and this name will eventually
- * be used to present the op mode in the list.
+ * "autonomous", the canonical name of the op mode, or anything else that the client class
+ * may define. This information is not currently used, but will eventually be used to better
+ * categorize the op modes when they are presented in a menu.
  *
  * @author Pranav Mathur
  */
@@ -32,8 +32,8 @@ public @interface OpMode {
 
 	/**
 	 * Gets the 'type' of the op mode. This can be "teleop" or "autonomous", or even any
-	 * custom category defined by the client code. This is currently not used by the
-	 * backend in any way, but a use for this may be implemented later.
+	 * custom category defined by the client code. This will be used to categorize different
+	 * types of op modes into sub-menus.
 	 *
 	 * @return the type of the op mode.
 	 */
