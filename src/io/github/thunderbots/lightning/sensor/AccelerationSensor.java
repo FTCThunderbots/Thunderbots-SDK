@@ -55,6 +55,8 @@ public class AccelerationSensor extends com.qualcomm.robotcore.hardware.Accelera
 	 * {@link #getReadValue()}.
 	 * 
 	 * @return the string value of the current acceleration
+	 * 
+	 * Calls on toString method
 	 */
 
 	@Override
