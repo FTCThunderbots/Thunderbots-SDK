@@ -5,6 +5,7 @@
 * ~~Better divide functionality of `SimpleOpMode` and `Robot`~~
 
 #### App Improvements
+* New app logo
 * Support the `OpMode` annotation
 * Add categories for op modes
 * Add manual controls
@@ -60,7 +61,7 @@
 * Make a script that auto-corrects style errors on a fixed interval
 
 #### Task Scheduler
-* Test the task scheduler (`io.github.thunderbots.testing.TaskSchedulerTest.java`)
+* ~~Test the task scheduler~~
 * Implement a `remove(Runnable)` method
 * Test the remove method
 
