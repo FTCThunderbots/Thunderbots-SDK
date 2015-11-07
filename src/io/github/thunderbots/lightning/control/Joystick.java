@@ -45,18 +45,18 @@ public class Joystick {
 	/**
 	 * The maximum value that can be expected from the thumb stick values.
 	 */
-	public static final double JOYSTICK_MAX = 1.0;
+	public static final double THUMBSTICK_MAX = 1.0;
 
 	/**
 	 * The value that should be expected from the thumb sticks when the thumb stick is at
 	 * rest.
 	 */
-	public static final double JOYSTICK_REST = 0.0;
+	public static final double THUMBSTICK_REST = 0.0;
 
 	/**
 	 * The minimum value that can be expected from the thumb stick values.
 	 */
-	public static final double JOYSTICK_MIN = -1.0;
+	public static final double THUMBSTICK_MIN = -1.0;
 
 	/**
 	 * The maximum value that can be expected from the trigger values.
@@ -64,7 +64,7 @@ public class Joystick {
 	public static final double TRIGGER_MAX = 1.0;
 
 	/**
-	 * The maximum value that can be expected from the trigger values.
+	 * The minimum value that can be expected from the trigger values.
 	 */
 	public static final double TRIGGER_MIN = 0.0;
 
@@ -90,8 +90,8 @@ public class Joystick {
 	 * @return the corresponding value between the minimum and maximum positions.
 	 */
 	private static double scaleJoystickInput(double raw) {
-		return MathUtil.scaleToRange(raw, new double[] {Joystick.THUMBSTICK_THRESHOLD, Joystick.JOYSTICK_MAX},
-				new double[] {Joystick.JOYSTICK_REST, Joystick.JOYSTICK_MAX});
+		return MathUtil.scaleToRange(raw, new double[] {Joystick.THUMBSTICK_THRESHOLD, Joystick.THUMBSTICK_MAX},
+				new double[] {Joystick.THUMBSTICK_REST, Joystick.THUMBSTICK_MAX});
 	}
 
 	/**
