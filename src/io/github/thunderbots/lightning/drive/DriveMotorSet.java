@@ -43,6 +43,15 @@ public class DriveMotorSet {
 			this.motors[i] = Lightning.getMotor(names[i]);
 		}
 	}
+	
+	/**
+	 * Gets the array of motors that this {@code DriveMotorSet} comprises.
+	 * 
+	 * @return an array of motors.
+	 */
+	public Motor[] getMotorArray() {
+		return this.motors;
+	}
 
 	/**
 	 * Set the power of the motors in this motor set from the corresponding power values in
