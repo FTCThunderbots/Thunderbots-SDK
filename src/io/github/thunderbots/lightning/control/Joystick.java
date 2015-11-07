@@ -37,10 +37,10 @@ public class Joystick {
 
 	/**
 	 * The threshold that must be exceeded by the raw thumb stick values before it should
-	 * register at all. The purpose of this value is to prevent random joystick noise and
+	 * register at all. The purpose of this value is to prevent random noise and
 	 * false movements from being registered and acted upon.
 	 */
-	public static final double JOYSTICK_THRESHOLD = 0.6;
+	public static final double THUMBSTICK_THRESHOLD = 0.2;
 
 	/**
 	 * The maximum value that can be expected from the thumb stick values.
@@ -75,7 +75,7 @@ public class Joystick {
 	 */
 	public Joystick(Gamepad baseGamepad) {
 		this.baseGamepad = baseGamepad;
-		this.baseGamepad.setJoystickDeadzone((float) Joystick.JOYSTICK_THRESHOLD);
+		this.baseGamepad.setJoystickDeadzone((float) Joystick.THUMBSTICK_THRESHOLD);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Joystick {
 	 * @return the corresponding value between the minimum and maximum positions.
 	 */
 	private static double scaleJoystickInput(double raw) {
-		return MathUtil.scaleToRange(raw, new double[] {Joystick.JOYSTICK_THRESHOLD, Joystick.JOYSTICK_MAX},
+		return MathUtil.scaleToRange(raw, new double[] {Joystick.THUMBSTICK_THRESHOLD, Joystick.JOYSTICK_MAX},
 				new double[] {Joystick.JOYSTICK_REST, Joystick.JOYSTICK_MAX});
 	}
 
