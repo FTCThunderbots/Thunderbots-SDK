@@ -17,6 +17,7 @@
 package io.github.thunderbots.lightning.drive;
 
 import io.github.thunderbots.lightning.hardware.Motor;
+import io.github.thunderbots.lightning.hardware.MotorSet;
 
 /**
  * A {@code MecanumDrive} is a {@code DriveSystem} that represents a system using mecanum
@@ -31,9 +32,9 @@ public class MecanumDrive extends DriveSystem {
 	 * base.
 	 *
 	 * @param wheels the {@code DriveMotorSet} of this drive system.
-	 * @see DriveSystem#DriveSystem(DriveMotorSet)
+	 * @see DriveSystem#DriveSystem(MotorSet)
 	 */
-	public MecanumDrive(DriveMotorSet wheels) {
+	public MecanumDrive(MotorSet wheels) {
 		super(wheels);
 	}
 

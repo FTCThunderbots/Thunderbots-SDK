@@ -16,6 +16,8 @@
 
 package io.github.thunderbots.lightning.drive;
 
+import io.github.thunderbots.lightning.hardware.MotorSet;
+
 /**
  * A {@code TankDrive} is a {@code DriveSystem} that represents a standard tank drive
  * system, with standard parallel wheels on both sides of the robot.
@@ -33,9 +35,9 @@ public class TankDrive extends MecanumDrive {
 	 * Constructs a new {@code TankDrive} with the given {@code DriveMotorSet} as a base.
 	 *
 	 * @param wheels the {@code DriveMotorSet} of this drive system.
-	 * @see DriveSystem#DriveSystem(DriveMotorSet)
+	 * @see DriveSystem#DriveSystem(MotorSet)
 	 */
-	public TankDrive(DriveMotorSet wheels) {
+	public TankDrive(MotorSet wheels) {
 		super(wheels);
 	}
 
