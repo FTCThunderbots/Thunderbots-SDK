@@ -25,7 +25,8 @@ import io.github.thunderbots.lightning.hardware.MotorSet;
  * The {@code TankDrive} class is a subclass of {@code MecanumDrive} for technical reasons.
  * The code that controls a tank drive system is exactly the same as the code that controls
  * a mecanum drive system, with the one difference being that the strafing vector must be
- * zero if the physical robot does not use mecanum drive.
+ * zero if the physical robot does not use mecanum drive. The inheritance relationship is
+ * purely functional, not symbolic.
  *
  * @author Zach Ohara
  */

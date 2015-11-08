@@ -58,13 +58,10 @@ public abstract class DriveSystem {
 	 * Gets and returns the average power of all encoder powers within the {@code DriveSystem}
 	 * 
 	 * @return an average of all encoder powers.
+	 * @see io.github.thunderbots.lightning.hardware.MotorSet#getAverageEncoderValue()
 	 */
-	public int getEncoderAverage() {
-		long sum = 0;
-		for (int i = 0; i < this.motors.getMotorArray().length; i++) {
-			sum += this.motors.getMotorArray()[i].getEncoder().getPosition();
-		}
-		return (int) (sum / this.motors.getMotorArray().length);
+	public int getAverageEncoderValue() {
+		return this.motors.getAverageEncoderValue();
 	}
 		
 	/**
