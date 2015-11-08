@@ -116,5 +116,18 @@ public class MotorSet {
 		}
 		return sum / this.motors.length;
 	}
+	
+	/**
+	 * Gets the average encoder reading for all the motors in this motor set.
+	 *
+	 * @return the average encoder reading for the motors in this set.
+	 */
+	public int getAverageEncoderValue() {
+		long sum = 0;
+		for (int i = 0; i < this.motors.length; i++) {
+			sum += this.motors[i].getEncoder().getPosition();
+		}
+		return (int) (sum / this.motors.length);
+	}
 
 }
