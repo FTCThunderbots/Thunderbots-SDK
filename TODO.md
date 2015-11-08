@@ -12,6 +12,7 @@
 
 #### Documentation
 * Update all javadoc
+* Add a description of Lightning SDK to the package-info of `lightning`
 * Remove unnecessarily commented code
 * Remove unnecessary `{@inheritDoc}` tags
 * Write better package-info files
