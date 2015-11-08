@@ -37,7 +37,7 @@ public class Servo {
 
 	/**
 	 * The minimum position of the servo. At the time of writing this, it is currently
-	 * -0.0, but this may change in the future.
+	 * 0.0, but this may change in the future.
 	 */
 	public static final double MIN_POSITION = com.qualcomm.robotcore.hardware.Servo.MIN_POSITION;
 
