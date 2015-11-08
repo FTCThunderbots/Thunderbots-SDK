@@ -41,13 +41,22 @@ public class MotorSet {
 	/**
 	 * Constructs a new {@code MotorSet} using the motors with the given names.
 	 *
-	 * @param names the names of all the motors to use with this motor set.
+	 * @param names the names of all the motors to use in this motor set.
 	 */
 	public MotorSet(String[] names) {
 		this.motors = new Motor[names.length];
 		for (int i = 0; i < names.length; i++) {
 			this.motors[i] = Lightning.getMotor(names[i]);
 		}
+	}
+	
+	/**
+	 * Constructs a new {@code MotorSet} using the given motor array.
+	 *
+	 * @param motors an array of motors to use in this motor set.
+	 */
+	public MotorSet(Motor[] motors) {
+		this.motors = motors;
 	}
 	
 	/**
@@ -58,9 +67,20 @@ public class MotorSet {
 	public Motor[] getMotorArray() {
 		return this.motors;
 	}
+	
+	/**
+	 * Sets the power of all the motors in this set to the given power.
+	 *
+	 * @param power the power to send to all the motors in this motor set.
+	 */
+	public void setMotorPower(double power) {
+		for (Motor m : this.motors) {
+			m.setPower(power);
+		}
+	}
 
 	/**
-	 * Set the power of the motors in this motor set from the corresponding power values in
+	 * Sets the power of the motors in this motor set from the corresponding power values in
 	 * the given double array. For example, the motor at {@code motors[n]} will be assigned
 	 * the power value at {@code powers[n]}. If the lengths of {@code motors} and
 	 * {@code powers} are mismatched, then all the available pairs will be matched, and the
@@ -73,6 +93,28 @@ public class MotorSet {
 		for (int i = 0; i < motorSet; i++) {
 			this.motors[i].setPower(powers[i]);
 		}
+	}
+	
+	/**
+	 * Stops all the motors in this motor set
+	 */
+	public void stopAllMotors() {
+		for (Motor m : this.motors) {
+			m.stop();
+		}
+	}
+	
+	/**
+	 * Gets the average power of all the motors in this motor set.
+	 *
+	 * @return the average power of the motors in this set.
+	 */
+	public double getAveragePower() {
+		double sum = 0;
+		for (Motor m : this.motors) {
+			sum += m.getPower();
+		}
+		return sum / this.motors.length;
 	}
 
 }
