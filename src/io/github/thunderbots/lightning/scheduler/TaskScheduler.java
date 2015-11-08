@@ -54,7 +54,16 @@ public class TaskScheduler {
 	public void registerTask(Runnable task) {
 		this.tasks.add(task);
 	}
-
+	
+	/**
+	 * Removes a given {@code Runnable} from the cycle.
+	 * 
+	 * @param task the task to be deleted from the cycle.
+	 */
+	public void removeTask(Runnable task) {
+		this.tasks.remove(task);
+	}
+	
 	/**
 	 * Calls the {@code run()} method of all {@code Runnable} objects that have been
 	 * registered with this task scheduler.
