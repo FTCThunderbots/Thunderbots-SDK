@@ -42,26 +42,26 @@ public class Joystick {
 
 	/**
 	 * The threshold that must be exceeded by the raw thumb stick values before it should
-	 * register at all. The purpose of this value is to prevent random joystick noise and
+	 * register at all. The purpose of this value is to prevent random noise and
 	 * false movements from being registered and acted upon.
 	 */
-	public static final double JOYSTICK_THRESHOLD = 0.6;
+	public static final double THUMBSTICK_THRESHOLD = 0.2;
 
 	/**
 	 * The maximum value that can be expected from the thumb stick values.
 	 */
-	public static final double JOYSTICK_MAX = 1.0;
+	public static final double THUMBSTICK_MAX = 1.0;
 
 	/**
 	 * The value that should be expected from the thumb sticks when the thumb stick is at
 	 * rest.
 	 */
-	public static final double JOYSTICK_REST = 0.0;
+	public static final double THUMBSTICK_REST = 0.0;
 
 	/**
 	 * The minimum value that can be expected from the thumb stick values.
 	 */
-	public static final double JOYSTICK_MIN = -1.0;
+	public static final double THUMBSTICK_MIN = -1.0;
 
 	/**
 	 * The maximum value that can be expected from the trigger values.
@@ -69,7 +69,7 @@ public class Joystick {
 	public static final double TRIGGER_MAX = 1.0;
 
 	/**
-	 * The maximum value that can be expected from the trigger values.
+	 * The minimum value that can be expected from the trigger values.
 	 */
 	public static final double TRIGGER_MIN = 0.0;
 	
@@ -90,7 +90,7 @@ public class Joystick {
 	 */
 	public Joystick(Gamepad baseGamepad) {
 		this.baseGamepad = baseGamepad;
-		this.baseGamepad.setJoystickDeadzone((float) Joystick.JOYSTICK_THRESHOLD);
+		this.baseGamepad.setJoystickDeadzone((float) Joystick.THUMBSTICK_THRESHOLD);
 	}
 
 	/**
@@ -99,19 +99,23 @@ public class Joystick {
 	 * maximum positions. This allows the thumb sticks to show a smooth transition between
 	 * the minimum and the maximum, even though any value less than the threshold will be
 	 * reported as zero.
+	 * <p>
+	 * This method acts as a delegate to
+	 * {@link io.github.thunderbots.lightning.utility.MathUtil#scaleToRange(double, double[], double[])
+	 * MathUtil.scaleToRange()}, but supplies the thumbstick constants as the range bounds.
 	 *
 	 * @param raw the raw input value from the joystick, between the threshold and maximum
 	 * positions.
 	 * @return the corresponding value between the minimum and maximum positions.
+	 * @see io.github.thunderbots.lightning.utility.MathUtil#scaleToRange(double, double[], double[])
 	 */
 	private static double scaleJoystickInput(double raw) {
-		return MathUtil.scaleToRange(raw, new double[] {Joystick.JOYSTICK_THRESHOLD, Joystick.JOYSTICK_MAX},
-				new double[] {Joystick.JOYSTICK_REST, Joystick.JOYSTICK_MAX});
+		return MathUtil.scaleToRange(raw, new double[] {Joystick.THUMBSTICK_THRESHOLD, Joystick.THUMBSTICK_MAX},
+				new double[] {Joystick.THUMBSTICK_REST, Joystick.THUMBSTICK_MAX});
 	}
 
 	/**
-	 * Returns {@code true} if and only if the A-button on the joystick is currently being
-	 * pressed.
+	 * Returns {@code true} if the A-button on the joystick is currently being pressed.
 	 *
 	 * @return whether the A-button is being pressed.
 	 */
@@ -120,8 +124,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the B-button on the joystick is currently being
-	 * pressed.
+	 * Returns {@code true} if the B-button on the joystick is currently being pressed.
 	 *
 	 * @return whether the B-button is being pressed.
 	 */
@@ -130,7 +133,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the X-button on the joystick is currently being
+	 * Returns {@code true} if the X-button on the joystick is currently being
 	 * pressed.
 	 *
 	 * @return whether the X-button is being pressed.
@@ -140,7 +143,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the Y-button on the joystick is currently being
+	 * Returns {@code true} if the Y-button on the joystick is currently being
 	 * pressed.
 	 *
 	 * @return whether the Y-button is being pressed.
@@ -150,7 +153,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the up-direction button on the joystick is
+	 * Returns {@code true} if the up-direction button on the joystick is
 	 * currently being pressed.
 	 *
 	 * @return whether the up-direction is being pressed.
@@ -160,7 +163,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the down-direction button on the joystick is
+	 * Returns {@code true} if down-direction button on the joystick is
 	 * currently being pressed.
 	 *
 	 * @return whether the down-direction is being pressed.
@@ -170,7 +173,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the left-direction button on the joystick is
+	 * Returns {@code true} if the left-direction button on the joystick is
 	 * currently being pressed.
 	 *
 	 * @return whether the left-direction is being pressed.
@@ -180,7 +183,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the right-direction button on the joystick is
+	 * Returns {@code true} if the right-direction button on the joystick is
 	 * currently being pressed.
 	 *
 	 * @return whether the right-direction is being pressed.
@@ -190,7 +193,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the left bumper on the joystick is currently
+	 * Returns {@code true} if the left bumper on the joystick is currently
 	 * being pressed.
 	 *
 	 * @return whether the left bumper is being pressed.
@@ -200,7 +203,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the right bumper on the joystick is currently
+	 * Returns {@code true} if the right bumper on the joystick is currently
 	 * being pressed.
 	 *
 	 * @return whether the right bumper is being pressed.
@@ -210,7 +213,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the left-stick button on the joystick is
+	 * Returns {@code true} if the left-stick button on the joystick is
 	 * currently being pressed.
 	 *
 	 * @return whether the left-stick button is being pressed.
@@ -220,7 +223,7 @@ public class Joystick {
 	}
 
 	/**
-	 * Returns {@code true} if and only if the right-stick button on the joystick is
+	 * Returns {@code true} if the right-stick button on the joystick is
 	 * currently being pressed.
 	 *
 	 * @return whether the right-stick button is being pressed.

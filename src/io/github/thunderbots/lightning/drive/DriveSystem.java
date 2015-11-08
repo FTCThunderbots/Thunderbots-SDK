@@ -16,6 +16,8 @@
 
 package io.github.thunderbots.lightning.drive;
 
+import io.github.thunderbots.lightning.hardware.MotorSet;
+
 /**
  * A {@code DriveSystem} represents the motors used for driving the robot, their
  * arrangement, and in some cases, the type of wheels attached to the motor. Every subclass
@@ -30,16 +32,16 @@ public abstract class DriveSystem {
 	/**
 	 * The motors in this drive system.
 	 *
-	 * @see io.github.thunderbots.lightning.drive.DriveMotorSet
+	 * @see io.github.thunderbots.lightning.hardware.MotorSet
 	 */
-	private DriveMotorSet motors;
+	private MotorSet motors;
 
 	/**
 	 * Constructs a new {@code DriveSystem} with the given {@code DriveMotorSet} as a base.
 	 *
 	 * @param wheels the {@code DriveMotorSet} of this drive system.
 	 */
-	public DriveSystem(DriveMotorSet wheels) {
+	public DriveSystem(MotorSet wheels) {
 		this.motors = wheels;
 	}
 
@@ -49,9 +51,19 @@ public abstract class DriveSystem {
 	 * @param motornames the names of the motors to use with this drive system.
 	 */
 	public DriveSystem(String[] motornames) {
-		this.motors = new DriveMotorSet(motornames);
+		this.motors = new MotorSet(motornames);
 	}
-
+	
+	/**
+	 * Gets and returns the average power of all encoder powers within the {@code DriveSystem}
+	 * 
+	 * @return an average of all encoder powers.
+	 * @see io.github.thunderbots.lightning.hardware.MotorSet#getAverageEncoderValue()
+	 */
+	public int getAverageEncoderValue() {
+		return this.motors.getAverageEncoderValue();
+	}
+		
 	/**
 	 * Sets the power of the motors on the robot so that the robot moves as described by
 	 * the two vectors.
@@ -68,7 +80,7 @@ public abstract class DriveSystem {
 	 * @return the {@code DriveMotorSet} for this drive system.
 	 * @see #motors
 	 */
-	protected DriveMotorSet getWheelSet() {
+	protected MotorSet getWheelSet() {
 		return this.motors;
 	}
 

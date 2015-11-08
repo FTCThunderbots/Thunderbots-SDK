@@ -15,6 +15,7 @@
  */
 
 /**
- * Provides annotations to be applied to classes in LightningSDK and Robot-Specific repositories.
+ * The {@link io.github.thunderbots.lightning.annotation} package provides annotations that
+ * can be applied to code that uses the Lightning SDK, or to classes in the SDK itself.
  */
 package io.github.thunderbots.lightning.annotation;

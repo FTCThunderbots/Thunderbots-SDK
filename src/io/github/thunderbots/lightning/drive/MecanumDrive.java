@@ -17,6 +17,7 @@
 package io.github.thunderbots.lightning.drive;
 
 import io.github.thunderbots.lightning.hardware.Motor;
+import io.github.thunderbots.lightning.hardware.MotorSet;
 
 /**
  * A {@code MecanumDrive} is a {@code DriveSystem} that represents a system using mecanum
@@ -31,9 +32,9 @@ public class MecanumDrive extends DriveSystem {
 	 * base.
 	 *
 	 * @param wheels the {@code DriveMotorSet} of this drive system.
-	 * @see DriveSystem#DriveSystem(DriveMotorSet)
+	 * @see DriveSystem#DriveSystem(MotorSet)
 	 */
-	public MecanumDrive(DriveMotorSet wheels) {
+	public MecanumDrive(MotorSet wheels) {
 		super(wheels);
 	}
 
@@ -74,12 +75,6 @@ public class MecanumDrive extends DriveSystem {
 	 * less responsive.
 	 */
 	public static final double ROTATE_POWER_WEIGHT = 1.0;
-
-	// This code is on standby. We don't know if we need it yet.
-	// public static final double[] INPUT_RANGE = {0, 1};
-	// public static final double[] DRIVE_POWER_RANGE = {0, 1};
-	// public static final double[] STRAFE_POWER_RANGE = {0, 1};
-	// public static final double[] ROTATE_POWER_RANGE = {0, 1};
 
 	/**
 	 * {@inheritDoc}
@@ -148,12 +143,6 @@ public class MecanumDrive extends DriveSystem {
 	 * @return the success of the operation.
 	 */
 	public boolean setMovement(double forward, double right, double clockwise) {
-
-		// This code is on standby
-		// forward = MathUtil.scaleToRange(forward, INPUT_RANGE, DRIVE_POWER_RANGE);
-		// right = MathUtil.scaleToRange(right, INPUT_RANGE, STRAFE_POWER_RANGE);
-		// clockwise = MathUtil.scaleToRange(clockwise, INPUT_RANGE, ROTATE_POWER_RANGE);
-
 		forward *= MecanumDrive.MOVE_POWER_SCALE * MecanumDrive.DRIVE_POWER_WEIGHT;
 		right *= MecanumDrive.MOVE_POWER_SCALE * MecanumDrive.STRAFE_POWER_WEIGHT;
 		clockwise *= MecanumDrive.MOVE_POWER_SCALE * MecanumDrive.ROTATE_POWER_WEIGHT;
