@@ -5,7 +5,6 @@
 * ~~Better divide functionality of `SimpleOpMode` and `Robot`~~
 
 #### App Improvements
-* New app logo
 * Support the `OpMode` annotation
 * Add categories for op modes
 * Add manual controls
@@ -55,6 +54,7 @@
 #### Sensor Wrapper
 * Make `Lightning.getSensor()` return a wrapper
 * _Add more things here???_
+* We no longer need a Sensor Wrapper, correct?
 
 #### Scripting
 * Make a script that compiles all necessary code and copies it to the phone
