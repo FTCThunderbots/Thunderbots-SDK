@@ -440,6 +440,7 @@ public class Joystick {
 		if (this.rightStickButton()) {
 			pressedButtons.add(JoystickButton.RIGHT_STICK);
 		}
+		/*
 		if (this.leftTriggerPressed()) {
 			pressedButtons.add(JoystickButton.LEFT_TRIGGER);
 		}
@@ -470,6 +471,7 @@ public class Joystick {
 		if (this.rightStickPositiveY()) {
 			pressedButtons.add(JoystickButton.RIGHT_Y_POS);
 		}
+		*/
 		return pressedButtons;
 	}
 
