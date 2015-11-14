@@ -36,10 +36,7 @@
 * __[Uncertain]__ Write and test code to detect if a servo is attached to a motor
 
 #### More Control Schemes
-* ~~Make a branch for this~~
 * ~~Add an abstract control scheme class~~
-* ~~Rewrite the default controls in `TeleOp` to use the control scheme system~~
-* ~~Implement other control schemes in the new system (tank, mecanum, drive/spin, video game, etc.)~~
 * Write a test program for the new system with drive-spin controls
 * Write a test program for the new system with tank-style controls
 * Run the test programs
