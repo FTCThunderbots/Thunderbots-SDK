@@ -32,6 +32,8 @@ public abstract class TeleOp extends SimpleOpMode {
 	
 	/**
 	 * The control layout of the driving joystick.
+	 * 
+	 * When TeleOp is active, then the then a loop will continue to get the movement from the joystick
 	 */
 	private ControlLayout joystickLayout;
 
@@ -42,6 +44,11 @@ public abstract class TeleOp extends SimpleOpMode {
 			this.mainLoop();
 		}
 	}
+	
+	/**
+	 * This initializes a layout based on ControlLayout
+	 * This sets up the controllayout to be used later on in the movement of the robot.
+	 */
 	
 	@Override
 	protected void initializeOpMode() {
