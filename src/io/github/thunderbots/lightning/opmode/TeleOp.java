@@ -86,5 +86,14 @@ public abstract class TeleOp extends SimpleOpMode {
 	public ControlLayout createControlLayout() {
 		return new DriveSpinControlLayout();
 	}
+	
+	/**
+	 * Gets a reference to the {@code ControlLayout} that this op mode is using.
+	 *
+	 * @return the control layout of this op mode.
+	 */
+	protected ControlLayout getControlLayout() {
+		return this.joystickLayout;
+	}
 
 }
