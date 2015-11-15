@@ -16,9 +16,14 @@
 
 package io.github.thunderbots.lightning.control;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import io.github.thunderbots.lightning.utility.MathUtil;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
+
+
 
 /**
  * A {@code Joystick} object represents one of the physical game controllers that are
@@ -67,6 +72,16 @@ public class Joystick {
 	 * The minimum value that can be expected from the trigger values.
 	 */
 	public static final double TRIGGER_MIN = 0.0;
+	
+	/**
+	 * The threshold that is used to determine if a joystick is sufficiently 'fully' pressed.
+	 */
+	public static final double JOYSTICK_PRESS_THRESHOLD = 0.95;
+	
+	/**
+	 * The threshold that is used to determine if a trigger is sufficiently 'fully' pressed.
+	 */
+	public static final double TRIGGER_PRESS_THRESHOLD = 0.95;
 
 	/**
 	 * Constructs a new {@code Joystick} with the given {@code Gamepad} as a base.
@@ -225,6 +240,17 @@ public class Joystick {
 	public double leftTrigger() {
 		return this.baseGamepad.left_trigger;
 	}
+	
+	/**
+	 * Returns {@code true} if the left trigger value is above the set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the left trigger value is above the set threshold.
+	 * @see #TRIGGER_PRESS_THRESHOLD
+	 */
+	public boolean leftTriggerPressed() {
+		return this.leftTrigger() > Joystick.TRIGGER_PRESS_THRESHOLD;
+	}
 
 	/**
 	 * Returns the current position of the right trigger on the joystick.
@@ -233,6 +259,17 @@ public class Joystick {
 	 */
 	public double rightTrigger() {
 		return this.baseGamepad.right_trigger;
+	}
+	
+	/**
+	 * Returns {@code true} if the right trigger value is above the set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the right trigger value is above the set threshold.
+	 * @see #TRIGGER_PRESS_THRESHOLD
+	 */
+	public boolean rightTriggerPressed() {
+		return this.rightTrigger() > Joystick.TRIGGER_PRESS_THRESHOLD;
 	}
 
 	/**
@@ -243,6 +280,28 @@ public class Joystick {
 	public double leftStickX() {
 		return Joystick.scaleJoystickInput(this.baseGamepad.left_stick_x);
 	}
+	
+	/**
+	 * Returns {@code true} if the x-position of the left stick is below a set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the x-position of the left stick is below a set threshold.
+	 * @see #JOYSTICK_PRESS_THRESHOLD
+	 */
+	public boolean leftStickNegativeX() {
+		return this.leftStickX() < -Joystick.JOYSTICK_PRESS_THRESHOLD;
+	}
+	
+	/**
+	 * Returns {@code true} if the x-position of the left stick is above a set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the x-position of the left stick is above a set threshold.
+	 * @see #JOYSTICK_PRESS_THRESHOLD
+	 */
+	public boolean leftStickPositiveX() {
+		return this.leftStickX() > Joystick.JOYSTICK_PRESS_THRESHOLD;
+	}
 
 	/**
 	 * Returns the current y-position of the left thumb stick.
@@ -251,6 +310,28 @@ public class Joystick {
 	 */
 	public double leftStickY() {
 		return Joystick.scaleJoystickInput(-this.baseGamepad.left_stick_y);
+	}
+	
+	/**
+	 * Returns {@code true} if the y-position of the left stick is below a set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the y-position of the left stick is below a set threshold.
+	 * @see #JOYSTICK_PRESS_THRESHOLD
+	 */
+	public boolean leftStickNegativeY() {
+		return this.leftStickY() < -Joystick.JOYSTICK_PRESS_THRESHOLD;
+	}
+	
+	/**
+	 * Returns {@code true} if the y-position of the left stick is above a set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the y-position of the left stick is above a set threshold.
+	 * @see #JOYSTICK_PRESS_THRESHOLD
+	 */
+	public boolean leftStickPositiveY() {
+		return this.leftStickY() > Joystick.JOYSTICK_PRESS_THRESHOLD;
 	}
 
 	/**
@@ -261,6 +342,28 @@ public class Joystick {
 	public double rightStickX() {
 		return Joystick.scaleJoystickInput(this.baseGamepad.right_stick_x);
 	}
+	
+	/**
+	 * Returns {@code true} if the x-position of the right stick is below a set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the x-position of the right stick is below a set threshold.
+	 * @see #JOYSTICK_PRESS_THRESHOLD
+	 */
+	public boolean rightStickNegativeX() {
+		return this.rightStickX() < -Joystick.JOYSTICK_PRESS_THRESHOLD;
+	}
+	
+	/**
+	 * Returns {@code true} if the x-position of the right stick is above a set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the x-position of the right stick is above a set threshold.
+	 * @see #JOYSTICK_PRESS_THRESHOLD
+	 */
+	public boolean rightStickPositiveX() {
+		return this.rightStickX() > Joystick.JOYSTICK_PRESS_THRESHOLD;
+	}
 
 	/**
 	 * Returns the current y-position of the right thumb stick.
@@ -269,6 +372,107 @@ public class Joystick {
 	 */
 	public double rightStickY() {
 		return Joystick.scaleJoystickInput(-this.baseGamepad.right_stick_y);
+	}
+	
+	/**
+	 * Returns {@code true} if the y-position of the right stick is below a set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the y-position of the right stick is below a set threshold.
+	 * @see #JOYSTICK_PRESS_THRESHOLD
+	 */
+	public boolean rightStickNegativeY() {
+		return this.rightStickY() < -Joystick.JOYSTICK_PRESS_THRESHOLD;
+	}
+	
+	/**
+	 * Returns {@code true} if the y-position of the right stick is above a set threshold, or
+	 * {@code false} otherwise.
+	 *
+	 * @return {@code true} if the y-position of the right stick is above a set threshold.
+	 * @see #JOYSTICK_PRESS_THRESHOLD
+	 */
+	public boolean rightStickPositiveY() {
+		return this.rightStickY() > Joystick.JOYSTICK_PRESS_THRESHOLD;
+	}
+	
+	/**
+	 * Generates a list of {@code JoystickButton}s that represent all the buttons that are
+	 * currently pressed on this joystick.
+	 *
+	 * @return the buttons currently pressed on the joystick.
+	 */
+	public List<JoystickButton> toButtonList() {
+		List<JoystickButton> pressedButtons = new LinkedList<JoystickButton>();
+		if (this.aButton()) {
+			pressedButtons.add(JoystickButton.A);
+		}
+		if (this.bButton()) {
+			pressedButtons.add(JoystickButton.B);
+		}
+		if (this.xButton()) {
+			pressedButtons.add(JoystickButton.X);
+		}
+		if (this.yButton()) {
+			pressedButtons.add(JoystickButton.Y);
+		}
+		if (this.upButton()) {
+			pressedButtons.add(JoystickButton.DPAD_UP);
+		}
+		if (this.downButton()) {
+			pressedButtons.add(JoystickButton.DPAD_DOWN);
+		}
+		if (this.leftButton()) {
+			pressedButtons.add(JoystickButton.DPAD_LEFT);
+		}
+		if (this.rightButton()) {
+			pressedButtons.add(JoystickButton.DPAD_RIGHT);
+		}
+		if (this.leftBumper()) {
+			pressedButtons.add(JoystickButton.LEFT_BUMPER);
+		}
+		if (this.rightBumper()) {
+			pressedButtons.add(JoystickButton.RIGHT_BUMPER);
+		}
+		if (this.leftStickButton()) {
+			pressedButtons.add(JoystickButton.LEFT_STICK);
+		}
+		if (this.rightStickButton()) {
+			pressedButtons.add(JoystickButton.RIGHT_STICK);
+		}
+		/*
+		if (this.leftTriggerPressed()) {
+			pressedButtons.add(JoystickButton.LEFT_TRIGGER);
+		}
+		if (this.rightTriggerPressed()) {
+			pressedButtons.add(JoystickButton.RIGHT_TRIGGER);
+		}
+		if (this.leftStickNegativeX()) {
+			pressedButtons.add(JoystickButton.LEFT_X_NEG);
+		}
+		if (this.leftStickPositiveX()) {
+			pressedButtons.add(JoystickButton.LEFT_X_POS);
+		}
+		if (this.leftStickNegativeY()) {
+			pressedButtons.add(JoystickButton.LEFT_Y_NEG);
+		}
+		if (this.leftStickPositiveY()) {
+			pressedButtons.add(JoystickButton.LEFT_Y_POS);
+		}
+		if (this.rightStickNegativeX()) {
+			pressedButtons.add(JoystickButton.RIGHT_X_NEG);
+		}
+		if (this.rightStickPositiveX()) {
+			pressedButtons.add(JoystickButton.RIGHT_X_POS);
+		}
+		if (this.rightStickNegativeY()) {
+			pressedButtons.add(JoystickButton.RIGHT_Y_NEG);
+		}
+		if (this.rightStickPositiveY()) {
+			pressedButtons.add(JoystickButton.RIGHT_Y_POS);
+		}
+		*/
+		return pressedButtons;
 	}
 
 }
