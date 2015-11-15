@@ -52,7 +52,9 @@ public class TaskScheduler {
 	 * @param task the task to be executed in the cycle.
 	 */
 	public void registerTask(Runnable task) {
-		this.tasks.add(task);
+		synchronized (this.tasks) {
+			this.tasks.add(task);
+		}
 	}
 	
 	/**
@@ -61,7 +63,9 @@ public class TaskScheduler {
 	 * @param task the task to be deleted from the cycle.
 	 */
 	public void removeTask(Runnable task) {
-		this.tasks.remove(task);
+		synchronized (this.tasks) {
+			this.tasks.remove(task);
+		}
 	}
 	
 	/**
@@ -69,8 +73,10 @@ public class TaskScheduler {
 	 * registered with this task scheduler.
 	 */
 	private void runAllTasks() {
-		for (Runnable r : this.tasks) {
-			r.run();
+		synchronized (this.tasks) {
+			for (Runnable r : this.tasks) {
+				r.run();
+			}
 		}
 	}
 
