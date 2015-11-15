@@ -29,19 +29,11 @@
 * Merge the branch into master
 
 #### Hardware
-* Write a test program for a Servo
-* Write a test program for a CRServo
-* Write a test program for a Motor
 * Test the CRServo code
 * __[Uncertain]__ Write and test code to detect if a servo is attached to a motor
 
 #### More Control Schemes
-* ~~Make a branch for this~~
 * ~~Add an abstract control scheme class~~
-* ~~Rewrite the default controls in `TeleOp` to use the control scheme system~~
-* ~~Implement other control schemes in the new system (tank, mecanum, drive/spin, video game, etc.)~~
-* Write a test program for the new system with drive-spin controls
-* Write a test program for the new system with tank-style controls
 * Run the test programs
 * Merge the branch into master
 
@@ -62,7 +54,6 @@
 * Make a script that auto-corrects style errors on a fixed interval
 
 #### Task Scheduler
-* ~~Test the task scheduler~~
 * Implement a `remove(Runnable)` method
 * Test the remove method
 
