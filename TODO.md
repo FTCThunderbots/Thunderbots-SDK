@@ -25,21 +25,21 @@
 * Make `MecanumDrive` override the average encoder function to account for polarity
 * Test encoder functionality on a drive base
 
-#### Event-Based Joystick Input
+#### ~~Event-Based Joystick Input~~
 * ~~Merge master into the joystick branch~~
 * ~~Write a test program~~
 * ~~Run the test program~~
-* Merge the branch into master (to be reviewed by Pranav)
+* ~~Merge the branch into master~~
 
 #### Hardware
 * Test the CRServo code
 * __[Uncertain]__ Write and test code to detect if a servo is attached to a motor
 
-#### More Control Schemes
+#### ~~More Control Schemes~~
 * ~~Add an abstract control scheme class~~
-* Write `TeleOpTest` test programs
-* Run the test programs
-* Merge the branch into master
+* ~~Write `TeleOpTest` test programs~~
+* ~~Run the test programs~~
+* ~~Merge the branch into master~~
 
 #### PID Control
 * Write a generic PID control system
@@ -60,6 +60,6 @@
 * ~~Implement a `remove(Runnable)` method~~
 * ~~Test the remove method~~
 
-#### Telemetry
+#### ~~Telemetry~~
 * ~~Remove overloads of `Lightning.sendTelemetryData()` and make the `Object` implementation check if the object is an instance of the other parameters~~
-* __[Uncertain]__ Write a more robust telemetry system
+* ~~__[Uncertain]__ Write a more robust telemetry system~~
