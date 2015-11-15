@@ -59,6 +59,7 @@ public class JoystickMonitor {
 		this.joystick = joystick;
 		this.listeners = new ArrayList<JoystickListener>();
 		Lightning.getTaskScheduler().registerTask(new MonitorUpdateRunnable());
+		this.lastButtons = Lightning.getJoystick(this.joystick).toButtonList();
 	}
 	
 	public void registerJoystickListener(JoystickListener listener) {
@@ -76,6 +77,7 @@ public class JoystickMonitor {
 				}
 			}
 		}
+		this.lastButtons = newButtons;
 	}
 	
 	private void tryButtonHandlers(List<JoystickButton> newButtons, JoystickButton button,
