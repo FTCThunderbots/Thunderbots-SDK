@@ -17,6 +17,7 @@
 package io.github.thunderbots.lightning;
 
 import io.github.thunderbots.lightning.control.Joystick;
+import io.github.thunderbots.lightning.control.JoystickMonitor;
 import io.github.thunderbots.lightning.hardware.CRServo;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
@@ -75,6 +76,9 @@ public final class Lightning {
 	 * and in client code of the SDK.
 	 */
 	private static TaskScheduler taskScheduler;
+	
+	private static JoystickMonitor monitor1;
+	private static JoystickMonitor monitor2;
 
 	/**
 	 * {@code Lightning} should not be instantiable.
@@ -96,6 +100,8 @@ public final class Lightning {
 		Lightning.robotTelemetry = opmode.telemetry;
 		Lightning.sensorMaps = Lightning.getSensorMaps(Lightning.robotHardware);
 		Lightning.taskScheduler = new TaskScheduler();
+		Lightning.monitor1 = new JoystickMonitor(1);
+		Lightning.monitor2 = new JoystickMonitor(2);
 	}
 
 	/**
@@ -124,6 +130,17 @@ public final class Lightning {
 				return new Joystick(Lightning.opmode.gamepad2);
 			default:
 				throw new IllegalArgumentException();
+		}
+	}
+	
+	public static JoystickMonitor getJoystickMonitor(int gamepad) {
+		switch (gamepad) {
+			case 1:
+				return Lightning.monitor1;
+			case 2:
+				return Lightning.monitor2;
+			default:
+				return null;
 		}
 	}
 

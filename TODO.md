@@ -6,6 +6,7 @@
 
 #### App Improvements
 * ~~Support the `OpMode` annotation~~
+* Apply `OpMode` and `Active` annotations to appropriate op modes
 * Add categories for op modes
 * Add manual controls
 * Add material design
@@ -55,7 +56,7 @@
 * Make a script that automaticaly updates the gh-pages branch with javadoc changes on a fixed ratio
 * Make a script that automatically corrects style errors on a fixed interval
 
-#### Task Scheduler
+#### ~~Task Scheduler~~
 * ~~Implement a `remove(Runnable)` method~~
 * ~~Test the remove method~~
 
