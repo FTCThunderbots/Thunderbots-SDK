@@ -68,7 +68,7 @@ public class JoystickMonitor {
 	
 	public void updateJoysticks() {
 		List<JoystickButton> newButtons = Lightning.getJoystick(this.joystick).toButtonList();
-		for (JoystickButton button : JoystickButton.class.getEnumConstants()) {
+		for (JoystickButton button : JoystickButton.values()) {
 			for (JoystickListener listener : this.listeners) {
 				for (Method m : listener.getClass().getMethods()) {
 					for (Annotation a : m.getAnnotations()) {
