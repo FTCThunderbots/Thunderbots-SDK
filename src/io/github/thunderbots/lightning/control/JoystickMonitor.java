@@ -35,8 +35,8 @@ public class JoystickMonitor {
 	 * The joystick to monitor.
 	 */
 	/* (non-Javadoc)
-	 * If at all possible in the future, this should be a reference to a Joystick object, not just
-	 * an ID number.
+	 * If at all possible in the future, this should be a reference to a
+	 * Joystick object, not just an ID number.
 	 */
 	private int joystick;
 	
@@ -99,7 +99,8 @@ public class JoystickMonitor {
 	}
 	
 	/**
-	 * Invokes the given method on the given instance, and catches all exceptions.
+	 * Invokes the given method on the given instance, and catches all
+	 * exceptions.
 	 *
 	 * @param method the method to call.
 	 * @param instance the instance to call the method on.
