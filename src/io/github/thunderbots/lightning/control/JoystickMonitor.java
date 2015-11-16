@@ -38,7 +38,7 @@ public class JoystickMonitor {
 	 * If at all possible in the future, this should be a reference to a Joystick object, not just
 	 * an ID number.
 	 */
-	int joystick;
+	private int joystick;
 	
 	/**
 	 * The {@code JoystickListeners} that are listening to the joystick.
