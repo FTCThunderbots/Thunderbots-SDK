@@ -16,13 +16,14 @@
 
 package io.github.thunderbots.lightning.control;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.control.ButtonHandler.PressType;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 
@@ -41,9 +42,15 @@ public class JoystickMonitor {
 	private int joystick;
 	
 	/**
-	 * The {@code JoystickListeners} that are listening to the joystick.
+	 * The {@code Methods} that are called when buttons specified in their
+	 * @ButtonHandler annotation are pressed.
 	 */
-	private List<JoystickListener> listeners;
+	private Map<JoystickButton, List<Method>> handlers;
+	
+	/**
+	 * Contains a Method and its instance.
+	 */
+	private Map<Method, JoystickListener> instances;
 	
 	/**
 	 * The last 'snapshot' of the buttons on the gamepad.
@@ -57,45 +64,48 @@ public class JoystickMonitor {
 	 */
 	public JoystickMonitor(int joystick) {
 		this.joystick = joystick;
-		this.listeners = new ArrayList<JoystickListener>();
+		this.handlers = new HashMap<JoystickButton, List<Method>>();
+		this.fillHandlerMap();
 		Lightning.getTaskScheduler().registerTask(new MonitorUpdateRunnable());
 		this.lastButtons = Lightning.getJoystick(this.joystick).toButtonList();
 	}
 	
-	public void registerJoystickListener(JoystickListener listener) {
-		this.listeners.add(listener);
+	private void fillHandlerMap() {
+		for (JoystickButton button : JoystickButton.values()) {
+			this.handlers.put(button, new LinkedList<Method>());
+		}
 	}
 	
-	public void updateJoysticks() {
-		List<JoystickButton> newButtons = Lightning.getJoystick(this.joystick).toButtonList();
+	public void registerJoystickListener(JoystickListener listener) {
+		Class<?> c = listener.getClass();
+		for (Method m : c.getMethods()) {
+			if (m.isAnnotationPresent(ButtonHandler.class) && m.getAnnotation(
+					ButtonHandler.class).joystick() == this.joystick) {
+				this.handlers.get(m.getAnnotation(ButtonHandler.class).button()).add(m);
+				this.instances.put(m, listener);
+			}
+		}
+	}
+	
+	private void runHandlers() {
+		List<JoystickButton> newButtons = Lightning.getJoystick(
+				this.joystick).toButtonList();
 		for (JoystickButton button : JoystickButton.values()) {
-			for (JoystickListener listener : this.listeners) {
-				for (Method m : listener.getClass().getMethods()) {
-					for (Annotation a : m.getAnnotations()) {
-						tryButtonHandlers(newButtons, button, listener, m, a);
+			for (Method m : this.handlers.get(button)) {
+				ButtonHandler a = m.getAnnotation(ButtonHandler.class);
+				if (a.type() == PressType.PRESS) {
+					if (!this.lastButtons.contains(button) && newButtons.contains(button)) {
+						this.invokeListenerMethod(m, this.instances.get(m));
+					}
+				}
+				if (a.type() == PressType.RELEASE) {
+					if (this.lastButtons.contains(button) && !newButtons.contains(button)) {
+						this.invokeListenerMethod(m, this.instances.get(m));
 					}
 				}
 			}
 		}
 		this.lastButtons = newButtons;
-	}
-	
-	private void tryButtonHandlers(List<JoystickButton> newButtons, JoystickButton button,
-			JoystickListener listener, Method m, Annotation a) {
-		if (a instanceof ButtonHandler) {
-			ButtonHandler handler = (ButtonHandler) a;
-			if (handler.button() == button && handler.joystick() == this.joystick) {
-				if (handler.type() == PressType.PRESS) {
-					if (!this.lastButtons.contains(button) && newButtons.contains(button)) {
-						this.invokeListenerMethod(m, listener);
-					}
-				} else {
-					if (this.lastButtons.contains(button) && !newButtons.contains(button)) {
-						this.invokeListenerMethod(m, listener);
-					}									
-				}
-			}
-		}
 	}
 	
 	/**
@@ -117,7 +127,7 @@ public class JoystickMonitor {
 
 		@Override
 		public void run() {
-			JoystickMonitor.this.updateJoysticks();
+			JoystickMonitor.this.runHandlers();
 		}
 		
 	}
