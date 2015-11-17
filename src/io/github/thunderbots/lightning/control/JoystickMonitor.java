@@ -26,9 +26,10 @@ import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.control.ButtonHandler.PressType;
 
 /**
- * 
+ * Contains functionality for using event-based joystick systems.
  *
  * @author Zach Ohara
+ * @author Pranav Mathur
  */
 public class JoystickMonitor {
 	
@@ -53,7 +54,7 @@ public class JoystickMonitor {
 	private Map<Method, JoystickListener> instances;
 	
 	/**
-	 * The last 'snapshot' of the buttons on the gamepad.
+	 * The latest 'snapshot' of the buttons on the gamepad.
 	 */
 	private List<JoystickButton> lastButtons;
 	
@@ -70,6 +71,11 @@ public class JoystickMonitor {
 		this.lastButtons = Lightning.getJoystick(this.joystick).toButtonList();
 	}
 	
+	/**
+	 * Add all button handling methods in the specified listener to
+	 * {@code handlers} and add the instance of the listener to 
+	 * {@code instances}.
+	 */
 	public void registerJoystickListener(JoystickListener listener) {
 		Class<?> c = listener.getClass();
 		for (Method m : c.getMethods()) {
@@ -81,6 +87,10 @@ public class JoystickMonitor {
 		}
 	}
 	
+	/**
+	 * Execute the corresponding method for each newly pressed or
+	 * newly released button
+	 */
 	private void runHandlers() {
 		List<JoystickButton> newButtons = Lightning.getJoystick(
 				this.joystick).toButtonList();
