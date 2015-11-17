@@ -70,12 +70,6 @@ public class JoystickMonitor {
 		this.lastButtons = Lightning.getJoystick(this.joystick).toButtonList();
 	}
 	
-	private void fillHandlerMap() {
-		for (JoystickButton button : JoystickButton.values()) {
-			this.handlers.put(button, new LinkedList<Method>());
-		}
-	}
-	
 	public void registerJoystickListener(JoystickListener listener) {
 		Class<?> c = listener.getClass();
 		for (Method m : c.getMethods()) {
@@ -120,6 +114,12 @@ public class JoystickMonitor {
 			method.invoke(instance, new Object[0]);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void fillHandlerMap() {
+		for (JoystickButton button : JoystickButton.values()) {
+			this.handlers.put(button, new LinkedList<Method>());
 		}
 	}
 	
