@@ -66,6 +66,7 @@ public class JoystickMonitor {
 	public JoystickMonitor(int joystick) {
 		this.joystick = joystick;
 		this.handlers = new HashMap<JoystickButton, List<Method>>();
+		this.instances = new HashMap<Method, JoystickListener>();
 		this.fillHandlerMap();
 		Lightning.getTaskScheduler().registerTask(new MonitorUpdateRunnable());
 		this.lastButtons = Lightning.getJoystick(this.joystick).toButtonList();
