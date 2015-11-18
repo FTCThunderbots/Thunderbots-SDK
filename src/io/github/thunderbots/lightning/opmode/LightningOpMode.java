@@ -29,13 +29,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 public abstract class LightningOpMode extends LinearOpMode {
 
 	/**
-	 * Constructs a new LightningOpMode.
-	 */
-	public LightningOpMode() {
-		
-	}
-
-	/**
 	 * Initializes the robot. This can be defined however it is seen fit by the specific
 	 * overriding op mode. Any op mode that overrides this method should also call
 	 * {@code super.initializeOpMode()} on the first line.
