@@ -10,5 +10,9 @@ public enum Alliance {
 	Alliance(int side) {
 		this.side = side;
 	}
+	
+	public int getSide() {
+		return this.side;
+	}
 
 }
