@@ -77,7 +77,16 @@ public final class Lightning {
 	 */
 	private static TaskScheduler taskScheduler;
 	
+	/**
+	 * The joystick monitor for joystick 1.
+	 * @see io.github.thunderbots.lightning.control.JoystickMonitor
+	 */
 	private static JoystickMonitor monitor1;
+	
+	/**
+	 * The joystick monitor for joystick 1.
+	 * @see io.github.thunderbots.lightning.control.JoystickMonitor
+	 */
 	private static JoystickMonitor monitor2;
 
 	/**
@@ -133,8 +142,16 @@ public final class Lightning {
 		}
 	}
 	
-	public static JoystickMonitor getJoystickMonitor(int gamepad) {
-		switch (gamepad) {
+	/**
+	 * Gets a reference to the joystick monitor for the given joystick.
+	 * 
+	 * @param joystick the ID of the joystick to get the monitor for; must be 1 or 2.
+	 * @return the joystick monitor for the given joystick.
+	 * @see #monitor1
+	 * @see #monitor2
+	 */
+	public static JoystickMonitor getJoystickMonitor(int joystick) {
+		switch (joystick) {
 			case 1:
 				return Lightning.monitor1;
 			case 2:
@@ -234,12 +251,29 @@ public final class Lightning {
 	}
 
 	/**
+	 * Gets a reference to any sensor on the robot with the given name.
+	 *
+	 * @param name the name of the sensor.
+	 * @return the sensor with the given name.
+	 * @throws IllegalArgumentException if no sensors exist with the given name.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T getSensor(String name) {
+		for (DeviceMapping<?> m : Lightning.sensorMaps) {
+			if (m.entrySet().contains(name)) {
+				return (T) m.get(name);
+			}
+		}
+		throw new IllegalArgumentException();
+	}
+
+	/**
 	 * Returns a list of {@code DeviceMapping}s in the given {@code HardwareMap} that could
 	 * contain sensors.
 	 * <p>
 	 * This method essentially works by enumerating the known device mappings that could contain
 	 * sensors. If more device mappings are added to FTC's built-in SDK, this method will need
-	 * to be updated before any new sensors can be accessed through {@code Lightning}.
+	 * to be updated before any new sensors can be accessed through Lightning.
 	 *
 	 * @param map the hardware map to search for sensor maps in.
 	 * @return a list of the device maps containing sensors.
@@ -262,22 +296,5 @@ public final class Lightning {
 		sensorMaps.add(map.voltageSensor);
 		return sensorMaps;
 	}
-
-	/**
-	 * Gets a reference to any sensor on the robot with the given name.
-	 *
-	 * @param name the name of the sensor.
-	 * @return the sensor with the given name.
-	 * @throws IllegalArgumentException if no sensors exist with the given name.
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T getSensor(String name) {
-		for (DeviceMapping<?> m : Lightning.sensorMaps) {
-			if (m.entrySet().contains(name)) {
-				return (T) m.get(name);
-			}
-		}
-		throw new IllegalArgumentException();
-	}
-
+	
 }
