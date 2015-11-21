@@ -1,5 +1,9 @@
 # To-do List for the Lightning SDK
 
+#### Post-Competition
+* Add strafe ticks and traverse ticks to mecanum drive
+* Deprecate all strafe and traverse stuff in tank drive
+
 #### App Improvements
 * Apply `OpMode` and `Active` annotations to appropriate op modes
 * Add categories for op modes
