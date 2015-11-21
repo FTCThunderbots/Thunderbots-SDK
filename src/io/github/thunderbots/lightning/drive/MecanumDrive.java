@@ -76,9 +76,6 @@ public class MecanumDrive extends DriveSystem {
 	 */
 	public static final double ROTATE_POWER_WEIGHT = 1.0;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean setMovement(double forward, double clockwise) {
 		return this.setMovement(forward, 0, clockwise);
