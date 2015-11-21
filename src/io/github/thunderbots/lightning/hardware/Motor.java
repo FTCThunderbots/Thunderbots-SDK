@@ -38,7 +38,7 @@ public class Motor {
 	private Encoder encoder;
 
 	/**
-	 * The current power of the motor. Used as backup for external requests of motor power.
+	 * The current power of the motor.
 	 */
 	private double power;
 
