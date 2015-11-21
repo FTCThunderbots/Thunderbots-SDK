@@ -3,6 +3,7 @@
 #### Post-Competition
 * Add strafe ticks and traverse ticks to mecanum drive
 * Deprecate all strafe and traverse stuff in tank drive
+* Move motor to an interface and implement it as a dc motor or cr servo
 
 #### App Improvements
 * Apply `OpMode` and `Active` annotations to appropriate op modes
