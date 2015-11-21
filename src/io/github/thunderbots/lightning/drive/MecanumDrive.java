@@ -174,4 +174,38 @@ public class MecanumDrive extends DriveSystem {
 		return true;
 	}
 
+	@Override
+	public int getDriveTicks() {
+		Motor[] motors = this.getWheelSet().getMotorArray();
+		int sum = motors[0].getEncoder().getPosition()
+				+ motors[2].getEncoder().getPosition()
+				- (motors[1].getEncoder().getPosition()
+						+ motors[3].getEncoder().getPosition());
+		return sum / 4;
+	}
+
+	@Override
+	public int getRotateTicks() {
+		Motor[] motors = this.getWheelSet().getMotorArray();
+		int sum = motors[0].getEncoder().getPosition()
+				+ motors[2].getEncoder().getPosition()
+				+ motors[1].getEncoder().getPosition()
+				+ motors[3].getEncoder().getPosition();
+		return sum / 4;
+	}
+
+	@Override
+	public int getSwingTicks(boolean clockwise) {
+		Motor[] motors = this.getWheelSet().getMotorArray();
+		int sum;
+		if (clockwise) {
+			sum = motors[0].getEncoder().getPosition()
+					+ motors[2].getEncoder().getPosition();
+		} else {
+			sum = - (motors[1].getEncoder().getPosition()
+					+ motors[3].getEncoder().getPosition());
+		}
+		return sum / 2;
+	}
+
 }

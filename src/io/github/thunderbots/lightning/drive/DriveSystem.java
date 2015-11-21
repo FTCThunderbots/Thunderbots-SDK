@@ -53,15 +53,15 @@ public abstract class DriveSystem {
 	public DriveSystem(String[] motornames) {
 		this.motors = new MotorSet(motornames);
 	}
-	
+
 	/**
-	 * Gets and returns the average power of all encoder powers within the {@code DriveSystem}
-	 * 
-	 * @return an average of all encoder powers.
-	 * @see io.github.thunderbots.lightning.hardware.MotorSet#getAverageEncoderValue()
+	 * Gets a reference to the {@code DriveMotorSet} used by this drive system.
+	 *
+	 * @return the {@code DriveMotorSet} for this drive system.
+	 * @see #motors
 	 */
-	public int getAverageEncoderValue() {
-		return this.motors.getAverageEncoderValue();
+	protected MotorSet getWheelSet() {
+		return this.motors;
 	}
 		
 	/**
@@ -73,16 +73,27 @@ public abstract class DriveSystem {
 	 * @return the success of the operation.
 	 */
 	public abstract boolean setMovement(double forward, double clockwise);
+	
+	/**
+	 * Gets the average value of the encoders for driving.
+	 *
+	 * @return the average value of the encoders for driving.
+	 */
+	public abstract int getDriveTicks();
+	
+	/**
+	 * Gets the average value of the encoders for rotating.
+	 *
+	 * @return the average value of the encoders for rotating.
+	 */	
+	public abstract int getRotateTicks();
 
 	/**
-	 * Gets a reference to the {@code DriveMotorSet} used by this drive system.
+	 * Gets the average value of the encoders for swinging.
 	 *
-	 * @return the {@code DriveMotorSet} for this drive system.
-	 * @see #motors
+	 * @return the average value of the encoders for swinging.
 	 */
-	protected MotorSet getWheelSet() {
-		return this.motors;
-	}
+	public abstract int getSwingTicks(boolean clockwise);
 
 	/**
 	 * Stops the robot.
@@ -121,7 +132,7 @@ public abstract class DriveSystem {
 	 * @param power the forward power; between -1 and 1.
 	 * @return the success of the operation.
 	 */
-	public boolean swing(boolean clockwise, int power) {
+	public boolean swing(boolean clockwise, double power) {
 		int directionMultiplier = clockwise ? 1 : -1;
 		return this.setMovement(power, Math.abs(power) * directionMultiplier);
 	}
@@ -160,8 +171,69 @@ public abstract class DriveSystem {
 	 * @return the success of the operation.
 	 * @see #swing(boolean, int)
 	 */
-	public boolean swingSeconds(boolean clockwise, int power, float seconds) {
+	public boolean swingSeconds(boolean clockwise, double power, double seconds) {
 		return this.swing(clockwise, power) && this.waitAndStop(seconds);
+	}
+	
+	/**
+	 * Drives the robot forward with the given power and for the given tick distance,
+	 * then stops.
+	 *
+	 * @param power the forward power; between -1 and 1.
+	 * @param ticks the amount of encoder ticks to move for.
+	 * @return the success of the operation.
+	 * @see #drive(double)
+	 */
+	public boolean driveTicks(double power, int ticks) {
+		int start = this.getDriveTicks();
+		int end = start + ticks;
+		this.drive(power);
+		while (this.getDriveTicks() < end) {
+			//do nothing
+		}
+		this.halt();
+		return true;
+	}
+	
+	/**
+	 * Spins the robot clockwise with the given power and for the given tick distance,
+	 * then stops.
+	 *
+	 * @param power the clockwise power; between -1 and 1.
+	 * @param ticks the amount of encoder ticks to move for.
+	 * @return the success of the operation.
+	 * @see #rotate(double)
+	 */
+	public boolean rotateTicks(double power, int ticks) {
+		int start = this.getRotateTicks();
+		int end = start + ticks;
+		this.rotate(power);
+		while (this.getRotateTicks() < end) {
+			//do nothing
+		}
+		this.halt();
+		return true;
+	}
+	
+	/**
+	 * Swings the robot with the given spin and forward power, and for the given tick distance,
+	 * then stops.
+	 *
+	 * @param clockwise the clockwise power; between -1 and 1.
+	 * @param power the forward power; between -1 and 1.
+	 * @param ticks the amount of encoder ticks to move for.
+	 * @return the success of the operation.
+	 * @see #drive(double)
+	 */
+	public boolean swingTicks(boolean clockwise, double power, int ticks) {
+		int start = this.getSwingTicks(clockwise);
+		int end = start + ticks;
+		this.swing(clockwise, power);
+		while (this.getSwingTicks(clockwise) < end) {
+			//do nothing
+		}
+		this.halt();
+		return true;
 	}
 
 	/**
