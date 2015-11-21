@@ -18,7 +18,6 @@ package io.github.thunderbots.lightning.control.layout;
 
 import io.github.thunderbots.lightning.control.Joystick;
 
-
 /**
  * A {@code DriveSpinControlLayout} is a {@code ControlLayout} that represents the 'default'
  * control layout for FTC robots. The y-axis of the left thumbstick is responsible for
