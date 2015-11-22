@@ -19,6 +19,14 @@ package io.github.thunderbots.lightning.utility;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
 
+/**
+ * The {@code Telemetry} class acts as a gateway to all telemetric exchange between the robot
+ * controller and the driver station. The static methods in this class can be used to send
+ * data from the robot controller to the driver station for purposes such as debugging or
+ * providing extra information about the state of the robot to the driver station.
+ * 
+ * @author Pranav Mathur
+ */
 public final class Telemetry {
 	
 	/**
@@ -31,15 +39,28 @@ public final class Telemetry {
 	private static com.qualcomm.robotcore.robocol.Telemetry robotTelemetry;
 	
 	/**
-	 * Telemetry should not be instantiable.
+	 * {@code Telemetry} should not be instantiable.
 	 */
 	private Telemetry() {
 		
 	}
 	
+	/**
+	 * Sets the telemetry base-object to the given object.
+	 * <p>
+	 * For security and encapsulation purposes, this method can only be called once, during
+	 * the setup period of any op mode. It is presumed that the object representing the
+	 * telemetric connection will not change over the duration of an op mode.
+	 *
+	 * @param telemetry the base telemetry object.
+	 * @throws IllegalStateException This method can only be called once, and subsequent calls
+	 * will result in an exception.
+	 * @see #robotTelemetry
+	 */
 	public static void setTelemetry(com.qualcomm.robotcore.robocol.Telemetry telemetry) {
-		if (Telemetry.robotTelemetry != null)
+		if (Telemetry.robotTelemetry != null) {
 			throw new IllegalStateException();
+		}
 		Telemetry.robotTelemetry = telemetry;
 	}
 
