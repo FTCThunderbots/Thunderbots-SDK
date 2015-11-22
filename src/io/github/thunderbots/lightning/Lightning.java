@@ -63,15 +63,6 @@ public final class Lightning {
 	private static List<DeviceMapping<?>> sensorMaps;
 
 	/**
-	 * The telemetry link between the robot controller and the driver station. It is used,
-	 * among other things, to send debug information from the robot controller to the driver
-	 * station.
-	 *
-	 * @see com.qualcomm.robotcore.robocol.Telemetry
-	 */
-	private static com.qualcomm.robotcore.robocol.Telemetry robotTelemetry;
-
-	/**
 	 * The master task scheduler that is used to execute all background tasks in the SDK
 	 * and in client code of the SDK.
 	 */
@@ -143,9 +134,10 @@ public final class Lightning {
 	}
 	
 	/**
-	 * Gets a reference to the joystick monitor for the given joystick.
+	 * Gets a reference to the joystick monitor for the given joystick. Currently, only
+	 * {@code joystick1} and {@code joystick2} are supported.
 	 * 
-	 * @param joystick the ID of the joystick to get the monitor for; must be 1 or 2.
+	 * @param joystick the ID of the joystick to get the monitor for; can only be 1 or 2.
 	 * @return the joystick monitor for the given joystick.
 	 * @see #monitor1
 	 * @see #monitor2
@@ -169,6 +161,7 @@ public final class Lightning {
 	 *
 	 * @param name the name of the motor.
 	 * @return the motor with the given name.
+	 * @see io.github.thunderbots.lightning.hardware.CRServo
 	 */
 	public static Motor getMotor(String name) {
 		try {
