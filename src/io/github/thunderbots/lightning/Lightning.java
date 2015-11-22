@@ -23,13 +23,13 @@ import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
 import io.github.thunderbots.lightning.opmode.LightningOpMode;
 import io.github.thunderbots.lightning.scheduler.TaskScheduler;
+import io.github.thunderbots.lightning.utility.Telemetry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
-import com.qualcomm.robotcore.robocol.Telemetry;
 
 /**
  * The {@code Lightning} class exposes methods for general interfacing with the hardware on
@@ -69,7 +69,7 @@ public final class Lightning {
 	 *
 	 * @see com.qualcomm.robotcore.robocol.Telemetry
 	 */
-	private static Telemetry robotTelemetry;
+	private static com.qualcomm.robotcore.robocol.Telemetry robotTelemetry;
 
 	/**
 	 * The master task scheduler that is used to execute all background tasks in the SDK
@@ -106,11 +106,11 @@ public final class Lightning {
 	public static void initializeLightning(LightningOpMode opmode) {
 		Lightning.opmode = opmode;
 		Lightning.robotHardware = opmode.hardwareMap;
-		Lightning.robotTelemetry = opmode.telemetry;
 		Lightning.sensorMaps = Lightning.getSensorMaps(Lightning.robotHardware);
 		Lightning.taskScheduler = new TaskScheduler();
 		Lightning.monitor1 = new JoystickMonitor(1);
 		Lightning.monitor2 = new JoystickMonitor(2);
+		Telemetry.setTelemetry(opmode.telemetry);
 	}
 
 	/**
@@ -187,67 +187,6 @@ public final class Lightning {
 	 */
 	public static Servo getServo(String name) {
 		return new Servo(Lightning.robotHardware.servo.get(name));
-	}
-
-	/**
-	 * Sends given data from the robot controller to the driver station. Any object can be
-	 * sent, but the object's {@code toString()} method will be called and the string
-	 * representation of the object is what will actually be sent. The data will be
-	 * displayed in the bottom portion of the driver station's screen.
-	 *
-	 * @param tag a very short description of the data that is being sent. Ideally this
-	 * string should be around 1-8 characters long, but an upper limit on characters is
-	 * currently not known.
-	 * @param data the object to be sent.
-	 */
-	public static void sendTelemetryData(String tag, Object data) {
-		Lightning.robotTelemetry.addData(tag, data);
-	}
-
-	/**
-	 * Sends given data from the robot controller to the driver station. This method acts as
-	 * a delegate to {@link #sendTelemetryData(String, Object)}, but replaces the tag
-	 * argument with an empty string.
-	 * 
-	 * @deprecated
-	 * Since this method is a delegate that substitutes an empty string for the tag, all
-	 * objects that are sent with this method will have an identical tag. The telemetry
-	 * system assumes that multiple objects sent with the same tag are just different
-	 * versions of the same information, and that only the most recent version of the
-	 * object is the 'correct' version. If multiple objects are sent with the same tag,
-	 * only the most recently sent object will be displayed, and all others will be
-	 * discarded. This makes it very impractical to send data with an empty tag, because
-	 * the telemetry system will discard potentially important data.
-	 *
-	 * @param data the object to be sent.
-	 * @see #sendTelemetryData(String, Object)
-	 */
-	public static void sendTelemetryData(Object data) {
-		Lightning.sendTelemetryData("", data);
-	}
-
-	/**
-	 * Sends motor data from the robot controller to the driver station. The name of the
-	 * motor is used as the tag for the data, and the power of the motor is sent as the
-	 * data.
-	 *
-	 * @param m the motor to be sent.
-	 * @see #sendTelemetryData(String, Object)
-	 */
-	public static void sendTelemetryData(Motor m) {
-		Lightning.sendTelemetryData(m.getName(), m.getPower());
-	}
-
-	/**
-	 * Sends servo data from the robot controller to the driver station. The name of the
-	 * servo is used as the tag for the data, and the position of the servo is sent as the
-	 * data.
-	 *
-	 * @param s the servo to be sent.
-	 * @see #sendTelemetryData(String, Object)
-	 */
-	public static void sendTelemetryData(Servo s) {
-		Lightning.sendTelemetryData(s.getName(), s.getPosition());
 	}
 
 	/**
