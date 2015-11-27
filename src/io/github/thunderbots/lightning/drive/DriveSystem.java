@@ -75,21 +75,24 @@ public abstract class DriveSystem {
 	public abstract boolean setMovement(double forward, double clockwise);
 	
 	/**
-	 * Gets the average value of the encoders for driving.
+	 * Gets the average value in raw ticks of the encoders for driving,
+	 * assuming the robot is traveling in a straight line.
 	 *
 	 * @return the average value of the encoders for driving.
 	 */
 	public abstract int getDriveTicks();
 	
 	/**
-	 * Gets the average value of the encoders for rotating.
+	 * Gets the average value in raw ticks of the encoders for driving,
+	 * assuming the robot is rotating.
 	 *
 	 * @return the average value of the encoders for rotating.
 	 */	
 	public abstract int getRotateTicks();
 
 	/**
-	 * Gets the average value of the encoders for swinging.
+	 * Gets the average value in raw ticks of the encoders for driving,
+	 * assuming the robot is swinging.
 	 *
 	 * @return the average value of the encoders for swinging.
 	 */
