@@ -24,6 +24,9 @@ package io.github.thunderbots.lightning.utility;
  */
 public final class MathUtil {
 
+	/**
+	 * {@code MathUtil} should not be instantiable.
+	 */
 	private MathUtil() {
 
 	}

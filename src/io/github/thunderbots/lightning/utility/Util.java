@@ -23,10 +23,20 @@ package io.github.thunderbots.lightning.utility;
  */
 public final class Util {
 
+	/**
+	 * {@code Util} should not be instantiable.
+	 */
 	private Util() {
 
 	}
 
+	/**
+	 * Blocks the thread for the given amount of milliseconds.
+	 * 
+	 * @param milliseconds the amount of time to block.
+	 * @return {@code true} if the block sucedded without being interrupted, or
+	 * {@code false} if the thread was interrupted.
+	 */
 	public static boolean sleep(long milliseconds) {
 		try {
 			Thread.sleep(milliseconds);;

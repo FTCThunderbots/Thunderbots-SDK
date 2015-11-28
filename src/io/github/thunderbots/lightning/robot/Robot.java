@@ -26,7 +26,15 @@ import io.github.thunderbots.lightning.drive.TankDrive;
  * @author Pranav Mathur
  */
 public abstract class Robot {
+
+	/**
+	 * The drive system that controls the movement of this robot.
+	 */
+	private DriveSystem drive;
 	
+	/**
+	 * Constructs a new {@code Robot} and initializes the drive system
+	 */
 	public Robot() {
 		this.drive = this.createDriveSystem();
 	}
@@ -49,13 +57,10 @@ public abstract class Robot {
 	 * @return the names of the driving motors.
 	 */
 	protected abstract String[] getDriveMotorNames();
-	
-	private DriveSystem drive;
 
 	/**
 	 * Initializes the robot. The implementation of this method should be used in place of
-	 * a constructor. Instance variables for a robot object should initialize from the
-	 * available hardware maps in this method.
+	 * a constructor.
 	 */
 	public abstract void initializeRobot();
 
@@ -63,6 +68,7 @@ public abstract class Robot {
 	 * Gets a reference to the {@code DriveSystem} being used to control the robot.
 	 *
 	 * @return the drive system for this robot.
+	 * @see #drive
 	 */
 	public DriveSystem getDrive() {
 		return this.drive;

@@ -32,8 +32,6 @@ public abstract class TeleOp extends SimpleOpMode {
 	
 	/**
 	 * The control layout of the driving joystick.
-	 * 
-	 * When TeleOp is active, then the then a loop will continue to get the movement from the joystick
 	 */
 	private ControlLayout joystickLayout;
 
@@ -45,11 +43,6 @@ public abstract class TeleOp extends SimpleOpMode {
 		}
 	}
 	
-	/**
-	 * This initializes a layout based on ControlLayout
-	 * This sets up the controllayout to be used later on in the movement of the robot.
-	 */
-	
 	@Override
 	protected void initializeOpMode() {
 		super.initializeOpMode();
@@ -58,8 +51,6 @@ public abstract class TeleOp extends SimpleOpMode {
 
 	/**
 	 * Sets the instantaneous movement of the robot based on readings from the joysticks.
-	 * This can be overridden by any op mode that should not use the default drive/turn
-	 * controls.
 	 */
 	protected void setMovement() {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
