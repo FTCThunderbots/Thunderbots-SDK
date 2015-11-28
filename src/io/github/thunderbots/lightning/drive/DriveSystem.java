@@ -420,5 +420,65 @@ public abstract class DriveSystem {
 		this.halt();
 		return true;
 	}
+	
+	/**
+	 * Drives the robot forward with the given power and for the given distance,
+	 * then stops.
+	 *
+	 * @param power the forward power; between -1 and 1.
+	 * @param inches the distance to drive forward, in inches.
+	 * @return the success of the operation.
+	 */
+	public boolean driveInches(double power, double inches) {
+		double start = this.getDriveInches();
+		double end = start + inches;
+		while (this.getDriveInches() < end) {
+			//do nothing
+		}
+		this.halt();
+		return true;
+	}
+	
+	/**
+	 * Spins the robot clockwise with the given power and for the given amount of degrees,
+	 * then stops.
+	 *
+	 * @param power the clockwise power; between -1 and 1.
+	 * @param degrees the degrees to rotate the robot.
+	 * @return the success of the operation.
+	 * @see #rotate(double)
+	 */
+	public boolean rotateDegrees(double power, double degrees) {
+		double start = this.getRotationDegrees();
+		double end = start + degrees;
+		this.rotate(power);
+		while (this.getRotationDegrees() < end) {
+			//do nothing
+		}
+		this.halt();
+		return true;
+	}
+	
+	/**
+	 * Swings the robot with the given spin and forward power, and for the given amount of degrees,
+	 * then stops.
+	 *
+	 * @param clockwise {@code true} if the robot should swing clockwise, or {@code false}
+	 * if the robot should spin counter-clockwise.
+	 * @param power the forward power; between -1 and 1.
+	 * @param ticks the amount of encoder ticks to move for.
+	 * @return the success of the operation.
+	 * @see #swing(boolean, double)
+	 */
+	public boolean swingDegrees(boolean clockwise, double power, double degrees) {
+		double start = this.getSwingDegrees(clockwise);
+		double end = start + degrees;
+		this.swing(clockwise, power);
+		while (this.getSwingDegrees(clockwise) < end) {
+			//do nothing
+		}
+		this.halt();
+		return true;
+	}
 
 }
