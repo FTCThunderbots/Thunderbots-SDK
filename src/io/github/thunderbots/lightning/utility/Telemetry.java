@@ -23,7 +23,7 @@ public final class Telemetry {
 	
 	public static void setTelemetry(com.qualcomm.robotcore.robocol.Telemetry telemetry) {
 		if (Telemetry.robotTelemetry != null)
-			throw new IllegalStateException();
+			throw new IllegalStateException("Telemetry can only be initialized once");
 		Telemetry.robotTelemetry = telemetry;
 	}
 
@@ -38,13 +38,13 @@ public final class Telemetry {
 	 * currently not known.
 	 * @param data the object to be sent.
 	 */
-	public static void sendTelemetryData(String tag, Object data) {
+	public static void sendData(String tag, Object data) {
 		Telemetry.robotTelemetry.addData(tag, data);
 	}
 
 	/**
 	 * Sends given data from the robot controller to the driver station. This method acts as
-	 * a delegate to {@link io.github.thunderbots.lightning.utility.Telemetry#sendTelemetryData(String, Object)}, but replaces the tag
+	 * a delegate to {@link io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)}, but replaces the tag
 	 * argument with an empty string.
 	 * 
 	 * @deprecated
@@ -58,10 +58,10 @@ public final class Telemetry {
 	 * the telemetry system will discard potentially important data.
 	 *
 	 * @param data the object to be sent.
-	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendTelemetryData(String, Object)
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
-	public static void sendTelemetryData(Object data) {
-		Telemetry.sendTelemetryData("", data);
+	public static void sendData(Object data) {
+		Telemetry.sendData("", data);
 	}
 
 	/**
@@ -70,10 +70,10 @@ public final class Telemetry {
 	 * data.
 	 *
 	 * @param m the motor to be sent.
-	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendTelemetryData(String, Object)
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
-	public static void sendTelemetryData(Motor m) {
-		Telemetry.sendTelemetryData(m.getName(), m.getPower());
+	public static void sendMotor(Motor m) {
+		Telemetry.sendData(m.getName(), m.getPower());
 	}
 
 	/**
@@ -82,10 +82,10 @@ public final class Telemetry {
 	 * data.
 	 *
 	 * @param s the servo to be sent.
-	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendTelemetryData(String, Object)
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
-	public static void sendTelemetryData(Servo s) {
-		Telemetry.sendTelemetryData(s.getName(), s.getPosition());
+	public static void sendServo(Servo s) {
+		Telemetry.sendData(s.getName(), s.getPosition());
 	}
 
 }
