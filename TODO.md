@@ -16,7 +16,7 @@
 * Update the gh-pages branch
 
 #### Encoders
-* Test encoder functionality on a drive base
+* Calibrate stuff to inches / ticks
 
 #### Hardware
 * Test the CRServo code
