@@ -177,7 +177,7 @@ public class MecanumDrive extends DriveSystem {
 		int sum = motors[0].getEncoder().getPosition()
 				+ motors[2].getEncoder().getPosition()
 				- (motors[1].getEncoder().getPosition()
-						+ motors[3].getEncoder().getPosition());
+				+ motors[3].getEncoder().getPosition());
 		return sum / 4;
 	}
 
