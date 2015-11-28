@@ -36,6 +36,45 @@ public abstract class DriveSystem {
 	 * @see io.github.thunderbots.lightning.hardware.MotorSet
 	 */
 	private MotorSet motors;
+	
+	/** 
+	 * The amount of ticks that are equal to one full revolution of the wheels in this
+	 * drive system.
+	 * <p>
+	 * This number cannot have a default value because different types of encoders will be
+	 * used, and each may have a different definition of a tick.
+	 */
+	private double encoderTicksPerRevolution;
+
+	/**
+	 * Sets the amount of ticks that should be expected if the robot drives forward one inch.
+	 * <p>
+	 * This number cannot have a default value because different types of encoders will be
+	 * used, and each may have a different definition of a tick.
+	 * 
+	 * @param ticks the amount of encoder ticks in one drive-inch of this drive system.
+	 */
+	private double encoderTicksPerDriveInch;
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot rotates one degree.
+	 * <p>
+	 * This number cannot have a default value because different types of encoders will be
+	 * used, and each may have a different definition of a tick.
+	 *
+	 * @param ticks the amount of encoder ticks in one rotation degree of this drive system.
+	 */
+	private double encoderTicksPerRotationDegree;
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot swings one degree.
+	 * <p>
+	 * This number cannot have a default value because different types of encoders will be
+	 * used, and each may have a different definition of a tick.
+	 *
+	 * @param ticks the amount of encoder ticks in one swing degree of this drive system.
+	 */
+	private double encoderTicksPerSwingDegree;
 
 	/**
 	 * Constructs a new {@code DriveSystem} with the given {@code DriveMotorSet} as a base.
@@ -74,39 +113,6 @@ public abstract class DriveSystem {
 	 * @return the success of the operation.
 	 */
 	public abstract boolean setMovement(double forward, double clockwise);
-	
-	/**
-	 * Gets the average value in raw ticks of the encoders for driving,
-	 * assuming the robot is traveling in a straight line.
-	 *
-	 * @return the average value of the encoders for driving.
-	 */
-	public abstract int getDriveTicks();
-	
-	/**
-	 * Gets the average value in raw ticks of the encoders for driving,
-	 * assuming the robot is rotating.
-	 *
-	 * @return the average value of the encoders for rotating.
-	 */	
-	public abstract int getRotateTicks();
-
-	/**
-	 * Gets the average value in raw ticks of the encoders for driving,
-	 * assuming the robot is swinging.
-	 *
-	 * @return the average value of the encoders for swinging.
-	 */
-	public abstract int getSwingTicks(boolean clockwise);
-	
-	/**
-	 * Resets the encoder of each motor in the drive system.
-	 */
-	public void resetEncoders() {
-		for (Motor m : this.motors.getMotorArray()) {
-			m.getEncoder().reset();
-		}
-	}
 
 	/**
 	 * Stops the robot.
@@ -266,6 +272,84 @@ public abstract class DriveSystem {
 			this.halt();
 		}
 		return uninterrupted;
+	}
+	
+	/*
+	 * Encoder methods
+	 */
+	
+	/**
+	 * Gets the average value in raw ticks of the encoders for driving,
+	 * assuming the robot is traveling in a straight line.
+	 *
+	 * @return the average value of the encoders for driving.
+	 */
+	public abstract int getDriveTicks();
+	
+	/**
+	 * Gets the average value in raw ticks of the encoders for driving,
+	 * assuming the robot is rotating.
+	 *
+	 * @return the average value of the encoders for rotating.
+	 */	
+	public abstract int getRotateTicks();
+
+	/**
+	 * Gets the average value in raw ticks of the encoders for driving,
+	 * assuming the robot is swinging.
+	 *
+	 * @return the average value of the encoders for swinging.
+	 */
+	public abstract int getSwingTicks(boolean clockwise);
+	
+	/**
+	 * Resets the encoder of each motor in the drive system.
+	 */
+	public void resetEncoders() {
+		for (Motor m : this.motors.getMotorArray()) {
+			m.getEncoder().reset();
+		}
+	}
+	
+	/**
+	 * Sets the amount of ticks that are equal to one full revolution of the wheels in this
+	 * drive system.
+	 *
+	 * @param ticks the amount of encoder ticks in one revolution of this drive system.
+	 * @see #encoderTicksPerRevolution
+	 */
+	public void setEncoderTicksPerRevolution(double ticks) {
+		this.encoderTicksPerRevolution = ticks;
+	}
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot drives forward one inch.
+	 * 
+	 * @param ticks the amount of encoder ticks in one drive-inch of this drive system.
+	 * @see #encoderTicksPerDriveInch
+	 */
+	public void setEncoderTicksPerDriveInch(double ticks) {
+		this.encoderTicksPerDriveInch = ticks;
+	}
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot rotates one degree.
+	 *
+	 * @param ticks the amount of encoder ticks in one rotation degree of this drive system.
+	 * @see #encoderTicksPerRotationDegree
+	 */
+	public void setEncoderTicksPerRotationDegree(double ticks) {
+		this.encoderTicksPerRotationDegree = ticks;
+	}
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot swings one degree.
+	 *
+	 * @param ticks the amount of encoder ticks in one swing degree of this drive system.
+	 * @see #encoderTicksPerSwingDegree
+	 */
+	public void setEncoderTicksPerSwingDegree(double ticks) {
+		this.encoderTicksPerSwingDegree = ticks;
 	}
 
 }
