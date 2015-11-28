@@ -65,6 +65,24 @@ public final class Telemetry {
 	}
 
 	/**
+	 * Sends motor data from the robot controller to the driver station. Two entries are
+	 * sent for the data, with the first being the power, and the second being the current
+	 * encoder reading.
+	 * <p>
+	 * This method works by calling {@link #sendMotorPower(Motor)} followed by 
+	 * {@link #sendMotorPosition(Motor)}. Refer to the documentation for both of these
+	 * methods for more information.
+	 *
+	 * @param m the motor to be sent.
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendMotorPower(Motor)
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendMotorPosition(Motor)
+	 */
+	public static void sendMotor(Motor m) {
+		Telemetry.sendMotorPower(m);
+		Telemetry.sendMotorPosition(m);
+	}
+
+	/**
 	 * Sends motor data from the robot controller to the driver station. The name of the
 	 * motor is used as the tag for the data, and the power of the motor is sent as the
 	 * data.
@@ -72,8 +90,20 @@ public final class Telemetry {
 	 * @param m the motor to be sent.
 	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
-	public static void sendMotor(Motor m) {
-		Telemetry.sendData(m.getName(), m.getPower());
+	public static void sendMotorPower(Motor m) {
+		Telemetry.sendData(m.getName() + " pow", m.getPower());
+	}
+
+	/**
+	 * Sends motor data from the robot controller to the driver station. The name of the
+	 * motor is used as the tag for the data, and the reading of the encoder is sent as
+	 * the data.
+	 *
+	 * @param m the motor to be sent.
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
+	 */
+	public static void sendMotorPosition(Motor m) {
+		Telemetry.sendData(m.getName() + " pos", m.getEncoder().getPosition());
 	}
 
 	/**
@@ -84,8 +114,8 @@ public final class Telemetry {
 	 * @param s the servo to be sent.
 	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
-	public static void sendServo(Servo s) {
-		Telemetry.sendData(s.getName(), s.getPosition());
+	public static void sendServoPosition(Servo s) {
+		Telemetry.sendData(s.getName() + " pos", s.getPosition());
 	}
 
 }
