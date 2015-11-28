@@ -18,11 +18,10 @@
  * A control layout is a method of converting a joystick state (i.e left stick forward,
  * right stick backward, etc) into both forward and clockwise power, which are interpreted 
  * by methods included in {@link io.github.thunderbots.lightning.drive.DriveSystem DriveSystem}.
- * This package includes many different control layouts, such as DriveSpin, Tank, and Mecanum.
- * {@link io.github.thunderbots.lightning.control.layout.ControlLayout Control Layout} includes
- * the base methods that all control layouts are meant to return. The Control Layout interface
- * should be implemented by anything that is a joystick control layout. Refer to 
- * {@link  io.github.thunderbots.lightning.opmode.Teleop TeleOp} to see implementation.
+ * This package includes many different control layouts, such as DriveSpin, Tank, and Mecanum. It
+ * also includes the base methods that all control layouts are meant to return. 
+ * The Control Layout interface should be implemented by anything that is a joystick control layout.
+ * Refer to {@link  io.github.thunderbots.lightning.opmode.Teleop TeleOp} to see implementation.
  * 
  * 
  * @author Jake Ohara
