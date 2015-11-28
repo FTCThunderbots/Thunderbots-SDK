@@ -16,6 +16,7 @@
 
 package io.github.thunderbots.lightning.drive;
 
+import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.MotorSet;
 
 /**
@@ -97,6 +98,15 @@ public abstract class DriveSystem {
 	 * @return the average value of the encoders for swinging.
 	 */
 	public abstract int getSwingTicks(boolean clockwise);
+	
+	/**
+	 * Resets the encoder of each motor in the drive system.
+	 */
+	public void resetEncoders() {
+		for (Motor m : this.motors.getMotorArray()) {
+			m.getEncoder().reset();
+		}
+	}
 
 	/**
 	 * Stops the robot.
