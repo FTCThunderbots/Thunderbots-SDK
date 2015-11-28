@@ -55,12 +55,12 @@ public abstract class DriveSystem {
 	}
 
 	/**
-	 * Gets a reference to the {@code DriveMotorSet} used by this drive system.
+	 * Gets a reference to the {@code MotorSet} used by this drive system.
 	 *
-	 * @return the {@code DriveMotorSet} for this drive system.
+	 * @return the {@code MotorSet} for this drive system.
 	 * @see #motors
 	 */
-	protected MotorSet getWheelSet() {
+	public MotorSet getMotorSet() {
 		return this.motors;
 	}
 		
