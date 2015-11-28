@@ -36,15 +36,6 @@ public abstract class DriveSystem {
 	 * @see io.github.thunderbots.lightning.hardware.MotorSet
 	 */
 	private MotorSet motors;
-	
-	/** 
-	 * The amount of ticks that are equal to one full revolution of the wheels in this
-	 * drive system.
-	 * <p>
-	 * This number cannot have a default value because different types of encoders will be
-	 * used, and each may have a different definition of a tick.
-	 */
-	private double encoderTicksPerRevolution;
 
 	/**
 	 * Sets the amount of ticks that should be expected if the robot drives forward one inch.
@@ -191,17 +182,6 @@ public abstract class DriveSystem {
 		for (Motor m : this.motors.getMotorArray()) {
 			m.getEncoder().reset();
 		}
-	}
-	
-	/**
-	 * Sets the amount of ticks that are equal to one full revolution of the wheels in this
-	 * drive system.
-	 *
-	 * @param ticks the amount of encoder ticks in one revolution of this drive system.
-	 * @see #encoderTicksPerRevolution
-	 */
-	public void setEncoderTicksPerRevolution(double ticks) {
-		this.encoderTicksPerRevolution = ticks;
 	}
 	
 	/**
