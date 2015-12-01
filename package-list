@@ -1,10 +1,9 @@
 io.github.thunderbots.lightning
-io.github.thunderbots.lightning.annotation
 io.github.thunderbots.lightning.control
+io.github.thunderbots.lightning.control.layout
 io.github.thunderbots.lightning.drive
 io.github.thunderbots.lightning.hardware
 io.github.thunderbots.lightning.opmode
 io.github.thunderbots.lightning.robot
 io.github.thunderbots.lightning.scheduler
-io.github.thunderbots.lightning.sensor
 io.github.thunderbots.lightning.utility
