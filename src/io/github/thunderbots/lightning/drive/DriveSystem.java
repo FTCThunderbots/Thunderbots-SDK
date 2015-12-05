@@ -138,6 +138,36 @@ public abstract class DriveSystem {
 	public abstract int getSwingTicks(boolean clockwise);
 	
 	/**
+	 * Converts between drive inches and encoder ticks.
+	 * 
+	 * @param inches inches to convert.
+	 * @return number of encoder ticks.
+	 */
+	private double driveInchesToTicks(double inches) {
+		return inches * this.encoderTicksPerDriveInch;
+	}
+	
+	/**
+	 * Converts between rotation degrees and encoder ticks.
+	 * 
+	 * @param degrees degrees to convert.
+	 * @return number of encoder ticks.
+	 */
+	private double rotateDegreesToTicks(double degrees) {
+		return degrees * this.encoderTicksPerRotationDegree;
+	}
+	
+	/**
+	 * Converts between swing degrees and encoder ticks.
+	 * 
+	 * @param degrees degrees to convert.
+	 * @return the number of encoder ticks.
+	 */
+	private double swingDegreesToTicks(double degrees) {
+		return degrees * this.encoderTicksPerSwingDegree;
+	}
+	
+	/**
 	 * Gets the distance that the robot has driven forward since the last encoder reset.
 	 * <p>
 	 * If other (non-drive) movement has occurred since the last encoder reset, this method
@@ -215,12 +245,12 @@ public abstract class DriveSystem {
 	}
 	
 	/*
-	 * +---------------------------------+
-	 * |                                 |
-	 * |      Raw movement methods:      |
-	 * |    No time and no encododers    |
-	 * |                                 |
-	 * +---------------------------------+
+	 * +-----------------------------------+
+	 * |                                   |
+	 * |       Raw movement methods:       |
+	 * |      No time and no encoders      |
+	 * |                                   |
+	 * +-----------------------------------+
 	 */
 
 	/**
@@ -332,11 +362,11 @@ public abstract class DriveSystem {
 	}
 	
 	/*
-	 * +--------------------------------------+
-	 * |                                      |
-	 * |    Encoder-based movement methods    |
-	 * |                                      |
-	 * +--------------------------------------+
+	 * +-----------------------------------+
+	 * |                                   |
+	 * |  Encoder-based movement methods   |
+	 * |                                   |
+	 * +-----------------------------------+
 	 */
 	
 	/**
@@ -410,13 +440,7 @@ public abstract class DriveSystem {
 	 * @return the success of the operation.
 	 */
 	public boolean driveInches(double power, double inches) {
-		double start = this.getDriveInches();
-		double end = start + inches;
-		while (this.getDriveInches() < end) {
-			//do nothing
-		}
-		this.halt();
-		return true;
+		return this.driveTicks(power, (int)(this.driveInchesToTicks(inches)));
 	}
 	
 	/**
@@ -429,14 +453,7 @@ public abstract class DriveSystem {
 	 * @see #rotate(double)
 	 */
 	public boolean rotateDegrees(double power, double degrees) {
-		double start = this.getRotationDegrees();
-		double end = start + degrees;
-		this.rotate(power);
-		while (this.getRotationDegrees() < end) {
-			//do nothing
-		}
-		this.halt();
-		return true;
+		return this.rotateTicks(power, (int)(this.rotateDegreesToTicks(degrees)));
 	}
 	
 	/**
@@ -451,14 +468,7 @@ public abstract class DriveSystem {
 	 * @see #swing(boolean, double)
 	 */
 	public boolean swingDegrees(boolean clockwise, double power, double degrees) {
-		double start = this.getSwingDegrees(clockwise);
-		double end = start + degrees;
-		this.swing(clockwise, power);
-		while (this.getSwingDegrees(clockwise) < end) {
-			//do nothing
-		}
-		this.halt();
-		return true;
+		return this.swingTicks(clockwise, power, (int)(this.swingDegreesToTicks(degrees)));
 	}
 
 }
