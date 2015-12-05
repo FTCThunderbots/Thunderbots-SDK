@@ -14,28 +14,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.lightning.control.layout;
-
-import io.github.thunderbots.lightning.control.Joystick;
+package io.github.thunderbots.lightning.utility;
 
 /**
- * A {@code DriveSpinControlLayout} is a {@code ControlLayout} that represents the 'default'
- * control layout for FTC robots. The y-axis of the left thumbstick is responsible for
- * forward/backward movement, and the x-axis of the right thumbstick is responsible for the
- * clockwise/counter-clockwise spin of the robot.
- * 
- * @author Zach Ohara
+ * The {@code Alliance} is an enumeration of possible sides of the field. This could be used
+ * to write autonomous code that can adapt to changing sides of the field.
  */
-public class DriveSpinControlLayout implements ControlLayout {
+public enum Alliance {
 	
-	@Override
-	public double getForwardPower(Joystick joy) {
-		return joy.leftStickY();
+	BLUE (1),
+	RED (-1);
+	
+	/**
+	 * The integer that represents the side of the field. Blue is 1, and red is -1.
+	 */
+	private final int side;
+	
+	/**
+	 * Constructs a new {@code Alliance}.
+	 * 
+	 * @param side the side of the field that this alliance represents.
+	 */
+	private Alliance(int side) {
+		this.side = side;
 	}
 	
-	@Override
-	public double getClockwisePower(Joystick joy) {
-		return joy.rightStickX();
+	/**
+	 * Gets the integer side of the field.
+	 * 
+	 * @return the side of the field.
+	 * @see #side
+	 */
+	public int getSide() {
+		return this.side;
 	}
-	
+
 }

@@ -23,11 +23,15 @@ import io.github.thunderbots.lightning.utility.MathUtil;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-
-
 /**
  * A {@code Joystick} object represents one of the physical game controllers that are
  * connected to the driver station.
+ * <p>
+ * Due to a currently existant problem in the way that the control system handles the
+ * controllers, a new joystick object is contructed every hardware cycle. References
+ * to joysticks should not be kept for any reason. Instead, all joysticks should be
+ * accessed through {@link io.github.thunderbots.lightning.Lightning#getJoystick(int)
+ * Lightning.getJoystick(int)}
  *
  * @author Zach Ohara
  */

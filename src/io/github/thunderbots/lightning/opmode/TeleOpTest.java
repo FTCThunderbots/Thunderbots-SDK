@@ -18,6 +18,7 @@ package io.github.thunderbots.lightning.opmode;
 
 import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.control.Joystick;
+import io.github.thunderbots.lightning.utility.Telemetry;
 
 /**
  * The {@code TeleOpTest} class is a base class that acts as a 'dummy' tele op. Everything
@@ -34,8 +35,8 @@ public abstract class TeleOpTest extends TeleOp {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
 		double forwardPower = this.getControlLayout().getForwardPower(drivingGamepad);
 		double clockwisePower = this.getControlLayout().getClockwisePower(drivingGamepad);
-		Lightning.sendTelemetryData("forward", forwardPower);
-		Lightning.sendTelemetryData("Clockwise", clockwisePower);
+		Telemetry.sendData("forward", forwardPower);
+		Telemetry.sendData("Clockwise", clockwisePower);
 	}
 	
 }
