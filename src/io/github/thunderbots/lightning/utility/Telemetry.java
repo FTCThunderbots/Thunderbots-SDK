@@ -23,7 +23,7 @@ public final class Telemetry {
 	
 	public static void setTelemetry(com.qualcomm.robotcore.robocol.Telemetry telemetry) {
 		if (Telemetry.robotTelemetry != null)
-			throw new IllegalStateException();
+			throw new IllegalStateException("Telemetry can only be initialized once");
 		Telemetry.robotTelemetry = telemetry;
 	}
 
@@ -38,13 +38,13 @@ public final class Telemetry {
 	 * currently not known.
 	 * @param data the object to be sent.
 	 */
-	public static void sendTelemetryData(String tag, Object data) {
+	public static void sendData(String tag, Object data) {
 		Telemetry.robotTelemetry.addData(tag, data);
 	}
 
 	/**
 	 * Sends given data from the robot controller to the driver station. This method acts as
-	 * a delegate to {@link io.github.thunderbots.lightning.utility.Telemetry#sendTelemetryData(String, Object)}, but replaces the tag
+	 * a delegate to {@link io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)}, but replaces the tag
 	 * argument with an empty string.
 	 * 
 	 * @deprecated
@@ -58,10 +58,28 @@ public final class Telemetry {
 	 * the telemetry system will discard potentially important data.
 	 *
 	 * @param data the object to be sent.
-	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendTelemetryData(String, Object)
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
-	public static void sendTelemetryData(Object data) {
-		Telemetry.sendTelemetryData("", data);
+	public static void sendData(Object data) {
+		Telemetry.sendData("", data);
+	}
+
+	/**
+	 * Sends motor data from the robot controller to the driver station. Two entries are
+	 * sent for the data, with the first being the power, and the second being the current
+	 * encoder reading.
+	 * <p>
+	 * This method works by calling {@link #sendMotorPower(Motor)} followed by 
+	 * {@link #sendMotorPosition(Motor)}. Refer to the documentation for both of these
+	 * methods for more information.
+	 *
+	 * @param m the motor to be sent.
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendMotorPower(Motor)
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendMotorPosition(Motor)
+	 */
+	public static void sendMotor(Motor m) {
+		Telemetry.sendMotorPower(m);
+		Telemetry.sendMotorPosition(m);
 	}
 
 	/**
@@ -70,10 +88,22 @@ public final class Telemetry {
 	 * data.
 	 *
 	 * @param m the motor to be sent.
-	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendTelemetryData(String, Object)
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
-	public static void sendTelemetryData(Motor m) {
-		Telemetry.sendTelemetryData(m.getName(), m.getPower());
+	public static void sendMotorPower(Motor m) {
+		Telemetry.sendData(m.getName() + " pow", m.getPower());
+	}
+
+	/**
+	 * Sends motor data from the robot controller to the driver station. The name of the
+	 * motor is used as the tag for the data, and the reading of the encoder is sent as
+	 * the data.
+	 *
+	 * @param m the motor to be sent.
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
+	 */
+	public static void sendMotorPosition(Motor m) {
+		Telemetry.sendData(m.getName() + " pos", m.getEncoder().getPosition());
 	}
 
 	/**
@@ -82,10 +112,10 @@ public final class Telemetry {
 	 * data.
 	 *
 	 * @param s the servo to be sent.
-	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendTelemetryData(String, Object)
+	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
-	public static void sendTelemetryData(Servo s) {
-		Telemetry.sendTelemetryData(s.getName(), s.getPosition());
+	public static void sendServoPosition(Servo s) {
+		Telemetry.sendData(s.getName() + " pos", s.getPosition());
 	}
 
 }

@@ -35,8 +35,8 @@ public abstract class TeleOpTest extends TeleOp {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
 		double forwardPower = this.getControlLayout().getForwardPower(drivingGamepad);
 		double clockwisePower = this.getControlLayout().getClockwisePower(drivingGamepad);
-		Telemetry.sendTelemetryData("forward", forwardPower);
-		Telemetry.sendTelemetryData("Clockwise", clockwisePower);
+		Telemetry.sendData("forward", forwardPower);
+		Telemetry.sendData("Clockwise", clockwisePower);
 	}
 	
 }

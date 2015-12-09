@@ -38,6 +38,36 @@ public abstract class DriveSystem {
 	private MotorSet motors;
 
 	/**
+	 * Sets the amount of ticks that should be expected if the robot drives forward one inch.
+	 * <p>
+	 * This number cannot have a default value because different types of encoders will be
+	 * used, and each may have a different definition of a tick.
+	 * 
+	 * @param ticks the amount of encoder ticks in one drive-inch of this drive system.
+	 */
+	private double encoderTicksPerDriveInch;
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot rotates one degree.
+	 * <p>
+	 * This number cannot have a default value because different types of encoders will be
+	 * used, and each may have a different definition of a tick.
+	 *
+	 * @param ticks the amount of encoder ticks in one rotation degree of this drive system.
+	 */
+	private double encoderTicksPerRotationDegree;
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot swings one degree.
+	 * <p>
+	 * This number cannot have a default value because different types of encoders will be
+	 * used, and each may have a different definition of a tick.
+	 *
+	 * @param ticks the amount of encoder ticks in one swing degree of this drive system.
+	 */
+	private double encoderTicksPerSwingDegree;
+
+	/**
 	 * Constructs a new {@code DriveSystem} with the given {@code DriveMotorSet} as a base.
 	 *
 	 * @param wheels the {@code DriveMotorSet} of this drive system.
@@ -75,6 +105,14 @@ public abstract class DriveSystem {
 	 */
 	public abstract boolean setMovement(double forward, double clockwise);
 	
+	/* 
+	 * +-----------------------------------------+
+	 * |                                         |
+	 * |    Encoder setup and utility methods    |
+	 * |                                         |
+	 * +-----------------------------------------+
+	 */
+	
 	/**
 	 * Gets the average value in raw ticks of the encoders for driving,
 	 * assuming the robot is traveling in a straight line.
@@ -100,6 +138,74 @@ public abstract class DriveSystem {
 	public abstract int getSwingTicks(boolean clockwise);
 	
 	/**
+	 * Converts between drive inches and encoder ticks.
+	 * 
+	 * @param inches inches to convert.
+	 * @return number of encoder ticks.
+	 */
+	private double driveInchesToTicks(double inches) {
+		return inches * this.encoderTicksPerDriveInch;
+	}
+	
+	/**
+	 * Converts between rotation degrees and encoder ticks.
+	 * 
+	 * @param degrees degrees to convert.
+	 * @return number of encoder ticks.
+	 */
+	private double rotateDegreesToTicks(double degrees) {
+		return degrees * this.encoderTicksPerRotationDegree;
+	}
+	
+	/**
+	 * Converts between swing degrees and encoder ticks.
+	 * 
+	 * @param degrees degrees to convert.
+	 * @return the number of encoder ticks.
+	 */
+	private double swingDegreesToTicks(double degrees) {
+		return degrees * this.encoderTicksPerSwingDegree;
+	}
+	
+	/**
+	 * Gets the distance that the robot has driven forward since the last encoder reset.
+	 * <p>
+	 * If other (non-drive) movement has occurred since the last encoder reset, this method
+	 * will not return an accurate result.
+	 *
+	 * @return the distance, in inches, that the robot has driven forward.
+	 */
+	public double getDriveInches() {
+		return this.getDriveTicks() / this.encoderTicksPerDriveInch;
+	}
+	
+	/**
+	 * Gets the degrees that the robot has rotated clockwise since the last encoder reset.
+	 * <p>
+	 * If other (non-rotation) movement has occurred since the last encoder reset, this method
+	 * will not return an accurate result.
+	 *
+	 * @return the degrees that the robot has rotated clockwise.
+	 */
+	public double getRotationDegrees() {
+		return this.getRotateTicks() / this.encoderTicksPerRotationDegree;
+	}
+	
+	/**
+	 * Gets the degrees that the robot has swung in the given direction since the last encoder reset.
+	 * <p>
+	 * If other (non-swing) movement has occurred since the last encoder reset, this method
+	 * will not return an accurate result.
+	 *
+	 * @param clockwise {@code true} if the robot should swing clockwise, or {@code false}
+	 * if the robot should spin counter-clockwise.
+	 * @return the degrees that the robot has swung in the given direction.
+	 */
+	public double getSwingDegrees(boolean clockwise) {
+		return this.getSwingTicks(clockwise) / this.encoderTicksPerSwingDegree;
+	}
+	
+	/**
 	 * Resets the encoder of each motor in the drive system.
 	 */
 	public void resetEncoders() {
@@ -107,6 +213,45 @@ public abstract class DriveSystem {
 			m.getEncoder().reset();
 		}
 	}
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot drives forward one inch.
+	 * 
+	 * @param ticks the amount of encoder ticks in one drive-inch of this drive system.
+	 * @see #encoderTicksPerDriveInch
+	 */
+	public void setEncoderTicksPerDriveInch(double ticks) {
+		this.encoderTicksPerDriveInch = ticks;
+	}
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot rotates one degree.
+	 *
+	 * @param ticks the amount of encoder ticks in one rotation degree of this drive system.
+	 * @see #encoderTicksPerRotationDegree
+	 */
+	public void setEncoderTicksPerRotationDegree(double ticks) {
+		this.encoderTicksPerRotationDegree = ticks;
+	}
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot swings one degree.
+	 *
+	 * @param ticks the amount of encoder ticks in one swing degree of this drive system.
+	 * @see #encoderTicksPerSwingDegree
+	 */
+	public void setEncoderTicksPerSwingDegree(double ticks) {
+		this.encoderTicksPerSwingDegree = ticks;
+	}
+	
+	/*
+	 * +-----------------------------------+
+	 * |                                   |
+	 * |       Raw movement methods:       |
+	 * |      No time and no encoders      |
+	 * |                                   |
+	 * +-----------------------------------+
+	 */
 
 	/**
 	 * Stops the robot.
@@ -149,6 +294,14 @@ public abstract class DriveSystem {
 		int directionMultiplier = clockwise ? 1 : -1;
 		return this.setMovement(power, Math.abs(power) * directionMultiplier);
 	}
+	
+	/*
+	 * +-----------------------------------+
+	 * |                                   |
+	 * |    Time-based movement methods    |
+	 * |                                   |
+	 * +-----------------------------------+
+	 */
 
 	/**
 	 * Drives the robot forward with the given power and for the given time, then stops.
@@ -178,7 +331,8 @@ public abstract class DriveSystem {
 	 * Swings the robot with the given spin and forward power, then stops after the given
 	 * amount of time.
 	 *
-	 * @param clockwise the clockwise power; between -1 and 1.
+	 * @param clockwise {@code true} if the robot should swing clockwise, or {@code false}
+	 * if the robot should spin counter-clockwise.
 	 * @param power the forward power; between -1 and 1.
 	 * @param seconds the time to move for.
 	 * @return the success of the operation.
@@ -187,6 +341,33 @@ public abstract class DriveSystem {
 	public boolean swingSeconds(boolean clockwise, double power, double seconds) {
 		return this.swing(clockwise, power) && this.waitAndStop(seconds);
 	}
+
+	/**
+	 * Waits the given amount of time, then stops the robot.
+	 *
+	 * @param seconds the time to wait before stopping the robot.
+	 * @return {@code true} if no interrupt exception was thrown during the wait.
+	 */
+	public boolean waitAndStop(double seconds) {
+		boolean uninterrupted = true;
+		try {
+			Thread.sleep((long) (seconds * 1000));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			uninterrupted = false;
+		} finally {
+			this.halt();
+		}
+		return uninterrupted;
+	}
+	
+	/*
+	 * +-----------------------------------+
+	 * |                                   |
+	 * |  Encoder-based movement methods   |
+	 * |                                   |
+	 * +-----------------------------------+
+	 */
 	
 	/**
 	 * Drives the robot forward with the given power and for the given tick distance,
@@ -232,11 +413,12 @@ public abstract class DriveSystem {
 	 * Swings the robot with the given spin and forward power, and for the given tick distance,
 	 * then stops.
 	 *
-	 * @param clockwise the clockwise power; between -1 and 1.
+	 * @param clockwise {@code true} if the robot should swing clockwise, or {@code false}
+	 * if the robot should spin counter-clockwise.
 	 * @param power the forward power; between -1 and 1.
 	 * @param ticks the amount of encoder ticks to move for.
 	 * @return the success of the operation.
-	 * @see #drive(double)
+	 * @see #swing(boolean, double)
 	 */
 	public boolean swingTicks(boolean clockwise, double power, int ticks) {
 		int start = this.getSwingTicks(clockwise);
@@ -248,24 +430,45 @@ public abstract class DriveSystem {
 		this.halt();
 		return true;
 	}
-
+	
 	/**
-	 * Waits the given amount of time, then stops the robot.
+	 * Drives the robot forward with the given power and for the given distance,
+	 * then stops.
 	 *
-	 * @param seconds the time to wait before stopping the robot.
-	 * @return {@code true} if no interrupt exception was thrown during the wait.
+	 * @param power the forward power; between -1 and 1.
+	 * @param inches the distance to drive forward, in inches.
+	 * @return the success of the operation.
 	 */
-	public boolean waitAndStop(double seconds) {
-		boolean uninterrupted = true;
-		try {
-			Thread.sleep((long) (seconds * 1000));
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			uninterrupted = false;
-		} finally {
-			this.halt();
-		}
-		return uninterrupted;
+	public boolean driveInches(double power, double inches) {
+		return this.driveTicks(power, (int)(this.driveInchesToTicks(inches)));
+	}
+	
+	/**
+	 * Spins the robot clockwise with the given power and for the given amount of degrees,
+	 * then stops.
+	 *
+	 * @param power the clockwise power; between -1 and 1.
+	 * @param degrees the degrees to rotate the robot.
+	 * @return the success of the operation.
+	 * @see #rotate(double)
+	 */
+	public boolean rotateDegrees(double power, double degrees) {
+		return this.rotateTicks(power, (int)(this.rotateDegreesToTicks(degrees)));
+	}
+	
+	/**
+	 * Swings the robot with the given spin and forward power, and for the given amount of degrees,
+	 * then stops.
+	 *
+	 * @param clockwise {@code true} if the robot should swing clockwise, or {@code false}
+	 * if the robot should spin counter-clockwise.
+	 * @param power the forward power; between -1 and 1.
+	 * @param ticks the amount of encoder ticks to move for.
+	 * @return the success of the operation.
+	 * @see #swing(boolean, double)
+	 */
+	public boolean swingDegrees(boolean clockwise, double power, double degrees) {
+		return this.swingTicks(clockwise, power, (int)(this.swingDegreesToTicks(degrees)));
 	}
 
 }
