@@ -16,6 +16,8 @@
 
 package io.github.thunderbots.lightning.drive;
 
+import io.github.thunderbots.lightning.functionality.Correctable;
+import io.github.thunderbots.lightning.functionality.PID;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.MotorSet;
 
@@ -27,16 +29,61 @@ import io.github.thunderbots.lightning.hardware.MotorSet;
  * move with the given two vectors.
  *
  * @author Zach Ohara
+ * @author Daniel Grimshaw
  */
-public abstract class DriveSystem {
+public abstract class DriveSystem implements Correctable {
 
+	/**
+	 * Enumeration of movement types.
+	 * Used by get_error.
+	 * 
+	 * @see #get_error
+	 * 
+	 * @author Daniel Grimshaw
+	 */
+	private enum MovementType {
+		DRIVE,
+		ROTATE,
+		SWING,
+		NONE
+	}
+	
 	/**
 	 * The motors in this drive system.
 	 *
 	 * @see io.github.thunderbots.lightning.hardware.MotorSet
 	 */
 	private MotorSet motors;
+	
+	/**
+	 * The Proportional Integral Derivative controller.
+	 * 
+	 * @see io.github.thunderbots.lightning.functionality.PID
+	 */
+	private PID pid;
 
+	/**
+	 * Describes the movement type for this.get_error()
+	 * 
+	 * @see #get_error()
+	 */
+	private MovementType movementType;
+	
+	/**
+	 * Target location for PID
+	 * 
+	 * @see #get_error()
+	 * @see io.github.thunderbots.lightning.functionality.PID
+	 */
+	private double targetPos;
+	
+	/**
+	 * Clockwise for PID
+	 * 
+	 * @see #get_error()
+	 */
+	private boolean clockwise = false;
+	
 	/**
 	 * Sets the amount of ticks that should be expected if the robot drives forward one inch.
 	 * <p>
@@ -136,6 +183,27 @@ public abstract class DriveSystem {
 	 * @return the average value of the encoders for swinging.
 	 */
 	public abstract int getSwingTicks(boolean clockwise);
+	
+	/**
+	 * Get the error associated with the device. 0 is no error, error
+	 * usually works best when it produces a normal curve.
+	 *
+	 * @return A scalar double representing the error in the device
+	 */
+	public double get_error() {
+		switch(this.movementType) {
+		case DRIVE:
+			return this.targetPos - this.getDriveTicks();
+		case ROTATE:
+			return this.targetPos - this.getRotateTicks();
+		case SWING:
+			return this.targetPos - this.getSwingTicks(this.clockwise);
+		case NONE:
+			return 0.0;
+		default:
+			throw new UnsupportedOperationException("Unknown movement type");			
+		}
+	}
 	
 	/**
 	 * Converts between drive inches and encoder ticks.
