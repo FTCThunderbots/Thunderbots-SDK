@@ -322,13 +322,66 @@ public class PID implements Runnable {
 	    
 	    this.correction = correction;
 	}
+	
+	/**
+	 * Get the wind-up guard (integral cap).
+	 * 
+	 * @return The wind-up guard (integral cap).
+	 */
+	public double getWindupGuard() {
+		return this.windupGuard;
+	}
+	
+	/**
+	 * Get the device being corrected.
+	 * 
+	 * @return The device being corrected.
+	 */
+	public Correctable getDevice() {
+		return this.device;
+	}
+	
+	/**
+	 * Get the proportional gain.
+	 * 
+	 * @return The current proportional gain.
+	 */
+	public double getProportionalGain() {
+		return this.proportionalGain;
+	}
+	
+	/**
+	 * Get the integral gain.
+	 * 
+	 * @return The current integral gain.
+	 */
+	public double getIntegralGain() {
+		return this.integralGain;
+	}
+	
+	/**
+	 * Get the derivative gain.
+	 * 
+	 * @return The current derivative gain.
+	 */
+	public double getDerivativeGain() {
+		return this.derivativeGain;
+	}
 
 	/**
 	 * The method to handle communication with the device.
 	 * 
-	 * @return The value to modify the device by.
+	 * @return The value (correction) to modify the device by.
 	 */
 	public synchronized double getCorrection() {
 		return this.correction;
+	}
+	
+	@Override
+	public String toString() {
+		return "PID for " + this.getDevice() +
+				": Kp: " + this.getProportionalGain() +
+				"; Ki: " + this.getIntegralGain() +
+				"; Kd: " + this.getDerivativeGain() + ";";
 	}
 }
