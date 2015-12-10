@@ -456,7 +456,7 @@ public abstract class DriveSystem implements Correctable {
 			//do nothing
 		}
 		this.halt();
-		return true;
+		return this.pid.reset();
 	}
 	
 	/**
@@ -476,7 +476,7 @@ public abstract class DriveSystem implements Correctable {
 			//do nothing
 		}
 		this.halt();
-		return true;
+		return this.pid.reset();
 	}
 	
 	/**
@@ -499,7 +499,7 @@ public abstract class DriveSystem implements Correctable {
 			//do nothing
 		}
 		this.halt();
-		return true;
+		return this.pid.reset();
 	}
 	
 	/**
