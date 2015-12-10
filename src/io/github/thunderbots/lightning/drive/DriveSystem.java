@@ -121,6 +121,7 @@ public abstract class DriveSystem implements Correctable {
 	 */
 	public DriveSystem(MotorSet wheels) {
 		this.motors = wheels;
+		this.pid = new PID(this);
 	}
 
 	/**
@@ -130,6 +131,7 @@ public abstract class DriveSystem implements Correctable {
 	 */
 	public DriveSystem(String[] motornames) {
 		this.motors = new MotorSet(motornames);
+		this.pid = new PID(this);
 	}
 
 	/**
@@ -337,7 +339,7 @@ public abstract class DriveSystem implements Correctable {
 	 * @return the success of the operation.
 	 */
 	public boolean drive(double power) {
-		return this.setMovement(power, 0);
+		return this.setMovement(power + this.pid.get_correction(), 0);
 	}
 
 	/**
@@ -347,7 +349,7 @@ public abstract class DriveSystem implements Correctable {
 	 * @return the success of the operation.
 	 */
 	public boolean rotate(double power) {
-		return this.setMovement(0, power);
+		return this.setMovement(0, power + this.pid.get_correction());
 	}
 
 	/**
@@ -360,7 +362,7 @@ public abstract class DriveSystem implements Correctable {
 	 */
 	public boolean swing(boolean clockwise, double power) {
 		int directionMultiplier = clockwise ? 1 : -1;
-		return this.setMovement(power, Math.abs(power) * directionMultiplier);
+		return this.setMovement(power + this.pid.get_correction(), Math.abs(power) * directionMultiplier + this.pid.get_correction());
 	}
 	
 	/*
@@ -489,6 +491,7 @@ public abstract class DriveSystem implements Correctable {
 	 * @see #swing(boolean, double)
 	 */
 	public boolean swingTicks(boolean clockwise, double power, int ticks) {
+		this.clockwise = clockwise;
 		int start = this.getSwingTicks(clockwise);
 		int end = start + ticks;
 		this.swing(clockwise, power);
