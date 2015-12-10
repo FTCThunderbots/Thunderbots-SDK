@@ -542,4 +542,8 @@ public abstract class DriveSystem implements Correctable {
 		return this.swingTicks(clockwise, power, (int)(this.swingDegreesToTicks(degrees)));
 	}
 
+	@Override
+	public String toString() {
+		return "DriveSystem";
+	}
 }
