@@ -187,7 +187,7 @@ public class PID implements Runnable {
 	public boolean reset() {
 		this.intError = 0.0;
 		this.prevError = 0.0;
-		return true;
+		return (this.intError == 0.0) && (this.prevError == 0.0);
 	}
 
 	/**
