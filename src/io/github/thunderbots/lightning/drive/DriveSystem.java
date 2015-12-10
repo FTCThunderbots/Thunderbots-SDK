@@ -339,7 +339,7 @@ public abstract class DriveSystem implements Correctable {
 	 * @return the success of the operation.
 	 */
 	public boolean drive(double power) {
-		return this.setMovement(power + this.pid.get_correction(), 0);
+		return this.setMovement(power + this.pid.getCorrection(), 0);
 	}
 
 	/**
@@ -349,7 +349,7 @@ public abstract class DriveSystem implements Correctable {
 	 * @return the success of the operation.
 	 */
 	public boolean rotate(double power) {
-		return this.setMovement(0, power + this.pid.get_correction());
+		return this.setMovement(0, power + this.pid.getCorrection());
 	}
 
 	/**
@@ -362,7 +362,7 @@ public abstract class DriveSystem implements Correctable {
 	 */
 	public boolean swing(boolean clockwise, double power) {
 		int directionMultiplier = clockwise ? 1 : -1;
-		return this.setMovement(power + this.pid.get_correction(), Math.abs(power) * directionMultiplier + this.pid.get_correction());
+		return this.setMovement(power + this.pid.getCorrection(), Math.abs(power) * directionMultiplier + this.pid.getCorrection());
 	}
 	
 	/*

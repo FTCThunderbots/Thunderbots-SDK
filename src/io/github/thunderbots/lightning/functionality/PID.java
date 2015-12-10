@@ -52,37 +52,37 @@ public class PID implements Runnable {
 	 * This will act as the limit the amount of of correction the PID can
 	 * actually provide.
 	 */
-	private double windup_guard;
+	private double windupGuard;
 
 	/**
 	 * The constant to scale the proportional error to.
 	 */
-	private double proportional_gain;
+	private double proportionalGain;
 
 	/**
 	 * The constant to scale the integral (cumulative) error to.
 	 */
-	private double integral_gain;
+	private double integralGain;
 
 	/**
 	 * The constant to scale the derivative (predicted) error to.
 	 */
-	private double derivative_gain;
+	private double derivativeGain;
 
 	/**
 	 * A variable to store the previous error calculated by the PID
 	 */
-	private double prev_error;
+	private double prevError;
 	
 	/**
 	 * A variable to store the previous time that update was called
 	 */
-	private double last_time;
+	private double lastTime;
 
 	/**
 	 * The cumulative integral (past) error.
 	 */
-	private double int_error;
+	private double intError;
 
 	/**
 	 * The correcting value
@@ -118,7 +118,7 @@ public class PID implements Runnable {
 	 * {@code PID} default constructor.
 	 *
 	 * @param device A {@code Correctable} device for the PID to act on.
-	 * @param windup_guard The integral cap
+	 * @param windupGuard The integral cap
 	 *
 	 * @return A fancy new PID specialized for your device!
 	 *
@@ -132,7 +132,7 @@ public class PID implements Runnable {
 	 * {@code PID} default constructor.
 	 *
 	 * @param device A {@code Correctable} device for the PID to act on.
-	 * @param windup_guard The integral cap
+	 * @param windupGuard The integral cap
 	 * @param Kp The proportional gain
 	 *
 	 * @return A fancy new PID specialized for your device!
@@ -147,7 +147,7 @@ public class PID implements Runnable {
 	 * {@code PID} default constructor.
 	 *
 	 * @param device A {@code Correctable} device for the PID to act on.
-	 * @param windup_guard The integral cap
+	 * @param windupGuard The integral cap
 	 * @param Kp The proportional gain
 	 * @param Ki The integral gain
 	 *
@@ -163,7 +163,7 @@ public class PID implements Runnable {
 	 * {@code PID} default constructor.
 	 *
 	 * @param device A {@code Correctable} device for the PID to act on.
-	 * @param windup_guard The integral cap
+	 * @param windupGuard The integral cap
 	 * @param Kp The proportional gain
 	 * @param Ki The integral gain
 	 * @param Kd The derivative gain
@@ -185,8 +185,8 @@ public class PID implements Runnable {
 	 * @return True if success, otherwise false
 	 */
 	public boolean reset() {
-		this.int_error = 0.0;
-		this.prev_error = 0.0;
+		this.intError = 0.0;
+		this.prevError = 0.0;
 		return true;
 	}
 
@@ -198,7 +198,7 @@ public class PID implements Runnable {
 	 * @return True if success, otherwise false
 	 */
 	public boolean reset(double integral_cap) {
-		this.set_constants(integral_cap, this.proportional_gain, this.integral_gain, this.derivative_gain);
+		this.setConstants(integral_cap, this.proportionalGain, this.integralGain, this.derivativeGain);
 		return this.reset();
 	}
 
@@ -211,7 +211,7 @@ public class PID implements Runnable {
 	 * @return True if success, otherwise false
 	 */
 	public boolean reset(double integral_cap, double Kp) {
-		this.set_constants(integral_cap, Kp, this.integral_gain, this.derivative_gain);
+		this.setConstants(integral_cap, Kp, this.integralGain, this.derivativeGain);
 		return this.reset();
 	}
 
@@ -225,7 +225,7 @@ public class PID implements Runnable {
 	 * @return True if success, otherwise false
 	 */
 	public boolean reset(double integral_cap, double Kp, double Ki) {
-		this.set_constants(integral_cap, Kp, Ki, this.proportional_gain);
+		this.setConstants(integral_cap, Kp, Ki, this.proportionalGain);
 		return this.reset();
 	}
 
@@ -240,7 +240,7 @@ public class PID implements Runnable {
 	 * @return True if success, otherwise false
 	 */
 	public boolean reset(double integral_cap, double Kp, double Ki, double Kd) {
-		this.set_constants(integral_cap, Kp, Ki, Kd);
+		this.setConstants(integral_cap, Kp, Ki, Kd);
 		return this.reset();
 	}
 
@@ -254,11 +254,11 @@ public class PID implements Runnable {
 	 * @param Kd The derivative gain
 	 *
 	 */
-	private void set_constants(double integral_cap, double Kp, double Ki, double Kd) {
-		this.windup_guard = integral_cap;
-		this.proportional_gain = Kp;
-		this.integral_gain = Ki;
-		this.derivative_gain = Kd;
+	private void setConstants(double integral_cap, double Kp, double Ki, double Kd) {
+		this.windupGuard = integral_cap;
+		this.proportionalGain = Kp;
+		this.integralGain = Ki;
+		this.derivativeGain = Kd;
 	}
 
 	/**
@@ -270,9 +270,9 @@ public class PID implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				double delta_t = (double)System.currentTimeMillis() - this.last_time;
-				this.update_correction(this.device.get_error(), delta_t);
-				this.last_time = (double)System.currentTimeMillis();
+				double delta_t = (double)System.currentTimeMillis() - this.lastTime;
+				this.updateCorrection(this.device.get_error(), delta_t);
+				this.lastTime = (double)System.currentTimeMillis();
 				Thread.sleep(1);
 			}
 		}
@@ -287,7 +287,7 @@ public class PID implements Runnable {
 	 * @param error The error in the device
 	 * @param delta_t The change in time from the last check
 	 */
-	private synchronized void update_correction(double error, double delta_t) {
+	private synchronized void updateCorrection(double error, double delta_t) {
 		double diff;
 		double p_term;
 		double i_term;
@@ -295,20 +295,20 @@ public class PID implements Runnable {
 		double correction;
 		
 		//integration with windup guarding
-		this.int_error += error*delta_t;
-		if (this.int_error < -(this.windup_guard)) {
-			this.int_error = -(this.windup_guard);
-		} else if (this.int_error > this.windup_guard) {
-			this.int_error = this.windup_guard;
+		this.intError += error*delta_t;
+		if (this.intError < -(this.windupGuard)) {
+			this.intError = -(this.windupGuard);
+		} else if (this.intError > this.windupGuard) {
+			this.intError = this.windupGuard;
 		}
 		
 		//differentiation
-		diff = ((error - this.prev_error) / delta_t);
+		diff = ((error - this.prevError) / delta_t);
 		
 		//scaling
-		p_term = (this.proportional_gain * error);
-	    i_term = (this.integral_gain     * this.int_error);
-	    d_term = (this.derivative_gain   * diff);
+		p_term = (this.proportionalGain * error);
+	    i_term = (this.integralGain     * this.intError);
+	    d_term = (this.derivativeGain   * diff);
 	    
 	    correction = p_term + i_term + d_term;
 	    
@@ -318,7 +318,7 @@ public class PID implements Runnable {
 	    	correction = Motor.MAX_POWER;
 	    }
 	    
-	    this.prev_error = error;
+	    this.prevError = error;
 	    
 	    this.correction = correction;
 	}
@@ -328,7 +328,7 @@ public class PID implements Runnable {
 	 * 
 	 * @return The value to modify the device by.
 	 */
-	public synchronized double get_correction() {
+	public synchronized double getCorrection() {
 		return this.correction;
 	}
 }
