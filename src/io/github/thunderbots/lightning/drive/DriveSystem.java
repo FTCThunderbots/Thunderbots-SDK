@@ -65,14 +65,14 @@ public abstract class DriveSystem implements Correctable {
 	/**
 	 * Describes the movement type for this.get_error()
 	 * 
-	 * @see #get_error()
+	 * @see #getError()
 	 */
 	private MovementType movementType;
 	
 	/**
 	 * Target location for PID
 	 * 
-	 * @see #get_error()
+	 * @see #getError()
 	 * @see io.github.thunderbots.lightning.functionality.PID
 	 */
 	private double targetPos;
@@ -80,7 +80,7 @@ public abstract class DriveSystem implements Correctable {
 	/**
 	 * Clockwise for PID
 	 * 
-	 * @see #get_error()
+	 * @see #getError()
 	 */
 	private boolean clockwise = false;
 	
@@ -192,7 +192,7 @@ public abstract class DriveSystem implements Correctable {
 	 *
 	 * @return A scalar double representing the error in the device
 	 */
-	public double get_error() {
+	public double getError() {
 		switch(this.movementType) {
 		case DRIVE:
 			return this.targetPos - this.getDriveTicks();

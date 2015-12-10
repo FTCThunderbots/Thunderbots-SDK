@@ -271,7 +271,7 @@ public class PID implements Runnable {
 		try {
 			while (true) {
 				double deltaT = (double)System.currentTimeMillis() - this.lastTime;
-				this.updateCorrection(this.device.get_error(), deltaT);
+				this.updateCorrection(this.device.getError(), deltaT);
 				this.lastTime = (double)System.currentTimeMillis();
 				Thread.sleep(1);
 			}
