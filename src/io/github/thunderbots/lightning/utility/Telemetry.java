@@ -22,8 +22,6 @@ public final class Telemetry {
 	}
 	
 	public static void setTelemetry(com.qualcomm.robotcore.robocol.Telemetry telemetry) {
-		if (Telemetry.robotTelemetry != null)
-			throw new IllegalStateException("Telemetry can only be initialized once");
 		Telemetry.robotTelemetry = telemetry;
 	}
 
