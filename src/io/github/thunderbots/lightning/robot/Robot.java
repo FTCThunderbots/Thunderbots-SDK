@@ -37,6 +37,7 @@ public abstract class Robot {
 	 */
 	public Robot() {
 		this.drive = this.createDriveSystem();
+		this.initializeRobot();
 	}
 	
 	/**
