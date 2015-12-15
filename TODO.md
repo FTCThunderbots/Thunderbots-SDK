@@ -15,9 +15,6 @@
 * Write better package-info files
 * Update the gh-pages branch
 
-#### Encoders
-* Calibrate stuff to inches / ticks
-
 #### Hardware
 * Test the CRServo code
 * __[Uncertain]__ Write and test code to detect if a servo is attached to a motor
