@@ -166,24 +166,24 @@ public class MecanumDrive extends DriveSystem {
 		motorPowers[1] = frontRight;
 		motorPowers[2] = backLeft;
 		motorPowers[3] = backRight;
-		this.getWheelSet().setMotorPowers(motorPowers);
+		this.getMotorSet().setMotorPowers(motorPowers);
 
 		return true;
 	}
 
 	@Override
 	public int getDriveTicks() {
-		Motor[] motors = this.getWheelSet().getMotorArray();
+		Motor[] motors = this.getMotorSet().getMotorArray();
 		int sum = motors[0].getEncoder().getPosition()
 				+ motors[2].getEncoder().getPosition()
 				- (motors[1].getEncoder().getPosition()
-						+ motors[3].getEncoder().getPosition());
+				+ motors[3].getEncoder().getPosition());
 		return sum / 4;
 	}
 
 	@Override
 	public int getRotateTicks() {
-		Motor[] motors = this.getWheelSet().getMotorArray();
+		Motor[] motors = this.getMotorSet().getMotorArray();
 		int sum = motors[0].getEncoder().getPosition()
 				+ motors[2].getEncoder().getPosition()
 				+ motors[1].getEncoder().getPosition()
@@ -193,14 +193,14 @@ public class MecanumDrive extends DriveSystem {
 
 	@Override
 	public int getSwingTicks(boolean clockwise) {
-		Motor[] motors = this.getWheelSet().getMotorArray();
+		Motor[] motors = this.getMotorSet().getMotorArray();
 		int sum;
 		if (clockwise) {
 			sum = motors[0].getEncoder().getPosition()
-					+ motors[2].getEncoder().getPosition();
+				+ motors[2].getEncoder().getPosition();
 		} else {
 			sum = - (motors[1].getEncoder().getPosition()
-					+ motors[3].getEncoder().getPosition());
+				+ motors[3].getEncoder().getPosition());
 		}
 		return sum / 2;
 	}
