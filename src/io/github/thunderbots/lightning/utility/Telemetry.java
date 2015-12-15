@@ -47,14 +47,8 @@ public final class Telemetry {
 	
 	/**
 	 * Sets the telemetry base-object to the given object.
-	 * <p>
-	 * For security and encapsulation purposes, this method can only be called once, during
-	 * the setup period of any op mode. It is presumed that the object representing the
-	 * telemetric connection will not change over the duration of an op mode.
 	 *
 	 * @param telemetry the base telemetry object.
-	 * @throws IllegalStateException This method can only be called once, and subsequent calls
-	 * will result in an exception.
 	 * @see #robotTelemetry
 	 */
 	public static void setTelemetry(com.qualcomm.robotcore.robocol.Telemetry telemetry) {
