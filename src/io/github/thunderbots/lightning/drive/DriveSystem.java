@@ -304,6 +304,7 @@ public abstract class DriveSystem {
 		return this.setMovement(power, Math.abs(power) * directionMultiplier);
 	}
 
+	// @formatter:off
 	/*
 	 * +-----------------------------------+
 	 * |                                   |
@@ -311,6 +312,7 @@ public abstract class DriveSystem {
 	 * |                                   |
 	 * +-----------------------------------+
 	 */
+	// @formatter:on
 
 	/**
 	 * Drives the robot forward with the given power and for the given time, then stops.
