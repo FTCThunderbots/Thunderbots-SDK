@@ -17,7 +17,7 @@
 
 #### Hardware
 * Test the CRServo code
-* __[Uncertain]__ Write and test code to detect if a servo is attached to a motor
+* __[Uncertain]__ Write and test code to detect if an encoder is attached to a motor
 
 #### PID Control
 * Write a generic PID control system
