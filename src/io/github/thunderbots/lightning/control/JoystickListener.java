@@ -20,11 +20,11 @@ package io.github.thunderbots.lightning.control;
  * The {@code JoystickListener} interface is a functionally empty interface that should be
  * implemented by any object that can respond to joystick button presses.
  * <p>
- * The point of this annotation is to require that the declaration of a class clearly
- * shows that it should be able to respond to joystick inputs.
+ * The point of this annotation is to require that the declaration of a class clearly shows
+ * that it should be able to respond to joystick inputs.
  *
  * @author Zach Ohara
  */
 public interface JoystickListener {
-	
+
 }

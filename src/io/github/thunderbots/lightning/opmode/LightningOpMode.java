@@ -27,20 +27,20 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * @author Zach Ohara
  */
 public abstract class LightningOpMode extends LinearOpMode {
-	
+
 	/**
 	 * Determines if the op mode has be <em> fully </em> initialized. The overridden
-	 * {@code initializeOpMode()} method will always be called, but serious problems
-	 * are caused later if any initialization method does not call the initialization
-	 * of its superclass. This value is used to determine if the initialization method
-	 * defined in {@code LightningOpMode} has been called, indicating if any method
-	 * did not call the supertype method.
+	 * {@code initializeOpMode()} method will always be called, but serious problems are
+	 * caused later if any initialization method does not call the initialization of its
+	 * superclass. This value is used to determine if the initialization method defined in
+	 * {@code LightningOpMode} has been called, indicating if any method did not call the
+	 * supertype method.
 	 * <p>
 	 * This value is initialized to false, and only set to true once the version of
 	 * {@link #initializeOpMode()} defined in {@code LightningOpMode} has been called.
 	 */
 	private boolean isInitialized;
-	
+
 	public LightningOpMode() {
 		this.isInitialized = false;
 	}
@@ -49,7 +49,7 @@ public abstract class LightningOpMode extends LinearOpMode {
 	 * Initializes the robot. This can be defined however it is seen fit by the specific
 	 * overriding op mode. Any op mode that overrides this method should also call
 	 * {@code super.initializeOpMode()} on the first line.
-	 * 
+	 *
 	 * @see #isInitialized
 	 */
 	protected void initializeOpMode() {

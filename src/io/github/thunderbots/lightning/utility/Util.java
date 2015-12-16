@@ -32,7 +32,7 @@ public final class Util {
 
 	/**
 	 * Blocks the thread for the given amount of milliseconds.
-	 * 
+	 *
 	 * @param milliseconds the amount of time to block.
 	 * @return {@code true} if the block sucedded without being interrupted, or
 	 * {@code false} if the thread was interrupted.

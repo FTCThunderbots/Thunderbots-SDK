@@ -29,7 +29,7 @@ import io.github.thunderbots.lightning.utility.Telemetry;
  * @author Zach Ohara
  */
 public abstract class TeleOpTest extends TeleOp {
-	
+
 	@Override
 	protected void setMovement() {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
@@ -38,5 +38,5 @@ public abstract class TeleOpTest extends TeleOp {
 		Telemetry.sendData("forward", forwardPower);
 		Telemetry.sendData("Clockwise", clockwisePower);
 	}
-	
+
 }

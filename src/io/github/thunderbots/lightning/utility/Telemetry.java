@@ -20,31 +20,31 @@ import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
 
 /**
- * The {@code Telemetry} class acts as a gateway to all telemetric exchange between the robot
- * controller and the driver station. The static methods in this class can be used to send
- * data from the robot controller to the driver station for purposes such as debugging or
- * providing extra information about the state of the robot to the driver station.
- * 
+ * The {@code Telemetry} class acts as a gateway to all telemetric exchange between the
+ * robot controller and the driver station. The static methods in this class can be used to
+ * send data from the robot controller to the driver station for purposes such as debugging
+ * or providing extra information about the state of the robot to the driver station.
+ *
  * @author Pranav Mathur
  */
 public final class Telemetry {
-	
+
 	/**
 	 * The telemetry link between the robot controller and the driver station. It is used,
-	 * among other things, to send debug information from the robot controller to the driver
-	 * station.
+	 * among other things, to send debug information from the robot controller to the
+	 * driver station.
 	 *
 	 * @see com.qualcomm.robotcore.robocol.Telemetry
 	 */
 	private static com.qualcomm.robotcore.robocol.Telemetry robotTelemetry;
-	
+
 	/**
 	 * {@code Telemetry} should not be instantiable.
 	 */
 	private Telemetry() {
-		
+
 	}
-	
+
 	/**
 	 * Sets the telemetry base-object to the given object.
 	 *
@@ -71,23 +71,23 @@ public final class Telemetry {
 	}
 
 	/**
-	 * Sends given data from the robot controller to the driver station. This method acts as
-	 * a delegate to {@link io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)}, but replaces the tag
-	 * argument with an empty string.
-	 * 
-	 * @deprecated
-	 * Since this method is a delegate that substitutes an empty string for the tag, all
-	 * objects that are sent with this method will have an identical tag. The telemetry
-	 * system assumes that multiple objects sent with the same tag are just different
-	 * versions of the same information, and that only the most recent version of the
-	 * object is the 'correct' version. If multiple objects are sent with the same tag,
+	 * Sends given data from the robot controller to the driver station. This method acts
+	 * as a delegate to
+	 * {@link io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)},
+	 * but replaces the tag argument with an empty string.
+	 *
+	 * @deprecated Since this method is a delegate that substitutes an empty string for the
+	 * tag, all objects that are sent with this method will have an identical tag. The
+	 * telemetry system assumes that multiple objects sent with the same tag are just
+	 * different versions of the same information, and that only the most recent version of
+	 * the object is the 'correct' version. If multiple objects are sent with the same tag,
 	 * only the most recently sent object will be displayed, and all others will be
 	 * discarded. This makes it very impractical to send data with an empty tag, because
 	 * the telemetry system will discard potentially important data.
-	 *
 	 * @param data the object to be sent.
 	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)
 	 */
+	@Deprecated
 	public static void sendData(Object data) {
 		Telemetry.sendData("", data);
 	}
@@ -97,7 +97,7 @@ public final class Telemetry {
 	 * sent for the data, with the first being the power, and the second being the current
 	 * encoder reading.
 	 * <p>
-	 * This method works by calling {@link #sendMotorPower(Motor)} followed by 
+	 * This method works by calling {@link #sendMotorPower(Motor)} followed by
 	 * {@link #sendMotorPosition(Motor)}. Refer to the documentation for both of these
 	 * methods for more information.
 	 *
@@ -124,8 +124,8 @@ public final class Telemetry {
 
 	/**
 	 * Sends motor data from the robot controller to the driver station. The name of the
-	 * motor is used as the tag for the data, and the reading of the encoder is sent as
-	 * the data.
+	 * motor is used as the tag for the data, and the reading of the encoder is sent as the
+	 * data.
 	 *
 	 * @param m the motor to be sent.
 	 * @see io.github.thunderbots.lightning.utility.Telemetry#sendData(String, Object)

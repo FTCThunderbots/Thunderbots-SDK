@@ -29,7 +29,7 @@ import io.github.thunderbots.lightning.control.layout.DriveSpinControlLayout;
  * @author Zach Ohara
  */
 public abstract class TeleOp extends SimpleOpMode {
-	
+
 	/**
 	 * The control layout of the driving joystick.
 	 */
@@ -42,7 +42,7 @@ public abstract class TeleOp extends SimpleOpMode {
 			this.mainLoop();
 		}
 	}
-	
+
 	@Override
 	protected void initializeOpMode() {
 		super.initializeOpMode();
@@ -69,15 +69,16 @@ public abstract class TeleOp extends SimpleOpMode {
 	}
 
 	/**
-	 * Constructs the joystick control layout that the op mode should use. A drive-turn layout
-	 * is provided as the default, but that can be replaced by overriding this method.
+	 * Constructs the joystick control layout that the op mode should use. A drive-turn
+	 * layout is provided as the default, but that can be replaced by overriding this
+	 * method.
 	 *
 	 * @return a constructed {@code ControlLayout} that should be used for this op mode.
 	 */
 	public ControlLayout createControlLayout() {
 		return new DriveSpinControlLayout();
 	}
-	
+
 	/**
 	 * Gets a reference to the {@code ControlLayout} that this op mode is using.
 	 *

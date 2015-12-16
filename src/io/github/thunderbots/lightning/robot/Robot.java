@@ -31,7 +31,7 @@ public abstract class Robot {
 	 * The drive system that controls the movement of this robot.
 	 */
 	private DriveSystem drive;
-	
+
 	/**
 	 * Constructs a new {@code Robot} and initializes the drive system
 	 */
@@ -39,7 +39,7 @@ public abstract class Robot {
 		this.drive = this.createDriveSystem();
 		this.initializeRobot();
 	}
-	
+
 	/**
 	 * Gets an array of Strings representing the names of the motors used for driving.
 	 * <p>

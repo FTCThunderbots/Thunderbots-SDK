@@ -32,8 +32,8 @@ public class Motor {
 	private DcMotor basemotor;
 
 	/**
-	 * The encoder that is attached to this motor. This will always be a defined
-	 * object, even if there is no encoder attached to this motor.
+	 * The encoder that is attached to this motor. This will always be a defined object,
+	 * even if there is no encoder attached to this motor.
 	 */
 	private Encoder encoder;
 

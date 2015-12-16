@@ -19,23 +19,23 @@ package io.github.thunderbots.lightning.control.layout;
 import io.github.thunderbots.lightning.control.Joystick;
 
 /**
- * A {@code DriveSpinControlLayout} is a {@code ControlLayout} that represents the 'default'
- * control layout for FTC robots. The y-axis of the left thumbstick is responsible for
- * forward/backward movement, and the x-axis of the right thumbstick is responsible for the
- * clockwise/counter-clockwise spin of the robot.
- * 
+ * A {@code DriveSpinControlLayout} is a {@code ControlLayout} that represents the
+ * 'default' control layout for FTC robots. The y-axis of the left thumbstick is
+ * responsible for forward/backward movement, and the x-axis of the right thumbstick is
+ * responsible for the clockwise/counter-clockwise spin of the robot.
+ *
  * @author Zach Ohara
  */
 public class DriveSpinControlLayout implements ControlLayout {
-	
+
 	@Override
 	public double getForwardPower(Joystick joy) {
 		return joy.leftStickY();
 	}
-	
+
 	@Override
 	public double getClockwisePower(Joystick joy) {
 		return joy.rightStickX();
 	}
-	
+
 }

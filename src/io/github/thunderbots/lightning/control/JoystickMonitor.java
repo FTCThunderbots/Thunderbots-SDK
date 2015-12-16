@@ -16,19 +16,19 @@
 
 package io.github.thunderbots.lightning.control;
 
+import io.github.thunderbots.lightning.Lightning;
+import io.github.thunderbots.lightning.control.ButtonHandler.PressType;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import io.github.thunderbots.lightning.Lightning;
-import io.github.thunderbots.lightning.control.ButtonHandler.PressType;
-
 /**
- * A {@code JoystickMonitor} is an object that attaches to a specific joystick object,
- * and monitors any changes in the joystick inputs. Any detected changes are forwarded
- * to the objects that are listening to the specific joystick.
+ * A {@code JoystickMonitor} is an object that attaches to a specific joystick object, and
+ * monitors any changes in the joystick inputs. Any detected changes are forwarded to the
+ * objects that are listening to the specific joystick.
  * <p>
  * Objects that should listen to the joysticks should register themselves with the
  * appropriate {@code JoystickMonitor}.
@@ -37,34 +37,33 @@ import io.github.thunderbots.lightning.control.ButtonHandler.PressType;
  * @author Pranav Mathur
  */
 public class JoystickMonitor {
-	
+
 	/**
 	 * The joystick to monitor.
 	 */
-	/* (non-Javadoc)
-	 * If at all possible in the future, this should be a reference to a Joystick object, not just
-	 * an ID number.
+	/*
+	 * (non-Javadoc) If at all possible in the future, this should be a reference to a
+	 * Joystick object, not just an ID number.
 	 */
 	private int joystick;
-	
+
 	/**
 	 * The {@code Methods} that are called when buttons specified in the
 	 * {@code ButtonHandler} annotation are updated.
 	 */
 	private Map<JoystickButton, List<Method>> handlers;
-	
+
 	/**
-	 * The map of all the appropriate methods to the specific objects that
-	 * contain them.
+	 * The map of all the appropriate methods to the specific objects that contain them.
 	 */
 	private Map<Method, JoystickListener> instances;
-	
+
 	/**
-	 * The latest 'snapshot' of the buttons on the gamepad. The list contains every
-	 * button on the joystick that is pressed, in no specific order.
+	 * The latest 'snapshot' of the buttons on the gamepad. The list contains every button
+	 * on the joystick that is pressed, in no specific order.
 	 */
 	private List<JoystickButton> lastButtons;
-	
+
 	/**
 	 * Constructs a new JoystickMonitor that should monitor the given joystick.
 	 *
@@ -78,29 +77,27 @@ public class JoystickMonitor {
 		Lightning.getTaskScheduler().registerTask(new MonitorUpdateRunnable());
 		this.lastButtons = Lightning.getJoystick(this.joystick).toButtonList();
 	}
-	
+
 	/**
-	 * Registers the given joystick listener so that joystick updates can be sent
-	 * to it.
+	 * Registers the given joystick listener so that joystick updates can be sent to it.
 	 */
 	public void registerJoystickListener(JoystickListener listener) {
 		Class<?> c = listener.getClass();
 		for (Method m : c.getMethods()) {
-			if (m.isAnnotationPresent(ButtonHandler.class) && m.getAnnotation(
-					ButtonHandler.class).joystick() == this.joystick) {
+			if (m.isAnnotationPresent(ButtonHandler.class)
+					&& m.getAnnotation(ButtonHandler.class).joystick() == this.joystick) {
 				this.handlers.get(m.getAnnotation(ButtonHandler.class).button()).add(m);
 				this.instances.put(m, listener);
 			}
 		}
 	}
-	
+
 	/**
-	 * Checks for updates in the joystick, and forwards those updates to all the
-	 * registered joystick listeners.
+	 * Checks for updates in the joystick, and forwards those updates to all the registered
+	 * joystick listeners.
 	 */
 	private void runHandlers() {
-		List<JoystickButton> newButtons = Lightning.getJoystick(
-				this.joystick).toButtonList();
+		List<JoystickButton> newButtons = Lightning.getJoystick(this.joystick).toButtonList();
 		for (JoystickButton button : JoystickButton.values()) {
 			for (Method m : this.handlers.get(button)) {
 				ButtonHandler a = m.getAnnotation(ButtonHandler.class);
@@ -118,7 +115,7 @@ public class JoystickMonitor {
 		}
 		this.lastButtons = newButtons;
 	}
-	
+
 	/**
 	 * Invokes the given method on the given instance, and catches all exceptions.
 	 *
@@ -132,7 +129,7 @@ public class JoystickMonitor {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Populates the maip of button handlers with an entry for every joystick button.
 	 */
@@ -141,10 +138,10 @@ public class JoystickMonitor {
 			this.handlers.put(button, new LinkedList<Method>());
 		}
 	}
-	
+
 	/**
-	 * The {@code MonitorUpdateRunnable} class is run through the task scheduler, and
-	 * is used to continuously check the joystick for any changes.
+	 * The {@code MonitorUpdateRunnable} class is run through the task scheduler, and is
+	 * used to continuously check the joystick for any changes.
 	 */
 	private class MonitorUpdateRunnable implements Runnable {
 
@@ -152,7 +149,7 @@ public class JoystickMonitor {
 		public void run() {
 			JoystickMonitor.this.runHandlers();
 		}
-		
+
 	}
 
 }

@@ -67,15 +67,17 @@ public final class Lightning {
 	 * and in client code of the SDK.
 	 */
 	private static TaskScheduler taskScheduler;
-	
+
 	/**
 	 * The joystick monitor for joystick 1.
+	 *
 	 * @see io.github.thunderbots.lightning.control.JoystickMonitor
 	 */
 	private static JoystickMonitor monitor1;
-	
+
 	/**
 	 * The joystick monitor for joystick 1.
+	 *
 	 * @see io.github.thunderbots.lightning.control.JoystickMonitor
 	 */
 	private static JoystickMonitor monitor2;
@@ -132,11 +134,11 @@ public final class Lightning {
 				throw new IllegalArgumentException();
 		}
 	}
-	
+
 	/**
 	 * Gets a reference to the joystick monitor for the given joystick. Currently, only
 	 * {@code joystick1} and {@code joystick2} are supported.
-	 * 
+	 *
 	 * @param joystick the ID of the joystick to get the monitor for; can only be 1 or 2.
 	 * @return the joystick monitor for the given joystick.
 	 * @see #monitor1
@@ -203,9 +205,10 @@ public final class Lightning {
 	 * Returns a list of {@code DeviceMapping}s in the given {@code HardwareMap} that could
 	 * contain sensors.
 	 * <p>
-	 * This method essentially works by enumerating the known device mappings that could contain
-	 * sensors. If more device mappings are added to FTC's built-in SDK, this method will need
-	 * to be updated before any new sensors can be accessed through Lightning.
+	 * This method essentially works by enumerating the known device mappings that could
+	 * contain sensors. If more device mappings are added to FTC's built-in SDK, this
+	 * method will need to be updated before any new sensors can be accessed through
+	 * Lightning.
 	 *
 	 * @param map the hardware map to search for sensor maps in.
 	 * @return a list of the device maps containing sensors.
@@ -228,5 +231,5 @@ public final class Lightning {
 		sensorMaps.add(map.voltageSensor);
 		return sensorMaps;
 	}
-	
+
 }
