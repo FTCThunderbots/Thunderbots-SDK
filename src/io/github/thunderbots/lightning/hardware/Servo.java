@@ -36,8 +36,8 @@ public class Servo {
 	private double centerPos;
 
 	/**
-	 * The minimum position of the servo. At the time of writing this, it is currently
-	 * -0.0, but this may change in the future.
+	 * The minimum position of the servo. At the time of writing this, it is currently 0.0,
+	 * but this may change in the future.
 	 */
 	public static final double MIN_POSITION = com.qualcomm.robotcore.hardware.Servo.MIN_POSITION;
 

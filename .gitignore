@@ -1,7 +1,6 @@
 # Java files
 
 *.class
-*Test.java
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -30,6 +29,11 @@ local.properties
 
 # Eclipse Core
 .project
+
+# IntelliJ files
+
+.idea/
+*.iml
 
 # External tool builders
 .externalToolBuilders/

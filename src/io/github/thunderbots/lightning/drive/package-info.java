@@ -15,6 +15,15 @@
  */
 
 /**
- * Provides classes used in the Drive Systems of robots.
+ * The {@link io.github.thunderbots.lightning.drive} package is a system for controlling the
+ * drive system of a robot. A drive system is an abstract way of representing the set of
+ * motors that are responsible for driving the robot, and their specific arrangement in the
+ * drive system. The drive system can handle abstract operations such as driving, turning,
+ * and spinning, and is responsible for all the math that is required to distribute those
+ * operations to the individual motors comprised by the drive system.
+ * <p>
+ * The class that primarily represents the concept of a drive system is, fittingly,
+ * {@link io.github.thunderbots.lightning.drive.DriveSystem DriveSystem}.
  */
 package io.github.thunderbots.lightning.drive;
+

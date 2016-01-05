@@ -15,6 +15,10 @@
  */
 
 /**
- * Provides classes used in control of robot systems.
+ * The {@link io.github.thunderbots.lightning.control} package exposes classes and methods
+ * that can be used to respond to controls and joystick inputs for the robot. Currently,
+ * the only way to control the robot is to use the joystick, but this may change in the
+ * future.
  */
 package io.github.thunderbots.lightning.control;
+

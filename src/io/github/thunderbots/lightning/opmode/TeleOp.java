@@ -18,6 +18,8 @@ package io.github.thunderbots.lightning.opmode;
 
 import io.github.thunderbots.lightning.Lightning;
 import io.github.thunderbots.lightning.control.Joystick;
+import io.github.thunderbots.lightning.control.layout.ControlLayout;
+import io.github.thunderbots.lightning.control.layout.DriveSpinControlLayout;
 
 /**
  * The TeleOp class is a base class that all tele-op programs should extend. It will handle
@@ -28,6 +30,11 @@ import io.github.thunderbots.lightning.control.Joystick;
  */
 public abstract class TeleOp extends SimpleOpMode {
 
+	/**
+	 * The control layout of the driving joystick.
+	 */
+	private ControlLayout joystickLayout;
+
 	@Override
 	protected void main() {
 		while (this.opModeIsActive()) {
@@ -36,21 +43,20 @@ public abstract class TeleOp extends SimpleOpMode {
 		}
 	}
 
+	@Override
+	protected void initializeOpMode() {
+		super.initializeOpMode();
+		this.joystickLayout = this.createControlLayout();
+	}
+
 	/**
 	 * Sets the instantaneous movement of the robot based on readings from the joysticks.
-	 * This can be overridden by any op mode that should not use the default drive/turn
-	 * controls.
 	 */
 	protected void setMovement() {
 		Joystick drivingGamepad = Lightning.getJoystick(1);
-		this.getDrive().setMovement(drivingGamepad.leftStickY(), drivingGamepad.rightStickX());
-
-		/*
-		 * This is commented because we don't need the debug information right now, but it
-		 * is not removed because we may need it again in the future.
-		 */
-		// Lightning.sendTelemetryData("joy1",
-		// drivingGamepad.leftStickY() + ", " + drivingGamepad.rightStickX());
+		double forwardPower = this.joystickLayout.getForwardPower(drivingGamepad);
+		double clockwisePower = this.joystickLayout.getClockwisePower(drivingGamepad);
+		this.getRobot().getDrive().setMovement(forwardPower, clockwisePower);
 	}
 
 	/**
@@ -60,6 +66,26 @@ public abstract class TeleOp extends SimpleOpMode {
 	 */
 	protected void mainLoop() {
 
+	}
+
+	/**
+	 * Constructs the joystick control layout that the op mode should use. A drive-turn
+	 * layout is provided as the default, but that can be replaced by overriding this
+	 * method.
+	 *
+	 * @return a constructed {@code ControlLayout} that should be used for this op mode.
+	 */
+	public ControlLayout createControlLayout() {
+		return new DriveSpinControlLayout();
+	}
+
+	/**
+	 * Gets a reference to the {@code ControlLayout} that this op mode is using.
+	 *
+	 * @return the control layout of this op mode.
+	 */
+	protected ControlLayout getControlLayout() {
+		return this.joystickLayout;
 	}
 
 }

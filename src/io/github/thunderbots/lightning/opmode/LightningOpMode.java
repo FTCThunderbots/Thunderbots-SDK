@@ -22,27 +22,39 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
  * The {@code LightningOpMode} is a customized version of {@code LinearOpMode} that should
- * be the superclass for all op modes written using the SDK.
+ * be the superclass for all op modes written using Lightning SDK.
  *
  * @author Zach Ohara
  */
 public abstract class LightningOpMode extends LinearOpMode {
 
 	/**
-	 * Constructs a new LightningOpMode.
+	 * Determines if the op mode has be <em> fully </em> initialized. The overridden
+	 * {@code initializeOpMode()} method will always be called, but serious problems are
+	 * caused later if any initialization method does not call the initialization of its
+	 * superclass. This value is used to determine if the initialization method defined in
+	 * {@code LightningOpMode} has been called, indicating if any method did not call the
+	 * supertype method.
+	 * <p>
+	 * This value is initialized to false, and only set to true once the version of
+	 * {@link #initializeOpMode()} defined in {@code LightningOpMode} has been called.
 	 */
+	private boolean isInitialized;
+
 	public LightningOpMode() {
-		if (this.isHidden()) {
-			throw new UnsupportedOperationException();
-			// This will be handled by the class loader
-		}
+		this.isInitialized = false;
 	}
 
 	/**
 	 * Initializes the robot. This can be defined however it is seen fit by the specific
-	 * overriding op mode.
+	 * overriding op mode. Any op mode that overrides this method should also call
+	 * {@code super.initializeOpMode()} on the first line.
+	 *
+	 * @see #isInitialized
 	 */
-	protected abstract void initializeOpMode();
+	protected void initializeOpMode() {
+		this.isInitialized = true;
+	}
 
 	/**
 	 * Executes the 'main procedure' of the op mode. This method will run either until
@@ -54,21 +66,12 @@ public abstract class LightningOpMode extends LinearOpMode {
 	public final void runOpMode() throws InterruptedException {
 		Lightning.initializeLightning(this);
 		this.initializeOpMode();
+		if (!this.isInitialized) {
+			throw new IllegalStateException("Op mode was not fully initialized. "
+					+ "You are probably missing a call to super.initializeOpMode()");
+		}
 		this.waitForStart();
 		this.main();
-	}
-
-	/**
-	 * Gets if this op mode should be hidden from the list in the app. If this method
-	 * returns {@code true}, then an exception will be raised during the construction of
-	 * this object, and the op mode will never show up in the drop-down menu of valid op
-	 * modes.
-	 *
-	 * @return {@code true} if the op mode should be hidden from view; {@code false}
-	 * otherwise.
-	 */
-	protected boolean isHidden() {
-		return false;
 	}
 
 }

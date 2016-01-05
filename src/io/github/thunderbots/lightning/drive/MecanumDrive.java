@@ -17,6 +17,7 @@
 package io.github.thunderbots.lightning.drive;
 
 import io.github.thunderbots.lightning.hardware.Motor;
+import io.github.thunderbots.lightning.hardware.MotorSet;
 
 /**
  * A {@code MecanumDrive} is a {@code DriveSystem} that represents a system using mecanum
@@ -31,9 +32,9 @@ public class MecanumDrive extends DriveSystem {
 	 * base.
 	 *
 	 * @param wheels the {@code DriveMotorSet} of this drive system.
-	 * @see DriveSystem#DriveSystem(DriveMotorSet)
+	 * @see DriveSystem#DriveSystem(MotorSet)
 	 */
-	public MecanumDrive(DriveMotorSet wheels) {
+	public MecanumDrive(MotorSet wheels) {
 		super(wheels);
 	}
 
@@ -75,15 +76,6 @@ public class MecanumDrive extends DriveSystem {
 	 */
 	public static final double ROTATE_POWER_WEIGHT = 1.0;
 
-	// This code is on standby. We don't know if we need it yet.
-	// public static final double[] INPUT_RANGE = {0, 1};
-	// public static final double[] DRIVE_POWER_RANGE = {0, 1};
-	// public static final double[] STRAFE_POWER_RANGE = {0, 1};
-	// public static final double[] ROTATE_POWER_RANGE = {0, 1};
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean setMovement(double forward, double clockwise) {
 		return this.setMovement(forward, 0, clockwise);
@@ -148,12 +140,6 @@ public class MecanumDrive extends DriveSystem {
 	 * @return the success of the operation.
 	 */
 	public boolean setMovement(double forward, double right, double clockwise) {
-
-		// This code is on standby
-		// forward = MathUtil.scaleToRange(forward, INPUT_RANGE, DRIVE_POWER_RANGE);
-		// right = MathUtil.scaleToRange(right, INPUT_RANGE, STRAFE_POWER_RANGE);
-		// clockwise = MathUtil.scaleToRange(clockwise, INPUT_RANGE, ROTATE_POWER_RANGE);
-
 		forward *= MecanumDrive.MOVE_POWER_SCALE * MecanumDrive.DRIVE_POWER_WEIGHT;
 		right *= MecanumDrive.MOVE_POWER_SCALE * MecanumDrive.STRAFE_POWER_WEIGHT;
 		clockwise *= MecanumDrive.MOVE_POWER_SCALE * MecanumDrive.ROTATE_POWER_WEIGHT;
@@ -174,15 +160,45 @@ public class MecanumDrive extends DriveSystem {
 			backLeft /= scale;
 			backRight /= scale;
 		}
-		
+
 		double[] motorPowers = new double[4];
 		motorPowers[0] = frontLeft;
 		motorPowers[1] = frontRight;
 		motorPowers[2] = backLeft;
 		motorPowers[3] = backRight;
-		this.getWheelSet().setMotorPowers(motorPowers);
+		this.getMotorSet().setMotorPowers(motorPowers);
 
 		return true;
+	}
+
+	@Override
+	public int getDriveTicks() {
+		Motor[] motors = this.getMotorSet().getMotorArray();
+		int sum =
+				motors[0].getEncoder().getPosition() + motors[2].getEncoder().getPosition()
+				- (motors[1].getEncoder().getPosition() + motors[3].getEncoder().getPosition());
+		return sum / 4;
+	}
+
+	@Override
+	public int getRotateTicks() {
+		Motor[] motors = this.getMotorSet().getMotorArray();
+		int sum =
+				motors[0].getEncoder().getPosition() + motors[2].getEncoder().getPosition()
+				+ motors[1].getEncoder().getPosition() + motors[3].getEncoder().getPosition();
+		return sum / 4;
+	}
+
+	@Override
+	public int getSwingTicks(boolean clockwise) {
+		Motor[] motors = this.getMotorSet().getMotorArray();
+		int sum;
+		if (clockwise) {
+			sum = motors[0].getEncoder().getPosition() + motors[2].getEncoder().getPosition();
+		} else {
+			sum = -(motors[1].getEncoder().getPosition() + motors[3].getEncoder().getPosition());
+		}
+		return sum / 2;
 	}
 
 }

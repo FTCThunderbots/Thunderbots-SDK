@@ -17,18 +17,19 @@
 package io.github.thunderbots.lightning;
 
 import io.github.thunderbots.lightning.control.Joystick;
+import io.github.thunderbots.lightning.control.JoystickMonitor;
 import io.github.thunderbots.lightning.hardware.CRServo;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.Servo;
 import io.github.thunderbots.lightning.opmode.LightningOpMode;
 import io.github.thunderbots.lightning.scheduler.TaskScheduler;
+import io.github.thunderbots.lightning.utility.Telemetry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
-import com.qualcomm.robotcore.robocol.Telemetry;
 
 /**
  * The {@code Lightning} class exposes methods for general interfacing with the hardware on
@@ -41,7 +42,8 @@ import com.qualcomm.robotcore.robocol.Telemetry;
 public final class Lightning {
 
 	/**
-	 * The op mode to get joystick information from.
+	 * The op mode to get hardware and objects from. All information that is accessible
+	 * through {@code Lightning} is provided by this op mode.
 	 */
 	private static LightningOpMode opmode;
 
@@ -61,43 +63,53 @@ public final class Lightning {
 	private static List<DeviceMapping<?>> sensorMaps;
 
 	/**
-	 * The telemetry link between the robot controller and the driver station.
-	 *
-	 * @see com.qualcomm.robotcore.robocol.Telemetry
-	 */
-	private static Telemetry robotTelemetry;
-
-	/**
 	 * The master task scheduler that is used to execute all background tasks in the SDK
 	 * and in client code of the SDK.
 	 */
 	private static TaskScheduler taskScheduler;
 
-	static {
-		Lightning.taskScheduler = new TaskScheduler();
-	}
+	/**
+	 * The joystick monitor for joystick 1.
+	 *
+	 * @see io.github.thunderbots.lightning.control.JoystickMonitor
+	 */
+	private static JoystickMonitor monitor1;
 
+	/**
+	 * The joystick monitor for joystick 1.
+	 *
+	 * @see io.github.thunderbots.lightning.control.JoystickMonitor
+	 */
+	private static JoystickMonitor monitor2;
+
+	/**
+	 * {@code Lightning} should not be instantiable.
+	 */
 	private Lightning() {
 
 	}
 
 	/**
-	 * Initializes the static information in {@code Lightning} from the given
+	 * Initializes the static members in {@code Lightning} from the given
 	 * {@code LightningOpMode}.
 	 *
-	 * @param opmode the op mode to initialize this robot from.
+	 * @param opmode the op mode to get information from.
+	 * @see #opmode
 	 */
 	public static void initializeLightning(LightningOpMode opmode) {
 		Lightning.opmode = opmode;
 		Lightning.robotHardware = opmode.hardwareMap;
-		Lightning.robotTelemetry = opmode.telemetry;
 		Lightning.sensorMaps = Lightning.getSensorMaps(Lightning.robotHardware);
+		Lightning.taskScheduler = new TaskScheduler();
+		Lightning.monitor1 = new JoystickMonitor(1);
+		Lightning.monitor2 = new JoystickMonitor(2);
+		Telemetry.setTelemetry(opmode.telemetry);
 	}
 
 	/**
-	 * Gets a reference to the master task scheduler.
+	 * Gets a reference to the main task scheduler.
 	 *
-	 * @return a reference to the master task scheduler.
+	 * @return a reference to the main task scheduler.
 	 * @see #taskScheduler
 	 */
 	public static TaskScheduler getTaskScheduler() {
@@ -105,18 +117,39 @@ public final class Lightning {
 	}
 
 	/**
-	 * Gets a reference to the given joystick. Currently, only {@code gamepad1} and
-	 * {@code gamepad2} are supported.
+	 * Gets a reference to the given joystick. Currently, only {@code joystick1} and
+	 * {@code joystick2} are supported.
 	 *
-	 * @param gamepad the joystick to return; can only be 1 or 2.
+	 * @param joystick the ID of the joystick to return; can only be 1 or 2.
 	 * @return the specified joystick.
+	 * @throws IllegalArgumentException if the given joystick ID is not 1 or 2.
 	 */
-	public static Joystick getJoystick(int gamepad) {
-		switch (gamepad) {
+	public static Joystick getJoystick(int joystick) {
+		switch (joystick) {
 			case 1:
 				return new Joystick(Lightning.opmode.gamepad1);
 			case 2:
 				return new Joystick(Lightning.opmode.gamepad2);
+			default:
+				throw new IllegalArgumentException();
+		}
+	}
+
+	/**
+	 * Gets a reference to the joystick monitor for the given joystick. Currently, only
+	 * {@code joystick1} and {@code joystick2} are supported.
+	 *
+	 * @param joystick the ID of the joystick to get the monitor for; can only be 1 or 2.
+	 * @return the joystick monitor for the given joystick.
+	 * @see #monitor1
+	 * @see #monitor2
+	 */
+	public static JoystickMonitor getJoystickMonitor(int joystick) {
+		switch (joystick) {
+			case 1:
+				return Lightning.monitor1;
+			case 2:
+				return Lightning.monitor2;
 			default:
 				return null;
 		}
@@ -130,82 +163,55 @@ public final class Lightning {
 	 *
 	 * @param name the name of the motor.
 	 * @return the motor with the given name.
+	 * @see io.github.thunderbots.lightning.hardware.CRServo
 	 */
 	public static Motor getMotor(String name) {
 		try {
 			return new Motor(Lightning.robotHardware.dcMotor.get(name));
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			// TODO: find out which specific type of exception we should expect here.
 			return new CRServo(new Servo(Lightning.robotHardware.servo.get(name)));
 		}
 	}
 
 	/**
-	 * Gets a reference to the motor with the given name.
+	 * Gets a reference to the servo with the given name.
 	 *
-	 * @param name the name of the motor.
-	 * @return the motor with the given name.
+	 * @param name the name of the servo.
+	 * @return the servo with the given name.
 	 */
 	public static Servo getServo(String name) {
 		return new Servo(Lightning.robotHardware.servo.get(name));
 	}
 
 	/**
-	 * Sends given data from the robot controller to the driver station. Any object can be
-	 * sent, but the object's {@code toString()} method will be called and the string
-	 * representation of the object is what will actually be sent. The data will be
-	 * displayed in the bottom portion of the driver station's screen.
+	 * Gets a reference to any sensor on the robot with the given name.
 	 *
-	 * @param tag a very short description of the data that is being sent. Ideally this
-	 * string should be around 1-8 characters long, but an upper limit on characters is
-	 * currently not known.
-	 * @param data the object to be sent.
+	 * @param name the name of the sensor.
+	 * @return the sensor with the given name.
+	 * @throws IllegalArgumentException if no sensors exist with the given name.
 	 */
-	public static void sendTelemetryData(String tag, Object data) {
-		Lightning.robotTelemetry.addData(tag, data);
+	@SuppressWarnings("unchecked")
+	public static <T> T getSensor(String name) {
+		for (DeviceMapping<?> m : Lightning.sensorMaps) {
+			if (m.entrySet().contains(name)) {
+				return (T) m.get(name);
+			}
+		}
+		throw new IllegalArgumentException();
 	}
 
 	/**
-	 * Sends given data from the robot controller to the driver station. Any object can be
-	 * sent, but the object's {@code toString()} method will be called and the string
-	 * representation of the object is what will actually be sent. The data will be
-	 * displayed in the bottom portion of the driver station's screen. <br>
-	 * If this method is used rather than {@link #sendTelemetryData(String, Object)}, the
-	 * tag for the data will be an empty string.
+	 * Returns a list of {@code DeviceMapping}s in the given {@code HardwareMap} that could
+	 * contain sensors.
+	 * <p>
+	 * This method essentially works by enumerating the known device mappings that could
+	 * contain sensors. If more device mappings are added to FTC's built-in SDK, this
+	 * method will need to be updated before any new sensors can be accessed through
+	 * Lightning.
 	 *
-	 * @param data the object to be sent.
-	 * @see #sendTelemetryData(String, Object)
-	 */
-	public static void sendTelemetryData(Object data) {
-		Lightning.sendTelemetryData("", data);
-	}
-
-	/**
-	 * Sends motor data from the robot controller to the driver station
-	 *
-	 * @param m the motor to be sent
-	 * @see #sendTelemetryData(String, Object)
-	 */
-	public static void sendTelemetryData(Motor m) {
-		Lightning.sendTelemetryData(m.getName() + ": ", m.getPower());
-	}
-
-	/**
-	 * Sends servo data from the robot controller to the driver station
-	 *
-	 * @param s the servo to be sent
-	 * @see #sendTelemetryData(String, Object)
-	 */
-	public static void sendTelemetryData(Servo s) {
-		Lightning.sendTelemetryData(s.getName() + ": ", s.getPosition());
-	}
-
-	/**
-	 * Given a {@code HardwareMap}, return a list of {@code DeviceMapping}s that could lead
-	 * to sensors.
-	 *
-	 * @param map the hardware map to search for maps in.
-	 * @return a list of the sensor maps.
+	 * @param map the hardware map to search for sensor maps in.
+	 * @return a list of the device maps containing sensors.
 	 */
 	private static List<DeviceMapping<?>> getSensorMaps(HardwareMap map) {
 		List<DeviceMapping<?>> sensorMaps = new ArrayList<DeviceMapping<?>>();
@@ -224,22 +230,6 @@ public final class Lightning {
 		sensorMaps.add(map.ultrasonicSensor);
 		sensorMaps.add(map.voltageSensor);
 		return sensorMaps;
-	}
-
-	/**
-	 * Gets a reference to any sensor on the robot with the given name.
-	 *
-	 * @param name the name of the sensor.
-	 * @return the sensor with the given name.
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T getSensor(String name) {
-		for (DeviceMapping<?> m : Lightning.sensorMaps) {
-			if (m.entrySet().contains(name)) {
-				return (T) m.get(name);
-			}
-		}
-		return null;
 	}
 
 }

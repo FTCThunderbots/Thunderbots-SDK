@@ -14,32 +14,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.thunderbots.lightning.sensor;
+package io.github.thunderbots.lightning.control.layout;
+
+import io.github.thunderbots.lightning.control.Joystick;
 
 /**
- * {@code SensorType} enumerates the possible types of sensors or abstract I/O devices that
- * are supported by the SDK.
+ * A {@code DriveSpinControlLayout} is a {@code ControlLayout} that represents the
+ * 'default' control layout for FTC robots. The y-axis of the left thumbstick is
+ * responsible for forward/backward movement, and the x-axis of the right thumbstick is
+ * responsible for the clockwise/counter-clockwise spin of the robot.
  *
  * @author Zach Ohara
  */
-public enum SensorType {
+public class DriveSpinControlLayout implements ControlLayout {
 
-	// Explicit sensor types
-	ACCELERATION,
-	COLOR,
-	COMPASS,
-	GYRO,
-	IR_SEEKER,
-	LIGHT,
-	OPTICAL_DISTANCE,
-	TOUCH,
-	ULTRASONIC,
-	VOLTAGE,
+	@Override
+	public double getForwardPower(Joystick joy) {
+		return joy.leftStickY();
+	}
 
-	// Abstract I/O types
-	ANALOG_INPUT,
-	ANALOG_OUTPUT,
-	DIGITAL_CHANNEL,
-	I2C_DEVICE,
+	@Override
+	public double getClockwisePower(Joystick joy) {
+		return joy.rightStickX();
+	}
 
 }

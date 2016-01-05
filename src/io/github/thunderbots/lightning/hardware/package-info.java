@@ -15,6 +15,9 @@
  */
 
 /**
- * Provides wrapper classes for the main motors/servos provided in the FTC SDK.
+ * The {@code io.github.thunderbots.lightning.hardware} package contains wrapper classes
+ * that represent physical motors and servos on the robot. Low-level hardware abstractions,
+ * such as {@link io.github.thunderbots.lightning.hardware.MotorSet MotorSet}, can also
+ * be included in this package.
  */
 package io.github.thunderbots.lightning.hardware;

@@ -16,20 +16,73 @@
 
 package io.github.thunderbots.lightning.robot;
 
+import io.github.thunderbots.lightning.drive.DriveSystem;
+import io.github.thunderbots.lightning.drive.TankDrive;
+
 /**
- * {@code Robot} is an interface that should be implemented by any class representing a
- * physical robot. In the future, this interface will be used to provide more seamless
- * operation between op modes objects and robot objects.
+ * {@code Robot} is an abstract class that should be extended by any class representing a
+ * physical robot.
  *
  * @author Pranav Mathur
  */
-public interface Robot {
+public abstract class Robot {
+
+	/**
+	 * The drive system that controls the movement of this robot.
+	 */
+	private DriveSystem drive;
+
+	/**
+	 * Constructs a new {@code Robot} and initializes the drive system
+	 */
+	public Robot() {
+		this.drive = this.createDriveSystem();
+		this.initializeRobot();
+	}
+
+	/**
+	 * Gets an array of Strings representing the names of the motors used for driving.
+	 * <p>
+	 * If the robot has four motors, this array should be in the format of:
+	 *
+	 * <pre>
+	 *  [front left, front right, back left, back right]
+	 * </pre>
+	 *
+	 * If the robot has only two motors, this array should be in the format of:
+	 *
+	 * <pre>
+	 *  [left, right]
+	 * </pre>
+	 *
+	 * @return the names of the driving motors.
+	 */
+	protected abstract String[] getDriveMotorNames();
 
 	/**
 	 * Initializes the robot. The implementation of this method should be used in place of
-	 * a constructor. Instance variables for a robot object should initialize from the
-	 * available hardware maps in this method.
+	 * a constructor.
 	 */
-	public void initializeRobot();
+	public abstract void initializeRobot();
+
+	/**
+	 * Gets a reference to the {@code DriveSystem} being used to control the robot.
+	 *
+	 * @return the drive system for this robot.
+	 * @see #drive
+	 */
+	public DriveSystem getDrive() {
+		return this.drive;
+	}
+
+	/**
+	 * Constructs a DriveSystem that the robot should use. TankDrive is assumed by default,
+	 * but this can be changed on an individual basis by overriding this method.
+	 *
+	 * @return a constructed {@code DriveSystem} that is specific to this robot or op mode.
+	 */
+	public DriveSystem createDriveSystem() {
+		return new TankDrive(this.getDriveMotorNames());
+	}
 
 }

@@ -14,7 +14,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package io.github.thunderbots.lightning.control;
+
 /**
- * Provides Sensor classes that extend a common Sensor Supertype.
+ * The {@code JoystickButton} enumeration contains all buttons that can be pressed on the
+ * joysticks.
+ *
+ * @author Zach Ohara
+ * @author Pranav Mathur
  */
-package io.github.thunderbots.lightning.sensor;
+public enum JoystickButton {
+
+	A,
+	B,
+	X,
+	Y,
+
+	DPAD_UP,
+	DPAD_DOWN,
+	DPAD_LEFT,
+	DPAD_RIGHT,
+
+	LEFT_STICK,
+	RIGHT_STICK,
+
+	LEFT_BUMPER,
+	RIGHT_BUMPER;
+
+	@Override
+	public String toString() {
+		return this.name();
+	}
+
+}

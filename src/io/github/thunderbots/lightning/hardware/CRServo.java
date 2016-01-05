@@ -58,8 +58,14 @@ public class CRServo extends Motor {
 	 */
 	public static final double REVERSE = 0;
 
-	public CRServo(Servo baseservo) {
+	/**
+	 * Constructs a new {@code CRServo} with the given {@code Servo} as a base.
+	 *
+	 * @param baseServo the servo to base this CR servo on.
+	 */
+	public CRServo(Servo baseServo) {
 		super(null);
+		this.baseServo = baseServo;
 	}
 
 	@Override
