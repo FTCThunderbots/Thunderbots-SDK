@@ -211,6 +211,27 @@ public abstract class DriveSystem implements Correctable {
 	}
 	
 	/**
+	 * Get the error associated with the device. 0 is no error, error
+	 * usually works best when it produces a normal curve.
+	 *
+	 * @return A scalar double representing the error in the device
+	 */
+	public double getError() {
+		switch(this.movementType) {
+		case DRIVE:
+			return this.targetPos - this.getDriveTicks();
+		case ROTATE:
+			return this.targetPos - this.getRotateTicks();
+		case SWING:
+			return this.targetPos - this.getSwingTicks(this.clockwise);
+		case NONE:
+			return 0.0;
+		default:
+			throw new UnsupportedOperationException("Unknown movement type");			
+		}
+	}
+	
+	/**
 	 * Converts between drive inches and encoder ticks.
 	 *
 	 * @param inches inches to convert.
