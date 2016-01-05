@@ -21,7 +21,7 @@ import io.github.thunderbots.lightning.hardware.Motor;
 
 /**
  * A {@code PID} is a class used to automatically calculate the PID values given
- * an error value and a change in time
+ * an error value and a change in time.
  *
  * @author Daniel Grimshaw
  */
@@ -52,40 +52,40 @@ public class PID implements Runnable {
 	 * This will act as the limit the amount of of correction the PID can
 	 * actually provide.
 	 */
-	private double windup_guard;
+	private double windupGuard;
 
 	/**
 	 * The constant to scale the proportional error to.
 	 */
-	private double proportional_gain;
+	private double proportionalGain;
 
 	/**
 	 * The constant to scale the integral (cumulative) error to.
 	 */
-	private double integral_gain;
+	private double integralGain;
 
 	/**
 	 * The constant to scale the derivative (predicted) error to.
 	 */
-	private double derivative_gain;
+	private double derivativeGain;
 
 	/**
-	 * A variable to store the previous error calculated by the PID
+	 * A variable to store the previous error calculated by the PID.
 	 */
-	private double prev_error;
+	private double prevError;
 	
 	/**
-	 * A variable to store the previous time that update was called
+	 * A variable to store the previous time that update was called.
 	 */
-	private double last_time;
+	private double lastTime;
 
 	/**
 	 * The cumulative integral (past) error.
 	 */
-	private double int_error;
+	private double intError;
 
 	/**
-	 * The correcting value
+	 * The correcting value.
 	 */
 	private double correction;
 
@@ -118,63 +118,63 @@ public class PID implements Runnable {
 	 * {@code PID} default constructor.
 	 *
 	 * @param device A {@code Correctable} device for the PID to act on.
-	 * @param windup_guard The integral cap
+	 * @param windupGuard The integral cap.
 	 *
 	 * @return A fancy new PID specialized for your device!
 	 *
 	 * @see io.github.thunderbots.lightning.functionality.Correctable
 	 */
-	public PID(Correctable device, double windup_guard) {
-		this(device, windup_guard, PID.DEFAULT_PROPORTIONAL_GAIN, PID.DEFAULT_INTEGRAL_GAIN, PID.DEFAULT_DERIVATIVE_GAIN);
+	public PID(Correctable device, double windupGuard) {
+		this(device, windupGuard, PID.DEFAULT_PROPORTIONAL_GAIN, PID.DEFAULT_INTEGRAL_GAIN, PID.DEFAULT_DERIVATIVE_GAIN);
 	}
 
 	/**
 	 * {@code PID} default constructor.
 	 *
 	 * @param device A {@code Correctable} device for the PID to act on.
-	 * @param windup_guard The integral cap
-	 * @param Kp The proportional gain
+	 * @param windupGuard The integral cap.
+	 * @param Kp The proportional gain.
 	 *
 	 * @return A fancy new PID specialized for your device!
 	 *
 	 * @see io.github.thunderbots.lightning.functionality.Correctable
 	 */
-	public PID(Correctable device, double windup_guard, double Kp) {
-		this(device, windup_guard, Kp, PID.DEFAULT_INTEGRAL_GAIN, PID.DEFAULT_DERIVATIVE_GAIN);
+	public PID(Correctable device, double windupGuard, double Kp) {
+		this(device, windupGuard, Kp, PID.DEFAULT_INTEGRAL_GAIN, PID.DEFAULT_DERIVATIVE_GAIN);
 	}
 
 	/**
 	 * {@code PID} default constructor.
 	 *
 	 * @param device A {@code Correctable} device for the PID to act on.
-	 * @param windup_guard The integral cap
-	 * @param Kp The proportional gain
-	 * @param Ki The integral gain
+	 * @param windupGuard The integral cap.
+	 * @param Kp The proportional gain.
+	 * @param Ki The integral gain.
 	 *
 	 * @return A fancy new PID specialized for your device!
 	 *
 	 * @see io.github.thunderbots.lightning.functionality.Correctable
 	 */
-	public PID(Correctable device, double windup_guard, double Kp, double Ki) {
-		this(device, windup_guard, Kp, Ki, PID.DEFAULT_DERIVATIVE_GAIN);
+	public PID(Correctable device, double windupGuard, double Kp, double Ki) {
+		this(device, windupGuard, Kp, Ki, PID.DEFAULT_DERIVATIVE_GAIN);
 	}
 
 	/**
 	 * {@code PID} default constructor.
 	 *
 	 * @param device A {@code Correctable} device for the PID to act on.
-	 * @param windup_guard The integral cap
-	 * @param Kp The proportional gain
-	 * @param Ki The integral gain
-	 * @param Kd The derivative gain
+	 * @param windupGuard The integral cap.
+	 * @param Kp The proportional gain.
+	 * @param Ki The integral gain.
+	 * @param Kd The derivative gain.
 	 *
 	 * @return A fancy new PID specialized for your device!
 	 *
 	 * @see io.github.thunderbots.lightning.functionality.Correctable
 	 */
-	public PID(Correctable device, double windup_guard, double Kp, double Ki, double Kd) {
+	public PID(Correctable device, double windupGuard, double Kp, double Ki, double Kd) {
 		this.device = device;
-		this.reset(windup_guard, Kp, Ki, Kd);
+		this.reset(windupGuard, Kp, Ki, Kd);
 		updater = new Thread(this);
 		updater.start();
 	}
@@ -185,94 +185,94 @@ public class PID implements Runnable {
 	 * @return True if success, otherwise false
 	 */
 	public boolean reset() {
-		this.int_error = 0.0;
-		this.prev_error = 0.0;
-		return true;
+		this.intError = 0.0;
+		this.prevError = 0.0;
+		return (this.intError == 0.0) && (this.prevError == 0.0);
 	}
 
 	/**
-	 * Resets the PID controller with new parameters
+	 * Resets the PID controller with new parameters.
 	 *
-	 * @param integral_cap The cap for the integral calculation
+	 * @param integralCap The cap for the integral calculation.
 	 *
-	 * @return True if success, otherwise false
+	 * @return True if success, otherwise false.
 	 */
-	public boolean reset(double integral_cap) {
-		this.set_constants(integral_cap, this.proportional_gain, this.integral_gain, this.derivative_gain);
+	public boolean reset(double integralCap) {
+		this.setConstants(integralCap, this.proportionalGain, this.integralGain, this.derivativeGain);
 		return this.reset();
 	}
 
 	/**
-	 * Resets the PID controller with new parameters
+	 * Resets the PID controller with new parameters.
 	 *
-	 * @param integral_cap The cap for the integral calculation
-	 * @param Kp The new proportional scaling factor
+	 * @param integralCap The cap for the integral calculation.
+	 * @param Kp The new proportional scaling factor.
 	 *
-	 * @return True if success, otherwise false
+	 * @return True if success, otherwise false.
 	 */
-	public boolean reset(double integral_cap, double Kp) {
-		this.set_constants(integral_cap, Kp, this.integral_gain, this.derivative_gain);
+	public boolean reset(double integralCap, double Kp) {
+		this.setConstants(integralCap, Kp, this.integralGain, this.derivativeGain);
 		return this.reset();
 	}
 
 	/**
-	 * Resets the PID controller with new parameters
+	 * Resets the PID controller with new parameters.
 	 *
-	 * @param integral_cap The cap for the integral calculation
-	 * @param Kp The new proportional scaling factor
-	 * @param Ki The new integral scaling factor
+	 * @param integralCap The cap for the integral calculation.
+	 * @param Kp The new proportional scaling factor.
+	 * @param Ki The new integral scaling factor.
 	 *
-	 * @return True if success, otherwise false
+	 * @return True if success, otherwise false.
 	 */
-	public boolean reset(double integral_cap, double Kp, double Ki) {
-		this.set_constants(integral_cap, Kp, Ki, this.proportional_gain);
+	public boolean reset(double integralCap, double Kp, double Ki) {
+		this.setConstants(integralCap, Kp, Ki, this.proportionalGain);
 		return this.reset();
 	}
 
 	/**
-	 * Resets the PID controller with new parameters
+	 * Resets the PID controller with new parameters.
 	 *
-	 * @param integral_cap The cap for the integral calculation
-	 * @param Kp The new proportional scaling factor
-	 * @param Ki The new integral scaling factor
-	 * @param Kd The new derivative scaling factor
+	 * @param integralCap The cap for the integral calculation.
+	 * @param Kp The new proportional scaling factor.
+	 * @param Ki The new integral scaling factor.
+	 * @param Kd The new derivative scaling factor.
 	 *
-	 * @return True if success, otherwise false
+	 * @return True if success, otherwise false.
 	 */
-	public boolean reset(double integral_cap, double Kp, double Ki, double Kd) {
-		this.set_constants(integral_cap, Kp, Ki, Kd);
+	public boolean reset(double integralCap, double Kp, double Ki, double Kd) {
+		this.setConstants(integralCap, Kp, Ki, Kd);
 		return this.reset();
 	}
 
 	/**
 	 * Set the constants for the PID.
-	 * Should only be called from constructor and reset functions
+	 * Should only be called from constructor and reset functions.
 	 *
-	 * @param integral_cap The cap for the integral calculation
-	 * @param Kp The proportional gain
-	 * @param Ki The integral gain
-	 * @param Kd The derivative gain
+	 * @param integralCap The cap for the integral calculation.
+	 * @param Kp The proportional gain.
+	 * @param Ki The integral gain.
+	 * @param Kd The derivative gain.
 	 *
 	 */
-	private void set_constants(double integral_cap, double Kp, double Ki, double Kd) {
-		this.windup_guard = integral_cap;
-		this.proportional_gain = Kp;
-		this.integral_gain = Ki;
-		this.derivative_gain = Kd;
+	private void setConstants(double integralCap, double Kp, double Ki, double Kd) {
+		this.windupGuard = integralCap;
+		this.proportionalGain = Kp;
+		this.integralGain = Ki;
+		this.derivativeGain = Kd;
 	}
 
 	/**
 	 * The thread that runs the actual PID calculations.
 	 *
 	 * Stores the PID correction value in this.correction,
-	 * which is available by calling this.getCorrection()
+	 * which is available by calling this.getCorrection().
 	 */
 	public void run() {
 		try {
 			while (true) {
-				double delta_t = (double)System.currentTimeMillis() - this.last_time;
-				this.update_correction(this.device.get_error(), delta_t);
-				this.last_time = (double)System.currentTimeMillis();
+				double deltaT = (double)System.currentTimeMillis() - this.lastTime;
+				this.updateCorrection(this.device.getError(), deltaT);
+				this.lastTime = (double)System.currentTimeMillis();
 				Thread.sleep(1);
 			}
 		}
@@ -282,35 +282,35 @@ public class PID implements Runnable {
 	}
 	
 	/**
-	 * This is the actual PID algorithm
+	 * This is the actual PID algorithm.
 	 * 
-	 * @param error The error in the device
-	 * @param delta_t The change in time from the last check
+	 * @param error The error in the device.
+	 * @param deltaT The change in time from the last check.
 	 */
-	private synchronized void update_correction(double error, double delta_t) {
+	private synchronized void updateCorrection(double error, double deltaT) {
 		double diff;
-		double p_term;
-		double i_term;
-		double d_term;
+		double pTerm;
+		double iTerm;
+		double dTerm;
 		double correction;
 		
-		//integration with windup guarding
-		this.int_error += error*delta_t;
-		if (this.int_error < -(this.windup_guard)) {
-			this.int_error = -(this.windup_guard);
-		} else if (this.int_error > this.windup_guard) {
-			this.int_error = this.windup_guard;
+		// Integration with wind-up guarding
+		this.intError += error*deltaT;
+		if (this.intError < -(this.windupGuard)) {
+			this.intError = -(this.windupGuard);
+		} else if (this.intError > this.windupGuard) {
+			this.intError = this.windupGuard;
 		}
 		
-		//differentiation
-		diff = ((error - this.prev_error) / delta_t);
+		// Differentiation
+		diff = ((error - this.prevError) / deltaT);
 		
-		//scaling
-		p_term = (this.proportional_gain * error);
-	    i_term = (this.integral_gain     * this.int_error);
-	    d_term = (this.derivative_gain   * diff);
+		// Scaling
+		pTerm = (this.proportionalGain * error);
+	    iTerm = (this.integralGain     * this.intError);
+	    dTerm = (this.derivativeGain   * diff);
 	    
-	    correction = p_term + i_term + d_term;
+	    correction = pTerm + iTerm + dTerm;
 	    
 	    if (correction < Motor.MIN_POWER) {
 	    	correction = Motor.MIN_POWER;
@@ -318,17 +318,70 @@ public class PID implements Runnable {
 	    	correction = Motor.MAX_POWER;
 	    }
 	    
-	    this.prev_error = error;
+	    this.prevError = error;
 	    
 	    this.correction = correction;
+	}
+	
+	/**
+	 * Get the wind-up guard (integral cap).
+	 * 
+	 * @return The wind-up guard (integral cap).
+	 */
+	public double getWindupGuard() {
+		return this.windupGuard;
+	}
+	
+	/**
+	 * Get the device being corrected.
+	 * 
+	 * @return The device being corrected.
+	 */
+	public Correctable getDevice() {
+		return this.device;
+	}
+	
+	/**
+	 * Get the proportional gain.
+	 * 
+	 * @return The current proportional gain.
+	 */
+	public double getProportionalGain() {
+		return this.proportionalGain;
+	}
+	
+	/**
+	 * Get the integral gain.
+	 * 
+	 * @return The current integral gain.
+	 */
+	public double getIntegralGain() {
+		return this.integralGain;
+	}
+	
+	/**
+	 * Get the derivative gain.
+	 * 
+	 * @return The current derivative gain.
+	 */
+	public double getDerivativeGain() {
+		return this.derivativeGain;
 	}
 
 	/**
 	 * The method to handle communication with the device.
 	 * 
-	 * @return The value to modify the device by.
+	 * @return The value (correction) to modify the device by.
 	 */
-	public synchronized double get_correction() {
+	public synchronized double getCorrection() {
 		return this.correction;
+	}
+	
+	@Override
+	public String toString() {
+		return "PID for " + this.getDevice() +
+				": Kp: " + this.getProportionalGain() +
+				"; Ki: " + this.getIntegralGain() +
+				"; Kd: " + this.getDerivativeGain() + ";";
 	}
 }

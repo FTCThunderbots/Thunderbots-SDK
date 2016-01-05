@@ -16,6 +16,8 @@
 
 package io.github.thunderbots.lightning.drive;
 
+import io.github.thunderbots.lightning.functionality.Correctable;
+import io.github.thunderbots.lightning.functionality.PID;
 import io.github.thunderbots.lightning.hardware.Motor;
 import io.github.thunderbots.lightning.hardware.MotorSet;
 
@@ -27,19 +29,63 @@ import io.github.thunderbots.lightning.hardware.MotorSet;
  * move with the given two vectors.
  *
  * @author Zach Ohara
+ * @author Daniel Grimshaw
  */
-public abstract class DriveSystem {
+public abstract class DriveSystem implements Correctable {
 
+	/**
+	 * Enumeration of movement types.
+	 * Used by get_error.
+	 * 
+	 * @see #get_error
+	 * 
+	 * @author Daniel Grimshaw
+	 */
+	private enum MovementType {
+		DRIVE,
+		ROTATE,
+		SWING,
+		NONE
+	}
+	
 	/**
 	 * The motors in this drive system.
 	 *
 	 * @see io.github.thunderbots.lightning.hardware.MotorSet
 	 */
 	private MotorSet motors;
+	
+	/**
+	 * The Proportional Integral Derivative controller.
+	 * 
+	 * @see io.github.thunderbots.lightning.functionality.PID
+	 */
+	private PID pid;
 
 	/**
-	 * Sets the amount of ticks that should be expected if the robot drives forward one
-	 * inch.
+	 * Describes the movement type for this.get_error()
+	 * 
+	 * @see #getError()
+	 */
+	private MovementType movementType;
+	
+	/**
+	 * Target location for PID
+	 * 
+	 * @see #getError()
+	 * @see io.github.thunderbots.lightning.functionality.PID
+	 */
+	private double targetPos;
+	
+	/**
+	 * Clockwise for PID
+	 * 
+	 * @see #getError()
+	 */
+	private boolean clockwise = false;
+	
+	/**
+	 * Sets the amount of ticks that should be expected if the robot drives forward one inch.
 	 * <p>
 	 * This number cannot have a default value because different types of encoders will be
 	 * used, and each may have a different definition of a tick.
@@ -76,6 +122,7 @@ public abstract class DriveSystem {
 	 */
 	public DriveSystem(MotorSet wheels) {
 		this.motors = wheels;
+		this.pid = new PID(this);
 	}
 
 	/**
@@ -85,6 +132,7 @@ public abstract class DriveSystem {
 	 */
 	public DriveSystem(String[] motornames) {
 		this.motors = new MotorSet(motornames);
+		this.pid = new PID(this);
 	}
 
 	/**
@@ -141,6 +189,27 @@ public abstract class DriveSystem {
 	 */
 	public abstract int getSwingTicks(boolean clockwise);
 
+	/**
+	 * Get the error associated with the device. 0 is no error, error
+	 * usually works best when it produces a normal curve.
+	 *
+	 * @return A scalar double representing the error in the device
+	 */
+	public double getError() {
+		switch(this.movementType) {
+		case DRIVE:
+			return this.targetPos - this.getDriveTicks();
+		case ROTATE:
+			return this.targetPos - this.getRotateTicks();
+		case SWING:
+			return this.targetPos - this.getSwingTicks(this.clockwise);
+		case NONE:
+			return 0.0;
+		default:
+			throw new UnsupportedOperationException("Unknown movement type");			
+		}
+	}
+	
 	/**
 	 * Converts between drive inches and encoder ticks.
 	 *
@@ -278,7 +347,7 @@ public abstract class DriveSystem {
 	 * @return the success of the operation.
 	 */
 	public boolean drive(double power) {
-		return this.setMovement(power, 0);
+		return this.setMovement(power + this.pid.getCorrection(), 0);
 	}
 
 	/**
@@ -288,7 +357,7 @@ public abstract class DriveSystem {
 	 * @return the success of the operation.
 	 */
 	public boolean rotate(double power) {
-		return this.setMovement(0, power);
+		return this.setMovement(0, power + this.pid.getCorrection());
 	}
 
 	/**
@@ -301,7 +370,7 @@ public abstract class DriveSystem {
 	 */
 	public boolean swing(boolean clockwise, double power) {
 		int directionMultiplier = clockwise ? 1 : -1;
-		return this.setMovement(power, Math.abs(power) * directionMultiplier);
+		return this.setMovement(power + this.pid.getCorrection(), Math.abs(power) * directionMultiplier + this.pid.getCorrection());
 	}
 
 	// @formatter:off
@@ -399,7 +468,7 @@ public abstract class DriveSystem {
 			// do nothing
 		}
 		this.halt();
-		return true;
+		return this.pid.reset();
 	}
 
 	/**
@@ -419,7 +488,7 @@ public abstract class DriveSystem {
 			// do nothing
 		}
 		this.halt();
-		return true;
+		return this.pid.reset();
 	}
 
 	/**
@@ -434,6 +503,7 @@ public abstract class DriveSystem {
 	 * @see #swing(boolean, double)
 	 */
 	public boolean swingTicks(boolean clockwise, double power, int ticks) {
+		this.clockwise = clockwise;
 		int start = this.getSwingTicks(clockwise);
 		int end = start + ticks;
 		this.swing(clockwise, power);
@@ -441,7 +511,7 @@ public abstract class DriveSystem {
 			// do nothing
 		}
 		this.halt();
-		return true;
+		return this.pid.reset();
 	}
 
 	/**
@@ -484,4 +554,8 @@ public abstract class DriveSystem {
 		return this.swingTicks(clockwise, power, (int) (this.swingDegreesToTicks(degrees)));
 	}
 
+	@Override
+	public String toString() {
+		return "DriveSystem";
+	}
 }
