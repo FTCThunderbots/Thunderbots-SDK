@@ -197,16 +197,16 @@ public abstract class DriveSystem implements Correctable {
 	 */
 	public double getError() {
 		switch(this.movementType) {
-		case DRIVE:
-			return this.targetPos - this.getDriveTicks();
-		case ROTATE:
-			return this.targetPos - this.getRotateTicks();
-		case SWING:
-			return this.targetPos - this.getSwingTicks(this.clockwise);
-		case NONE:
-			return 0.0;
-		default:
-			throw new UnsupportedOperationException("Unknown movement type");			
+			case DRIVE:
+				return this.targetPos - this.getDriveTicks();
+			case ROTATE:
+				return this.targetPos - this.getRotateTicks();
+			case SWING:
+				return this.targetPos - this.getSwingTicks(this.clockwise);
+			case NONE:
+				return 0.0;
+			default:
+				throw new UnsupportedOperationException("Unknown movement type");			
 		}
 	}
 	
