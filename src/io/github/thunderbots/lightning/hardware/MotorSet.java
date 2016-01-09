@@ -20,14 +20,14 @@ import io.github.thunderbots.lightning.Lightning;
 
 /**
  * A {@code MotorSet} is a collection of motors that should move in unison. The most common
- * use for this functionality is in a drive system, because all the motors of a drive system
- * move together.
+ * use for this functionality is in a drive system, because all the motors of a drive
+ * system move together.
  * <p>
- * It is <b> not </b> required that all of the motors in a motor set move <em> exactly </em>
- * in usison. In some cases, this would be catastrophic. In the case of a drive system, the
- * robot would only be able to spin clockwise or counterclockwise. Instead, a motor set
- * comprises motors that should be controlled together, even if they should be given
- * different individual powers.
+ * It is <b> not </b> required that all of the motors in a motor set move
+ * <em> exactly </em> in usison. In some cases, this would be catastrophic. In the case of
+ * a drive system, the robot would only be able to spin clockwise or counterclockwise.
+ * Instead, a motor set comprises motors that should be controlled together, even if they
+ * should be given different individual powers.
  *
  * @author Zach Ohara
  */
@@ -49,7 +49,7 @@ public class MotorSet {
 			this.motors[i] = Lightning.getMotor(names[i]);
 		}
 	}
-	
+
 	/**
 	 * Constructs a new {@code MotorSet} using the given motor array.
 	 *
@@ -58,16 +58,16 @@ public class MotorSet {
 	public MotorSet(Motor[] motors) {
 		this.motors = motors;
 	}
-	
+
 	/**
 	 * Gets the array of motors that this {@code MotorSet} comprises.
-	 * 
+	 *
 	 * @return an array of motors.
 	 */
 	public Motor[] getMotorArray() {
 		return this.motors;
 	}
-	
+
 	/**
 	 * Sets the power of all the motors in this set to the given power.
 	 *
@@ -80,9 +80,9 @@ public class MotorSet {
 	}
 
 	/**
-	 * Sets the power of the motors in this motor set from the corresponding power values in
-	 * the given double array. For example, the motor at {@code motors[n]} will be assigned
-	 * the power value at {@code powers[n]}. If the lengths of {@code motors} and
+	 * Sets the power of the motors in this motor set from the corresponding power values
+	 * in the given double array. For example, the motor at {@code motors[n]} will be
+	 * assigned the power value at {@code powers[n]}. If the lengths of {@code motors} and
 	 * {@code powers} are mismatched, then all the available pairs will be matched, and the
 	 * extra values in either array will be discarded.
 	 *
@@ -94,7 +94,7 @@ public class MotorSet {
 			this.motors[i].setPower(powers[i]);
 		}
 	}
-	
+
 	/**
 	 * Stops all the motors in this motor set
 	 */
@@ -103,7 +103,7 @@ public class MotorSet {
 			m.stop();
 		}
 	}
-	
+
 	/**
 	 * Gets the average power of all the motors in this motor set.
 	 *
@@ -116,7 +116,7 @@ public class MotorSet {
 		}
 		return sum / this.motors.length;
 	}
-	
+
 	/**
 	 * Gets the average encoder reading for all the motors in this motor set.
 	 *

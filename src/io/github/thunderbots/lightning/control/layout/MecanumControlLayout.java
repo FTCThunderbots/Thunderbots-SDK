@@ -21,15 +21,15 @@ import io.github.thunderbots.lightning.control.Joystick;
 /**
  * A {@code MecanumControlLayout} is a {@code ControlLayout} that can control a robot with
  * a mecanum drive system. There is no 'standard' accepted way to control a mecanum drive
- * system, but in this implementation, the y-axis of the left thumbstick is responsible
- * for forward/backward movement, the x-axis of the left thumbstick is responsible for
+ * system, but in this implementation, the y-axis of the left thumbstick is responsible for
+ * forward/backward movement, the x-axis of the left thumbstick is responsible for
  * left/right strafing movement, and the x-axis of the right thumbstick controls
  * clockwise/counter-clockwise rotation of the robot.
- * 
+ *
  * @author Jake Ohara
  */
 public class MecanumControlLayout implements ControlLayout {
-	
+
 	@Override
 	public double getForwardPower(Joystick joy) {
 		return joy.leftStickY();
@@ -39,16 +39,16 @@ public class MecanumControlLayout implements ControlLayout {
 	public double getClockwisePower(Joystick joy) {
 		return joy.rightStickX();
 	}
-	
+
 	/**
 	 * Gets the right strafe power that should be sent to the robot based on the current
 	 * state of the given joystick.
-	 * 
+	 *
 	 * @param joy the joystick to use for power calculations.
 	 * @return the right strafe power of the robot.
 	 */
 	public double getRightStrafePower(Joystick joy) {
 		return joy.leftStickX();
 	}
-		
+
 }

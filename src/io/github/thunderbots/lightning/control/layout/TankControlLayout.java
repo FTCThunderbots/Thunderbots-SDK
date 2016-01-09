@@ -20,10 +20,9 @@ import io.github.thunderbots.lightning.control.Joystick;
 
 /**
  * A {@code TankControlLayout} is a {@code ControlLayout} that represents a tank-like
- * control system. In a tank control system, the y-axis of the left thumbstick is used
- * to control the forward/backward power of the left side of the robot, and the right
- * thumbstick is used to control the forward/backward power of the right side of the
- * robot.
+ * control system. In a tank control system, the y-axis of the left thumbstick is used to
+ * control the forward/backward power of the left side of the robot, and the right
+ * thumbstick is used to control the forward/backward power of the right side of the robot.
  * <p>
  * Since the movement methods of {@link io.github.thunderbots.lightning.drive.DriveSystem
  * DriveSystem} accept only a single forward vector and a single clockwise vector, some
@@ -31,7 +30,7 @@ import io.github.thunderbots.lightning.control.Joystick;
  * the drive system. The forward power is calculated as the average of the two y-values,
  * and the clockwise power is calculated as the difference between the y-values of the two
  * thumbsticks.
- * 
+ *
  * @author Zach Ohara
  */
 public class TankControlLayout implements ControlLayout {

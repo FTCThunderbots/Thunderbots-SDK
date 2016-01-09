@@ -14,9 +14,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Provides classes that expose methods for general interfacing with the hardware on
- * the physical robot.
- */
-package io.github.thunderbots.lightning;
+package io.github.thunderbots.lightning.utility;
 
+/**
+ * The {@code Alliance} is an enumeration of possible sides of the field. This could be
+ * used to write autonomous code that can adapt to changing sides of the field.
+ */
+public enum Alliance {
+
+	BLUE(1),
+	RED(-1);
+
+	/**
+	 * The integer that represents the side of the field. Blue is 1, and red is -1.
+	 */
+	private final int side;
+
+	/**
+	 * Constructs a new {@code Alliance}.
+	 *
+	 * @param side the side of the field that this alliance represents.
+	 */
+	private Alliance(int side) {
+		this.side = side;
+	}
+
+	/**
+	 * Gets the integer side of the field.
+	 *
+	 * @return the side of the field.
+	 * @see #side
+	 */
+	public int getSide() {
+		return this.side;
+	}
+
+}

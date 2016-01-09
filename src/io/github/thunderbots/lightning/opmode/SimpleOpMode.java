@@ -21,26 +21,31 @@ import io.github.thunderbots.lightning.robot.Robot;
 /**
  * A {@code SimpleOpMode} is an op mode that is designed to make the op mode programming
  * process very easy. Many common functionalities are implemented in this class, so all
- * subclasses have easy access to that functionality. An example of this is the automatic
- * construction of a {@code DriveSystem} based on the return value of {@link #isHidden()}.
+ * subclasses have easy access to that functionality.
  *
  * @author Zach Ohara
  */
 public abstract class SimpleOpMode extends LightningOpMode {
-	
+
 	/**
 	 * The robot that this OpMode is designed for.
 	 */
 	private Robot robot;
-	
+
 	/**
-	 * Get a reference to this OpMode's robot
-	 * @return the corresponding robot
+	 * Get a reference to this op mode's robot.
+	 *
+	 * @return this op mode's robot
 	 */
 	protected Robot getRobot() {
 		return this.robot;
 	}
-	
+
+	/**
+	 * Sets the robot to use for this op mode.
+	 *
+	 * @param robot the robot to use for this op mode.
+	 */
 	protected void setRobot(Robot robot) {
 		this.robot = robot;
 	}
