@@ -29,5 +29,5 @@ public interface Correctable {
 	 *
 	 * @return A scalar double representing the error in the device
 	 */
-	public double get_error();
+	public double getError();
 }
