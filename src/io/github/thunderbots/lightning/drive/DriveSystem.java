@@ -137,6 +137,7 @@ public abstract class DriveSystem {
 	 * Gets the average value in raw ticks of the encoders for driving, assuming the robot
 	 * is swinging.
 	 *
+	 * @param clockwise the direction of swing, true for CW, false for CCW
 	 * @return the average value of the encoders for swinging.
 	 */
 	public abstract int getSwingTicks(boolean clockwise);

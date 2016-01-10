@@ -187,6 +187,7 @@ public final class Lightning {
 	/**
 	 * Gets a reference to any sensor on the robot with the given name.
 	 *
+	 * @param <T> the type of the desired sensor.
 	 * @param name the name of the sensor.
 	 * @return the sensor with the given name.
 	 * @throws IllegalArgumentException if no sensors exist with the given name.
