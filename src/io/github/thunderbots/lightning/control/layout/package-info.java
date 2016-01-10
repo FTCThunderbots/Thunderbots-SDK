@@ -21,7 +21,7 @@
  * This package includes many different control layouts, such as DriveSpin, Tank, and Mecanum. It
  * also includes the base methods that all control layouts are meant to return.
  * The Control Layout interface should be implemented by anything that is a joystick control layout.
- * Refer to {@link  io.github.thunderbots.lightning.opmode.Teleop TeleOp} to see implementation.
+ * Refer to {@link  io.github.thunderbots.lightning.opmode.TeleOp TeleOp} to see implementation.
  *
  *
  * @author Jake Ohara
