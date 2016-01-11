@@ -77,9 +77,10 @@ public class JoystickMonitor {
 		Lightning.getTaskScheduler().registerTask(new MonitorUpdateRunnable());
 		this.lastButtons = Lightning.getJoystick(this.joystick).toButtonList();
 	}
-
+	
 	/**
 	 * Registers the given joystick listener so that joystick updates can be sent to it.
+	 * @param listener the class to be searched for listener Button Handlers
 	 */
 	public void registerJoystickListener(JoystickListener listener) {
 		Class<?> c = listener.getClass();
@@ -138,7 +139,7 @@ public class JoystickMonitor {
 			this.handlers.put(button, new LinkedList<Method>());
 		}
 	}
-
+	
 	/**
 	 * The {@code MonitorUpdateRunnable} class is run through the task scheduler, and is
 	 * used to continuously check the joystick for any changes.

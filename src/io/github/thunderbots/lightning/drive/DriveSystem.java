@@ -185,6 +185,7 @@ public abstract class DriveSystem implements Correctable {
 	 * Gets the average value in raw ticks of the encoders for driving, assuming the robot
 	 * is swinging.
 	 *
+	 * @param clockwise the direction of swing, true for CW, false for CCW
 	 * @return the average value of the encoders for swinging.
 	 */
 	public abstract int getSwingTicks(boolean clockwise);
@@ -416,7 +417,7 @@ public abstract class DriveSystem implements Correctable {
 	 * @param power the forward power; between -1 and 1.
 	 * @param seconds the time to move for.
 	 * @return the success of the operation.
-	 * @see #swing(boolean, int)
+	 * @see #swing(boolean, double)
 	 */
 	public boolean swingSeconds(boolean clockwise, double power, double seconds) {
 		return this.swing(clockwise, power) && this.waitAndStop(seconds);
@@ -546,7 +547,7 @@ public abstract class DriveSystem implements Correctable {
 	 * @param clockwise {@code true} if the robot should swing clockwise, or {@code false}
 	 * if the robot should spin counter-clockwise.
 	 * @param power the forward power; between -1 and 1.
-	 * @param ticks the amount of encoder ticks to move for.
+	 * @param degrees the amount of degrees to move for.
 	 * @return the success of the operation.
 	 * @see #swing(boolean, double)
 	 */

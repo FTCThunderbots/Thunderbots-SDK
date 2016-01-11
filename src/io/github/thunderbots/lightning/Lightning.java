@@ -158,7 +158,7 @@ public final class Lightning {
 	/**
 	 * Gets a reference to the motor with the given name. If there is no motor with the
 	 * given name, but there is a servo with the given name, the servo is assumed to be a
-	 * continuous-rotation servo, and a {@link io.github.thunderbots.hardware.CRServo
+	 * continuous-rotation servo, and a {@link io.github.thunderbots.lightning.hardware.CRServo
 	 * CRServo} object representing that servo is returned.
 	 *
 	 * @param name the name of the motor.
@@ -187,6 +187,7 @@ public final class Lightning {
 	/**
 	 * Gets a reference to any sensor on the robot with the given name.
 	 *
+	 * @param <T> the type of the desired sensor.
 	 * @param name the name of the sensor.
 	 * @return the sensor with the given name.
 	 * @throws IllegalArgumentException if no sensors exist with the given name.
