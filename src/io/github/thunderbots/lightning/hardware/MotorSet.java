@@ -37,6 +37,11 @@ public class MotorSet {
 	 * The array of motors that this {@code MotorSet} comprises.
 	 */
 	private Motor[] motors;
+	
+	/**
+	 * The target speeds for each motor
+	 */
+	private double[] motorSpeeds;
 
 	/**
 	 * Constructs a new {@code MotorSet} using the motors with the given names.
@@ -95,6 +100,19 @@ public class MotorSet {
 		}
 	}
 
+	public void setMotorSpeed(double speed) {
+		for (int i = 0; i < motorSpeeds.length; i++) {
+			this.motorSpeeds[i] = speed;
+		}
+	}
+	
+	public void setMotorSpeeds(double[] powers) {
+		int motorSet = Math.min(powers.length, this.motors.length);
+		for (int i = 0; i < motorSet; i++) {
+			this.motorSpeeds[i] = powers[i];
+		}
+	}
+	
 	/**
 	 * Stops all the motors in this motor set
 	 */
