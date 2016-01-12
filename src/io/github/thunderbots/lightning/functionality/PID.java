@@ -284,6 +284,8 @@ public class PID implements Runnable {
 	/**
 	 * This is the actual PID algorithm.
 	 * 
+	 * This method is synchronized to protect write errors on the correction variable.
+	 * 
 	 * @param error The error in the device.
 	 * @param deltaT The change in time from the last check.
 	 */
@@ -370,6 +372,8 @@ public class PID implements Runnable {
 
 	/**
 	 * The method to handle communication with the device.
+	 * 
+	 * This method is synchronized to protect the correction variable from write errors
 	 * 
 	 * @return The value (correction) to modify the device by.
 	 */
