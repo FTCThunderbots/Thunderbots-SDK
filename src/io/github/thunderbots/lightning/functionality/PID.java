@@ -18,6 +18,7 @@ package io.github.thunderbots.lightning.functionality;
 
 import io.github.thunderbots.lightning.functionality.Correctable;
 import io.github.thunderbots.lightning.hardware.Motor;
+import io.github.thunderbots.lightning.utility.Telemetry;
 
 /**
  * A {@code PID} is a class used to automatically calculate the PID values given
@@ -277,7 +278,7 @@ public class PID implements Runnable {
 			}
 		}
 		catch (Exception e) { //TODO: Implement this
-			
+			Telemetry.sendData("PID ERROR!!!", this.toString()+" HAS STOPPED!");
 		}
 	}
 	
