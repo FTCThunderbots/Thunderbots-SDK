@@ -16,6 +16,11 @@
 
 package io.github.thunderbots.lightning.hardware;
 
+import io.github.thunderbots.lightning.functionality.Correctable;
+import io.github.thunderbots.lightning.functionality.PID;
+import io.github.thunderbots.lightning.utility.Telemetry;
+import io.github.thunderbots.lightning.utility.Util;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
@@ -24,7 +29,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * @author Zach Ohara
  * @author Pranav Mathur
  */
-public class Motor {
+public class Motor implements Runnable, Correctable{
 
 	/**
 	 * The {@code DcMotor} that this object is based on.
@@ -36,11 +41,26 @@ public class Motor {
 	 * even if there is no encoder attached to this motor.
 	 */
 	private Encoder encoder;
+	
+	/**
+	 * The Proportional Integral Derivative Controller
+	 */
+	private PID pid;
+	
+	/**
+	 * The target speed of the motor
+	 */
+	private double goalSpeed;
+	
+	/**
+	 * The current speed of the motor
+	 */
+	private double speed;
 
 	/**
 	 * The current power of the motor.
 	 */
-	private double power;
+//	private double power;
 
 	/**
 	 * The maximum power of the motor.
@@ -65,6 +85,8 @@ public class Motor {
 	public Motor(DcMotor basemotor) {
 		this.basemotor = basemotor;
 		this.encoder = new Encoder();
+		Thread t = new Thread(this);
+		t.start();
 	}
 
 	/**
@@ -125,11 +147,11 @@ public class Motor {
 	 * @return the current movement power; between -1 and 1.
 	 */
 	public double getPower() {
-		try {
+		//try {
 			return this.basemotor.getPower();
-		} catch (Exception e) {
-			return this.power;
-		}
+		//} catch (Exception e) {
+		//	return this.power;
+		//}
 	}
 
 	/**
@@ -139,7 +161,23 @@ public class Motor {
 	 */
 	public void setPower(double power) {
 		this.basemotor.setPower(power);
-		this.power = power;
+//		this.power = power;
+	}
+	
+	public synchronized void setSpeed(double goalSpeed) {
+		this.goalSpeed = goalSpeed;
+	}
+	
+	public synchronized void setCurrentSpeed(int lastPosition, long lastTime) {
+		this.speed = (double)(this.getRawPosition()-lastPosition)/(double)(System.currentTimeMillis()-lastTime);
+	}
+	
+	private synchronized double getGoalSpeed() {
+		return this.goalSpeed;
+	}
+	
+	private synchronized double getCurrentSpeed() {
+		return this.speed;
 	}
 
 	/**
@@ -268,6 +306,29 @@ public class Motor {
 			return "Encoder[" + Motor.this + "]";
 		}
 
+	}
+
+	@Override
+	public double getError() {
+		return this.getGoalSpeed() - this.getCurrentSpeed();
+	}
+
+	@Override
+	public void run() {
+		try {
+			int lastPosition = this.getRawPosition();
+			long lastTime = System.currentTimeMillis();
+			Util.sleep(1);
+			while (true) {
+				this.setCurrentSpeed(lastPosition, lastTime);
+				lastPosition = this.getRawPosition();
+				lastTime = System.currentTimeMillis();
+				Util.sleep(1);
+			}
+		} catch (Exception e) { 
+			Telemetry.sendData("PID ERROR!!!", this.pid.toString()+" HAS STOPPED!");
+		}
+		
 	}
 
 }
