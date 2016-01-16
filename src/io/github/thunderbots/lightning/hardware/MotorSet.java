@@ -37,11 +37,6 @@ public class MotorSet {
 	 * The array of motors that this {@code MotorSet} comprises.
 	 */
 	private Motor[] motors;
-	
-	/**
-	 * The target speeds for each motor
-	 */
-	private double[] motorSpeeds;
 
 	/**
 	 * Constructs a new {@code MotorSet} using the motors with the given names.
@@ -100,16 +95,32 @@ public class MotorSet {
 		}
 	}
 
+	/**
+	 * Set all of the motors to go at speed.
+	 * 
+	 * Uses PID
+	 *
+	 * @param speed goal speed of the motors
+	 */
 	public void setMotorSpeed(double speed) {
-		for (int i = 0; i < motorSpeeds.length; i++) {
-			this.motorSpeeds[i] = speed;
+		for (Motor m : this.motors) {
+			m.setSpeed(speed);
 		}
 	}
 	
-	public void setMotorSpeeds(double[] powers) {
-		int motorSet = Math.min(powers.length, this.motors.length);
+	/**
+	 * Sets the goal speed of the motors in this motor set from the corresponding speed values
+	 * in the given double array. For example, the motor at {@code motors[n]} will be
+	 * assigned the goal speed value at {@code speeds[n]}. If the lengths of {@code motors} and
+	 * {@code speeds} are mismatched, then all the available pairs will be matched, and the
+	 * extra values in either array will be discarded.
+	 *
+	 * @param speeds the goal speed values to assign to the corresponding motors.
+	 */
+	public void setMotorSpeeds(double[] speeds) {
+		int motorSet = Math.min(speeds.length, this.motors.length);
 		for (int i = 0; i < motorSet; i++) {
-			this.motorSpeeds[i] = powers[i];
+			this.motors[i].setSpeed(speeds[i]);
 		}
 	}
 	
