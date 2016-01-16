@@ -145,5 +145,10 @@ public final class Telemetry {
 	public static void sendServoPosition(Servo s) {
 		Telemetry.sendData(s.getName() + " pos", s.getPosition());
 	}
+	
+	public static void sendThrowable(Throwable t) {
+		Telemetry.sendData("Throwable: ", t.getMessage());
+		t.printStackTrace();
+	}
 
 }
