@@ -85,6 +85,7 @@ public class Motor implements Runnable, Correctable{
 	public Motor(DcMotor basemotor) {
 		this.basemotor = basemotor;
 		this.encoder = new Encoder();
+		this.pid = new PID(this);
 		Thread t = new Thread(this);
 		t.start();
 	}
@@ -323,6 +324,7 @@ public class Motor implements Runnable, Correctable{
 				this.setCurrentSpeed(lastPosition, lastTime);
 				lastPosition = this.getRawPosition();
 				lastTime = System.currentTimeMillis();
+				this.setPower(this.pid.getCorrection());
 				Util.sleep(1);
 			}
 		} catch (Exception e) { 
