@@ -155,6 +155,10 @@ public final class Lightning {
 		}
 	}
 
+	public static HardwareMap getRobotHardware() {
+		return robotHardware;
+	}
+
 	/**
 	 * Gets a reference to the motor with the given name. If there is no motor with the
 	 * given name, but there is a servo with the given name, the servo is assumed to be a
