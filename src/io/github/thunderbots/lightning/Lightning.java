@@ -26,8 +26,11 @@ import io.github.thunderbots.lightning.scheduler.TaskScheduler;
 import io.github.thunderbots.lightning.utility.Telemetry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.HardwareMap.DeviceMapping;
 
@@ -60,7 +63,15 @@ public final class Lightning {
 	 *
 	 * @see #robotHardware
 	 */
-	private static List<DeviceMapping<?>> sensorMaps;
+	private static List<DeviceMapping<? extends HardwareDevice>> sensorMaps;
+	
+	/**
+	 * A collection of all of the sensors on the robot, compiled from
+	 * {@code robotHardware}.
+	 * 
+	 * @see sensorMaps
+	 */
+	private static Map<String, HardwareDevice> sensors;
 
 	/**
 	 * The master task scheduler that is used to execute all background tasks in the SDK
@@ -100,6 +111,7 @@ public final class Lightning {
 		Lightning.opmode = opmode;
 		Lightning.robotHardware = opmode.hardwareMap;
 		Lightning.sensorMaps = Lightning.getSensorMaps(Lightning.robotHardware);
+		Lightning.sensors = Lightning.getAllSensors();
 		Lightning.taskScheduler = new TaskScheduler();
 		Lightning.monitor1 = new JoystickMonitor(1);
 		Lightning.monitor2 = new JoystickMonitor(2);
@@ -154,11 +166,11 @@ public final class Lightning {
 				return null;
 		}
 	}
-
+	
 	public static HardwareMap getRobotHardware() {
 		return robotHardware;
 	}
-
+	
 	/**
 	 * Gets a reference to the motor with the given name. If there is no motor with the
 	 * given name, but there is a servo with the given name, the servo is assumed to be a
@@ -198,12 +210,7 @@ public final class Lightning {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getSensor(String name) {
-		for (DeviceMapping<?> m : Lightning.sensorMaps) {
-			if (m.entrySet().contains(name)) {
-				return (T) m.get(name);
-			}
-		}
-		throw new IllegalArgumentException();
+		return (T) sensors.get(name);
 	}
 
 	/**
@@ -218,8 +225,8 @@ public final class Lightning {
 	 * @param map the hardware map to search for sensor maps in.
 	 * @return a list of the device maps containing sensors.
 	 */
-	private static List<DeviceMapping<?>> getSensorMaps(HardwareMap map) {
-		List<DeviceMapping<?>> sensorMaps = new ArrayList<DeviceMapping<?>>();
+	private static List<DeviceMapping<? extends HardwareDevice>> getSensorMaps(HardwareMap map) {
+		List<DeviceMapping<? extends HardwareDevice>> sensorMaps = new ArrayList<DeviceMapping<? extends HardwareDevice>>();
 		sensorMaps.add(map.accelerationSensor);
 		sensorMaps.add(map.analogInput);
 		sensorMaps.add(map.analogOutput);
@@ -235,6 +242,15 @@ public final class Lightning {
 		sensorMaps.add(map.ultrasonicSensor);
 		sensorMaps.add(map.voltageSensor);
 		return sensorMaps;
+	}
+	
+	private static Map<String, HardwareDevice> getAllSensors() {
+		Map<String, HardwareDevice> sensors = new HashMap<String, HardwareDevice>();
+		for (DeviceMapping<? extends HardwareDevice> mapping : sensorMaps) {
+			for (HardwareDevice o : mapping)
+				sensors.put(o.getDeviceName(), o);
+		}
+		return sensors;
 	}
 
 }
