@@ -61,7 +61,7 @@ public final class Lightning {
 	 * A list of all the {@code DeviceMapping}s exposed by the hardware map that could
 	 * point to sensors.
 	 *
-	 * @see #sensorMaps
+	 * @see #robotHardware
 	 */
 	private static List<DeviceMapping<? extends HardwareDevice>> sensorMaps;
 	
