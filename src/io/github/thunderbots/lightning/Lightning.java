@@ -155,6 +155,12 @@ public final class Lightning {
 		}
 	}
 
+	/**
+	 * Gets a reference to the hardware map supplied by
+	 * {@code Lightning.opmode}. The map is supplied by the RobotCore SDK.
+	 * 
+	 * @return the map of the opmode with which Lightning was initialized.
+	 */
 	public static HardwareMap getRobotHardware() {
 		return robotHardware;
 	}
