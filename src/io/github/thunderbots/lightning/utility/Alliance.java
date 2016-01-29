@@ -48,5 +48,14 @@ public enum Alliance {
 	public int getSide() {
 		return this.side;
 	}
+	
+	public static Alliance fromInt(int side) {
+		for (Alliance a : Alliance.values()) {
+			if (a.getSide() == side) {
+				return a;
+			}
+		}
+		throw new IllegalArgumentException();
+	}
 
 }
