@@ -56,6 +56,11 @@ public class Motor implements Runnable, Correctable{
 	 * The current speed of the motor
 	 */
 	private double speed;
+	
+	/**
+	 * Toggle for the speed control (PID) system control.
+	 */
+	private boolean speedControl = false;
 
 	/**
 	 * The current power of the motor.
@@ -163,6 +168,10 @@ public class Motor implements Runnable, Correctable{
 	public void setPower(double power) {
 		this.basemotor.setPower(power);
 //		this.power = power;
+	}
+	
+	public void toggleSpeedControl() {
+		this.speedControl = !(this.speedControl);
 	}
 	
 	public synchronized void setSpeed(double goalSpeed) {
@@ -324,7 +333,8 @@ public class Motor implements Runnable, Correctable{
 				this.setCurrentSpeed(lastPosition, lastTime);
 				lastPosition = this.getRawPosition();
 				lastTime = System.currentTimeMillis();
-				this.setPower(this.pid.getCorrection());
+				if (this.speedControl)
+					this.setPower(this.pid.getCorrection());
 				Util.sleep(1);
 			}
 		} catch (Exception e) { 
