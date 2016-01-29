@@ -30,6 +30,7 @@ import io.github.thunderbots.lightning.Lightning;
  * should be given different individual powers.
  *
  * @author Zach Ohara
+ * @author Daniel Grimshaw
  */
 public class MotorSet {
 

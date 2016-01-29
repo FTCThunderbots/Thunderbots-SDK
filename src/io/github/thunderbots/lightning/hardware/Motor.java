@@ -28,6 +28,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  *
  * @author Zach Ohara
  * @author Pranav Mathur
+ * @author Daniel Grimshaw
  */
 public class Motor implements Runnable, Correctable{
 
